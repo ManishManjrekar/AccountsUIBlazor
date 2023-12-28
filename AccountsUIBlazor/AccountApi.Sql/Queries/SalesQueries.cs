@@ -70,5 +70,13 @@ namespace AccountApi.Sql.Queries
              inner join StockIn as si on s.StockInId = si.StockInId
               where s.StockInId =  @StockInId";
 
+        public static string GetSalesDataAsPerCustomerId => @"SELECT s.SalesId,s.createdDate,s.Price, s.Quantity, s.Total,c.FirstName as CustomerName,
+            v.FirstName as VendorName, si.LoadName
+            FROM [accountancy].[dbo].[Sales] as s
+             inner join Customer as c on s.CustomerId = c.CustomerId
+            inner join Vendor as v on v.VendorId = s.VendorId
+             inner join StockIn as si on s.StockInId = si.StockInId
+              where s.CustomerId =  @CustomerId";
+
     }
 }
