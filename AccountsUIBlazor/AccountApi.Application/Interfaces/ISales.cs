@@ -12,5 +12,6 @@ namespace AccountApi.Application.Interfaces
     public interface ISalesRepository : IRepository<Sales>
     {
         public Task<List<SalesDetails>> GetSalesDataAsPerStockInId(int stockInId);
+        public Task<List<SalesDetails>> GetSalesDataAsPerSalesInId(int customerId);
     }
 }
