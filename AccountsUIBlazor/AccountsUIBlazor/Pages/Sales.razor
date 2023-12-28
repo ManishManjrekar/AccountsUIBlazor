@@ -3,8 +3,8 @@
 @using AccountsUIBlazor.UIModels; 
 @using System.Net.Http
 @using AccountsUIBlazor.UIModels;
-@using Newtonsoft.Json;
 @using System.Text;
+@using System.Text.Json
 @inject HttpClient HttpClient
 @inject NavigationManager navigationManager;
 <h3>Sales</h3>
@@ -40,19 +40,101 @@
         <label for="Amount">Total Amount:</label>
         <input type="number" class="form-control" id="Amount" @bind="@UISales.UISalesPostDataModel.Amount" readonly />
 
- </div>
+ </div> 
 <div>
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
 </div>
 </EditForm>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+
+        <h4>Customer Details</h4>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Load Name</th>
+                    <th>Customer Name</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Amount</th>
+                    <th></th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sale in sales)
+                {
+                    <tr>
+                        <td>@sale.LoadName</td>
+                        <td>@sale.CustomerName</td>
+                        <td>@sale.CreatedDate</td>
+                        <td>@sale.Price</td>
+                        <td>@sale.Quantity</td>
+                        <td>@sale.Total</td>
+                        <td>
+                            <div>
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary"
+                                              Click="HandleDeleteClick"><RadzenIcon Icon="delete" /></RadzenButton>
+                            </div>
+                        </td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 @code {
 
 
     public UISales UISales { get; set; } = new();
     public UISalesStockInData UIStockIn { get; set; } = new();
+    private List<SalesDetailsDto> sales = new List<SalesDetailsDto>() { new SalesDetailsDto()
+    {
 
+    CreatedDate = DateTime.UtcNow,
+    CustomerName = "Raams",
+    LoadName = "Raams Load",
+    Price = 100,
+    Quantity = 2,
+    Total = 200,
+    } };
     public string Log { get; set; } = "";
 
+
+    protected override void OnInitialized()
+    {
+        // Load customer details on page load
+        LoadCustomerDetails();
+    }
+
+    private async void LoadCustomerDetails()
+    {
+        int stockinId = UIStockIn.StockInId;
+
+        if (UIStockIn.StockInId != 0)
+        {
+            HttpResponseMessage response = await HttpClient.GetAsync($"Sales/GetSalesDataAsPerStockInId?stockInId={stockinId}");
+            if (response.IsSuccessStatusCode)
+            {
+                string responseContent = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(responseContent))
+                {
+                    sales = JsonSerializer.Deserialize<List<SalesDetailsDto>>(responseContent);
+                }
+            }
+        }
+    }
+
+    private async void HandleDeleteClick(MouseEventArgs args)
+    {
+
+    }
 
     void OnChange(object value)
     {
@@ -61,6 +143,7 @@
         UIStockIn.StockInId = UISales.UIStockInList.Where(e => e.LoadName.Equals(value))
                               .Select(p => p.StockInId).FirstOrDefault();
         GetVendorId(UIStockIn.StockInId);
+        LoadCustomerDetails();
         // UIStockIn.VendorName = str.ToString();
 
         // Console.WriteLine($"Value changed to {str}");
@@ -80,7 +163,7 @@
 
     public void CalculateAmount()
     {
-       
+
         UISales.UISalesPostDataModel.Amount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
         StateHasChanged();
     }
@@ -89,7 +172,7 @@
     {
         // Log += "DateSelection fired. ";
         var results = await HttpClient.PostAsJsonAsync($"Sales/PostStockInsData", UISales.UICalenderModel);
-        var APIreturn = JsonConvert.DeserializeObject<List<UISalesStockInData>> (await results.Content.ReadAsStringAsync());
+        var APIreturn = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UISalesStockInData>> (await results.Content.ReadAsStringAsync());
         Console.WriteLine(APIreturn);
         foreach (var item in APIreturn)
         {

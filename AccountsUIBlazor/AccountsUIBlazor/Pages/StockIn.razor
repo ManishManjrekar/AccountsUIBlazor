@@ -3,11 +3,11 @@
 @using AccountsUIBlazor.UIModels; 
 @using System.Net.Http
 
-@using Newtonsoft.Json;
 @using System.Text;
 @inject HttpClient HttpClient
 @inject NavigationManager navigationManager;
 @using AccountsUIBlazor.Data;
+@using System.Text.Json
 <h3>Stock In</h3>
 
 @* <div class="form-group">
@@ -50,10 +50,63 @@
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
 </div>
 </EditForm>
+
+
+<div class="row mt-3">
+    <div class="col-md-12">
+
+        <h4>Stock In Details</h4>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Load Name</th>
+                    <th>Vendor Name</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Payment Done</th>
+                    <th></th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sale in StockInList)
+                {
+                    <tr>
+                        <td>@sale.LoadName</td>
+                        <td>@sale.VendorName</td>
+                        <td>@sale.CreatedDate</td>
+                        <td>@sale.Quantity</td>
+                        <td>No</td>
+                        <td>
+                            <div>
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary"
+                                              Click="HandleDeleteClick"><RadzenIcon Icon="delete" /></RadzenButton>
+                            </div>
+                        </td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 @code {
 
     public UICalenderModel UICalenderModel { get; set; } = new();
     public UIStockIn UIStockIn { get; set; } = new();
+    private List<UIStockIn> StockInList = new List<UIStockIn>()
+    {
+    new UIStockIn()
+    {
+        CreatedDate = DateTime.Now,
+LoadName = "Raams_Load_2",
+Quantity = 200,
+VendorName = "Raams",
+    }    
+    
+    };
     public string Log { get; set; } = "";
     //UIStockIn.VendorNames = new List<VendorNames>();
     // List<VendorNames> Vendorname = new List<VendorNames>();
@@ -66,6 +119,36 @@
     // {
     //     return await HttpClient.GetFromJsonAsync<List<Coffee>>("Coffee/List");
     // }
+
+
+    protected override void OnInitialized()
+    {
+        // Load customer details on page load
+        LoadStockInDetails();
+    }
+
+    private async void LoadStockInDetails()
+    {
+      
+        HttpResponseMessage response = await HttpClient.GetAsync($"StockIn");
+            if (response.IsSuccessStatusCode)
+            {
+                string responseContent = await response.Content.ReadAsStringAsync();
+
+                if (!string.IsNullOrEmpty(responseContent))
+                {
+                StockInList = JsonSerializer.Deserialize<List<UIStockIn>>(responseContent);
+                }
+            }
+        
+    }
+
+    private async void HandleDeleteClick(MouseEventArgs args)
+    {
+
+    }
+
+
     private void userNameChanged(string value)
     {
         UIStockIn.LoadName = value;
@@ -115,7 +198,7 @@
         var vendorid = UIStockIn.VendorId;
         var laodcount = await HttpClient.GetStringAsync($"StockIn/GetVendorLoadCount?vendorid={vendorid}&createdDate={createdDate}");
         Console.WriteLine(laodcount);
-        string value = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
+        string value = $"{UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
         userNameChanged(value);
         //UIStockIn.LoadName = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
         StateHasChanged();

@@ -74,10 +74,50 @@
 </EditForm>
 
 
+<div class="row mt-3">
+    <div class="col-md-12">
+
+        <h4>Customer Details</h4>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th></th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vendor in Vendors)
+                {
+                    <tr>
+                        <td>@vendor.FirstName</td>
+                        <td>@vendor.LastName</td>
+                        <td>@vendor.Email</td>
+                        <td>@vendor.Mobile</td>
+                        <td>
+                            <div>
+                                <RadzenButton ButtonStyle="ButtonStyle.Secondary"
+                                              Click="HandleDeleteClick"><RadzenIcon Icon="delete" /></RadzenButton>
+                            </div>
+                        </td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 @code {
     public UIVendor VendorModel { get; set; } = new();
     public string Log { get; set; } = "";
     private UIVendor UIVendor;
+
+    private List<UIVendor> Vendors = new List<UIVendor>();
      bool displayValidationErrorMessages = false;
     public void InvalidSubmit(EditContext formContext)
     {
@@ -88,6 +128,54 @@
     // {
     //     Log += "OnValidSubmit fired. ";
     // }
+
+    protected override void OnInitialized()
+    {
+        // Load customer details on page load
+        LoadCustomerDetails();
+    }
+
+    private void LoadCustomerDetails()
+    {
+        // HttpResponseMessage response = await HttpClient.GetAsync($"Customer");
+        // if (response.IsSuccessStatusCode)
+        // {
+        //     string responseContent = await response.Content.ReadAsStringAsync();
+
+        //     if (!string.IsNullOrEmpty(responseContent))
+        //     {
+        //         customers = JsonSerializer.Deserialize<List<UICustomer>>(responseContent);
+        //     }
+        // }
+
+        Vendors = new List<UIVendor>() { new UIVendor()
+        {
+        FirstName = "Raam",
+        LastName = "Sree",
+        Email = "Chckc@fd.com",
+        Mobile = "1234567890",
+
+        },new UIVendor()
+        {
+        FirstName = "Raam",
+        LastName = "Sree",
+        Email = "Chckc@fd.com",
+        Mobile = "1234567890",
+
+        },new UIVendor()
+        {
+        FirstName = "Raam",
+        LastName = "Sree",
+        Email = "Chckc@fd.com",
+        Mobile = "1234567890",
+
+        } };
+    }
+
+    private async void HandleDeleteClick(MouseEventArgs args)
+    {
+
+    }
 
     public void Submit(EditContext formContext)
     {

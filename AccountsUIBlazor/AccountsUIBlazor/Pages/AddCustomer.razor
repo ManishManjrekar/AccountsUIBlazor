@@ -2,9 +2,9 @@
 
 @using System.Net.Http
 @using AccountsUIBlazor.UIModels;
-@using Newtonsoft.Json;
 @using System.Text;
-@inject HttpClient HttpClient
+@using System.Text.Json;
+@inject HttpClient HttpClient;
 @inject NavigationManager navigationManager;
 
 <EditForm Model="CustomerModel" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
@@ -78,11 +78,91 @@
         </div>
 </EditForm>
 
+<div class="row mt-3">
+    <div class="col-md-12">
+
+        <h4>Customer Details</h4>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th></th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in customers)
+                {
+                    <tr>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.Mobile</td>
+                        <td> <div><RadzenButton ButtonStyle="ButtonStyle.Secondary"
+                                              Click="HandleDeleteClick"><RadzenIcon Icon="delete" /></RadzenButton>
+                            </div>
+                        </td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @code {
     public UICustomer CustomerModel { get; set; } = new();
     public string Log { get; set; } = "";
     private UICustomer UICustomer;
+    private List<UICustomer> customers;
+    protected override void OnInitialized()
+    {
+        // Load customer details on page load
+        LoadCustomerDetails();
+    }
+
+    private void LoadCustomerDetails()
+    {
+        // HttpResponseMessage response = await HttpClient.GetAsync($"Customer");
+        // if (response.IsSuccessStatusCode)
+        // {
+        //     string responseContent = await response.Content.ReadAsStringAsync();
+
+        //     if (!string.IsNullOrEmpty(responseContent))
+        //     {
+        //         customers = JsonSerializer.Deserialize<List<UICustomer>>(responseContent);
+        //     }
+        // }
+
+        customers = new List<UICustomer>() { new UICustomer()
+        {
+        FirstName = "Raam",
+        LastName = "Sree",
+        Email = "Chckc@fd.com",
+        Mobile = "1234567890",
+
+        },new UICustomer()
+        {
+        FirstName = "Raam",
+        LastName = "Sree",
+        Email = "Chckc@fd.com",
+        Mobile = "1234567890",
+
+        },new UICustomer()
+        {
+        FirstName = "Raam",
+        LastName = "Sree",
+        Email = "Chckc@fd.com",
+        Mobile = "1234567890",
+
+        } };
+    }
+    
+    
      bool displayValidationErrorMessages = false;
     public void InvalidSubmit(EditContext formContext)
     {
@@ -98,6 +178,11 @@
     {
         var form = (UICustomer)formContext.Model;
         Log += "OnSubmit fired. ";
+    }
+
+    private async void HandleDeleteClick(MouseEventArgs args)
+    {
+       
     }
 
     public async Task ValidSubmit(EditContext formContext)
