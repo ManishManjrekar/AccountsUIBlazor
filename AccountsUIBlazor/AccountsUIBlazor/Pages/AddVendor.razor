@@ -55,7 +55,7 @@
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="Mobile">Mobile #</label>
-                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.Mobile" />
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.MobileNo" />
                        
                     </div>
                 </div>
@@ -66,6 +66,7 @@
                        
                     </div>
                 </div>
+            
                 
                 <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Vendor</button>
             </div>
@@ -91,13 +92,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var vendor in Vendors)
+                @foreach (var vendor in VendorListData)
                 {
                     <tr>
                         <td>@vendor.FirstName</td>
                         <td>@vendor.LastName</td>
                         <td>@vendor.Email</td>
-                        <td>@vendor.Mobile</td>
+                        <td>@vendor.MobileNo</td>
                         <td>
                             <div>
                                 <RadzenButton ButtonStyle="ButtonStyle.Secondary"
@@ -117,8 +118,8 @@
     public string Log { get; set; } = "";
     private UIVendor UIVendor;
 
-    private List<UIVendor> Vendors = new List<UIVendor>();
-     bool displayValidationErrorMessages = false;
+    private List<UIVendor> VendorListData = new List<UIVendor>();
+    bool displayValidationErrorMessages = false;
     public void InvalidSubmit(EditContext formContext)
     {
         Log += "OnInvalidSubmit fired. ";
@@ -135,41 +136,10 @@
         LoadCustomerDetails();
     }
 
-    private void LoadCustomerDetails()
+    private async void LoadCustomerDetails()
     {
-        // HttpResponseMessage response = await HttpClient.GetAsync($"Customer");
-        // if (response.IsSuccessStatusCode)
-        // {
-        //     string responseContent = await response.Content.ReadAsStringAsync();
-
-        //     if (!string.IsNullOrEmpty(responseContent))
-        //     {
-        //         customers = JsonSerializer.Deserialize<List<UICustomer>>(responseContent);
-        //     }
-        // }
-
-        Vendors = new List<UIVendor>() { new UIVendor()
-        {
-        FirstName = "Raam",
-        LastName = "Sree",
-        Email = "Chckc@fd.com",
-        Mobile = "1234567890",
-
-        },new UIVendor()
-        {
-        FirstName = "Raam",
-        LastName = "Sree",
-        Email = "Chckc@fd.com",
-        Mobile = "1234567890",
-
-        },new UIVendor()
-        {
-        FirstName = "Raam",
-        LastName = "Sree",
-        Email = "Chckc@fd.com",
-        Mobile = "1234567890",
-
-        } };
+        VendorListData = await HttpClient.GetFromJsonAsync<List<UIVendor>>($"Vendor/GetAllVendor");
+        StateHasChanged();
     }
 
     private async void HandleDeleteClick(MouseEventArgs args)
@@ -189,12 +159,8 @@
 
         try
         {
-            // var serialized = JsonConvert.SerializeObject(UICustomer);
-            // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
-            //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
-
             var obj = await HttpClient.PostAsJsonAsync($"Vendor/AddVendor", UIVendor);
-            Console.WriteLine(obj);
+            LoadCustomerDetails();
         }
         catch (Exception ex)
         {

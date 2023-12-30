@@ -118,52 +118,22 @@
     public UICustomer CustomerModel { get; set; } = new();
     public string Log { get; set; } = "";
     private UICustomer UICustomer;
-    private List<UICustomer> customers;
+    private List<UICustomer> customers=new List<UICustomer>();
     protected override void OnInitialized()
     {
         // Load customer details on page load
         LoadCustomerDetails();
     }
 
-    private void LoadCustomerDetails()
+    private async void LoadCustomerDetails()
     {
-        // HttpResponseMessage response = await HttpClient.GetAsync($"Customer");
-        // if (response.IsSuccessStatusCode)
-        // {
-        //     string responseContent = await response.Content.ReadAsStringAsync();
-
-        //     if (!string.IsNullOrEmpty(responseContent))
-        //     {
-        //         customers = JsonSerializer.Deserialize<List<UICustomer>>(responseContent);
-        //     }
-        // }
-
-        customers = new List<UICustomer>() { new UICustomer()
-        {
-        FirstName = "Raam",
-        LastName = "Sree",
-        Email = "Chckc@fd.com",
-        Mobile = "1234567890",
-
-        },new UICustomer()
-        {
-        FirstName = "Raam",
-        LastName = "Sree",
-        Email = "Chckc@fd.com",
-        Mobile = "1234567890",
-
-        },new UICustomer()
-        {
-        FirstName = "Raam",
-        LastName = "Sree",
-        Email = "Chckc@fd.com",
-        Mobile = "1234567890",
-
-        } };
+        customers = await HttpClient.GetFromJsonAsync<List<UICustomer>>($"Customer/GetAllCustomer");
+        Console.WriteLine(customers);
+        StateHasChanged();
     }
-    
-    
-     bool displayValidationErrorMessages = false;
+
+
+    bool displayValidationErrorMessages = false;
     public void InvalidSubmit(EditContext formContext)
     {
         Log += "OnInvalidSubmit fired. ";
@@ -182,7 +152,7 @@
 
     private async void HandleDeleteClick(MouseEventArgs args)
     {
-       
+
     }
 
     public async Task ValidSubmit(EditContext formContext)
@@ -197,6 +167,7 @@
 
             var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
             Console.WriteLine(obj);
+            LoadCustomerDetails();
         }
         catch (Exception ex)
         {

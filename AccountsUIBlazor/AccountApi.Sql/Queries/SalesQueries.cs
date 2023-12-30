@@ -10,22 +10,21 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class SalesQueries
     {
-		public static string AllSales => "SELECT * FROM [Sales] (NOLOCK)";
+		public static string AllSales => "SELECT * FROM [Sales] (NOLOCK) where isActive=1";
 
-		public static string SalesById => "SELECT * FROM [Sales] (NOLOCK) WHERE [SalesId] = @SalesId";
+		public static string SalesById => "SELECT * FROM [Sales] (NOLOCK) WHERE [SalesId] = @SalesId and where isActive=1";
 
 		public static string AddSales =>
-            @"INSERT INTO [dbo].[Vendor]
+            @"INSERT INTO [dbo].[Sales]
            ([VendorId]
            ,[StockInId]
-           ,[CustomerId]
            ,[CustomerId]
            ,[Quantity]
            ,[Price]
            ,[Total]
            ,[Type]
            ,[CreatedDate]
-           ,[LastModifiedDate]
+           ,[ModifiedDate]
            ,[CreatedBy]
            ,[IsActive]
            ,[LoggedInUser])
@@ -33,13 +32,12 @@ namespace AccountApi.Sql.Queries
            (@VendorId
            ,@StockInId
            ,@CustomerId
-           ,@CustomerId
            ,@Quantity
            ,@Price
            ,@Total
            ,@Type
            ,@CreatedDate
-           ,@LastModifiedDate
+           ,@ModifiedDate
            ,@CreatedBy,
            ,@IsActive
            ,@LoggedInUser)";
@@ -54,11 +52,11 @@ namespace AccountApi.Sql.Queries
                 [Total] = @Total, 
 				[Type] = @Type,
                 [CreatedDate] = @CreatedDate, 
-				[LastModifiedDate] = @LastModifiedDate,
+				[ModifiedDate] = @ModifiedDate,
                 [CreatedBy] = @CreatedBy, 
 				[IsActive] = @IsActive,
 				[LoggedInUser] = @LoggedInUser
-            WHERE [SalesId] = @SalesId";
+            WHERE [SalesId] = @SalesId and isActive=1";
 
         public static string DeleteSales => "Update FROM [Sales] WHERE [SalesId] = @SalesId where isActive=0";
 
@@ -68,7 +66,7 @@ namespace AccountApi.Sql.Queries
              inner join Customer as c on s.CustomerId = c.CustomerId
             inner join Vendor as v on v.VendorId = s.VendorId
              inner join StockIn as si on s.StockInId = si.StockInId
-              where s.StockInId =  @StockInId";
+              where s.StockInId =  @StockInId and where isActive=1";
 
         public static string GetSalesDataAsPerCustomerId => @"SELECT s.SalesId,s.createdDate,s.Price, s.Quantity, s.Total,c.FirstName as CustomerName,
             v.FirstName as VendorName, si.LoadName
@@ -76,7 +74,7 @@ namespace AccountApi.Sql.Queries
              inner join Customer as c on s.CustomerId = c.CustomerId
             inner join Vendor as v on v.VendorId = s.VendorId
              inner join StockIn as si on s.StockInId = si.StockInId
-              where s.CustomerId =  @CustomerId";
+              where s.CustomerId =  @CustomerId and isActive=1";
 
     }
 }

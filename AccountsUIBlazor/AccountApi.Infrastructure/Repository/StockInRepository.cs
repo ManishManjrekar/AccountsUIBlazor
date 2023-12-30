@@ -30,7 +30,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<StockIn>(CustomerQueries.AllCustomer);
+                var result = await connection.QueryAsync<StockIn>(StockInQueries.AllStockIn);
                 return result.ToList();
             }
         }
@@ -40,19 +40,33 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<StockIn>(CustomerQueries.CustomerById, new { CustomerId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<StockIn>(StockInQueries.StockInById, new { CustomerId = id });
                 return result;
             }
         }
 
         public async Task<string> AddAsync(StockIn entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            entity.isActive = true;
+            entity.CreatedBy = "System";
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            entity.IsPaymentDone = false;
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(StockInQueries.AddStockIn, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
         public async Task<string> UpdateAsync(StockIn entity)
@@ -60,7 +74,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
+                var result = await connection.ExecuteAsync(StockInQueries.UpdateStockIn, entity);
                 return result.ToString();
             }
         }
@@ -70,29 +84,39 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(StockInQueries.DeleteStockIn, new { CustomerId = id });
                 return result.ToString();
             }
         }
 
 
-        public async Task<int> GetVendorLoadCount(int vendorid, string createdDate)
+        public async Task<int> GetVendorLoadCount(int VendorId, string createdDate)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<StockIn>(CustomerQueries.CustomerById, new { CustomerId = 1 });
-                return 0;
+                var result = await connection.ExecuteScalarAsync<int>(StockInQueries.GetVendorLoadCount, new { VendorId, createdDate });
+                return result;
             }
         }
 
-        public async Task<List<StockIn>> GetStockInDataAsperDates(string fromDate, string toDate)
+        public async Task<IReadOnlyList<StockIn>> GetStockInDataAsperDates(string fromDate, string toDate, int VendorId)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.CustomerById, new { CustomerId = 1 });
-                return null;
+                var result = await connection.QueryAsync<StockIn>(StockInQueries.GetStockInAsPerVendorId, new { VendorId, fromDate, toDate, });
+                return result.ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<StockIn>> GetStockInAsperDates(string fromDate, string toDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<StockIn>(StockInQueries.GetStockInAsPerDates, new { fromDate, toDate, });
+                return result.ToList();
             }
         }
 

@@ -9,18 +9,7 @@
 @inject NavigationManager navigationManager;
 <h3>Sales</h3>
 
-@* <div class="form-group">
-    <label for="title">Price</label>
-    <InputText id="title" @bind-Value="SelectedCoffee.Title" placeholder="Coffee title..." class="form-control" />
-</div>
-<div class="form-group">
-    <label for="title">Quantity</label>
-    <InputText id="title" @bind-Value="SelectedCoffee.Title" placeholder="Coffee title..." class="form-control" />
-</div>
-<div class="form-group">
-    <label for="title">total</label>
-    <InputText id="title" @bind-Value="SelectedCoffee.Title" placeholder="Coffee title..." class="form-control" />
-</div> *@
+
 <EditForm Model="UISales" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
 <div class="col-md-8">
         From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UICalenderModel.FromDate" />
@@ -32,6 +21,9 @@
         
         <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UISales.UIStockInList" TextProperty="LoadName" ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
 </div>
+    <div class="col-md-8 pt-1">
+        <RadzenAutoComplete Placeholder="Select customer name.." class="mt-2" Data="@UISales.UICustomerNamesList" TextProperty="CustomerName" ValueProperty="@UIStockIn.CustomerId" Change="@CustomerNameChange" />
+    </div>
 <div class="col-md-8">
         <label for="price">Price:</label>
         <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter price." />
@@ -93,16 +85,8 @@
 
     public UISales UISales { get; set; } = new();
     public UISalesStockInData UIStockIn { get; set; } = new();
-    private List<SalesDetailsDto> sales = new List<SalesDetailsDto>() { new SalesDetailsDto()
-    {
+    private List<SalesDetailsDto> sales = new List<SalesDetailsDto>() { new SalesDetailsDto() };
 
-    CreatedDate = DateTime.UtcNow,
-    CustomerName = "Raams",
-    LoadName = "Raams Load",
-    Price = 100,
-    Quantity = 2,
-    Total = 200,
-    } };
     public string Log { get; set; } = "";
 
 
@@ -114,28 +98,34 @@
 
     private async void LoadCustomerDetails()
     {
-        int stockinId = UIStockIn.StockInId;
+        //int stockinId = UIStockIn.StockInId;
 
-        if (UIStockIn.StockInId != 0)
-        {
-            HttpResponseMessage response = await HttpClient.GetAsync($"Sales/GetSalesDataAsPerStockInId?stockInId={stockinId}");
-            if (response.IsSuccessStatusCode)
-            {
-                string responseContent = await response.Content.ReadAsStringAsync();
+        // if (UIStockIn.StockInId != 0)
+        // {
+        //     HttpResponseMessage response = await HttpClient.GetAsync($"Sales/GetSalesDataAsPerStockInId?stockInId={stockinId}");
+        //     if (response.IsSuccessStatusCode)
+        //     {
+        //         string responseContent = await response.Content.ReadAsStringAsync();
 
-                if (!string.IsNullOrEmpty(responseContent))
-                {
-                    sales = JsonSerializer.Deserialize<List<SalesDetailsDto>>(responseContent);
-                }
-            }
-        }
+        //         if (!string.IsNullOrEmpty(responseContent))
+        //         {
+        //             sales = JsonSerializer.Deserialize<List<SalesDetailsDto>>(responseContent);
+        //         }
+        //     }
+        // }
     }
 
     private async void HandleDeleteClick(MouseEventArgs args)
     {
 
     }
-
+    private async void LoadCustemerNames()
+    {
+        //for binding autocomplete dropdownlist
+        UISales.UICustomerNamesList = new List<UICustomerNames>();
+        UISales.UICustomerNamesList = await HttpClient.GetFromJsonAsync<List<UICustomerNames>>($"Customer/GetAllCustomerNames");
+        StateHasChanged();
+    }
     void OnChange(object value)
     {
 
@@ -143,7 +133,25 @@
         UIStockIn.StockInId = UISales.UIStockInList.Where(e => e.LoadName.Equals(value))
                               .Select(p => p.StockInId).FirstOrDefault();
         GetVendorId(UIStockIn.StockInId);
-        LoadCustomerDetails();
+        UISales.UISalesPostDataModel.LoadName = str.ToString();
+        UISales.UISalesPostDataModel.StockInId = UIStockIn.StockInId;
+        
+
+        LoadCustemerNames();
+        // UIStockIn.VendorName = str.ToString();
+
+        // Console.WriteLine($"Value changed to {str}");
+    }
+
+    void CustomerNameChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UIStockIn.CustomerId = UISales.UICustomerNamesList.Where(e => e.CustomerName.Equals(value))
+                              .Select(p => p.CustomerId).FirstOrDefault();
+        UISales.UISalesPostDataModel.CustomerId = UIStockIn.CustomerId;
+        // GetVendorId(UIStockIn.StockInId);
+        // LoadCustomerDetails();
         // UIStockIn.VendorName = str.ToString();
 
         // Console.WriteLine($"Value changed to {str}");
@@ -171,13 +179,14 @@
     public async Task GetStockInData()
     {
         // Log += "DateSelection fired. ";
-        var results = await HttpClient.PostAsJsonAsync($"Sales/PostStockInsData", UISales.UICalenderModel);
+        var results = await HttpClient.PostAsJsonAsync($"StockIn/PostStockInsAsPerDates", UISales.UICalenderModel);
         var APIreturn = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UISalesStockInData>> (await results.Content.ReadAsStringAsync());
         Console.WriteLine(APIreturn);
         foreach (var item in APIreturn)
         {
             UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
         }
+        //StateHasChanged();
     }
     public async Task GetVendorId(int StockInId)
     {
@@ -186,7 +195,7 @@
         var id = await HttpClient.GetStringAsync($"Sales/GetVendorId?id={StockInId}");
         int.TryParse(id, out vendorId);
         UIStockIn.VendorId = vendorId;
-       
+        UISales.UISalesPostDataModel.VendorId = UIStockIn.VendorId;
         
     }
 
@@ -202,7 +211,7 @@
 
         try
         {
-            var obj = await HttpClient.PostAsJsonAsync($"Customer", UISales);
+            var obj = await HttpClient.PostAsJsonAsync($"Sales/AddSales", UISales.UISalesPostDataModel);
             Console.WriteLine(obj);
         }
         catch (Exception ex)

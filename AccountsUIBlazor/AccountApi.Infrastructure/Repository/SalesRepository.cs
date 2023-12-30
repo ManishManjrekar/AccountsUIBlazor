@@ -31,7 +31,7 @@ namespace AccountApi.Infrastructure.Repository
             {
                 
                 connection.Open();
-                var result = await connection.QueryAsync<Sales>(CustomerQueries.AllCustomer);
+                var result = await connection.QueryAsync<Sales>(SalesQueries.AllSales);
                 return result.ToList();
             }
         }
@@ -41,18 +41,25 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<Sales>(CustomerQueries.CustomerById, new { CustomerId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Sales>(SalesQueries.SalesById, new { SalesId = id });
                 return result;
             }
         }
 
         public async Task<string> AddAsync(Sales entity)
         {
+            entity.Type = "";
+            entity.CreatedBy = "System";
+            entity.LoggedInUser = "System";
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            entity.IsActive = true;
+          
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 Sales obj = new Sales();
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
+                var result = await connection.ExecuteAsync(SalesQueries.AddSales, entity);
                // var result1 = await connection.Add<Sales>(entity);
 
                 return result.ToString();
@@ -64,7 +71,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
+                var result = await connection.ExecuteAsync(SalesQueries.UpdateSales, entity);
                 return result.ToString();
             }
         }
@@ -74,7 +81,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(SalesQueries.DeleteSales, new { CustomerId = id });
                 return result.ToString();
             }
         }
@@ -85,6 +92,16 @@ namespace AccountApi.Infrastructure.Repository
             {
                 connection.Open();
                 var result = await connection.QueryAsync<List<SalesDetails>>(SalesQueries.GetSalesDataAsPerStockInId, new { stockInId  });
+                return (List<SalesDetails>)result;
+            }
+        }
+
+        public async Task<List<SalesDetails>> GetSalesDataAsPerSalesInId(int customerId)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<List<SalesDetails>>(SalesQueries.GetSalesDataAsPerCustomerId, new { customerId });
                 return (List<SalesDetails>)result;
             }
         }

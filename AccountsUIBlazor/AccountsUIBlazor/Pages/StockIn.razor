@@ -96,52 +96,33 @@
 
     public UICalenderModel UICalenderModel { get; set; } = new();
     public UIStockIn UIStockIn { get; set; } = new();
-    private List<UIStockIn> StockInList = new List<UIStockIn>()
-    {
-    new UIStockIn()
-    {
-        CreatedDate = DateTime.Now,
-LoadName = "Raams_Load_2",
-Quantity = 200,
-VendorName = "Raams",
-    }    
-    
-    };
+    public List<UIStockIn> StockInList = new List<UIStockIn>();//for grid
+
+
+
     public string Log { get; set; } = "";
-    //UIStockIn.VendorNames = new List<VendorNames>();
-    // List<VendorNames> Vendorname = new List<VendorNames>();
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     Coffees = await GetCoffees();
-    // }
-
-    // async Task<List<Coffee>> GetVendorProducts()
-    // {
-    //     return await HttpClient.GetFromJsonAsync<List<Coffee>>("Coffee/List");
-    // }
-
 
     protected override void OnInitialized()
     {
         // Load customer details on page load
         LoadStockInDetails();
+        FillGridForStockIns();
     }
 
     private async void LoadStockInDetails()
     {
-      
-        HttpResponseMessage response = await HttpClient.GetAsync($"StockIn");
-            if (response.IsSuccessStatusCode)
-            {
-                string responseContent = await response.Content.ReadAsStringAsync();
-
-                if (!string.IsNullOrEmpty(responseContent))
-                {
-                StockInList = JsonSerializer.Deserialize<List<UIStockIn>>(responseContent);
-                }
-            }
-        
+        //for binding autocomplete dropdownlist 
+        UIStockIn.VendorNames = new List<VendorNames>();
+        UIStockIn.VendorNames = await HttpClient.GetFromJsonAsync<List<VendorNames>>($"Vendor/GetAllVendorNames");
+        StateHasChanged();
     }
+    private async void FillGridForStockIns()
+    {
+        //for binding grid
+        StockInList = await HttpClient.GetFromJsonAsync<List<UIStockIn>>($"StockIn/GetAllStockIns");
+        StateHasChanged();
+    }
+
 
     private async void HandleDeleteClick(MouseEventArgs args)
     {
@@ -218,7 +199,7 @@ VendorName = "Raams",
         try
         {
             var obj = await HttpClient.PostAsJsonAsync($"StockIn/AddVendor", UIStockIn);
-            Console.WriteLine(obj);
+            FillGridForStockIns();
         }
         catch (Exception ex)
         {

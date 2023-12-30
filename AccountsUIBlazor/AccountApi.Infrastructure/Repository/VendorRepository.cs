@@ -27,12 +27,21 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<IReadOnlyList<Vendor>> GetAllAsync()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Vendor>(CustomerQueries.AllCustomer);
-                return result.ToList();
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Vendor>(VendorQueries.AllVendor);
+                    return result.ToList();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
         public async Task<Vendor> GetByIdAsync(long id)
@@ -40,19 +49,36 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<Vendor>(CustomerQueries.CustomerById, new { CustomerId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Vendor>(VendorQueries.VendorById, new { CustomerId = id });
                 return result;
             }
         }
 
         public async Task<string> AddAsync(Vendor entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            entity.IsActive = true;
+            entity.Address = "Address";
+            entity.City = "some city";
+            entity.State = "some state";
+            entity.CreatedBy = "System";
+            entity.ModifiedBy = "system";
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(VendorQueries.AddVendor, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
         public async Task<string> UpdateAsync(Vendor entity)
@@ -60,7 +86,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
+                var result = await connection.ExecuteAsync(VendorQueries.UpdateVendor, entity);
                 return result.ToString();
             }
         }
@@ -70,7 +96,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(VendorQueries.DeleteVendor, new { CustomerId = id });
                 return result.ToString();
             }
         }

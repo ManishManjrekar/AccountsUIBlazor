@@ -47,6 +47,14 @@ namespace AccountApi.Sql.Queries
 				[IsPaymentDone] = @IsPaymentDone
             WHERE [StockInId] = @StockInId";
 
-		public static string DeleteStockIn => "Update FROM [StockIn] WHERE [StockInId] = @StockInId where isActive=0";
+        public static string GetStockInAsPerVendorId => @"SELECT * FROM[accountancy].[dbo].[StockIn] as s
+                                             where s.VendorId = @VendorId and s.CreatedDate between @fromDate and @toDate";
+        public static string GetStockInAsPerDates => @"SELECT * FROM[accountancy].[dbo].[StockIn] as s
+                                             where s.CreatedDate between @fromDate and @toDate";
+        public static string GetVendorLoadCount => @"SELECT count(*) FROM [accountancy].[dbo].[StockIn] as s
+                                                   where s.VendorId = @VendorId and s.CreatedDate = @createdDate";
+
+
+        public static string DeleteStockIn => "Update FROM [StockIn] WHERE [StockInId] = @StockInId where isActive=0";
 	}
 }

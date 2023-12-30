@@ -31,30 +31,49 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        public async Task<ApiResponse<List<Vendor>>> GetAll()
+        [Route("GetAllVendor")]
+        public async Task<List<UIVendor>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<Vendor>>();
+            List<UIVendor> vendorList = new List<UIVendor>();
 
             try
             {
                 var data = await _unitOfWork.Vendor.GetAllAsync();
-                apiResponse.Success = true;
-                apiResponse.Result = data.ToList();
+                vendorList = _IMapper.Map<List<UIVendor>>(data);
+                
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
                 Logger.Instance.Error("Exception:", ex);
             }
 
-            return apiResponse;
+            return vendorList;
+        }
+
+        [HttpGet]
+        [Route("GetAllVendorNames")]
+        public async Task<List<VendorNames>> GetAllVendorNames()
+        {
+            var vendorNames = new List<VendorNames>();
+            try
+            {
+                var data = await _unitOfWork.Vendor.GetAllAsync();
+                vendorNames = _IMapper.Map<List<VendorNames>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return vendorNames;
         }
 
         [HttpGet("{id}")]

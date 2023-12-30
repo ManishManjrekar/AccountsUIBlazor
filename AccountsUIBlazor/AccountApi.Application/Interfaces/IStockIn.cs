@@ -12,6 +12,7 @@ namespace AccountApi.Application.Interfaces
     public interface IStockInRepository : IRepository<StockIn>
     {
         Task<int> GetVendorLoadCount(int vendorid, string createdDate);
-        Task<List<StockIn>> GetStockInDataAsperDates(string fromDate, string toDate);
+        Task<IReadOnlyList<StockIn>> GetStockInDataAsperDates(string fromDate, string toDate, int VendorId);
+        Task<IReadOnlyList<StockIn>> GetStockInAsperDates(string fromDate, string toDate);
     }
 }

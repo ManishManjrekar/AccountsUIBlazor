@@ -2,8 +2,14 @@
 
 namespace AccountsUIBlazor.UIModels
 {
-    
-    
+
+
+    public class UICustomerNames
+    {
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; }
+    }
+
 
     public class UICustomer
     {

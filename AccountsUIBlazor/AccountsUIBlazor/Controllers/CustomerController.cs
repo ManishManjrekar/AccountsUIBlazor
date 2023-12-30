@@ -35,14 +35,15 @@ namespace AccountsUIBlazor.Controller
 
       
         [HttpGet]
-        public async Task<ApiResponse<List<UICustomer>>> GetAll()
+        [Route("GetAllCustomer")]
+        public async Task<List<UICustomer>> GetAll()
         {
             var apiResponse = new ApiResponse<List<UICustomer>>();
-
+            List<UICustomer> customerList = new List<UICustomer>();
             try
             {
                 var data = await _unitOfWork.Customers.GetAllAsync();
-                List<UICustomer> customerList = _IMapper.Map<List<UICustomer>>(data);
+                customerList = _IMapper.Map<List<UICustomer>>(data);
                 apiResponse.Success = true;
                 apiResponse.Result = customerList;
             }
@@ -59,7 +60,29 @@ namespace AccountsUIBlazor.Controller
                 Logger.Instance.Error("Exception:", ex);
             }
 
-            return apiResponse;
+            return customerList;
+        }
+
+        [HttpGet]
+        [Route("GetAllCustomerNames")]
+        public async Task<List<UICustomerNames>> GetAllCustomerNames()
+        {
+            var customerNames = new List<UICustomerNames>();
+            try
+            {
+                var data = await _unitOfWork.Customers.GetAllAsync();
+                customerNames = _IMapper.Map<List<UICustomerNames>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return customerNames;
         }
 
         [HttpGet("{id}")]
@@ -96,16 +119,16 @@ namespace AccountsUIBlazor.Controller
         public async Task<IActionResult> Add(UICustomer Customer)
         {
           
-            var apiResponse = new ApiResponse<UICustomer>();
+            var apiResponse = new ApiResponse<string>();
             Customer customer = _IMapper.Map<Customer>(Customer);
             customer.IsActive = true;
 
             try
             {
                 var data = await _unitOfWork.Customers.AddAsync(customer);
-                UICustomer customerdata = _IMapper.Map<UICustomer>(data);
+                //UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = customerdata;
+                apiResponse.Result = data;
                
             }
             catch (SqlException ex)

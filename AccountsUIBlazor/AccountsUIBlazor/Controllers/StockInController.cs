@@ -28,72 +28,81 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        public async Task<ApiResponse<List<UIStockIn>>> GetAll()
+        [Route("GetAllStockIns")]
+        public async Task<List<UIStockIn>> GetAllStockIns()
         {
-            var apiResponse = new ApiResponse<List<UIStockIn>>();
-
+            var stockInList = new List<UIStockIn>();
             try
             {
                 var data = await _unitOfWork.StockIn.GetAllAsync();
-                apiResponse.Success = true;
-                List<UIStockIn> stockinData = _IMapper.Map<List<UIStockIn>>(data);
-                apiResponse.Result = stockinData;
+                stockInList = _IMapper.Map<List<UIStockIn>>(data);
             }
             catch (SqlException ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
+                
                 Logger.Instance.Error("Exception:", ex);
             }
 
-            return apiResponse;
+            return stockInList;
         }
 
         [HttpGet]
         [Route("GetVendorNames")]
-        public async Task<IActionResult> GetVendorList()
+        public async Task<List<VendorNames>> GetVendorList()
         {
-
-            //var apiResponse = new ApiResponse<List<VendorNames>>();
-            UIStockIn vendorNames = new UIStockIn();
-            //Vendor.IsActive = true;
-            var Result = new List<VendorNames>();
+            var vendorNames = new List<VendorNames>();
             try
             {
-                 Result = new List<VendorNames> { new VendorNames { VendorId=1, VendorName="rams"},
-                    new VendorNames { VendorId = 2, VendorName = "rams1" } };
-
-                //  var data = await _unitOfWork.Vendor.GetAllAsync();
-                //var names = _IMapper.Map<List<VendorNames>>(data);
-                
-                //apiResponse.Success = true;
-               // apiResponse.Result = names.ToList();
-
+                 var data = await _unitOfWork.Vendor.GetAllAsync();
+                vendorNames = _IMapper.Map<List<VendorNames>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-               // apiResponse.Success = false;
-              //  apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
+             
+                Logger.Instance.Error("Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
-
-            return Ok(Result);
+            return vendorNames;
         }
+
         [HttpPost]
         [Route("PostStockInsAsPerVendorId")]
-        public async Task<IActionResult> PostStockInsAsPerVendorId(UIVendorCalenderModel UiCalenderModel)
+        public async Task<List<UISalesStockInData>> PostStockInsAsPerVendorId(UIVendorCalenderModel UiCalenderModel)
+        {
+            List<UISalesStockInData> stockInData = new List<UISalesStockInData>();
+
+            try
+            {
+                var data = await _unitOfWork.StockIn.GetStockInDataAsperDates(
+                    UiCalenderModel.FromDate.ToString(),
+                    UiCalenderModel.ToDate.ToString(), UiCalenderModel.VendorId);
+                stockInData = _IMapper.Map<List<UISalesStockInData>>(data);
+
+                
+
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return stockInData;
+        }
+
+        [HttpPost]
+        [Route("PostStockInsAsPerDates")]
+        public async Task<IActionResult> PostStockInsAsPerDates(UICalenderModel uICalenderModel)
         {
             List<UISalesStockInData> sales = new List<UISalesStockInData>();
             //var apiResponse = new ApiResponse<string>();
@@ -102,11 +111,13 @@ namespace AccountsUIBlazor.Controller
 
             try
             {
-                //var data = await _unitOfWork.StockIn.GetStockInDataAsperDates(
-                //    UiCalenderModel.FromDate.ToString(),
-                //    UiCalenderModel .ToDate.ToString(), UiCalenderModel.VendorId);
-                sales.Add(new UISalesStockInData { LoadName = "load1", VendorId = 1, Quantity = 100, StockInId = 1 });
-                sales.Add(new UISalesStockInData { LoadName = "load2", VendorId = 2, Quantity = 700, StockInId = 2 });
+                var data = await _unitOfWork.StockIn.GetStockInAsperDates(
+                    uICalenderModel.FromDate.ToString(),
+                    uICalenderModel.FromDate.ToString());
+
+
+                //sales.Add(new UISalesStockInData { LoadName = "load1", VendorId = 1, Quantity = 100, StockInId = 1 });
+                //sales.Add(new UISalesStockInData { LoadName = "load2", VendorId = 2, Quantity = 700, StockInId = 2 });
 
                 //sales = _IMapper.Map<List<UISalesStockInData>>(data);
 
@@ -164,25 +175,19 @@ namespace AccountsUIBlazor.Controller
         public async Task<int> GetVendorLoadCount(int vendorid,string createdDate)
         {
 
-            var apiResponse = new ApiResponse<AccountApi.Core.StockIn>();
+           // var apiResponse = new ApiResponse<AccountApi.Core.StockIn>();
 
             try
             {
-                // var data = await _unitOfWork.StockIn.GetVendorLoadCount(vendorid, createdDate);
+                 var data = await _unitOfWork.StockIn.GetVendorLoadCount(vendorid, createdDate);
                 return 0;
-               // apiResponse.Success = true;
-               // apiResponse.Result = data;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
                 Logger.Instance.Error("Exception:", ex);
             }
 
@@ -203,7 +208,7 @@ namespace AccountsUIBlazor.Controller
                 var data = await _unitOfWork.StockIn.AddAsync(stockinData);
                 apiResponse.Success = true;
                 UIStockIn stockinDataresults = _IMapper.Map<UIStockIn>(data);
-                apiResponse.Result = stockinDataresults;
+               apiResponse.Result = stockinDataresults;
                
             }
             catch (SqlException ex)

@@ -40,7 +40,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<CustomerPaymentReceived>(CustomerQueries.CustomerById, new { CustomerId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<CustomerPaymentReceived>(CustomerPaymentQueries.CustomerPaymentById, new { CustomerId = id });
                 return result;
             }
         }
@@ -75,7 +75,15 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-       
+        public async Task<IReadOnlyList<CustomerPaymentReceived>> GetAllCustomerPaymentById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerPaymentQueries.CustomerPaymentById, new { CustomerId = id });
+                return result.ToList();
+            }
+        }
 
     }
 }

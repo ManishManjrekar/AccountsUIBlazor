@@ -9,8 +9,12 @@ namespace AccountsUIBlazor.UIModels
             UICalenderModel = new UICalenderModel();
             UIStockInList = new List<UIStockInItem>();
             UISalesPostDataModel = new UISalesPostDataModel();
+            UICustomerNamesList = new List<UICustomerNames>();
         }
+
         public List<UIStockInItem> UIStockInList { get; set; }
+        public List<UICustomerNames> UICustomerNamesList { get; set; }
+
         public UISalesPostDataModel UISalesPostDataModel { get; set; }
         //[Required]
         public UIStockIn StockIn { get; set; }
@@ -24,6 +28,8 @@ namespace AccountsUIBlazor.UIModels
     {
         public string LoadName { get; set; }
         public int StockInId { get; set; }
+        public int CustomerId { get; set; }
+
         public int VendorId { get; set; }
 
         public int Quantity { get; set; }

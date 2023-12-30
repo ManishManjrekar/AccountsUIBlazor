@@ -86,7 +86,7 @@ namespace AccountsUIBlazor.Controller
 
         [HttpPost]
         [Route("AddSales")]
-        public async Task<IActionResult> AddSales(UISales uiSales)
+        public async Task<IActionResult> AddSales(UISalesPostDataModel uiSales)
         {
           
             var apiResponse = new ApiResponse<string>();
@@ -116,44 +116,46 @@ namespace AccountsUIBlazor.Controller
             return Ok(apiResponse);
         }
 
-        [HttpPost]
-        [Route("PostStockInsData")]
-        public async Task<IActionResult> PostStockInsData(UICalenderModel uiSales)
-        {
-            List<UISalesStockInData> sales = new List<UISalesStockInData>();
-            //var apiResponse = new ApiResponse<string>();
+        //[HttpPost]
+        //[Route("PostStockInsData")]
+        //public async Task<IActionResult> PostStockInsData(UICalenderModel uICalenderModel)
+        //{
+        //    List<UISalesStockInData> sales = new List<UISalesStockInData>();
+        //    //var apiResponse = new ApiResponse<string>();
 
-            //customer.IsActive = true;
+        //    //customer.IsActive = true;
 
-            try
-            {
-                //var data = await _unitOfWork.StockIn.GetStockInDataAsperDates(
-                //    uiSales.UICalenderModel.FromDate.ToString(), 
-                //    uiSales.UICalenderModel.FromDate.ToString());
-                sales.Add(new UISalesStockInData { LoadName = "load1", VendorId = 1, Quantity = 100, StockInId = 1 });
-                sales.Add(new UISalesStockInData { LoadName = "load2", VendorId = 2, Quantity = 700, StockInId = 2 });
+        //    try
+        //    {
+        //        var data = await _unitOfWork.StockIn.GetStockInDataAsperDates(
+        //            uICalenderModel.FromDate.ToString(),
+        //            uICalenderModel.FromDate.ToString());
 
-                //sales = _IMapper.Map<List<UISalesStockInData>>(data);
 
-                //apiResponse.Success = true;
-                //apiResponse.Result = data;
+        //        //sales.Add(new UISalesStockInData { LoadName = "load1", VendorId = 1, Quantity = 100, StockInId = 1 });
+        //        //sales.Add(new UISalesStockInData { LoadName = "load2", VendorId = 2, Quantity = 700, StockInId = 2 });
 
-            }
-            catch (Exception ex)
-            {
-                //apiResponse.Success = false;
-                //apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
-            }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+        //        //sales = _IMapper.Map<List<UISalesStockInData>>(data);
 
-            return Ok(sales);
-        }
+        //        //apiResponse.Success = true;
+        //        //apiResponse.Result = data;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //apiResponse.Success = false;
+        //        //apiResponse.Message = ex.Message;
+        //        Logger.Instance.Error("SQL Exception:", ex);
+        //    }
+        //    //catch (Exception ex)
+        //    //{
+        //    //    apiResponse.Success = false;
+        //    //    apiResponse.Message = ex.Message;
+        //    //    Logger.Instance.Error("Exception:", ex);
+        //    //}
+
+        //    return Ok(sales);
+        //}
 
         [HttpGet]
         [Route("GetVendorId")]

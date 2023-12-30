@@ -7,9 +7,9 @@
     [Price]        INT              NOT NULL,
     [Total]        INT              NOT NULL,
     [Type]   NVARCHAR (50)    NULL,
-    [createdDate]  DATETIME         CONSTRAINT [DF_Sales_createdDate] DEFAULT (getdate()) NOT NULL,
-    [modifiedDate] DATETIME         CONSTRAINT [DF_Sales_modifiedDate] DEFAULT (getdate()) NOT NULL,
-    [createdBy]    NVARCHAR (50)    NULL,
+    [CreatedDate]  DATETIME         CONSTRAINT [DF_Sales_createdDate] DEFAULT (getdate()) NOT NULL,
+    [ModifiedDate] DATETIME         CONSTRAINT [DF_Sales_modifiedDate] DEFAULT (getdate()) NOT NULL,
+    [CreatedBy]    NVARCHAR (50)    NULL,
     [LoggedInUser] NVARCHAR (500)   NULL,
     [IsActive]     BIT              CONSTRAINT [DF_Sales_IsActive] DEFAULT ((1)) NOT NULL,
     

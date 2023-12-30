@@ -10,46 +10,52 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class VendorQueries
     {
-		public static string AllCustomer => "SELECT * FROM [Vendor] (NOLOCK)";
+		public static string AllVendor => "SELECT * FROM [Vendor] (NOLOCK)";
 
-		public static string CustomerById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [CustomerId] = @CustomerId";
+		public static string VendorById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [CustomerId] = @CustomerId";
 
-		public static string AddCustomer =>
+		public static string AddVendor =>
             @"INSERT INTO [dbo].[Vendor]
            ([FirstName]
            ,[MiddleName]
-           ,[NickName]
            ,[LastName]
-           ,[Mobile]
-           ,[ReferredBy]
-           ,[CreatedBy]
+           ,[MobileNo]
            ,[ModifiedDate]
            ,[CreatedDate]
+           ,[CreatedBy]
            ,[ModifiedBy]
-           ,[Url]
-           ,[IsActive])
+           ,[IsActive]
+           ,[ElectronicPaymentId]
+           ,[ReferredBy]
+           ,[Address]
+            ,[City]
+            ,[State]
+           )
      VALUES
            (@FirstName
            ,@MiddleName
-           ,@NickName
            ,@LastName
-           ,@Mobile
-           ,@ReferredBy
-           ,@CreatedBy
+           ,@MobileNo
            ,@ModifiedDate
            ,@CreatedDate
+           ,@CreatedBy
            ,@ModifiedBy
-           ,@Url
-           ,@IsActive)";
+           ,@IsActive
+           ,@ElectronicPaymentId
+           ,@ReferredBy
+           ,@Address
+             ,@City
+             ,@State
+           )";
 
-		public static string UpdateCustomer =>
+		public static string UpdateVendor =>
             @"UPDATE [Vendor] 
             SET [FirstName] = @FirstName, 
 				[LastName] = @LastName, 
-				[Email] = @Email, 
+				[ElectronicPaymentId] = @ElectronicPaymentId, 
 				[PhoneNumber] = @PhoneNumber
             WHERE [CustomerId] = @CustomerId";
 
-		public static string DeleteCustomer => "Update FROM [Vendor] WHERE [VendorId] = @CustomerId where isActive=0";
+		public static string DeleteVendor => "Update FROM [Vendor] WHERE [VendorId] = @CustomerId where isActive=0";
 	}
 }
