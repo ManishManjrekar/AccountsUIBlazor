@@ -22,7 +22,7 @@ namespace AccountsUIBlazor.UIModels
         public string Email { get; set; }
 
         [Required]
-        public string MobileNo { get; set; }
+        public string Mobile { get; set; }
 
         public string ReferredBy { get; set; }
 

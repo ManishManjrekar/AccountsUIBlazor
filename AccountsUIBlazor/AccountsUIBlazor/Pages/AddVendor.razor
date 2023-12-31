@@ -55,7 +55,7 @@
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="Mobile">Mobile #</label>
-                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.MobileNo" />
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.Mobile" />
                        
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="UIVendor" Property="MobileNo" Title="Mobile No" Width="120px">
                     <EditTemplate Context="vendor">
-                        <RadzenTextBox @bind-Value="vendor.MobileNo" Style="width:200px; display: block" Name="MobileNo" />
+                        <RadzenTextBox @bind-Value="vendor.Mobile" Style="width:200px; display: block" Name="MobileNo" />
                         <RadzenRequiredValidator Text="Mobile No is required" Component="MobileNo" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
@@ -167,7 +167,7 @@
                 LastName = vendor.LastName ?? string.Empty,
                 Email = vendor.Email ?? string.Empty,
                 MiddleName = vendor.MiddleName ?? string.Empty,
-                MobileNo = vendor.MobileNo ?? string.Empty,
+                Mobile = vendor.Mobile ?? string.Empty,
                 ElectronicPaymentId = vendor.ElectronicPaymentId ?? string.Empty,
                 ReferredBy = vendor.ReferredBy ?? string.Empty
             };

@@ -25,7 +25,7 @@ namespace AccountsUIBlazor.UIModels
         public string MiddleName { get; set; }
 
         ////[Required]
-        public string Email { get; set; }
+       // public string Email { get; set; }
 
         public string ElectronicPaymentId { get; set; }
 

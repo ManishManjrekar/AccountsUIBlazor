@@ -199,18 +199,18 @@ namespace AccountsUIBlazor.Controller
 
         [HttpGet]
         [Route("GetPendingBalanceForCustomer")]
-        public async Task<List<SalesDetailsDto>> GetPendingBalanceForCustomer(int customerId)
+        public async Task<UICustomerPaymentMaster> GetPendingBalanceForCustomer(int customerId)
         {
-            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
+            UICustomerPaymentMaster customerPaymentMasterDto = new UICustomerPaymentMaster();
             try
             {
-                var customerPurchases = await GetSalesDataAsPerCustomerId(customerId);
-                var customerPaymentsDone =await GetAllCustomerPaymentById(customerId);
-                var BalanceAmountDue = customerPurchases.Select(e=>e.TotalAmount).Sum() - customerPaymentsDone.Select(e =>e.AmountPaid).Sum();
+                customerPaymentMasterDto.CustomerPurchases = await GetSalesDataAsPerCustomerId(customerId);
+                customerPaymentMasterDto.CustomerPaymentsDone  = await GetAllCustomerPaymentById(customerId);
+                customerPaymentMasterDto. BalanceAmountDue = customerPaymentMasterDto.CustomerPurchases.Select(e=>e.TotalAmount).Sum() - customerPaymentMasterDto.CustomerPaymentsDone.Select(e =>e.AmountPaid).Sum();
+                
 
-
-                var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
-                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+                //var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
+                //results = _IMapper.Map<List<SalesDetailsDto>>(data);
             }
             catch (SqlException ex)
             {
@@ -221,7 +221,7 @@ namespace AccountsUIBlazor.Controller
 
                 Logger.Instance.Error("Exception:", ex);
             }
-            return results;
+            return customerPaymentMasterDto;
         }
 
 

@@ -1,5 +1,15 @@
 ﻿namespace AccountsUIBlazor.UIModels
 {
+    public class UICustomerPaymentMaster
+    {
+        public List<SalesDetailsDto> CustomerPurchases { get; set; }
+        public List<UICustomerPayment> CustomerPaymentsDone { get; set; }
+
+        public long BalanceAmountDue { get; set; }
+        
+    }
+
+
     public class UICustomerPayment
     {
         public List<UICustomerNames> CustomerList { get; set; }

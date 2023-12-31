@@ -15,7 +15,7 @@ namespace AccountApi.Core
 
         public string LastName { get; set; }
 
-        public string MobileNo { get; set; }
+        public string Mobile { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
