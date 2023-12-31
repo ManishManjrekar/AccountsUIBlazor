@@ -3,7 +3,7 @@
     [FirstName]         NVARCHAR (500)   NULL,
     [MiddleName]        NVARCHAR (500)   NULL,
     [LastName]          NVARCHAR (500)   NULL,
-    [MobileNo]          NVARCHAR (500)   NULL,
+    [Mobile]          NVARCHAR (500)   NULL,
     [CreatedDate]       DATETIME         DEFAULT (getdate()) NOT NULL,
     [ModifiedDate]      DATETIME         DEFAULT (getdate()) NOT NULL,
     [CreatedBy]         NVARCHAR (50)    NULL,

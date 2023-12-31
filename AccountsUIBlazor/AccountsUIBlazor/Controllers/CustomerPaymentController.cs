@@ -3,8 +3,10 @@ using AccountApi.Application.Interfaces;
 using AccountApi.Core;
 using AccountApi.Logging;
 using AccountsUIBlazor.Data;
+using AccountsUIBlazor.Pages;
 using AccountsUIBlazor.UIModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -31,213 +33,197 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        public async Task<ApiResponse<List<CustomerPaymentReceived>>> GetAll()
+        public async Task<List<UICustomerPayment>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<CustomerPaymentReceived>>();
+            List<UICustomerPayment> results = new List<UICustomerPayment>();
 
             try
             {
                 var data = await _unitOfWork.CustomerPaymentReceived.GetAllAsync();
-                apiResponse.Success = true;
-                apiResponse.Result = data.ToList();
+                results = _IMapper.Map<List<UICustomerPayment>>(data);
+               
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
+              
                 Logger.Instance.Error("Exception:", ex);
             }
 
-            return apiResponse;
+            return results;
         }
 
-        [HttpGet]
-        [Route("CustomerList")]
-        public async Task<IActionResult> CustomerList()
-        {
-
-            //var apiResponse = new ApiResponse<List<CustomerPaymentReceived>>();
-            //UIStockIn vendorNames = new UIStockIn();
-            //Vendor.IsActive = true;
-            var Result = new List<CustomerList>();
-            try
-            {
-                 Result = new List<CustomerList> { new CustomerList { CustomerId=1, CustomerName="cust"},
-                    new CustomerList { CustomerId = 2, CustomerName = "cust1" } };
-
-                //  var data = await _unitOfWork.Vendor.GetAllAsync();
-                //var names = _IMapper.Map<List<VendorNames>>(data);
-                
-                //apiResponse.Success = true;
-               // apiResponse.Result = names.ToList();
-
-            }
-            catch (Exception ex)
-            {
-               // apiResponse.Success = false;
-              //  apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
-            }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
-
-            return Ok(Result);
-        }
+        
 
         [HttpGet("{id}")]
-        public async  Task<ApiResponse<CustomerPaymentReceived>> GetById(int id)
+        public async  Task<UICustomerPayment> GetById(int id)
         {
-
-            var apiResponse = new ApiResponse<CustomerPaymentReceived>();
-
+            UICustomerPayment results = null;
             try
             {
                 var data = await _unitOfWork.CustomerPaymentReceived.GetByIdAsync(id);
-                apiResponse.Success = true;
-                apiResponse.Result = data;
+                results = _IMapper.Map< UICustomerPayment > (data);
+                return results;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
+              
                 Logger.Instance.Error("Exception:", ex);
             }
-
-            return apiResponse;
+            return results;
         }
 
-        [HttpGet]
-        [Route("GetVendorLoadCount")]
-        public async Task<int> GetVendorLoadCount(int vendorid,string createdDate)
-        {
-
-            var apiResponse = new ApiResponse<CustomerPaymentReceived>();
-
-            try
-            {
-                // var data = await _unitOfWork.StockIn.GetVendorLoadCount(vendorid, createdDate);
-                return 0;
-               // apiResponse.Success = true;
-               // apiResponse.Result = data;
-            }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
-            catch (Exception ex)
-            {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
-                Logger.Instance.Error("Exception:", ex);
-            }
-
-            return 0;
-        }
+        
 
         [HttpPost]
         [Route("AddCustomerPayment")]
-        public async Task<IActionResult> AddCustomerPayment(UICustomerPayment UICustomerPayment)
+        public async Task<string> AddCustomerPayment(UICustomerPayment UICustomerPayment)
         {
-          
-            var apiResponse = new ApiResponse<string>();
             CustomerPaymentReceived custPayment = _IMapper.Map<CustomerPaymentReceived>(UICustomerPayment);
-            //Vendor.IsActive = true;
-
             try
             {
-                var data = await _unitOfWork.CustomerPaymentReceived.AddAsync(custPayment);
-                apiResponse.Success = true;
-                apiResponse.Result = data;
+                custPayment.TypeOfTransaction = UICustomerPayment.TypeOfTransaction.ToString();
                
+                var data = await _unitOfWork.CustomerPaymentReceived.AddAsync(custPayment);
+                //results = _IMapper.Map<List<UICustomerPayment>>(data);
+                return data;
+               
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
+                Logger.Instance.Error("Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
-
-            return Ok(apiResponse);
+            return "success";
         }
 
         [HttpPut]
-        public async Task<ApiResponse<string>> Update(StockIn stockIn)
+        public async Task<string> Update(UICustomerPayment UICustomerPayment)
         {
-            var apiResponse = new ApiResponse<string>();
-
             try
             {
-                var data = await _unitOfWork.StockIn.UpdateAsync(stockIn);
-                apiResponse.Success = true;
-                apiResponse.Result = data;
+                CustomerPaymentReceived custPayment = _IMapper.Map<CustomerPaymentReceived>(UICustomerPayment);
+                var data = await _unitOfWork.CustomerPaymentReceived.UpdateAsync(custPayment);
+                //results = _IMapper.Map<List<UICustomerPayment>>(data);
+                return data;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
-
-            return apiResponse;
-        }
-
-        [HttpDelete]
-        public async Task<ApiResponse<string>> Delete(int id)
-        {
-            var apiResponse = new ApiResponse<string>();
-
-            try
-            {
-                var data = await _unitOfWork.Vendor.DeleteAsync(id);
-                apiResponse.Success = true;
-                apiResponse.Result = data;
-            }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
                 Logger.Instance.Error("Exception:", ex);
             }
 
-            return apiResponse;
+            return "success";
         }
 
-       
+        [HttpDelete]
+        public async Task<string> Delete(int id)
+        {
+            try
+            {
+                var data = await _unitOfWork.Vendor.DeleteAsync(id);
+                //results = _IMapper.Map<List<UICustomerPayment>>(data);
+                return data;
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return "success";
+        }
+
+        //For filling the grid details for customer payments completed
+        [HttpGet]
+        [Route("GetCustomerPaymentReceivedByCustomerId")]
+        public async Task<List<UICustomerPayment>> GetAllCustomerPaymentById(int customerId)
+        {
+            List<UICustomerPayment> results = new List<UICustomerPayment>();
+            try
+            {
+                 var data = await _unitOfWork.CustomerPaymentReceived.GetCustomerPaymentReceivedByCustomerId(customerId);
+                results = _IMapper.Map<List<UICustomerPayment>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return results;
+        }
+
+        //For filling the grid details for customer purchases from us..
+        [HttpGet]
+        [Route("GetSalesDataAsPerCustomerId")]
+        public async Task<List<SalesDetailsDto>> GetSalesDataAsPerCustomerId(int customerId)
+        {
+            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
+            try
+            {
+                var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
+                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return results;
+        }
+
+        [HttpGet]
+        [Route("GetPendingBalanceForCustomer")]
+        public async Task<List<SalesDetailsDto>> GetPendingBalanceForCustomer(int customerId)
+        {
+            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
+            try
+            {
+                var customerPurchases = await GetSalesDataAsPerCustomerId(customerId);
+                var customerPaymentsDone =await GetAllCustomerPaymentById(customerId);
+                var BalanceAmountDue = customerPurchases.Select(e=>e.TotalAmount).Sum() - customerPaymentsDone.Select(e =>e.AmountPaid).Sum();
+
+
+                var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
+                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return results;
+        }
+
+
     }
 }

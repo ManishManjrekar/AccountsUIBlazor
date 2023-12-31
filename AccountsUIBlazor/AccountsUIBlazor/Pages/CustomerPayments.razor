@@ -17,29 +17,35 @@
         <label for="selectvendor">select Customer #</label>
         <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerPayment.CustomerList" TextProperty="CustomerName" ValueProperty="@UICustomerPayment.CustomerId" Change="@OnChange" />
     </div>
-    
 
     <div class="col-md-8">
-        From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.PaymentDate" Change="DateSelection" />
+        Payment Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.PaymentDate" Change="DateSelection" />
     </div>
     <div class="col-md-12">
         <label for="lastName">Amount paid #</label>
         <input type="text" class="form-control" id="lastName" @bind-value="@UICustomerPayment.AmountPaid" placeholder="enter last name..." />
-        @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+       
     </div>
     <div class="col-md-12">
         <label for="lastName">comments</label>
         <input type="text" class="form-control" id="comments" @bind-value="@UICustomerPayment.Comments" placeholder="enter last name..." />
-        @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+      
+    </div>
+    <div>
+        <InputSelect @bind-Value="@UICustomerPayment.TypeOfTransaction">
+            @foreach (var value in Enum.GetValues<TypeOfTransaction>())
+            {
+                <option value="@value">@value</option>
+            }
+        </InputSelect>
     </div>
     
 <div>
-        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit Customer Payment</button>
 </div>
 </EditForm>
 @code {
 
-   // public UICalenderModel UICalenderModel { get; set; } = new();
     public UICustomerPayment UICustomerPayment { get; set; } = new();
     public string Log { get; set; } = "";
     
@@ -47,22 +53,20 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-
-        // var results = await HttpClient.GetStringAsync($"StockIn/GetVendorNames");
-        var custList = await HttpClient.GetFromJsonAsync<List<CustomerList>>($"CustomerPayment/CustomerList");
-        //var APIreturn =  JsonConvert.DeserializeObject(results);
+        var custList = await HttpClient.GetFromJsonAsync<List<UICustomerNames>>($"Customer/GetAllCustomerNames");
         UICustomerPayment.CustomerList = custList;
-        //Console.WriteLine(Vendorname);
+      
     }
+
+
     void OnChange(object value)
     {
 
-        // var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
-        // UIStockIn.VendorId =  UIStockIn.VendorNames.Where(e => e.VendorName.Equals(value))
-        //                       .Select(p=> p.VendorId).FirstOrDefault();
-        // UIStockIn.VendorName = str.ToString();
-
-        // Console.WriteLine($"Value changed to {str}");
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UICustomerPayment.CustomerId = UICustomerPayment.CustomerList.Where(e => e.CustomerName.Equals(value))
+                              .Select(p=> p.CustomerId).FirstOrDefault();
+        UICustomerPayment.CustomerName = str.ToString();
+        
     }
     public void InvalidSubmit(EditContext formContext)
     {
@@ -77,25 +81,9 @@
     {
         Log += "DateSelection fired. ";
 
-        var laodcount = GetLoadValue();
-        Console.WriteLine(laodcount);
+        //Console.WriteLine(laodcount);
     }
-    public async Task GetLoadValue()
-    {
-        // // Log += "DateSelection fired. ";
-        // DateTime dateAndTime = UIStockIn.CreatedDate;
-        // var datevalue = dateAndTime.ToString("dd/MM/yyyy");
-        // var createdDate = UIStockIn.CreatedDate;
-        // var vendorid = UIStockIn.VendorId;
-        // var laodcount = await HttpClient.GetStringAsync($"StockIn/GetVendorLoadCount?vendorid={vendorid}&createdDate={createdDate}");
-        // Console.WriteLine(laodcount);
-        // string value = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
-        // userNameChanged(value);
-        // //UIStockIn.LoadName = $" {UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
-
-        
-        // Log += UIStockIn.LoadName;
-    }
+    
     public void Submit(EditContext formContext)
     {
         var form = (UICustomerPayment)formContext.Model;

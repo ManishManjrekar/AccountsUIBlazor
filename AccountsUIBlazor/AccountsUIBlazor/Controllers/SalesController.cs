@@ -91,6 +91,7 @@ namespace AccountsUIBlazor.Controller
           
             var apiResponse = new ApiResponse<string>();
             Sales sales = _IMapper.Map<Sales>(uiSales);
+            sales.Type = uiSales.Type.ToString();
            
 
             try
@@ -241,32 +242,49 @@ namespace AccountsUIBlazor.Controller
 
         [HttpGet]
         [Route("GetSalesDataAsPerStockInId")]
-        public async Task<IActionResult> GetSalesDataAsPerStockInId(int stockInId)
+        public async Task<List<SalesDetailsDto>> GetSalesDataAsPerStockInId(int stockInId)
         {
-            var apiResponse = new ApiResponse<List<SalesDetailsDto>>();
+            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
             try
             {
                 var data = await _unitOfWork.Sales.GetSalesDataAsPerStockInId(stockInId);
-               List<SalesDetailsDto> results = _IMapper.Map<List<SalesDetailsDto>>(data);
-                apiResponse.Success = true;
-                apiResponse.Result = results;
-
+                results = _IMapper.Map<List<SalesDetailsDto>>(data);
             }
             catch (SqlException ex)
             {
-                //apiResponse.Success = false;
-                //apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
+              
                 Logger.Instance.Error("Exception:", ex);
             }
-
-            return Ok(apiResponse);
+            return results;
         }
+
+        [HttpGet]
+        [Route("GetSalesDataAsPerCustomerId")]
+        public async Task<List<SalesDetailsDto>> GetSalesDataAsPerCustomerId(int customerId)
+        {
+            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
+            try
+            {
+                var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
+                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return results;
+        }
+
+       
 
 
     }

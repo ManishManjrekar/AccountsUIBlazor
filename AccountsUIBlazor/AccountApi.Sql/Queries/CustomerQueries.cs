@@ -10,9 +10,9 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class CustomerQueries
 	{
-		public static string AllCustomer => "SELECT * FROM [Customer] (NOLOCK)";
+		public static string AllCustomer => "SELECT * FROM [Customer] (NOLOCK) where isActive=1";
 
-		public static string CustomerById => "SELECT * FROM [Customer] (NOLOCK) WHERE [CustomerId] = @CustomerId";
+		public static string CustomerById => "SELECT * FROM [Customer] (NOLOCK) WHERE [CustomerId] = @CustomerId and isActive=1";
 
 		public static string AddCustomer =>
             @"INSERT INTO [dbo].[Customer]
@@ -41,13 +41,12 @@ namespace AccountApi.Sql.Queries
            ,@IsActive)";
 
 		public static string UpdateCustomer =>
-			@"UPDATE [Customer] 
+            @"UPDATE [Customer] 
             SET [FirstName] = @FirstName, 
 				[LastName] = @LastName, 
-				[Email] = @Email, 
-				[PhoneNumber] = @PhoneNumber
-            WHERE [CustomerId] = @CustomerId";
+				[Mobile] = @Mobile
+            WHERE [CustomerId] = @CustomerId and isActive=1";
 
-		public static string DeleteCustomer => "Update FROM [Customer] WHERE [CustomerId] = @CustomerId where isActive=0";
+		public static string DeleteCustomer => "Update [Customer] set isActive=0 WHERE [CustomerId] = @CustomerId";
     }
 }

@@ -48,22 +48,29 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<string> AddAsync(Sales entity)
         {
-            entity.Type = "";
+            //entity.Type = "";
             entity.CreatedBy = "System";
             entity.LoggedInUser = "System";
             entity.CreatedDate = DateTime.Now;
             entity.ModifiedDate = DateTime.Now;
             entity.IsActive = true;
-          
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                Sales obj = new Sales();
-                connection.Open();
-                var result = await connection.ExecuteAsync(SalesQueries.AddSales, entity);
-               // var result1 = await connection.Add<Sales>(entity);
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    //Sales obj = new Sales();
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(SalesQueries.AddSales, entity);
+                    // var result1 = await connection.Add<Sales>(entity);
 
-                return result.ToString();
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public async Task<string> UpdateAsync(Sales entity)
@@ -85,25 +92,43 @@ namespace AccountApi.Infrastructure.Repository
                 return result.ToString();
             }
         }
-
-        public async Task<List<SalesDetails>> GetSalesDataAsPerStockInId(int stockInId)
+        
+        public async Task<IReadOnlyList<SalesDetails>> GetSalesDataAsPerStockInId(int stockInId)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<List<SalesDetails>>(SalesQueries.GetSalesDataAsPerStockInId, new { stockInId  });
-                return (List<SalesDetails>)result;
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerStockInId, new { stockInId });
+                    return result.ToList();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
-        public async Task<List<SalesDetails>> GetSalesDataAsPerSalesInId(int customerId)
+        public async Task<IReadOnlyList<SalesDetails>> GetSalesDataAsPerCustomerId(int customerId)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<List<SalesDetails>>(SalesQueries.GetSalesDataAsPerCustomerId, new { customerId });
-                return (List<SalesDetails>)result;
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerCustomerId, new { customerId });
+                    return result.ToList();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
 

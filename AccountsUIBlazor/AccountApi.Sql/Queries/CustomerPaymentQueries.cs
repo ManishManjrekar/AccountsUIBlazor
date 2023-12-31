@@ -10,51 +10,57 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class CustomerPaymentQueries
     {
-		public static string AllCustomer => "SELECT * FROM [CustomerPaymentReceived] (NOLOCK)";
-
-		public static string CustomerPaymentById => "SELECT * FROM [CustomerPaymentReceived] (NOLOCK) WHERE [CustomerId] = @CustomerId";
+		public static string AllCustomerPaymentReceived => "SELECT * FROM [CustomerPaymentReceived] (NOLOCK)";
+        public static string GetCPRByCustomerPaymentId => "SELECT * FROM [CustomerPaymentReceived] where CustomerPaymentId =@CustomerPaymentId";
+        public static string GetCustomerPaymentReceivedByCustomerId => @"SELECT c.FirstName as CustomerName, c.CustomerId,
+            cp.AmountPaid, cp.ModifiedDate, cp.CreatedBy, cp.ModifiedBy, cp.LoggedInUser
+            FROM [accountancy].[dbo].[CustomerPaymentReceived] as cp  inner join 
+            Customer as c on cp.CustomerId = c.CustomerId WHERE cp.CustomerId = @CustomerId and cp.IsActive=1";
 
 		public static string AddCustomerPayment =>
             @"INSERT INTO [dbo].[CustomerPaymentReceived]
-           ([CustomerName]
+           ([CustomerId]
+            ,[CustomerName]
+           ,[TypeOfTransaction]
            ,[AmountPaid]
-           ,[CreatedDate]
+           ,[PaymentDate]
            ,[ModifiedDate]
            ,[IsActive]
            ,[CreatedBy]
            ,[ModifiedBy]
            ,[LoggedInUser]
-           ,[TypeOfTransaction]
            ,[Comments]
-)
+           )
            
      VALUES
-           (@CustomerName
+           (@CustomerId
+            ,@CustomerName
+           ,@TypeOfTransaction
            ,@AmountPaid
-           ,@CreatedDate
+           ,@PaymentDate
            ,@ModifiedDate
            ,@IsActive
            ,@CreatedBy
            ,@ModifiedBy
            ,@LoggedInUser
-           ,@TypeOfTransaction
-            @Comments
+            ,@Comments
           )";
 
-		public static string UpdateCustomer =>
+		public static string UpdateCustomerPayment =>
             @"UPDATE [CustomerPaymentReceived] 
-            SET [CustomerName] = @CustomerName, 
+            SET [CustomerId] = @CustomerId,
+                [CustomerName] = @CustomerName, 
 				[AmountPaid] = @AmountPaid, 
-				[CreatedDate] = @CreatedDate, 
+				[PaymentDate] = @PaymentDate, 
 				[ModifiedDate] = @ModifiedDate
 	            [IsActive] = @IsActive, 
 				[CreatedBy] = @CreatedBy, 
 				[ModifiedBy] = @ModifiedBy
                 [LoggedInUser] = @LoggedInUser,
-                [TypeOfTransaction] = @TypeOfTransaction
-                [Comments] = @Comments,
+                [TypeOfTransaction] = @TypeOfTransaction,
+                [Comments] = @Comments
             WHERE [CustomerPaymentId] = @CustomerPaymentId";
 
-		public static string DeleteCustomer => "Update FROM [CustomerPaymentReceived] WHERE [CustomerPaymentId] = @CustomerPaymentId where isActive=0";
+		public static string DeleteCustomerPaymentReceived => "Update FROM [CustomerPaymentReceived] WHERE [CustomerPaymentId] = @CustomerPaymentId and isActive=0";
     }
 }

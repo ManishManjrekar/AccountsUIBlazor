@@ -10,16 +10,16 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class VendorQueries
     {
-		public static string AllVendor => "SELECT * FROM [Vendor] (NOLOCK)";
+		public static string AllVendor => "SELECT * FROM [Vendor] (NOLOCK) where IsActive =1 ";
 
-		public static string VendorById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [CustomerId] = @CustomerId";
+		public static string VendorById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [VendorId] = @VendorId";
 
 		public static string AddVendor =>
             @"INSERT INTO [dbo].[Vendor]
            ([FirstName]
            ,[MiddleName]
            ,[LastName]
-           ,[MobileNo]
+           ,[Mobile]
            ,[ModifiedDate]
            ,[CreatedDate]
            ,[CreatedBy]
@@ -35,7 +35,7 @@ namespace AccountApi.Sql.Queries
            (@FirstName
            ,@MiddleName
            ,@LastName
-           ,@MobileNo
+           ,@Mobile
            ,@ModifiedDate
            ,@CreatedDate
            ,@CreatedBy
@@ -53,9 +53,9 @@ namespace AccountApi.Sql.Queries
             SET [FirstName] = @FirstName, 
 				[LastName] = @LastName, 
 				[ElectronicPaymentId] = @ElectronicPaymentId, 
-				[PhoneNumber] = @PhoneNumber
-            WHERE [CustomerId] = @CustomerId";
+				[Mobile] = @Mobile
+            WHERE [CustomerId] = @VendorId and IsActive =1";
 
-		public static string DeleteVendor => "Update FROM [Vendor] WHERE [VendorId] = @CustomerId where isActive=0";
+		public static string DeleteVendor => "Update [Vendor] set  isActive=0 where [VendorId] = @VendorId";
 	}
 }

@@ -148,16 +148,16 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpPut]
-        public async Task<ApiResponse<UICustomer>> Update(Customer Customer)
+        public async Task<ApiResponse<UICustomer>> Update(UICustomer Customer)
         {
             var apiResponse = new ApiResponse<UICustomer>();
-
+            Customer customerdata = _IMapper.Map<Customer>(Customer);
             try
             {
-                var data = await _unitOfWork.Customers.UpdateAsync(Customer);
-                UICustomer customerdata = _IMapper.Map<UICustomer>(data);
+                var data = await _unitOfWork.Customers.UpdateAsync(customerdata);
+                UICustomer customerUI = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = customerdata;
+                apiResponse.Result = customerUI;
             }
             catch (SqlException ex)
             {
@@ -176,16 +176,16 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpDelete]
-        public async Task<ApiResponse<UICustomer>> Delete(int id)
+        public async Task<ApiResponse<string>> Delete(int id)
         {
-            var apiResponse = new ApiResponse<UICustomer>();
+            var apiResponse = new ApiResponse<string>();
 
             try
             {
                 var data = await _unitOfWork.Customers.DeleteAsync(id);
-                UICustomer customerdata = _IMapper.Map<UICustomer>(data);
+                //UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = customerdata;
+                apiResponse.Result = data.ToString();
             }
             catch (SqlException ex)
             {

@@ -13,6 +13,7 @@ namespace AccountsUIBlazor.UIModels
 
     public class UICustomer
     {
+        public int CustomerId { get; set; }
 
         [Required]
         public string FirstName { get; set; }

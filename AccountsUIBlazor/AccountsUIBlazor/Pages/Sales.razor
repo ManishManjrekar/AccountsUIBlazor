@@ -30,8 +30,13 @@
         <label for="quantity">Quantity:</label>
         <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter quantity." />
         <label for="Amount">Total Amount:</label>
-        <input type="number" class="form-control" id="Amount" @bind="@UISales.UISalesPostDataModel.Amount" readonly />
-
+        <input type="number" class="form-control" id="TotalAmount" @bind="@UISales.UISalesPostDataModel.TotalAmount" />
+        <InputSelect @bind-Value="@UISales.UISalesPostDataModel.Type">
+            @foreach (var value in Enum.GetValues<SaleType>())
+            {
+                <option value="@value">@value</option>
+            }
+        </InputSelect>
  </div> 
 <div>
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
@@ -65,7 +70,7 @@
                         <td>@sale.CreatedDate</td>
                         <td>@sale.Price</td>
                         <td>@sale.Quantity</td>
-                        <td>@sale.Total</td>
+                        <td>@sale.TotalAmount</td>
                         <td>
                             <div>
                                 <RadzenButton ButtonStyle="ButtonStyle.Secondary"
@@ -93,26 +98,18 @@
     protected override void OnInitialized()
     {
         // Load customer details on page load
-        LoadCustomerDetails();
+        //FillGridForSaleAsPerStockInId();
+        LoadCustemerNames();
     }
 
-    private async void LoadCustomerDetails()
+    private async void FillGridForSaleAsPerStockInId()
     {
-        //int stockinId = UIStockIn.StockInId;
-
-        // if (UIStockIn.StockInId != 0)
-        // {
-        //     HttpResponseMessage response = await HttpClient.GetAsync($"Sales/GetSalesDataAsPerStockInId?stockInId={stockinId}");
-        //     if (response.IsSuccessStatusCode)
-        //     {
-        //         string responseContent = await response.Content.ReadAsStringAsync();
-
-        //         if (!string.IsNullOrEmpty(responseContent))
-        //         {
-        //             sales = JsonSerializer.Deserialize<List<SalesDetailsDto>>(responseContent);
-        //         }
-        //     }
-        // }
+        //for binding grid
+        int stockInId = UISales.UISalesPostDataModel.StockInId;
+        // var results = await HttpClient.PostAsJsonAsync($"StockIn/PostStockInsAsPerDates", UISales.UICalenderModel);
+        // var APIreturn = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UISalesStockInData>>(await results.Content.ReadAsStringAsync());
+        sales = await HttpClient.GetFromJsonAsync<List<SalesDetailsDto>>($"Sales/GetSalesDataAsPerStockInId?stockInId="+stockInId);
+        StateHasChanged();
     }
 
     private async void HandleDeleteClick(MouseEventArgs args)
@@ -135,7 +132,7 @@
         GetVendorId(UIStockIn.StockInId);
         UISales.UISalesPostDataModel.LoadName = str.ToString();
         UISales.UISalesPostDataModel.StockInId = UIStockIn.StockInId;
-        
+
 
         LoadCustemerNames();
         // UIStockIn.VendorName = str.ToString();
@@ -172,7 +169,7 @@
     public void CalculateAmount()
     {
 
-        UISales.UISalesPostDataModel.Amount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
+        UISales.UISalesPostDataModel.TotalAmount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
         StateHasChanged();
     }
 
@@ -190,13 +187,13 @@
     }
     public async Task GetVendorId(int StockInId)
     {
-       
+
         int vendorId = 0;
         var id = await HttpClient.GetStringAsync($"Sales/GetVendorId?id={StockInId}");
         int.TryParse(id, out vendorId);
         UIStockIn.VendorId = vendorId;
         UISales.UISalesPostDataModel.VendorId = UIStockIn.VendorId;
-        
+
     }
 
     public void Submit(EditContext formContext)
@@ -213,6 +210,7 @@
         {
             var obj = await HttpClient.PostAsJsonAsync($"Sales/AddSales", UISales.UISalesPostDataModel);
             Console.WriteLine(obj);
+            FillGridForSaleAsPerStockInId();
         }
         catch (Exception ex)
         {

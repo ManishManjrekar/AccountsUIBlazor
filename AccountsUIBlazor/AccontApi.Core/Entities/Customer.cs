@@ -19,7 +19,7 @@ namespace AccountApi.Core
         public string LastName { get; set; }
 
         //[Required]
-        public string Email { get; set; }
+       // public string Email { get; set; }
 
         [Required]
         public string Mobile { get; set; }

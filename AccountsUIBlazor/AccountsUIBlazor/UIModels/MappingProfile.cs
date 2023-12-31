@@ -20,9 +20,18 @@ namespace AccountsUIBlazor.UIModels
 
 
             CreateMap<UISales, Sales>().ReverseMap();
+            CreateMap<UISalesStockInData, StockIn> ().ReverseMap();
+            CreateMap<SalesDetailsDto, SalesDetails>().ReverseMap();
+
+            CreateMap<UISalesPostDataModel,Sales > ().ReverseMap();
+            
+
+
             CreateMap<UIStockIn, UISalesStockInData>().ReverseMap();
             CreateMap<UIStockIn, StockIn>().ReverseMap();
             CreateMap<SalesDetailsDto, SalesDetails>().ReverseMap();
+            CreateMap<CustomerPaymentReceived, UICustomerPayment>().ReverseMap();
+
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();

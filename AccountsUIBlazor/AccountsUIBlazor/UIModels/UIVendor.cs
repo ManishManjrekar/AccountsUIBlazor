@@ -4,7 +4,7 @@ namespace AccountsUIBlazor.UIModels
 {
     public class UIVendor
     {
-        //public int? UIVendorId { get; set; }
+        public int VendorId { get; set; }
 
         [Required]
         public string FirstName { get; set; }

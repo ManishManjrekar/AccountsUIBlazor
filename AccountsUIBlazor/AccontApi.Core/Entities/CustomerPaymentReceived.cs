@@ -10,7 +10,7 @@ namespace AccountApi.Core
         public string TypeOfTransaction { get; set; }
 
         public int AmountPaid { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime PaymentDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsActive { get; set; }
         public string CreatedBy { get; set; }

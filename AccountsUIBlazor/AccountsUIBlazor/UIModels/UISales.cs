@@ -34,7 +34,11 @@ namespace AccountsUIBlazor.UIModels
 
         public int Quantity { get; set; }
     }
-
+    public enum SaleType
+    {
+        OnPrice,
+        Tol
+    }
     public class UISalesPostDataModel
     {
         public string LoadName { get; set; }
@@ -43,8 +47,9 @@ namespace AccountsUIBlazor.UIModels
         public int CustomerId { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
-        public int Amount { get; set; }
-       
+        public int TotalAmount { get; set; }
+        public SaleType Type { get; set; }
+
     }
 
     public class UIStockInItem
@@ -61,7 +66,7 @@ namespace AccountsUIBlazor.UIModels
         public int CustomerId { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }
-        public int Total { get; set; }
+        public int TotalAmount { get; set; }
         public string Type { get; set; }
         public string CustomerName { get; set; }
         public string VendorName { get; set; }

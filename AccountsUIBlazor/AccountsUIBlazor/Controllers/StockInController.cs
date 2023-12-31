@@ -81,8 +81,8 @@ namespace AccountsUIBlazor.Controller
             try
             {
                 var data = await _unitOfWork.StockIn.GetStockInDataAsperDates(
-                    UiCalenderModel.FromDate.ToString(),
-                    UiCalenderModel.ToDate.ToString(), UiCalenderModel.VendorId);
+                   UiCalenderModel.FromDate.ToString("yyyy-MM-dd"),
+                    UiCalenderModel.ToDate.ToString("yyyy-MM-dd"), UiCalenderModel.VendorId);
                 stockInData = _IMapper.Map<List<UISalesStockInData>>(data);
 
                 
@@ -102,43 +102,27 @@ namespace AccountsUIBlazor.Controller
 
         [HttpPost]
         [Route("PostStockInsAsPerDates")]
-        public async Task<IActionResult> PostStockInsAsPerDates(UICalenderModel uICalenderModel)
+        public async Task<List<UISalesStockInData>> PostStockInsAsPerDates(UICalenderModel uICalenderModel)
         {
             List<UISalesStockInData> sales = new List<UISalesStockInData>();
-            //var apiResponse = new ApiResponse<string>();
-
-            //customer.IsActive = true;
-
             try
             {
                 var data = await _unitOfWork.StockIn.GetStockInAsperDates(
-                    uICalenderModel.FromDate.ToString(),
-                    uICalenderModel.FromDate.ToString());
+                    uICalenderModel.FromDate.ToString("yyyy-MM-dd"),
+                    uICalenderModel.ToDate.ToString("yyyy-MM-dd"));
+                sales = _IMapper.Map<List<UISalesStockInData>>(data);
 
-
-                //sales.Add(new UISalesStockInData { LoadName = "load1", VendorId = 1, Quantity = 100, StockInId = 1 });
-                //sales.Add(new UISalesStockInData { LoadName = "load2", VendorId = 2, Quantity = 700, StockInId = 2 });
-
-                //sales = _IMapper.Map<List<UISalesStockInData>>(data);
-
-                //apiResponse.Success = true;
-                //apiResponse.Result = data;
-
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-                //apiResponse.Success = false;
-                //apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
+                Logger.Instance.Error("Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
 
-            return Ok(sales);
+            return sales;
         }
 
         [HttpGet("{id}")]

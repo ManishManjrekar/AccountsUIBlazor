@@ -30,7 +30,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerQueries.AllCustomer);
+                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerPaymentQueries.AllCustomerPaymentReceived);
                 return result.ToList();
             }
         }
@@ -40,19 +40,32 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<CustomerPaymentReceived>(CustomerPaymentQueries.CustomerPaymentById, new { CustomerId = id });
+                var result = await connection.QueryFirstOrDefaultAsync<CustomerPaymentReceived>(CustomerPaymentQueries.GetCPRByCustomerPaymentId, new { GetCPRByCustomerPaymentId = id });
                 return result;
             }
         }
 
         public async Task<string> AddAsync(CustomerPaymentReceived entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                entity.CreatedBy = "System";
+                entity.LoggedInUser = "System";
+                //entity.PaymentDate = DateTime.Now;
+                entity.ModifiedDate = DateTime.Now;
+                entity.IsActive = true;
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(CustomerPaymentQueries.AddCustomerPayment, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+           
         }
 
         public async Task<string> UpdateAsync(CustomerPaymentReceived entity)
@@ -60,7 +73,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
+                var result = await connection.ExecuteAsync(CustomerPaymentQueries.UpdateCustomerPayment, entity);
                 return result.ToString();
             }
         }
@@ -70,17 +83,17 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(CustomerPaymentQueries.DeleteCustomerPaymentReceived, new { CustomerId = id });
                 return result.ToString();
             }
         }
 
-        public async Task<IReadOnlyList<CustomerPaymentReceived>> GetAllCustomerPaymentById(int id)
+        public async Task<IReadOnlyList<CustomerPaymentReceived>> GetCustomerPaymentReceivedByCustomerId(int customerId)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerPaymentQueries.CustomerPaymentById, new { CustomerId = id });
+                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerPaymentQueries.GetCustomerPaymentReceivedByCustomerId, new { CustomerId = customerId });
                 return result.ToList();
             }
         }

@@ -49,7 +49,7 @@ namespace AccountApi.Infrastructure.Repository
         {
             entity.isActive = true;
             entity.CreatedBy = "System";
-            entity.CreatedDate = DateTime.Now;
+            //entity.CreatedDate = DateTime.Now;
             entity.ModifiedDate = DateTime.Now;
             entity.IsPaymentDone = false;
             try
@@ -112,6 +112,7 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<IReadOnlyList<StockIn>> GetStockInAsperDates(string fromDate, string toDate)
         {
+
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();

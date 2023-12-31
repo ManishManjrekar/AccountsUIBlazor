@@ -137,28 +137,29 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpPut]
-        public async Task<ApiResponse<string>> Update(Vendor Vendor)
+        public async Task<ApiResponse<string>> Update(UIVendor uiVendor)
         {
             var apiResponse = new ApiResponse<string>();
-
+            Vendor vendorData = _IMapper.Map<Vendor>(uiVendor);
             try
             {
-                var data = await _unitOfWork.Vendor.UpdateAsync(Vendor);
+                var data = await _unitOfWork.Vendor.UpdateAsync(vendorData);
+                //UIVendor vendorDataResults = _IMapper.Map<UIVendor>(data);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return apiResponse;
         }
@@ -174,12 +175,12 @@ namespace AccountsUIBlazor.Controller
                 apiResponse.Success = true;
                 apiResponse.Result = data;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
