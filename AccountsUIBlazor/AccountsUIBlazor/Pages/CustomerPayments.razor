@@ -49,65 +49,25 @@
     <h4>Customer Details</h4>
     <div class="col-md-12">
         <RadzenDataGrid @ref="customerPaymentGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
-                        Data="@customerPaymentMasterDto.CustomerPurchases" TItem="SalesDetailsDto" RowUpdate="@OnUpdateRow" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+                        Data="@customerPaymentMasterDto.CustomerPurchases" TItem="SalesDetailsDto"  Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenTextBox @bind-Value="customerPurchases.CustomerName" Style="width:200px; display: block" Name="CustomerName" />
-                        <RadzenRequiredValidator Text="CustomerName is required" Component="CustomerName" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="VendorName" Title="Vendor Name" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenTextBox @bind-Value="customerPurchases.VendorName" Style="width:200px; display: block" Name="VendorName" />
-                        <RadzenRequiredValidator Text="VendorName is required" Component="VendorName" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="LoadName" Title="LoadName Name" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenTextBox @bind-Value="customerPurchases.LoadName" Style="width:200px; display: block" Name="LoadName" />
-                        <RadzenRequiredValidator Text="LoadName is required" Component="LoadName" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Quantity" Title="Quantity" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenNumeric @bind-Value="customerPurchases.Quantity" Style="width:200px; display: block" Name="Quantity" />
-                        <RadzenRequiredValidator Text="Quantity is required" Component="Quantity" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenNumeric @bind-Value="customerPurchases.Price" Style="width:200px; display: block" Name="TotalAmount" />
-                        <RadzenRequiredValidator Text="Price is required" Component="Price" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenNumeric @bind-Value="customerPurchases.TotalAmount" Style="width:200px; display: block" Name="TotalAmount" />
-                        <RadzenRequiredValidator Text="TotalAmount is required" Component="TotalAmount" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px">
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenNumeric @bind-Value="customerPurchases.TotalAmount" Style="width:200px; display: block" Name="TotalAmount" />
-                        <RadzenRequiredValidator Text="TotalAmount is required" Component="TotalAmount" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="VendorName" Title="Vendor Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="LoadName" Title="LoadName Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Quantity" Title="Quantity" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px" />
+             
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px" />
+               
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Context="customerPurchases" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
                     <Template Context="customerPurchases">
-                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@(args => EditRow(customerPurchases))" @onclick:stopPropagation="true">
-                        </RadzenButton>
                         <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(customerPurchases))" @onclick:stopPropagation="true">
                         </RadzenButton>
                     </Template>
-                    <EditTemplate Context="customerPurchases">
-                        <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@((args) => SaveRow(customerPurchases))">
-                        </RadzenButton>
-                        <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@((args) => CancelEdit(customerPurchases))">
-                        </RadzenButton>
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(customerPurchases))">
-                        </RadzenButton>
-                    </EditTemplate>
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
@@ -120,6 +80,7 @@
     public UICustomerPaymentMaster customerPaymentMasterDto = new UICustomerPaymentMaster();
     SalesDetailsDto customerPurchasesInsert;
     SalesDetailsDto customerPurchasesUpdate;
+    int selectedCustId = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -130,7 +91,7 @@
     }
     private async void LoadCustomerPayment(int customerId)
     {
-        customerPaymentMasterDto = await HttpClient.GetFromJsonAsync<UICustomerPaymentMaster>($"CustomerPayment/GetPendingBalanceForCustomer?customerId="+customerId);
+        customerPaymentMasterDto = await HttpClient.GetFromJsonAsync<UICustomerPaymentMaster>($"CustomerPayment/GetPendingBalanceForCustomer?customerId={customerId}");
         //Console.WriteLine(customers);
         StateHasChanged();
     }
@@ -142,6 +103,7 @@
         UICustomerPayment.CustomerId = UICustomerPayment.CustomerList.Where(e => e.CustomerName.Equals(value))
                               .Select(p=> p.CustomerId).FirstOrDefault();
         UICustomerPayment.CustomerName = str.ToString();
+        selectedCustId = UICustomerPayment.CustomerId;
         LoadCustomerPayment(UICustomerPayment.CustomerId);
 
     }
@@ -184,94 +146,31 @@
         //return null;
     }
 
-    async Task EditRow(SalesDetailsDto customer)
-    {
-        customerPurchasesUpdate = customer;
-        await customerPaymentGrid.EditRow(customer);
-    }
-    async Task SaveRow(SalesDetailsDto customer)
-    {
-
-
-        // UICustomer updatedCustomer = new UICustomer()
-        //     {
-        //         CustomerId = customer.CustomerId,
-        //         FirstName = customer.FirstName ?? string.Empty,
-        //         LastName = customer.LastName ?? string.Empty,
-        //         //Email = customer.Email ?? string.Empty,
-        //         MiddleName = customer.MiddleName ?? string.Empty,
-        //         Mobile = customer.Mobile ?? string.Empty,
-        //         ElectronicPaymentId = customer.ElectronicPaymentId ?? string.Empty,
-        //         ReferredBy = customer.ReferredBy ?? string.Empty
-        //     };
-
-        try
-        {
-            // var serialized = JsonConvert.SerializeObject(UICustomer);
-            // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
-            //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
-
-            var obj = await HttpClient.PutAsJsonAsync("CustomerPayment", customer);
-            Console.WriteLine(obj);
-            LoadCustomerDetails();
-            await customerGrid.UpdateRow(customer);
-        }
-        catch (Exception ex)
-        {
-
-            Console.WriteLine(ex.Message.ToString());
-        }
-
-        // update customer api call need to be update
-    }
 
     void Reset()
     {
-        customerToInsert = null;
-        customerToUpdate = null;
+        customerPurchasesInsert = null;
+        customerPurchasesUpdate = null;
     }
 
-    void OnUpdateRow(UICustomer customer)
+
+    async Task DeleteRow(SalesDetailsDto customerPurchases)
     {
         Reset();
 
-    }
-
-    void CancelEdit(UICustomer customer)
-    {
-        Reset();
-
-        customerGrid.CancelEditRow(customer);
-
-
-    }
-
-    async Task DeleteRow(UICustomer customer)
-    {
-        Reset();
-
-        if (customers.Contains(customer))
+        if (customerPaymentMasterDto.CustomerPurchases.Contains(customerPurchases))
         {
             try
             {
-                // var serialized = JsonConvert.SerializeObject(UICustomer);
-                // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
-                //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
-
-                var obj = await HttpClient.DeleteAsync($"Customer?id={customer.CustomerId}");
-                LoadCustomerDetails();
+                var obj = await HttpClient.DeleteAsync($"CustomerPayment?id={customerPurchases.SalesId}");
+                LoadCustomerPayment(selectedCustId);
             }
             catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message.ToString());
             }
-            await customerGrid.Reload();
-        }
-        else
-        {
-            customerGrid.CancelEditRow(customer);
-            await customerGrid.Reload();
+            await customerPaymentGrid.Reload();
         }
     }
 }

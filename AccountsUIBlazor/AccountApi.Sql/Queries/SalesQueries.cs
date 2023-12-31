@@ -21,7 +21,7 @@ namespace AccountApi.Sql.Queries
            ,[CustomerId]
            ,[Quantity]
            ,[Price]
-           ,[TotalAmount]
+           ,[Total]
            ,[Type]
            ,[CreatedDate]
            ,[ModifiedDate]
