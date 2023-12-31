@@ -43,13 +43,13 @@
                         @* <ValidationMessage For="@(()=>CustomerModel.MiddleName)" /> *@
                     </div>
                 </div>
-                <div class="row" style="margin-top:10px">
+                @* <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="email">Email Id #</label>
                         <input type="text" class="form-control" id="email" @bind-value="@CustomerModel.Email" placeholder="email..." />
-                        @* <ValidationMessage For="@(()=>CustomerModel.Email)" /> *@
+                        @* <ValidationMessage For="@(()=>CustomerModel.Email)" /> 
                     </div>
-                </div>
+                </div> *@
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="ElectronicPaymentId">Electronic Payment Id #</label>
@@ -78,47 +78,66 @@
         </div>
 </EditForm>
 
-<div class="row mt-3">
+<div class="row mt-2">
+    <h4>Customer Details</h4>
     <div class="col-md-12">
-
-        <h4>Customer Details</h4>
-
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Mobile</th>
-                    <th></th>
-                    <!-- Add more columns as needed -->
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in customers)
-                {
-                    <tr>
-                        <td>@customer.FirstName</td>
-                        <td>@customer.LastName</td>
-                        <td>@customer.Email</td>
-                        <td>@customer.Mobile</td>
-                        <td> <div><RadzenButton ButtonStyle="ButtonStyle.Secondary"
-                                              Click="HandleDeleteClick"><RadzenIcon Icon="delete" /></RadzenButton>
-                            </div>
-                        </td>
-                        <!-- Add more columns as needed -->
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <RadzenDataGrid @ref="customerGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@customers" TItem="UICustomer" RowUpdate="@OnUpdateRow" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICustomer" Property="FirstName" Title="First Name" Width="120px">
+                    <EditTemplate Context="customer">
+                        <RadzenTextBox @bind-Value="customer.FirstName" Style="width:200px; display: block" Name="FirstName" />
+                        <RadzenRequiredValidator Text="FirstName is required" Component="FirstName" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="UICustomer" Property="LastName" Title="First Name" Width="120px">
+                    <EditTemplate Context="customer">
+                        <RadzenTextBox @bind-Value="customer.LastName" Style="width:200px; display: block" Name="LastName" />
+                        <RadzenRequiredValidator Text="LastName is required" Component="LastName" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+          @*       <RadzenDataGridColumn TItem="UICustomer" Property="Email" Title="Email" Width="120px">
+                    <EditTemplate Context="customer">
+                        <RadzenTextBox @bind-Value="customer.Email" Style="width:200px; display: block" Name="Email" />
+                        <RadzenRequiredValidator Text="Email is required" Component="Email" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn> *@
+                <RadzenDataGridColumn TItem="UICustomer" Property="Mobile" Title="Mobile" Width="120px">
+                    <EditTemplate Context="customer">
+                        <RadzenTextBox @bind-Value="customer.Mobile" Style="width:200px; display: block" Name="Mobile" />
+                        <RadzenRequiredValidator Text="Mobile is required" Component="Mobile" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="UICustomer" Context="customer" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="customer">
+                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@(args => EditRow(customer))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(customer))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                    <EditTemplate Context="customer">
+                        <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@((args) => SaveRow(customer))">
+                        </RadzenButton>
+                        <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@((args) => CancelEdit(customer))">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(customer))">
+                        </RadzenButton>
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
     </div>
 </div>
 
+
 @code {
+    RadzenDataGrid<UICustomer> customerGrid;
     public UICustomer CustomerModel { get; set; } = new();
     public string Log { get; set; } = "";
     private UICustomer UICustomer;
     private List<UICustomer> customers=new List<UICustomer>();
+    UICustomer customerToInsert;
+    UICustomer customerToUpdate;
     protected override void OnInitialized()
     {
         // Load customer details on page load
@@ -130,6 +149,97 @@
         customers = await HttpClient.GetFromJsonAsync<List<UICustomer>>($"Customer/GetAllCustomer");
         Console.WriteLine(customers);
         StateHasChanged();
+    }
+
+    async Task EditRow(UICustomer customer)
+    {
+        customerToUpdate = customer;
+        await customerGrid.EditRow(customer);
+    }
+    async Task SaveRow(UICustomer customer)
+    {
+      
+
+        UICustomer updatedCustomer = new UICustomer()
+            {
+                CustomerId = customer.CustomerId,
+                FirstName = customer.FirstName ?? string.Empty,
+                LastName = customer.LastName ?? string.Empty,
+                //Email = customer.Email ?? string.Empty,
+                MiddleName = customer.MiddleName ?? string.Empty,
+                Mobile = customer.Mobile ?? string.Empty,
+                ElectronicPaymentId = customer.ElectronicPaymentId ?? string.Empty,
+                ReferredBy = customer.ReferredBy ?? string.Empty
+            };
+
+        try
+        {
+            // var serialized = JsonConvert.SerializeObject(UICustomer);
+            // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+            //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
+
+            var obj = await HttpClient.PutAsJsonAsync("Customer", updatedCustomer);
+            Console.WriteLine(obj);
+            LoadCustomerDetails();
+            await customerGrid.UpdateRow(customer);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+        // update customer api call need to be update
+    }
+
+    void Reset()
+    {
+        customerToInsert = null;
+        customerToUpdate = null;
+    }
+
+    void OnUpdateRow(UICustomer customer)
+    {
+        Reset();
+
+    }
+
+    void CancelEdit(UICustomer customer)
+    {
+        Reset();
+
+        customerGrid.CancelEditRow(customer);
+
+
+    }
+
+    async Task DeleteRow(UICustomer customer)
+    {
+        Reset();
+
+        if (customers.Contains(customer))
+        {
+            try
+            {
+                // var serialized = JsonConvert.SerializeObject(UICustomer);
+                // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
+                //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
+
+                var obj = await HttpClient.DeleteAsync($"Customer?id={customer.CustomerId}");
+                LoadCustomerDetails();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await customerGrid.Reload();
+        }
+        else
+        {
+            customerGrid.CancelEditRow(customer);
+            await customerGrid.Reload();
+        }
     }
 
 
