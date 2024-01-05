@@ -239,13 +239,18 @@ namespace AccountsUIBlazor.Controller
 
         [HttpGet]
         [Route("GetSalesDataAsPerStockInId")]
-        public async Task<List<SalesDetailsDto>> GetSalesDataAsPerStockInId(int stockInId)
+        public async Task<UISalesDto> GetSalesDataAsPerStockInId(int stockInId)
         {
+            UISalesDto resultData = new UISalesDto();
             List<SalesDetailsDto> results = new List<SalesDetailsDto>();
             try
             {
-                var data = await _unitOfWork.Sales.GetSalesDataAsPerStockInId(stockInId);
-                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+                var Salesdata = await _unitOfWork.Sales.GetSalesDataAsPerStockInId(stockInId);
+                resultData.salesDetailsList = _IMapper.Map<List<SalesDetailsDto>>(Salesdata);
+
+                resultData.TotalStock = await _unitOfWork.StockIn.GetstockQuantity_ByStockInId(stockInId);
+                resultData.TotalSalesDone = Salesdata.Select(p =>p.Quantity).Sum();
+                resultData.TotalStockLeft = resultData.TotalStock - resultData.TotalSalesDone;
             }
             catch (SqlException ex)
             {
@@ -256,7 +261,7 @@ namespace AccountsUIBlazor.Controller
               
                 Logger.Instance.Error("Exception:", ex);
             }
-            return results;
+            return resultData;
         }
 
         [HttpGet]

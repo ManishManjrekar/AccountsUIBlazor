@@ -3,6 +3,7 @@ using AccountApi.Infrastructure.Repository;
 using AccountsUIBlazor.UIModels;
 using AutoMapper;
 using Microsoft.OpenApi.Models;
+using Radzen;
 
 namespace AccountsUIBlazor
 {
@@ -32,7 +33,7 @@ namespace AccountsUIBlazor
             services.AddScoped<IStockInRepository, StockInRepository>();
             services.AddScoped<IVendorExpensesPaymentRepository, VendorExpensesPaymentRepository>();
             services.AddScoped<IVendorPaymentRepository, VendorPaymentRepository>();
-
+            services.AddScoped<DialogService>();
             // Add other services as needed
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IProductRepository, ProductRepository>();

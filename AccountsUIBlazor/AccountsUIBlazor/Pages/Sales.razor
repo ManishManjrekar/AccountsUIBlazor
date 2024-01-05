@@ -7,6 +7,8 @@
 @using System.Text.Json
 @inject HttpClient HttpClient
 @inject NavigationManager navigationManager;
+
+@* @inject DialogService DialogService *@
 <h3>Sales</h3>
 
 
@@ -25,10 +27,13 @@
         <RadzenAutoComplete Placeholder="Select customer name.." class="mt-2" Data="@UISales.UICustomerNamesList" TextProperty="CustomerName" ValueProperty="@UIStockIn.CustomerId" Change="@CustomerNameChange" />
     </div>
 <div class="col-md-8">
-        <label for="price">Price:</label>
-        <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter price." />
         <label for="quantity">Quantity:</label>
         <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter quantity." />
+
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter price." />
+
+      
         <label for="Amount">Total Amount:</label>
         <input type="number" class="form-control" id="TotalAmount" @bind="@UISales.UISalesPostDataModel.TotalAmount" />
         Sales Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UISalesPostDataModel.CreatedDate" />
@@ -42,6 +47,7 @@
  </div> 
 <div>
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
+        
 </div>
 </EditForm>
 
@@ -77,15 +83,33 @@
     </div>
 </div>
 
+@* <RadzenButton Text="Test Popup" Click=@(args => DialogService.Confirm("Confirm Action?", "Test Popup", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" })) /> *@
+
+
+@code
+{
+
+
+    private void OpenDialog()
+    {
+        // var parameters = new DialogParameters { { "ImageDetails", ImageDetails } };
+        // DialogService.Show<ImageDialog>(ImageDetails.Title, parameters);
+        DialogService.Alert("Quantity entered is more than stock quantity left", "Stock Quantiy Error");
+    }
+}
 
 @code {
 
-
+   
     public UISales UISales { get; set; } = new();
     public UISalesStockInData UIStockIn { get; set; } = new();
     private List<SalesDetailsDto> salesDetailsList = new List<SalesDetailsDto>() { new SalesDetailsDto() };
     public List<UIStockInItem> UIStockInList = new List<UIStockInItem>();
     public string Log { get; set; } = "";
+    UISalesDto salesDetails = new UISalesDto();
+
+    [Inject]
+    protected DialogService DialogService{ get; set; }
 
     //Grid variables
     RadzenDataGrid<SalesDetailsDto> salesDetailsGrid;
@@ -103,9 +127,9 @@
     {
         //for binding grid
         int stockInId = UISales.UISalesPostDataModel.StockInId;
-        // var results = await HttpClient.PostAsJsonAsync($"StockIn/PostStockInsAsPerDates", UISales.UICalenderModel);
-        // var APIreturn = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UISalesStockInData>>(await results.Content.ReadAsStringAsync());
-        salesDetailsList = await HttpClient.GetFromJsonAsync<List<SalesDetailsDto>>($"Sales/GetSalesDataAsPerStockInId?stockInId=" + stockInId);
+        //salesDetailsList = await HttpClient.GetFromJsonAsync<List<SalesDetailsDto>>($"Sales/GetSalesDataAsPerStockInId?stockInId=" + stockInId);
+        salesDetails = await HttpClient.GetFromJsonAsync<UISalesDto>($"Sales/GetSalesDataAsPerStockInId?stockInId=" + stockInId);
+        salesDetailsList = salesDetails.salesDetailsList;
         StateHasChanged();
     }
 
@@ -155,33 +179,35 @@
     }
 
 
-    public void DateSelection()
-    {
-        Log += "DateSelection fired. ";
-        GetStockInData();
-    }
+    // public void DateSelection()
+    // {
+    //     Log += "DateSelection fired. ";
+    //     GetStockInData();
+    // }
 
     public void CalculateAmount()
     {
 
-        UISales.UISalesPostDataModel.TotalAmount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
-        StateHasChanged();
+        if (UISales.UISalesPostDataModel.Quantity > salesDetails.TotalStockLeft)
+        {
+            //@DialogService.Alert("rams message", "rams")
+            OpenDialog();
+        }
+        else
+        {
+            UISales.UISalesPostDataModel.TotalAmount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
+            StateHasChanged();
+        }
     }
 
     public async Task GetStockInData()
     {
-        // Log += "DateSelection fired. ";
-        //var results = await HttpClient.PostAsJsonAsync($"StockIn/PostStockInsAsPerDates", UISales.UICalenderModel);
+       
         var results = await HttpClient.GetFromJsonAsync<List<UISalesStockInData>>($"StockIn/GetStockInAsPerPaymentNotCompleted");
-
-
-        //var APIreturn = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UISalesStockInData>> (await results.Content.ReadAsStringAsync());
-        //Console.WriteLine(APIreturn);
         foreach (var item in results)
         {
            // UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
             UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
-
         }
 
         UISales.UIStockInList = UIStockInList;

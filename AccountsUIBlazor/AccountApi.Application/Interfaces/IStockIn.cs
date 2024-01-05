@@ -17,5 +17,7 @@ namespace AccountApi.Application.Interfaces
         Task<IReadOnlyList<StockIn>> GetStockInAsPerPaymentNotCompleted();
         Task<IReadOnlyList<StockIn>> GetStockInAsperDate(string selectedDate);
         Task<int> GetVendorId(long vendorId);
+        Task<int> GetstockQuantity_ByStockInId(int stockInId);
+        Task<int> GetstockQuantity_ByDate(string selectedDate);
     }
 }

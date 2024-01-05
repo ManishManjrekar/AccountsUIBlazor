@@ -21,6 +21,7 @@ namespace AccountsUIBlazor.UIModels
         public UICalenderModel UICalenderModel { get; set; }
         public UISalesStockInData UISalesStockInData { get; set; }
 
+      
 
     }
 
@@ -76,5 +77,14 @@ namespace AccountsUIBlazor.UIModels
         public DateTime CreatedDate { get; set; }
 
 
+    }
+
+    public class UISalesDto
+    {
+        public List<SalesDetailsDto> salesDetailsList { get; set; }
+
+        public int TotalStock { get; set; }
+        public int TotalSalesDone { get; set; }
+        public int TotalStockLeft { get; set; }
     }
 }

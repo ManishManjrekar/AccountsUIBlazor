@@ -153,7 +153,25 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
+        public async Task<int> GetstockQuantity_ByStockInId(int stockInId)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(StockInQueries.GetstockQuantity_ByStockInId, new { StockInId = stockInId });
+                return result;
+            }
+        }
 
+        public async Task<int> GetstockQuantity_ByDate(string selectedDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(StockInQueries.GetstockQuantity_ByDate, new { CreatedDate = selectedDate });
+                return result;
+            }
+        }
 
 
     }
