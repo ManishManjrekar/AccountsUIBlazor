@@ -15,7 +15,7 @@ namespace AccountApi.Sql.Queries
         public static string GetCustomerPaymentReceivedByCustomerId => @"SELECT c.FirstName as CustomerName, c.CustomerId,
             cp.AmountPaid, cp.ModifiedDate, cp.CreatedBy, cp.ModifiedBy, cp.LoggedInUser
             FROM [accountancy].[dbo].[CustomerPaymentReceived] as cp  inner join 
-            Customer as c on cp.CustomerId = c.CustomerId WHERE cp.CustomerId = @CustomerId and cp.IsActive=1";
+            [accountancy].[dbo].[Customer] as c on cp.CustomerId = c.CustomerId WHERE cp.CustomerId = @CustomerId and cp.IsActive=1";
 
 		public static string AddCustomerPayment =>
             @"INSERT INTO [dbo].[CustomerPaymentReceived]
@@ -61,6 +61,12 @@ namespace AccountApi.Sql.Queries
                 [Comments] = @Comments
             WHERE [CustomerPaymentId] = @CustomerPaymentId";
 
-		public static string DeleteCustomerPaymentReceived => "Update FROM [CustomerPaymentReceived] WHERE [CustomerPaymentId] = @CustomerPaymentId and isActive=0";
+        public static string GetCustomerPaymentReceivedByDate => @"SELECT c.FirstName as CustomerName, c.CustomerId,
+            cp.AmountPaid, cp.ModifiedDate, cp.CreatedBy, cp.ModifiedBy, cp.LoggedInUser,cp.PaymentDate,cp.TypeOfTransaction
+            FROM [accountancy].[dbo].[CustomerPaymentReceived] as cp  inner join 
+            [accountancy].[dbo].[Customer] as c on cp.CustomerId = c.CustomerId 
+            where CONVERT(DATE,cp.PaymentDate) = @PaymentDate and cp.IsActive=1";
+
+        public static string DeleteCustomerPaymentReceived => "Update FROM [CustomerPaymentReceived] WHERE [CustomerPaymentId] = @CustomerPaymentId and isActive=0";
     }
 }

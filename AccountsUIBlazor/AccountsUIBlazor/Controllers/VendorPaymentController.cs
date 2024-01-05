@@ -31,9 +31,9 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        public async Task<ApiResponse<List<VendorPayment>>> GetAll()
+        public async Task<ApiResponse<List<VendorPayments>>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<VendorPayment>>();
+            var apiResponse = new ApiResponse<List<VendorPayments>>();
 
             try
             {
@@ -95,10 +95,10 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet("{id}")]
-        public async  Task<ApiResponse<VendorPayment>> GetById(int id)
+        public async  Task<ApiResponse<VendorPayments>> GetById(int id)
         {
 
-            var apiResponse = new ApiResponse<VendorPayment>();
+            var apiResponse = new ApiResponse<VendorPayments>();
 
             try
             {
@@ -126,41 +126,33 @@ namespace AccountsUIBlazor.Controller
 
         [HttpPost]
         [Route("AddVendorPayment")]
-        public async Task<IActionResult> AddVendorPayment(UIVendorPayment UIVendorPayment)
+        public async Task<string> AddVendorPayment(UIVendorPayment UIVendorPayment)
         {
           
-            var apiResponse = new ApiResponse<string>();
-            VendorPayment vendorPayment = _IMapper.Map<VendorPayment>(UIVendorPayment);
-            //Vendor.IsActive = true;
+            VendorPayments vendorPayment = _IMapper.Map<VendorPayments>(UIVendorPayment);
+            vendorPayment.TypeOfTransaction = UIVendorPayment.TypeOfTransaction.ToString();
 
             try
             {
                 var data = await _unitOfWork.VendorPayment.AddAsync(vendorPayment);
-                apiResponse.Success = true;
-                apiResponse.Result = data;
                
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-                apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
+                Logger.Instance.Error("exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
-
-            return Ok(apiResponse);
+            return "success";
         }
 
         [HttpPut]
         public async Task<ApiResponse<string>> Update(UIVendorPayment vendorPayment)
         {
             var apiResponse = new ApiResponse<string>();
-            VendorPayment vendorpayment = _IMapper.Map<VendorPayment>(vendorPayment);
+            VendorPayments vendorpayment = _IMapper.Map<VendorPayments>(vendorPayment);
             try
             {
                 var data = await _unitOfWork.VendorPayment.UpdateAsync(vendorpayment);
@@ -210,6 +202,57 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-       
+        [HttpGet]
+        [Route("GetVendorPaymentAsPerStockInId")]
+        public async Task<List<UIVendorPaymentDto>> GetVendorPaymentAsPerStockInId(int stockInId)
+        {
+            var results = new List<UIVendorPaymentDto>();
+            try
+            {
+                var data = await _unitOfWork.VendorPayment.GetVendorPaymentAsPerStockInId(stockInId);
+                results = _IMapper.Map<List<UIVendorPaymentDto>>(data);
+               
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return results;
+        }
+
+        [HttpGet]
+        [Route("GetVendorPaymentDetails")]
+        public async Task<VendorPaymentMaster> GetVendorPaymentDetails(int stockInId)
+        {
+            VendorPaymentMaster results = new VendorPaymentMaster();
+            try
+            {
+                //Sales Details as per StockInId
+                var salesDetails = await _unitOfWork.Sales.GetSalesDataAsPerStockInId(stockInId);
+                results.SalesDetailsList = _IMapper.Map<List<SalesDetailsDto>>(salesDetails);
+
+                var vendorPaymentDetails= await _unitOfWork.VendorPayment.GetVendorPaymentAsPerStockInId(stockInId);
+                results.VendorPaymentList = _IMapper.Map<List<UIVendorPaymentDto>>(vendorPaymentDetails);
+
+                results.TotalSalesAmount = results.SalesDetailsList.Select(p => p.TotalAmount).Sum();
+                results.TotalVendorPaymentPaid = results.VendorPaymentList.Select(p => p.AmountPaid).Sum();
+                results.BalanceAmount = results.SalesDetailsList.Select(p => p.TotalAmount).Sum() - results.VendorPaymentList.Select(p => p.AmountPaid).Sum();
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return results;
+        }
+
+
     }
 }

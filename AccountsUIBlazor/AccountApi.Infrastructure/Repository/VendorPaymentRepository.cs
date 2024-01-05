@@ -25,42 +25,54 @@ namespace AccountApi.Infrastructure.Repository
             this.configuration = configuration;
         }
 
-        public async Task<IReadOnlyList<VendorPayment>> GetAllAsync()
+        public async Task<IReadOnlyList<VendorPayments>> GetAllAsync()
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<VendorPayment>(CustomerQueries.AllCustomer);
+                var result = await connection.QueryAsync<VendorPayments>(VendorPaymentQueries.AllVendorPayment);
                 return result.ToList();
             }
         }
 
-        public async Task<VendorPayment> GetByIdAsync(long id)
+        public async Task<VendorPayments> GetByIdAsync(long id)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<VendorPayment>(CustomerQueries.CustomerById, new { CustomerId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<VendorPayments>(VendorPaymentQueries.VendorPaymentById, new { VendorPaymentId = id });
                 return result;
             }
         }
 
-        public async Task<string> AddAsync(VendorPayment entity)
+        public async Task<string> AddAsync(VendorPayments entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            entity.IsActive = true;
+            entity.ModifiedDate = DateTime.Now;
+            
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(VendorPaymentQueries.AddVendorPayment, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
 
-        public async Task<string> UpdateAsync(VendorPayment entity)
+        public async Task<string> UpdateAsync(VendorPayments entity)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
+                var result = await connection.ExecuteAsync(VendorPaymentQueries.UpdateVendorPayment, entity);
                 return result.ToString();
             }
         }
@@ -70,12 +82,22 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(VendorPaymentQueries.DeleteVendorPayment, new { VendorPaymentId = id });
                 return result.ToString();
             }
         }
 
-       
+        public async Task<IReadOnlyList<VendorPaymentDetails>> GetVendorPaymentAsPerStockInId(long stockInId)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<VendorPaymentDetails>(VendorPaymentQueries.GetVendorPaymentAsPerStockInId, new { StockInId = stockInId });
+                return result.ToList();
+            }
+        }
+
+
 
     }
 }

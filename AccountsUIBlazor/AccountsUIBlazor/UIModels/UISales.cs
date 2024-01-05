@@ -50,6 +50,8 @@ namespace AccountsUIBlazor.UIModels
         public int TotalAmount { get; set; }
         public SaleType Type { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
     }
 
     public class UIStockInItem

@@ -6,6 +6,7 @@ using AccountApi.Logging;
 using AccountsUIBlazor.Data;
 using AccountsUIBlazor.UIModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -15,13 +16,13 @@ namespace AccountsUIBlazor.Controller
 {
     [Route("[controller]")]
     [ApiController]
-    public class SalesController : BaseApiController
+    public class JEController : BaseApiController
     {
        
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
-        public SalesController(IUnitOfWork unitOfWork, IMapper Mapper)
+        public JEController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
             this._IMapper = Mapper;
@@ -163,25 +164,28 @@ namespace AccountsUIBlazor.Controller
         public async Task<int> GetVendorId(int id)
         {
 
-            //var apiResponse = new ApiResponse<Sales>();
-            //return 2;
-            try
-            {
-                var data = await _unitOfWork.StockIn.GetVendorId(id);
-                return data;
-            }
-            catch (SqlException ex)
-            {
-               
-                Logger.Instance.Error("SQL Exception:", ex);
-            }
-            catch (Exception ex)
-            {
-                
-                Logger.Instance.Error("Exception:", ex);
-            }
+            var apiResponse = new ApiResponse<Sales>();
+            return 2;
+            //try
+            //{
+            //    var data = await _unitOfWork.Sales.GetByIdAsync(id);
+            //    apiResponse.Success = true;
+            //    apiResponse.Result = data;
+            //}
+            ////catch (SqlException ex)
+            ////{
+            ////    apiResponse.Success = false;
+            ////    apiResponse.Message = ex.Message;
+            ////    Logger.Instance.Error("SQL Exception:", ex);
+            ////}
+            //catch (Exception ex)
+            //{
+            //    apiResponse.Success = false;
+            //    apiResponse.Message = ex.Message;
+            //    Logger.Instance.Error("Exception:", ex);
+            //}
 
-            return 0;
+            //return apiResponse;
         }
         [HttpPut]
         public async Task<ApiResponse<string>> Update(Sales sales)
@@ -260,28 +264,45 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpGet]
-        [Route("GetSalesDataAsPerCustomerId")]
-        public async Task<List<SalesDetailsDto>> GetSalesDataAsPerCustomerId(int customerId)
+        [Route("GetJEDataAsperSelectedDate")]
+        public async Task<UIJEMasterDto> GetJEDataAsperSelectedDate(string SelectedDate)
         {
-            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
+            UIJEMasterDto jeDto = new UIJEMasterDto();
             try
             {
-                var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
-                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+              
+                //Get Sales as per Date
+                var salesDetails = await _unitOfWork.Sales.GetSalesDataAsperDate(SelectedDate);
+
+                jeDto.JESalesList = _IMapper.Map<List<SalesDetailsDto>>(salesDetails);
+
+                //Get CustomerPayment as per Date
+                var customerPayment = await _unitOfWork.CustomerPaymentReceived.GetCustomerPaymentReceivedByDate(SelectedDate);
+
+                jeDto.JECustomerPaymentList = _IMapper.Map<List<UICustomerPayment>>(customerPayment);
+
+
+                //Get Total Stock as per Date arrived.....
+                var stockDetailsList = await _unitOfWork.StockIn.GetStockInAsperDate(SelectedDate);
+
+                jeDto.TotalStock = stockDetailsList.Select(p => p.Quantity).Sum();
+                jeDto.TotalSalesCompleted = salesDetails.Select(p => p.Quantity).Sum();
+                jeDto.TotalStockLeft = jeDto.TotalStock - jeDto.TotalSalesCompleted;
+                jeDto.TotalCustomerPaymentReceived = jeDto.JECustomerPaymentList.Select(p=>p.AmountPaid).Sum();
             }
+
             catch (SqlException ex)
             {
                 Logger.Instance.Error("SQL Exception:", ex);
             }
             catch (Exception ex)
             {
-
                 Logger.Instance.Error("Exception:", ex);
             }
-            return results;
+            return jeDto;
         }
 
-       
+
 
 
     }

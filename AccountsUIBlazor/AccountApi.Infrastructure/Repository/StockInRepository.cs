@@ -35,6 +35,16 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
+        public async Task<int> GetVendorId(long vendorId)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QuerySingleOrDefaultAsync<int>(StockInQueries.GetVendorId_ByStockInId, new { StockInId = vendorId });
+                return result;
+            }
+        }
+
         public async Task<StockIn> GetByIdAsync(long id)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
@@ -120,6 +130,30 @@ namespace AccountApi.Infrastructure.Repository
                 return result.ToList();
             }
         }
+
+        public async Task<IReadOnlyList<StockIn>> GetStockInAsPerPaymentNotCompleted()
+        {
+
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<StockIn>(StockInQueries.GetStockInWhereIn_PaymentNotCompleted);
+                return result.ToList();
+            }
+        }
+
+        public async Task<IReadOnlyList<StockIn>> GetStockInAsperDate(string selectedDate)
+        {
+
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<StockIn>(StockInQueries.GetStockInAsperDate, new { CreatedDate = selectedDate });
+                return result.ToList();
+            }
+        }
+
+
 
 
     }

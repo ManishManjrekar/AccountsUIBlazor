@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace AccountApi.Application.Interfaces
 {
-    public interface IVendorPaymentRepository : IRepository<VendorPayment>
+    public interface IVendorPaymentRepository : IRepository<VendorPayments>
     {
+        public Task<IReadOnlyList<VendorPaymentDetails>> GetVendorPaymentAsPerStockInId(long stockInId);
     }
 }

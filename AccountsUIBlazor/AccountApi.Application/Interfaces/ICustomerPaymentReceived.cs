@@ -12,5 +12,6 @@ namespace AccountApi.Application.Interfaces
     public interface ICustomerPaymentReceivedRepository : IRepository<CustomerPaymentReceived>
     {
         Task<IReadOnlyList<CustomerPaymentReceived>> GetCustomerPaymentReceivedByCustomerId(int customerId);
+        Task<IReadOnlyList<CustomerPaymentReceived>> GetCustomerPaymentReceivedByDate(string selectedDate);
     }
 }

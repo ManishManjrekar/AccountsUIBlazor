@@ -268,6 +268,27 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-       
+        [HttpGet]
+        [Route("GetStockInAsPerPaymentNotCompleted")]
+        public async Task<List<UISalesStockInData>> GetStockInAsPerPaymentNotCompleted()
+        {
+            List<UISalesStockInData> sales = new List<UISalesStockInData>();
+            try
+            {
+                var data = await _unitOfWork.StockIn.GetStockInAsPerPaymentNotCompleted();
+                sales = _IMapper.Map<List<UISalesStockInData>>(data);
+
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return sales;
+        }
     }
 }

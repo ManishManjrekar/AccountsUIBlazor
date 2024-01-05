@@ -10,51 +10,55 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class VendorPaymentQueries
 	{
-        public static string AllVendorPayment => "SELECT * FROM [VendorPayment] (NOLOCK)";
+        public static string AllVendorPayment => "SELECT * FROM [VendorPayments] (NOLOCK) where IsActive=1";
 
-        public static string CustomerPaymentById => "SELECT * FROM [VendorPayment] (NOLOCK) WHERE [VendorId] = @VendorId";
+        public static string VendorPaymentById => "SELECT * FROM [VendorPayments] (NOLOCK) WHERE [VendorPaymentId] = @VendorPaymentId and IsActive=1";
 
-        public static string AddCustomerPayment =>
-            @"INSERT INTO [dbo].[VendorPayment]
-           ([CustomerName]
+        public static string AddVendorPayment =>
+            @"INSERT INTO [dbo].[VendorPayments]
+           ( [VendorId]
+            ,[StockInId]
+            ,[TypeOfTransaction]
            ,[AmountPaid]
            ,[CreatedDate]
            ,[ModifiedDate]
-           ,[IsActive]
-           ,[CreatedBy]
-           ,[ModifiedBy]
            ,[LoggedInUser]
-           ,[TypeOfTransaction]
            ,[Comments]
+           ,[IsActive]
 )
            
      VALUES
-           (@CustomerName
+           (@VendorId
+            ,@StockInId
+            ,@TypeOfTransaction
            ,@AmountPaid
            ,@CreatedDate
            ,@ModifiedDate
-           ,@IsActive
-           ,@CreatedBy
-           ,@ModifiedBy
            ,@LoggedInUser
-           ,@TypeOfTransaction
-            @Comments
+           , @Comments
+           ,@IsActive
           )";
 
-        public static string UpdateCustomer =>
-            @"UPDATE [VendorPayment] 
-            SET [CustomerName] = @CustomerName, 
+        public static string UpdateVendorPayment =>
+            @"UPDATE [VendorPayments] 
+            SET [VendorId] = @VendorId, 
+				[StockInId] = @StockInId,
+                [TypeOfTransaction] = @TypeOfTransaction
 				[AmountPaid] = @AmountPaid, 
 				[CreatedDate] = @CreatedDate, 
-				[ModifiedDate] = @ModifiedDate
-	            [IsActive] = @IsActive, 
-				[CreatedBy] = @CreatedBy, 
-				[ModifiedBy] = @ModifiedBy
+				[ModifiedDate] = @ModifiedDate,
                 [LoggedInUser] = @LoggedInUser,
-                [TypeOfTransaction] = @TypeOfTransaction
                 [Comments] = @Comments,
-            WHERE [CustomerPaymentId] = @CustomerPaymentId";
+	            [IsActive] = @IsActive, 
+            WHERE [VendorPaymentId] = @VendorPaymentId and IsActive=1 ";
 
-        public static string DeleteCustomer => "Update FROM [VendorPayment] WHERE [CustomerPaymentId] = @CustomerPaymentId where isActive=0";
+        public static string GetVendorPaymentAsPerStockInId => @"SELECT  vp.StockInId,vp.VendorId, vp.AmountPaid, vp.Comments, vp.CreatedDate , vp.ModifiedDate, vp.TypeOfTransaction, 
+                                                                vp.VendorPaymentId, v.FirstName as VendorName
+                                                                FROM [accountancy].[dbo].[VendorPayments] as vp
+                                                                inner join [accountancy].[dbo].[Vendor] as v on v.VendorId = vp.VendorId
+                                                                inner join [accountancy].[dbo].[StockIn] as s on s.StockInId = vp.StockInId
+                                                                where vp.StockInId = @StockInId";
+
+        public static string DeleteVendorPayment => "Update [VendorPayments] set isActive=0 where [VendorPaymentId] = @VendorPaymentId ";
     }
 }

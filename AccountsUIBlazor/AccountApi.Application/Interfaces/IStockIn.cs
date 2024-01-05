@@ -14,5 +14,8 @@ namespace AccountApi.Application.Interfaces
         Task<int> GetVendorLoadCount(int vendorid, string createdDate);
         Task<IReadOnlyList<StockIn>> GetStockInDataAsperDates(string fromDate, string toDate, int VendorId);
         Task<IReadOnlyList<StockIn>> GetStockInAsperDates(string fromDate, string toDate);
+        Task<IReadOnlyList<StockIn>> GetStockInAsPerPaymentNotCompleted();
+        Task<IReadOnlyList<StockIn>> GetStockInAsperDate(string selectedDate);
+        Task<int> GetVendorId(long vendorId);
     }
 }

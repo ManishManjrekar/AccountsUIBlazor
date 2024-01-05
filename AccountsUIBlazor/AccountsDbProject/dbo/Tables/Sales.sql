@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[Sales] (
     [SalesId] INT NOT NULL IDENTITY,
-    [CustomerId]   INT NULL,
-    [VendorId]     INT NULL,
-    [StockInId]    INT NULL,
+    [CustomerId]   INT NOT NULL,
+    [VendorId]     INT NOT NULL,
+    [StockInId]    INT NOT NULL,
     [Quantity]     INT              NOT NULL,
     [Price]        INT              NOT NULL,
-    [Total]        INT              NOT NULL,
+    [TotalAmount]        INT              NOT NULL,
     [Type]   NVARCHAR (50)    NULL,
     [CreatedDate]  DATETIME         CONSTRAINT [DF_Sales_createdDate] DEFAULT (getdate()) NOT NULL,
     [ModifiedDate] DATETIME         CONSTRAINT [DF_Sales_modifiedDate] DEFAULT (getdate()) NOT NULL,
@@ -15,7 +15,6 @@
     
     CONSTRAINT [PK_Sales] PRIMARY KEY CLUSTERED ([SalesId]),
     CONSTRAINT [FK_Sales_StockIn] FOREIGN KEY ([StockInId]) REFERENCES [dbo].[StockIn] ([StockInId]),
-    CONSTRAINT [FK_Sales_Vendor] FOREIGN KEY ([VendorId]) REFERENCES [dbo].[Vendor] ([VendorId]),
     CONSTRAINT [FK_Sales_Customer] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customer] ([CustomerId])
 
 );

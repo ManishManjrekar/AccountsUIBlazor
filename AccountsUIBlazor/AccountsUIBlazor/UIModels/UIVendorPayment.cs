@@ -14,14 +14,14 @@
         //public DateTime FromDate { get; set; }
         //public DateTime ToDate { get; set; }
         public UIVendorCalenderModel UICalenderModel { get; set; }
-
+        public TypeOfTransaction TypeOfTransaction { get; set; }
         public int VendorId { get; set; }
         public int StockInId { get; set; }
         public int AmountPaid { get; set; }
         public DateTime PaymentDate { get; set; }
         public string Comments { get; set; }
     }
-
+    
     public class VendorList
     {
         public int VendorId { get; set; }

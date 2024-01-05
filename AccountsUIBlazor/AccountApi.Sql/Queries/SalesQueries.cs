@@ -14,14 +14,17 @@ namespace AccountApi.Sql.Queries
 
 		public static string SalesById => "SELECT * FROM [Sales] (NOLOCK) WHERE [SalesId] = @SalesId and isActive=1";
 
-		public static string AddSales =>
+       
+
+
+        public static string AddSales =>
             @"INSERT INTO [dbo].[Sales]
            ([VendorId]
            ,[StockInId]
            ,[CustomerId]
            ,[Quantity]
            ,[Price]
-           ,[Total]
+           ,[TotalAmount]
            ,[Type]
            ,[CreatedDate]
            ,[ModifiedDate]
@@ -65,18 +68,26 @@ namespace AccountApi.Sql.Queries
         public static string GetSalesDataAsPerStockInId => @"SELECT s.SalesId,s.createdDate,s.Price, s.Quantity, s.TotalAmount,c.FirstName as CustomerName,
             v.FirstName as VendorName, si.LoadName
             FROM [accountancy].[dbo].[Sales] as s
-             inner join Customer as c on s.CustomerId = c.CustomerId
-            inner join Vendor as v on v.VendorId = s.VendorId
-             inner join StockIn as si on s.StockInId = si.StockInId
+             inner join [accountancy].[dbo].[Customer] as c on s.CustomerId = c.CustomerId
+            inner join [accountancy].[dbo].[Vendor] as v on v.VendorId = s.VendorId
+             inner join [accountancy].[dbo].[StockIn] as si on s.StockInId = si.StockInId
               where s.StockInId =  @StockInId and s.isActive=1";
 
         public static string GetSalesDataAsPerCustomerId => @"SELECT s.SalesId,s.createdDate,s.Price, s.Quantity, s.TotalAmount,c.FirstName as CustomerName,
             v.FirstName as VendorName, si.LoadName
             FROM [accountancy].[dbo].[Sales] as s
-             inner join Customer as c on s.CustomerId = c.CustomerId
-            inner join Vendor as v on v.VendorId = s.VendorId
-             inner join StockIn as si on s.StockInId = si.StockInId
+             inner join [accountancy].[dbo].[Customer] as c on s.CustomerId = c.CustomerId
+            inner join [accountancy].[dbo].[Vendor] as v on v.VendorId = s.VendorId
+             inner join [accountancy].[dbo].[StockIn] as si on s.StockInId = si.StockInId
               where s.CustomerId =  @CustomerId and s.isActive=1";
+
+        public static string GetSalesDataAsPerDate => @"SELECT s.SalesId,s.createdDate,s.Price, s.Quantity, s.TotalAmount,c.FirstName as CustomerName,
+            v.FirstName as VendorName, si.LoadName
+            FROM [accountancy].[dbo].[Sales] as s
+             inner join [accountancy].[dbo].[Customer] as c on s.CustomerId = c.CustomerId
+            inner join [accountancy].[dbo].[Vendor] as v on v.VendorId = s.VendorId
+             inner join [accountancy].[dbo].[StockIn] as si on s.StockInId = si.StockInId
+              where CONVERT(DATE,s.CreatedDate) = @CreatedDate and s.isActive=1";
 
     }
 }

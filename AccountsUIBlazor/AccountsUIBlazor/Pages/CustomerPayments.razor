@@ -14,7 +14,7 @@
 <EditForm Model="UICustomerPayment" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
 
     <div class="col-md-8">
-        <label for="selectvendor">select Customer #</label>
+        <label for="selectvendor">Search Customer #</label>
         <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerPayment.CustomerList" TextProperty="CustomerName" ValueProperty="@UICustomerPayment.CustomerId" Change="@OnChange" />
     </div>
 
@@ -46,9 +46,9 @@
 </EditForm>
 
 <div class="row mt-2">
-    <h4>Customer Details</h4>
+    <h4>Customer Purchases Details</h4>
     <div class="col-md-12">
-        <RadzenDataGrid @ref="customerPaymentGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+        <RadzenDataGrid @ref="customerPaymentSalesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
                         Data="@customerPaymentMasterDto.CustomerPurchases" TItem="SalesDetailsDto"  Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
@@ -62,6 +62,8 @@
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px" />
              
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px" />
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
                
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Context="customerPurchases" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
                     <Template Context="customerPurchases">
@@ -73,8 +75,42 @@
         </RadzenDataGrid>
     </div>
 </div>
+
+<div class="row mt-2">
+    <h4>Customer Payment Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="customerPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@customerPaymentMasterDto.CustomerPaymentsDone" TItem="UICustomerPayment" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="PaymentDate" Title="LoadName Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="TypeOfTransaction" Title="TypeOfTransaction" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="Comments" Title="Price" Width="120px" />
+
+                
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Context="CustomerPaymentsDone" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="CustomerPaymentsDone">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowCustomerPayment(CustomerPaymentsDone))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+<div>
+    <p> Total  Balance Amount Due:- @customerPaymentMasterDto.BalanceAmountDue</p>
+</div>
 @code {
-    RadzenDataGrid<SalesDetailsDto> customerPaymentGrid;
+    RadzenDataGrid<SalesDetailsDto> customerPaymentSalesDetailsGrid;
+    RadzenDataGrid<UICustomerPayment> customerPaymentDetailsGrid;
+
     public UICustomerPayment UICustomerPayment { get; set; } = new();
     public string Log { get; set; } = "";
     public UICustomerPaymentMaster customerPaymentMasterDto = new UICustomerPaymentMaster();
@@ -136,7 +172,7 @@
         try
         {
             var obj = await HttpClient.PostAsJsonAsync($"CustomerPayment/AddCustomerPayment", UICustomerPayment);
-            Console.WriteLine(obj);
+            LoadCustomerPayment(UICustomerPayment.CustomerId);
         }
         catch (Exception ex)
         {
@@ -170,7 +206,27 @@
 
                 Console.WriteLine(ex.Message.ToString());
             }
-            await customerPaymentGrid.Reload();
+            await customerPaymentSalesDetailsGrid.Reload();
+        }
+    }
+
+    async Task DeleteRowCustomerPayment(UICustomerPayment customerPurchases)
+    {
+        Reset();
+
+        if (customerPaymentMasterDto.CustomerPaymentsDone.Contains(customerPurchases))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"CustomerPayment?id={customerPurchases.CustomerId}");
+                LoadCustomerPayment(selectedCustId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await customerPaymentDetailsGrid.Reload();
         }
     }
 }

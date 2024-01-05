@@ -14,7 +14,8 @@ namespace AccountApi.Sql.Queries
 
 		public static string StockInById => "SELECT * FROM [StockIn] (NOLOCK) WHERE [StockInId] = @StockInId";
 
-		public static string AddStockIn =>
+        public static string GetVendorId_ByStockInId => "SELECT VendorId FROM [StockIn] (NOLOCK) WHERE [StockInId] = @StockInId and isActive=1";
+        public static string AddStockIn =>
             @"INSERT INTO [dbo].[StockIn]
            ([LoadName]
            ,[VendorId]
@@ -54,7 +55,10 @@ namespace AccountApi.Sql.Queries
         public static string GetVendorLoadCount => @"SELECT count(*) FROM [accountancy].[dbo].[StockIn] as s
                                                    where s.VendorId = @VendorId and s.CreatedDate = @createdDate";
 
-
+        public static string GetStockInWhereIn_PaymentNotCompleted => @"SELECT * FROM [accountancy].[dbo].[StockIn] as s
+                                             where s.IsPaymentDone =0 and isActive =1 ";
+        public static string GetStockInAsperDate => @"SELECT * FROM[accountancy].[dbo].[StockIn] as s
+                                                   where CONVERT(DATE,s.CreatedDate) = @CreatedDate and isActive=1 ";
         public static string DeleteStockIn => "Update FROM [StockIn] WHERE [StockInId] = @StockInId where isActive=0";
 	}
 }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[CustomerPaymentReceived] (
     [CustomerPaymentId] INT           IDENTITY (1, 1) NOT NULL,
-    [CustomerId]            INT           NULL,
+    [CustomerId]            INT           NOT NULL,
     [CustomerName]      NVARCHAR (Max)   NULL,
     [AmountPaid]        INT           NULL,
     [PaymentDate]       DATETIME         CONSTRAINT [DF_CustomerPayments_createdDate] DEFAULT (getdate()) NOT NULL,

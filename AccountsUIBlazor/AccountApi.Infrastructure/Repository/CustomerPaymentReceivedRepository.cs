@@ -98,5 +98,15 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
+        public async Task<IReadOnlyList<CustomerPaymentReceived>> GetCustomerPaymentReceivedByDate(string selectedDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerPaymentQueries.GetCustomerPaymentReceivedByDate, new { PaymentDate = selectedDate });
+                return result.ToList();
+            }
+        }
+
     }
 }

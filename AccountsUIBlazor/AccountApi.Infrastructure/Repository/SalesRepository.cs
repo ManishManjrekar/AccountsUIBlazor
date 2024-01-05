@@ -46,12 +46,14 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
+        
+
         public async Task<string> AddAsync(Sales entity)
         {
             //entity.Type = "";
             entity.CreatedBy = "System";
             entity.LoggedInUser = "System";
-            entity.CreatedDate = DateTime.Now;
+            //entity.CreatedDate = DateTime.Now;
             entity.ModifiedDate = DateTime.Now;
             entity.IsActive = true;
             try
@@ -131,6 +133,15 @@ namespace AccountApi.Infrastructure.Repository
            
         }
 
+        public async Task<IReadOnlyList<SalesDetails>> GetSalesDataAsperDate(string selectedDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerDate, new { CreatedDate = selectedDate });
+                return result.ToList();
+            }
+        }
 
 
     }

@@ -13,5 +13,7 @@ namespace AccountApi.Application.Interfaces
     {
         public Task<IReadOnlyList<SalesDetails>> GetSalesDataAsPerStockInId(int stockInId);
         public Task<IReadOnlyList<SalesDetails>> GetSalesDataAsPerCustomerId(int customerId);
+
+        public Task<IReadOnlyList<SalesDetails>> GetSalesDataAsperDate(string selectedDate);
     }
 }
