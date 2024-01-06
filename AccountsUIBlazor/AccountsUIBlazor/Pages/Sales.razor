@@ -90,17 +90,21 @@
 {
 
 
-    private void OpenDialog()
+    private async Task OpenDialog()
     {
-        // var parameters = new DialogParameters { { "ImageDetails", ImageDetails } };
-        // DialogService.Show<ImageDialog>(ImageDetails.Title, parameters);
-        DialogService.Alert("Quantity entered is more than stock quantity left", "Stock Quantiy Error");
+        var confirmationResult = await DialogService.Alert("Quantity entered is more than stock quantity left", "Stock Quantiy Error");
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+           // if yes then 
+            Console.WriteLine();
+        }
     }
 }
 
 @code {
 
-   
+
     public UISales UISales { get; set; } = new();
     public UISalesStockInData UIStockIn { get; set; } = new();
     private List<SalesDetailsDto> salesDetailsList = new List<SalesDetailsDto>() { new SalesDetailsDto() };
@@ -185,19 +189,22 @@
     //     GetStockInData();
     // }
 
-    public void CalculateAmount()
+    public async void CalculateAmount()
     {
-
-        if (UISales.UISalesPostDataModel.Quantity > salesDetails.TotalStockLeft)
+        if (UISales.UISalesPostDataModel.Quantity > 0 &&  salesDetails.TotalStockLeft > 0)
         {
-            //@DialogService.Alert("rams message", "rams")
-            OpenDialog();
+            if (UISales.UISalesPostDataModel.Quantity > salesDetails.TotalStockLeft)
+            {
+                //@DialogService.Alert("rams message", "rams")
+                await OpenDialog();
+            }
+            else
+            {
+                UISales.UISalesPostDataModel.TotalAmount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
+                StateHasChanged();
+            }
         }
-        else
-        {
-            UISales.UISalesPostDataModel.TotalAmount = UISales.UISalesPostDataModel.Price * UISales.UISalesPostDataModel.Quantity;
-            StateHasChanged();
-        }
+        
     }
 
     public async Task GetStockInData()
