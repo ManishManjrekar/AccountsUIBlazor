@@ -13,44 +13,50 @@
 
 <EditForm Model="UIVendorPayment" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
 
-    <div class="col-md-8">
-        <label for="selectvendor">select Vendor #</label>
-        <RadzenAutoComplete Placeholder="Select Vendor..." Data="@UIVendorPayment.VendorList" TextProperty="VendorName" ValueProperty="@UIVendorPayment.VendorId" Change="@OnVendorSelectionChange" />
+    <div class="row col-md-4">
+        <label for="selectvendor">select Vendor</label>
+        <RadzenAutoComplete Placeholder="Select Vendor..." class="form-control" Style="margin-left:10px" Name="selectvendor" Data="@UIVendorPayment.VendorList" TextProperty="VendorName" ValueProperty="@UIVendorPayment.VendorId" Change="@OnVendorSelectionChange" />
     </div>
-    <div class="col-md-8">
-        From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UIVendorPayment.UICalenderModel.FromDate"  />
+    <div class="row mt-1">
+        <div class=" col-md-2">
+            <label for="fromDate">From Date</label>
+            <RadzenDatePicker style="width: 100%;margin-left:10px" class="form-control" Name="fromDate" @bind-Value="@UIVendorPayment.UICalenderModel.FromDate" />
+        </div>
+        <div class=" col-md-2">
+            <label for="toDate">To Date</label>
+            <RadzenDatePicker Name="toDate" class="form-control" Style="margin-left:10px" @bind-Value="@UIVendorPayment.UICalenderModel.ToDate" Change="DateSelection" />
+        </div>
     </div>
-    <div class="col-md-8">
-        To Date<RadzenDatePicker style="width: 100%;" Name="toDate" @bind-Value="@UIVendorPayment.UICalenderModel.ToDate" Change="DateSelection" />
-    </div>
-    <div class="col-md-8">
+    <div class="row col-md-4 mt-1">
         <label for="selectvendor">Select StockIn</label>
-        <RadzenAutoComplete Placeholder="Select stockIn..." Data="@UIVendorPayment.StockInList" TextProperty="LoadName" ValueProperty="@UIVendorPayment.StockInId" Change="@OnStockInSelectionChange" />
+        <RadzenAutoComplete Placeholder="Select stockIn..." Style="margin-left:10px;" Data="@UIVendorPayment.StockInList" class="form-control" TextProperty="LoadName" ValueProperty="@UIVendorPayment.StockInId" Change="@OnStockInSelectionChange" />
     </div>
     
 
-    <div class="col-md-8">
-        Payment Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UIVendorPayment.PaymentDate"  />
+    <div class="row col-md-4 mt-1">
+        <label for="PaymentDate">Payment Date</label>
+        <RadzenDatePicker class="form-control" style="width: 100%;margin-left:10px;" Name="PaymentDate"  @bind-Value="@UIVendorPayment.PaymentDate" />
     </div>
-    <div class="col-md-12">
-        <label for="lastName">Amount Paid #</label>
-        <input type="text" class="form-control" id="lastName" @bind-value="@UIVendorPayment.AmountPaid" placeholder="enter last name..." />
+    <div class="row col-md-4 mt-1">
+        <label for="AmountPaid">Amount Paid</label>
+        <input type="text" class="form-control" id="AmountPaid" @bind-value="@UIVendorPayment.AmountPaid" style="margin-left:10px;" placeholder="enter Amount Paid..." />
         
     </div>
-    <div class="col-md-12">
-        <label for="lastName">Comments</label>
-        <input type="text" class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments" placeholder="enter last name..." />
+    <div class="row col-md-12 mt-1">
+        <label for="Comments">Comments</label>
+        <input type="text" class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments" style="margin-left:10px;" placeholder="enter Comments..." />
         
     </div>
-    <div>
-        <InputSelect @bind-Value="@UIVendorPayment.TypeOfTransaction">
+    <div class="mt-2 col-md-4">
+        <label for="TypeOfTransaction">Type Of Transaction</label>
+        <InputSelect DisplayName="TypeOfTransaction" class="form-control" style="margin-left:10px;" @bind-Value="@UIVendorPayment.TypeOfTransaction">
             @foreach (var value in Enum.GetValues<TypeOfTransaction>())
             {
                 <option value="@value">@value</option>
             }
         </InputSelect>
     </div>
-    <div>
+    <div class="mt-2 col-md-4">
         <label class="form-control" id="BalanceAmount">Total Sales Amount is : "@VendorPaymentmasterDataSet.TotalSalesAmount"</label>
         <label class="form-control" id="BalanceAmount">Total Vendor Payment Paid is : "@VendorPaymentmasterDataSet.TotalVendorPaymentPaid"</label>
         <label class="form-control" id="BalanceAmount">Total Balance Amount is : "@VendorPaymentmasterDataSet.BalanceAmount"</label>

@@ -19,26 +19,27 @@
     </div>
     <button class="btn btn-primary">Submit</button> *@
 
+    <h4>Customer Registration</h4>
      
     <div class="row">
-            <div class="col-md-8"> 
-                <div class="row" style="margin-top:10px">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-10">
+            <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="firstName">First Name #</label>
+                        <label for="firstName">First Name</label>
                         <input type="text" class="form-control" id="firstName" @bind-value="@CustomerModel.FirstName" placeholder="enter first name..." />
                         @* <ValidationMessage For="@(()=>CustomerModel.FirstName)" /> *@
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="lastName">Last Name #</label>
+                        <label for="lastName">Last Name</label>
                         <input type="text" class="form-control" id="lastName" @bind-value="@CustomerModel.LastName" placeholder="enter last name..." />
                        @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="MiddleName">Middle Name #</label>
+                        <label for="MiddleName">Middle Name</label>
                         <input type="text" class="form-control" id="MiddleName" @bind-value="@CustomerModel.MiddleName" placeholder="enter Middle name..." />
                         @* <ValidationMessage For="@(()=>CustomerModel.MiddleName)" /> *@
                     </div>
@@ -52,27 +53,27 @@
                 </div> *@
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="ElectronicPaymentId">Electronic Payment Id #</label>
+                        <label for="ElectronicPaymentId">Electronic Payment Id</label>
                     <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@CustomerModel.ElectronicPaymentId" />
                         @* <ValidationMessage For="@(()=>CustomerModel.ElectronicPaymentId)" /> *@
                     </div>
                 </div>
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="Mobile">Mobile #</label>
+                        <label for="Mobile">Mobile</label>
                     <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@CustomerModel.Mobile" />
                        
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="ReferredBy">ReferredBy #</label>
+                        <label for="ReferredBy">ReferredBy</label>
                     <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
                         <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" />
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Customer</button>
+                <button type="submit" class="btn btn-primary" Style="margin-top:10px">Register</button>
             </div>
             
         </div>

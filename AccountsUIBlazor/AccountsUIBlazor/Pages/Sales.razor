@@ -1,6 +1,6 @@
 ﻿@page "/AddSales"
 
-@using AccountsUIBlazor.UIModels; 
+@using AccountsUIBlazor.UIModels;
 @using System.Net.Http
 @using AccountsUIBlazor.UIModels;
 @using System.Text;
@@ -10,45 +10,71 @@
 
 @* @inject DialogService DialogService *@
 <h3>Sales</h3>
-
+<style>
+    #LoadNam3 > .row>* {
+        padding-left: 0;
+    }
+</style>
 
 <EditForm Model="UISales" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
-@* <div class="col-md-8">
-        From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UICalenderModel.FromDate" />
-</div>
-<div class="col-md-8">
-        To Date<RadzenDatePicker style="width: 100%;" Name="Todate" @bind-Value="UISales.UICalenderModel.ToDate" Change="DateSelection" />
-</div> *@
-<div class="col-md-8 pt-1">
-        
-        <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UISales.UIStockInList" TextProperty="LoadName" ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
-</div>
-    <div class="col-md-8 pt-1">
-        <RadzenAutoComplete Placeholder="Select customer name.." class="mt-2" Data="@UISales.UICustomerNamesList" TextProperty="CustomerName" ValueProperty="@UIStockIn.CustomerId" Change="@CustomerNameChange" />
+    @* <div class="col-md-8">
+    From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UICalenderModel.FromDate" />
     </div>
-<div class="col-md-8">
-        <label for="quantity">Quantity:</label>
-        <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter quantity." />
+    <div class="col-md-8">
+    To Date<RadzenDatePicker style="width: 100%;" Name="Todate" @bind-Value="UISales.UICalenderModel.ToDate" Change="DateSelection" />
+    </div> *@
+    <div class="row col-md-3 pt-1" style=" margin-left: 0;">
+        <label for="LoadName">Select Vendor Stock In</label>
+        <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UISales.UIStockInList" Name="LoadName" TextProperty="LoadName"  ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
+    </div>
+    <div class="row col-md-3 pt-1 ml-0" style=" margin-left: 0;">
+        <label for="">Select Customer</label>
+        <RadzenAutoComplete Placeholder="Select customer name.." class="mt-2 " Data="@UISales.UICustomerNamesList" TextProperty="CustomerName"  ValueProperty="@UIStockIn.CustomerId" Change="@CustomerNameChange" />
+    </div>
+    <div class="row pt-1">
+        <div class="col-md-3">
+            <label for="quantity">Quantity:</label>
+            <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" name="quantity"  @onblur="CalculateAmount" placeholder="enter quantity." />
 
-        <label for="price">Price:</label>
-        <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" placeholder="enter price." />
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-md-3">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" 
+            placeholder="enter price." />
 
-      
-        <label for="Amount">Total Amount:</label>
-        <input type="number" class="form-control" id="TotalAmount" @bind="@UISales.UISalesPostDataModel.TotalAmount" />
-        Sales Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UISalesPostDataModel.CreatedDate" />
+        </div>
+    </div>
+    <div class="row pt-1">
+        <div class="col-md-3">
+            <label for="Amount">Total Amount:</label>
+            <input type="number" class="form-control" id="TotalAmount" @bind="@UISales.UISalesPostDataModel.TotalAmount" />
+        </div>
+    </div>
 
-        <InputSelect @bind-Value="@UISales.UISalesPostDataModel.Type">
-            @foreach (var value in Enum.GetValues<SaleType>())
-            {
-                <option value="@value">@value</option>
-            }
-        </InputSelect>
- </div> 
-<div>
+    <div class="row pt-1">
+        <div class="col-md-3">
+            <label for="fromDate"> Sales Date</label>
+            <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UISalesPostDataModel.CreatedDate" />
+        </div>
+    </div>
+
+    <div class="row pt-1">
+        <div class="col-md-3 pt-1">
+            <label for="fromDate"> Payment Type</label>
+            <InputSelect class="form-control pt-1" @bind-Value="@UISales.UISalesPostDataModel.Type">
+                @foreach (var value in Enum.GetValues<SaleType>())
+                {
+                    <option value="@value">@value</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+    <div>
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
-        
-</div>
+
+    </div>
 </EditForm>
 
 
@@ -96,7 +122,7 @@
         //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
         if (confirmationResult.Equals(true))
         {
-           // if yes then 
+            // if yes then
             Console.WriteLine();
         }
     }
@@ -113,7 +139,7 @@
     UISalesDto salesDetails = new UISalesDto();
 
     [Inject]
-    protected DialogService DialogService{ get; set; }
+    protected DialogService DialogService { get; set; }
 
     //Grid variables
     RadzenDataGrid<SalesDetailsDto> salesDetailsGrid;
@@ -191,7 +217,7 @@
 
     public async void CalculateAmount()
     {
-        if (UISales.UISalesPostDataModel.Quantity > 0 &&  salesDetails.TotalStockLeft > 0)
+        if (UISales.UISalesPostDataModel.Quantity > 0 && salesDetails.TotalStockLeft > 0)
         {
             if (UISales.UISalesPostDataModel.Quantity > salesDetails.TotalStockLeft)
             {
@@ -204,16 +230,16 @@
                 StateHasChanged();
             }
         }
-        
+
     }
 
     public async Task GetStockInData()
     {
-       
+
         var results = await HttpClient.GetFromJsonAsync<List<UISalesStockInData>>($"StockIn/GetStockInAsPerPaymentNotCompleted");
         foreach (var item in results)
         {
-           // UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
+            // UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
             UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
         }
 
@@ -279,4 +305,3 @@
         }
     }
 }
- 

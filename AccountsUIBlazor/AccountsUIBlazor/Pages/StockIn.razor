@@ -8,35 +8,40 @@
 @inject NavigationManager navigationManager;
 @using AccountsUIBlazor.Data;
 @using System.Text.Json
-<h3>Stock In</h3>
+
+
+<h3>Stock In Entry</h3>
 
 
 <EditForm Model="UIStockIn" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="selectvendor">Please Select Vendor</label>
+            <RadzenAutoComplete Placeholder="Select vendor..." class="form-control" Data="@UIStockIn.VendorNames" TextProperty="VendorName" ValueProperty="@UIStockIn.VendorId" Change="@OnChange" />
+        </div>
 
-    <div class="col-md-8">
-        <label for="selectvendor">select Vendor #</label>
-        <RadzenAutoComplete Placeholder="Select vendor..." Data="@UIStockIn.VendorNames" TextProperty="VendorName" ValueProperty="@UIStockIn.VendorId" Change="@OnChange" />
-    </div>
-    
 
-    <div class="col-md-8">
-        From Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UIStockIn.CreatedDate" Change="DateSelection" />
+        <div class="col-md-4">
+            <label for="fromDate"> Entry Date</label>
+            <RadzenDatePicker Name="fromDate" class="form-control" @bind-Value="@UIStockIn.CreatedDate" DateFormat="dd/MM/yyyy" Change="DateSelection" />
+        </div>
     </div>
+   
     <div class="row" style="margin-top:10px">
-        <div class="col-md-12">
-            <label for="lastName">enter LoadName #</label>
+        <div class="col-md-4">
+            <label for="lastName">Load Name</label>
             <RadzenTextBox type="text" class="form-control" onkeydown="userNameChanged" id="LoadName" onchange="userNameChanged" @bind-value="@UIStockIn.LoadName" />
             @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
         </div>
-        <div class="col-md-12">
-            <label for="lastName">enter quantity #</label>
-            <input type="text" class="form-control" id="lastName" @bind-value="@UIStockIn.Quantity" placeholder="enter last name..." />
+        <div class="col-md-4">
+            <label for="lastName">Quantity</label>
+            <input type="text" class="form-control" id="Quantity" @bind-value="@UIStockIn.Quantity" placeholder="enter last name..." />
             @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
         </div>
         
     </div>
 <div>
-        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Sales</button>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Stock</button>
 </div>
 </EditForm>
 
@@ -84,7 +89,7 @@
 @code {
 
     public UICalenderModel UICalenderModel { get; set; } = new();
-    public UIStockIn UIStockIn { get; set; } = new();
+    public UIStockIn UIStockIn { get; set; } = new() {  };
     public List<UIStockIn> StockInList = new List<UIStockIn>();//for grid
 
 

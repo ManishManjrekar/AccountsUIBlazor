@@ -12,27 +12,29 @@
 
 
 <EditForm Model="UICustomerPayment" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
-
-    <div class="col-md-8">
-        <label for="selectvendor">Search Customer #</label>
-        <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerPayment.CustomerList" TextProperty="CustomerName" ValueProperty="@UICustomerPayment.CustomerId" Change="@OnChange" />
+    <div class="row">
+        <div class="col-md-4">
+            <label for="selectvendor">Search Customer</label>
+            <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerPayment.CustomerList" class="form-control" Name="selectvendor" TextProperty="CustomerName" ValueProperty="@UICustomerPayment.CustomerId" Change="@OnChange" />
+        </div>
     </div>
-
-    <div class="col-md-8">
-        Payment Date<RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.PaymentDate" Change="DateSelection" />
+    <div class="row col-md-4">
+        <label for="fromDate">Payment Date</label>
+        <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.PaymentDate" Change="DateSelection" />
     </div>
-    <div class="col-md-12">
-        <label for="lastName">Amount paid #</label>
-        <input type="text" class="form-control" id="lastName" @bind-value="@UICustomerPayment.AmountPaid" placeholder="enter last name..." />
+    <div class="row col-md-4" >
+        <label for="lastName">Amount paid </label>
+        <input type="text" class="form-control" id="lastName" style="margin-left:10px" @bind-value="@UICustomerPayment.AmountPaid" placeholder="enter last name..." />
        
     </div>
-    <div class="col-md-12">
+    <div class=" row col-md-4" >
         <label for="lastName">comments</label>
-        <input type="text" class="form-control" id="comments" @bind-value="@UICustomerPayment.Comments" placeholder="enter last name..." />
+        <input type="text" class="form-control" id="comments" style="margin-left:10px" @bind-value="@UICustomerPayment.Comments" placeholder="enter last name..." />
       
     </div>
-    <div>
-        <InputSelect @bind-Value="@UICustomerPayment.TypeOfTransaction">
+    <div class="row col-md-4 mt-1" >
+        <label for="TypeOfTransaction">Type Of Transaction</label>
+        <InputSelect class="form-control" DisplayName="TypeOfTransaction" style="margin-left:10px" @bind-Value="@UICustomerPayment.TypeOfTransaction">
             @foreach (var value in Enum.GetValues<TypeOfTransaction>())
             {
                 <option value="@value">@value</option>
