@@ -9,10 +9,13 @@ namespace AccountApi.Core
         public int StockInId { get; set; }
         public string ExpensesName { get; set; }
 
-        public int Amount { get; set; }
+        public int AmountPaid { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public string LoggedInUser { get; set; }
         public string Comments { get; set; }
+        public bool IsActive { get; set; }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [dbo].[VendorExpenses] (
+    [VendorExpensesId] INT NOT NULL IDENTITY PRIMARY KEY,
     [StockInId]    BIGINT           NULL,
     [ExpenseId]    BIGINT           NULL,
     [Amount]       BIGINT           NULL,

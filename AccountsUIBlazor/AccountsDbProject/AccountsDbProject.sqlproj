@@ -64,7 +64,6 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Customer.sql" />
     <Build Include="dbo\Tables\CommissionAgentExpenses.sql" />
-    <Build Include="dbo\Tables\CommissionAgentPurchases.sql" />
     <Build Include="dbo\Tables\CommissionAgentSales.sql" />
     <Build Include="dbo\Tables\CommissionEarned.sql" />
     <Build Include="dbo\Tables\CommissionPercentage.sql" />
@@ -80,6 +79,7 @@
     <Build Include="dbo\Tables\VendorDetails.sql" />
     <Build Include="dbo\Tables\VendorExpenses.sql" />
     <Build Include="dbo\Tables\VendorPayments.sql" />
+    <Build Include="dbo\CustomerBalanceCarryForward.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AccountsDbProject.refactorlog" />

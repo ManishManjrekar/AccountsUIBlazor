@@ -9,6 +9,15 @@
         
     }
 
+    public class UICustomerBalanceCarryForward
+    {
+        public List<UICustomerNames> CustomerList { get; set; }
+        public int CustomerId { get; set; }
+        public int AmountPaid { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public string CustomerName { get; set; }
+        public string Comments { get; set; }
+    }
 
     public class UICustomerPayment
     {
