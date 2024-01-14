@@ -11,7 +11,7 @@
 @* @inject DialogService DialogService *@
 <h3>Sales</h3>
 <style>
-    #LoadNam3 > .row>* {
+    #LoadNam3 > .row > * {
         padding-left: 0;
     }
 </style>
@@ -23,45 +23,50 @@
     <div class="col-md-8">
     To Date<RadzenDatePicker style="width: 100%;" Name="Todate" @bind-Value="UISales.UICalenderModel.ToDate" Change="DateSelection" />
     </div> *@
-    <div class="row col-md-3 pt-1" style=" margin-left: 0;">
-        <label for="LoadName">Select Vendor Stock In</label>
-        <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UISales.UIStockInList" Name="LoadName" TextProperty="LoadName"  ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
-    </div>
-    <div class="row col-md-3 pt-1 ml-0" style=" margin-left: 0;">
-        <label for="">Select Customer</label>
-        <RadzenAutoComplete Placeholder="Select customer name.." class="mt-2 " Data="@UISales.UICustomerNamesList" TextProperty="CustomerName"  ValueProperty="@UIStockIn.CustomerId" Change="@CustomerNameChange" />
-    </div>
-    <div class="row pt-1">
-        <div class="col-md-3">
-            <label for="quantity">Quantity:</label>
-            <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" name="quantity"  @onblur="CalculateAmount" placeholder="enter quantity." />
-
+    <div class="row">
+        <div class=" col-md-4 pt-1" style=" margin-left: 0;">
+            <label for="LoadName">Select Vendor Stock In</label>
+            <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2 form-control" Data="@UISales.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UIStockIn.StockInId" Change="@OnChange" />
+        </div>
+        <div class=" col-md-4 pt-1 ml-0" style=" margin-left: 0;">
+            <label for="CustomerName">Select Customer</label>
+            <RadzenAutoComplete Placeholder="Select customer name.." class="mt-2 form-control " Data="@UISales.UICustomerNamesList" Name="CustomerName" TextProperty="CustomerName" ValueProperty="@UIStockIn.CustomerId" Change="@CustomerNameChange" />
         </div>
     </div>
-    <div class="row pt-1">
-        <div class="col-md-3">
-            <label for="price">Price:</label>
-            <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount" 
-            placeholder="enter price." />
+    <div class="row">
+        <div class="col-md-4 pt-1">
+            <div class="">
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" @bind="@UISales.UISalesPostDataModel.Quantity" @oninput="CalculateAmount" name="quantity" @onblur="CalculateAmount" placeholder="enter quantity." />
 
+            </div>
+        </div>
+        <div class="col-md-4 pt-1">
+            <div class="">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount"
+                       placeholder="enter price." />
+
+            </div>
         </div>
     </div>
-    <div class="row pt-1">
-        <div class="col-md-3">
-            <label for="Amount">Total Amount:</label>
-            <input type="number" class="form-control" id="TotalAmount" @bind="@UISales.UISalesPostDataModel.TotalAmount" />
+    <div class="row">
+        <div class="col-md-4 pt-1">
+            <div class="">
+                <label for="Amount">Total Amount:</label>
+                <input type="number" class="form-control" id="TotalAmount" @bind="@UISales.UISalesPostDataModel.TotalAmount" />
+            </div>
+        </div>
+
+        <div class="col-md-4 pt-1">
+            <div class="">
+                <label for="fromDate"> Sales Date</label>
+                <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UISalesPostDataModel.CreatedDate" />
+            </div>
         </div>
     </div>
-
-    <div class="row pt-1">
-        <div class="col-md-3">
-            <label for="fromDate"> Sales Date</label>
-            <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="UISales.UISalesPostDataModel.CreatedDate" />
-        </div>
-    </div>
-
-    <div class="row pt-1">
-        <div class="col-md-3 pt-1">
+    <div class="row col-md-4 pt-1">
+        <div class=" pt-1">
             <label for="fromDate"> Payment Type</label>
             <InputSelect class="form-control pt-1" @bind-Value="@UISales.UISalesPostDataModel.Type">
                 @foreach (var value in Enum.GetValues<SaleType>())
