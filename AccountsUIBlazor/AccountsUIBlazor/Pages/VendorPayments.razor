@@ -9,58 +9,72 @@
 @inject NavigationManager navigationManager;
 @using AccountsUIBlazor.Data;
 <h3>Vendor payment</h3>
-
-
+    
 <EditForm Model="UIVendorPayment" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
 
-    <div class="row col-md-4">
-        <label for="selectvendor">select Vendor</label>
-        <RadzenAutoComplete Placeholder="Select Vendor..." class="form-control" Style="margin-left:10px" Name="selectvendor" Data="@UIVendorPayment.VendorList" TextProperty="VendorName" ValueProperty="@UIVendorPayment.VendorId" Change="@OnVendorSelectionChange" />
-    </div>
     <div class="row mt-1">
-        <div class=" col-md-2">
-            <label for="fromDate">From Date</label>
-            <RadzenDatePicker style="width: 100%;margin-left:10px" class="form-control" Name="fromDate" @bind-Value="@UIVendorPayment.UICalenderModel.FromDate" />
+        <div class=" col-md-3">
+            <label for="selectvendor" >Select Vendor</label>
+            <RadzenAutoComplete Placeholder="Select Vendor..." class="form-control-plaintext" Name="selectvendor" Data="@UIVendorPayment.VendorList" TextProperty="VendorName" ValueProperty="@UIVendorPayment.VendorId" Change="@OnVendorSelectionChange" />
         </div>
-        <div class=" col-md-2">
-            <label for="toDate">To Date</label>
-            <RadzenDatePicker Name="toDate" class="form-control" Style="margin-left:10px" @bind-Value="@UIVendorPayment.UICalenderModel.ToDate" Change="DateSelection" />
-        </div>
-    </div>
-    <div class="row col-md-4 mt-1">
-        <label for="selectvendor">Select StockIn</label>
-        <RadzenAutoComplete Placeholder="Select stockIn..." Style="margin-left:10px;" Data="@UIVendorPayment.StockInList" class="form-control" TextProperty="LoadName" ValueProperty="@UIVendorPayment.StockInId" Change="@OnStockInSelectionChange" />
-    </div>
-    
 
-    <div class="row col-md-4 mt-1">
-        <label for="PaymentDate">Payment Date</label>
-        <RadzenDatePicker class="form-control" style="width: 100%;margin-left:10px;" Name="PaymentDate"  @bind-Value="@UIVendorPayment.PaymentDate" />
+        <div class=" col-md-3">
+            <label for="fromDate" >From Date</label>
+            <RadzenDatePicker style="width: 100%;" class="form-control-plaintext" Name="fromDate" @bind-Value="@UIVendorPayment.UICalenderModel.FromDate" />
+        </div>
+        <div class=" col-md-3">
+            <label for="toDate" >To Date</label>
+            <RadzenDatePicker Name="toDate" class="form-control-plaintext" @bind-Value="@UIVendorPayment.UICalenderModel.ToDate" Change="DateSelection" />
+        </div>
     </div>
-    <div class="row col-md-4 mt-1">
-        <label for="AmountPaid">Amount Paid</label>
-        <input type="text" class="form-control" id="AmountPaid" @bind-value="@UIVendorPayment.AmountPaid" style="margin-left:10px;" placeholder="enter Amount Paid..." />
-        
+
+    <div class="row">
+
+        <div class=" col-md-3 mt-1">
+            <label for="selectvendor" >Select StockIn</label>
+            <RadzenAutoComplete Placeholder="Select stockIn..." Data="@UIVendorPayment.StockInList" class="form-control-plaintext" TextProperty="LoadName" ValueProperty="@UIVendorPayment.StockInId" Change="@OnStockInSelectionChange" />
+        </div>
+
+
+        <div class=" col-md-3 mt-1">
+            <label for="PaymentDate" >Payment Date</label>
+            <RadzenDatePicker class="form-control-plaintext" style="width: 100%;" Name="PaymentDate" @bind-Value="@UIVendorPayment.PaymentDate" />
+        </div>
+        <div class=" col-md-3 mt-1">
+            <label for="AmountPaid" >Amount Paid</label>
+            <RadzenNumeric class="form-control" id="AmountPaid" @bind-Value="@UIVendorPayment.AmountPaid" placeholder="enter Amount Paid..."></RadzenNumeric>
+            @* <input type="text" class="form-control" id="AmountPaid" @bind-value="@UIVendorPayment.AmountPaid"  placeholder="enter Amount Paid..." /> *@
+
+        </div>
     </div>
-    <div class="row col-md-12 mt-1">
-        <label for="Comments">Comments</label>
-        <input type="text" class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments" style="margin-left:10px;" placeholder="enter Comments..." />
-        
+
+    <div class="row">
+        <div class=" col-md-3 mt-1">
+            <label for="Comments" >Comments</label>
+            <RadzenTextBox class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments" placeholder="enter Comments..."></RadzenTextBox>
+            @* <input type="text" class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments"  placeholder="enter Comments..." /> *@
+
+        </div>
+        <div class="mt-2 col-md-3">
+            <label for="TypeOfTransaction" >Type Of Transaction</label>
+            <InputSelect DisplayName="TypeOfTransaction" class="form-control" @bind-Value="@UIVendorPayment.TypeOfTransaction">
+                @foreach (var value in Enum.GetValues<TypeOfTransaction>())
+                {
+                    <option value="@value">@value</option>
+                }
+            </InputSelect>
+        </div>
     </div>
-    <div class="mt-2 col-md-4">
-        <label for="TypeOfTransaction">Type Of Transaction</label>
-        <InputSelect DisplayName="TypeOfTransaction" class="form-control" style="margin-left:10px;" @bind-Value="@UIVendorPayment.TypeOfTransaction">
-            @foreach (var value in Enum.GetValues<TypeOfTransaction>())
-            {
-                <option value="@value">@value</option>
-            }
-        </InputSelect>
+    <div class="mt-3 card p-2">
+        <h4>Total Sales Amount is <span class="h-25 text-primary">@VendorPaymentmasterDataSet.TotalSalesAmount</span></h4>
+        <h4>Total Vendor Payment Paid is <span class="h-25 text-success">@VendorPaymentmasterDataSet.TotalVendorPaymentPaid</span></h4>
+        <h4>Total Balance Amount is <span class="h-25 text-danger">@VendorPaymentmasterDataSet.BalanceAmount</span></h4>
     </div>
-    <div class="mt-2 col-md-4">
-        <label class="form-control" id="BalanceAmount">Total Sales Amount is : "@VendorPaymentmasterDataSet.TotalSalesAmount"</label>
-        <label class="form-control" id="BalanceAmount">Total Vendor Payment Paid is : "@VendorPaymentmasterDataSet.TotalVendorPaymentPaid"</label>
-        <label class="form-control" id="BalanceAmount">Total Balance Amount is : "@VendorPaymentmasterDataSet.BalanceAmount"</label>
-    </div>
+   @*  <div class="mt-2 col-md-4">
+        <label class="form-control-plaintext" id="BalanceAmount">Total Sales Amount is : "@VendorPaymentmasterDataSet.TotalSalesAmount"</label>
+        <label class="form-control-plaintext" id="BalanceAmount">Total Vendor Payment Paid is : "@VendorPaymentmasterDataSet.TotalVendorPaymentPaid"</label>
+        <label class="form-control-plaintext" id="BalanceAmount">Total Balance Amount is : "@VendorPaymentmasterDataSet.BalanceAmount"</label>
+    </div> *@
     <div>
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit Vendor Payment</button>
     </div>
