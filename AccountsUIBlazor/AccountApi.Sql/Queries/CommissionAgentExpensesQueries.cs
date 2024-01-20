@@ -14,7 +14,7 @@ namespace AccountApi.Sql.Queries
 
         public static string GetAllCommissionAgentExpenses_ByStockInId => "SELECT * FROM [CommissionAgentExpenses] (NOLOCK) WHERE [StockInId] = @StockInId and IsActive=1";
 
-        public static string GetCommissionAgentExpenses_ByDate => @"SELECT sum(Quantity) FROM [accountancy].[dbo].[CommissionAgentExpenses] as c
+        public static string GetCommissionAgentExpenses_ByDate => @"SELECT * FROM [accountancy].[dbo].[CommissionAgentExpenses] as c
                                                          where CONVERT(DATE,c.CreatedDate) = @CreatedDate and isActive=1 ";
 
         public static string AddCommissionAgentExpenses =>

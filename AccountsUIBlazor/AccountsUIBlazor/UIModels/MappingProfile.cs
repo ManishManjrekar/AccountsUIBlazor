@@ -1,6 +1,7 @@
 ﻿using AccountApi.Core;
 using AccountApi.Core.Entities;
 using AutoMapper;
+using AutoMapper.Extensions.EnumMapping;
 
 namespace AccountsUIBlazor.UIModels
 {
@@ -35,7 +36,17 @@ namespace AccountsUIBlazor.UIModels
             CreateMap<VendorPayments, UIVendorPayment>()
                 .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.CreatedDate)).ReverseMap();
 
+            CreateMap<CustomerBalanceCarryForward, UICustomerBalanceCarryForward>().ReverseMap();
+            CreateMap<CustomerBalanceCarryForward, UICustomerBalanceCarryForwardGridData>().ReverseMap();
+          
+            CreateMap<VendorExpenses, UIVendorExpenses>()
+           .ForMember(dest => dest.VendorExpensesTypes, 
+                       opt => opt.MapFrom(src => src.ExpensesName)).ReverseMap();
 
+            CreateMap<CommissionAgentPercentage, UICommissionAgentPercentage>().ReverseMap();
+
+            CreateMap<CommissionEarned, UIVendorExpenses>()//.ReverseMap();
+                .ForMember(dest => dest.AmountPaid, opt => opt.MapFrom(src => src.Amount)).ReverseMap();
 
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();

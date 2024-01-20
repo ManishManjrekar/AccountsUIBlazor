@@ -11,6 +11,7 @@ namespace AccountApi.Application.Interfaces
 {
     public interface ICommissionAgentPercentageRepository : IRepository<CommissionAgentPercentage>
     {
-
+        Task<IReadOnlyList<CommissionAgentPercentage>> GetAllCommissionPercentage();
+        Task<int> GetCommissionPercentage_Active();
     }
 }

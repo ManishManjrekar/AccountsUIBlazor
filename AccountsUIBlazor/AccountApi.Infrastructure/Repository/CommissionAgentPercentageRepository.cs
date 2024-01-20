@@ -30,7 +30,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<CommissionAgentPercentage>(CustomerQueries.AllCustomer);
+                var result = await connection.QueryAsync<CommissionAgentPercentage>(CommissionPercentageQueries.AllCommissionPercentage);
                 return result.ToList();
             }
         }
@@ -40,7 +40,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentPercentage>(CustomerQueries.CustomerById, new { CustomerId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentPercentage>(CommissionPercentageQueries.CommissionPercentageById, new { CommissionPercentageId = id });
                 return result;
             }
         }
@@ -50,7 +50,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
+                var result = await connection.ExecuteAsync(CommissionPercentageQueries.AddCommissionPercentage, entity);
                 return result.ToString();
             }
         }
@@ -60,7 +60,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
+                var result = await connection.ExecuteAsync(CommissionPercentageQueries.UpdateCommissionPercentage, entity);
                 return result.ToString();
             }
         }
@@ -70,12 +70,30 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(CommissionPercentageQueries.DeleteCommissionPercentage, new { CommissionPercentageId = id });
                 return result.ToString();
             }
         }
 
-       
+        public async Task<IReadOnlyList<CommissionAgentPercentage>> GetAllCommissionPercentage()
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CommissionAgentPercentage>(CommissionPercentageQueries.GetAllCommissionPercentageData);
+                return result.ToList();
+            }
+        }
+
+        public async Task<int> GetCommissionPercentage_Active()
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(CommissionPercentageQueries.GetCommissionPercentage_Active);
+                return result;
+            }
+        }
 
     }
 }

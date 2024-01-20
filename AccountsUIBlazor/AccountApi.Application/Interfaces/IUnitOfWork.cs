@@ -16,7 +16,11 @@ namespace AccountApi.Application.Interfaces
         ICustomerPaymentReceivedRepository CustomerPaymentReceived { get; }
         IExpensesTypesRepository ExpensesTypes { get; }
         IStockInRepository StockIn { get; }
-        IVendorExpensesPaymentRepository VendorExpensesPayment { get; }
+        IVendorExpensesRepository VendorExpenses { get; }
         IVendorPaymentRepository VendorPayment { get; }
+
+        ICustomerBalanceCarryForwardRepository CustomerBalanceCarryForward { get; }
+        ICommissionEarnedRepository CommissionEarned { get; }
+
     }
 }

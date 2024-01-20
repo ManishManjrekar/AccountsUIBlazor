@@ -11,5 +11,6 @@ namespace AccountApi.Application.Interfaces
 {
     public interface ICommissionAgentExpensesRepository : IRepository<CommissionAgentExpenses>
     {
+        Task<IReadOnlyList<CommissionAgentExpenses>> GetCommissionAgentExpensesForADate(string selectedDate);
     }
 }

@@ -1,0 +1,123 @@
+﻿@page "/CommissionPercentage"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+@using System.Text.Json
+
+
+<h3>Commission Percentage</h3>
+
+
+<EditForm Model="UICommissionPercentage" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    
+
+        <div class="col-md-4">
+            <label for="lastName">Commission Percentage</label>
+        <input type="text" class="form-control" id="Quantity" @bind-value="@UICommissionPercentage.CommissionPercentage" placeholder="enter last name..." />
+            @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+        </div>
+<div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add</button>
+</div>
+</EditForm>
+<div class="row mt-2">
+    <h4>Vendor Payments Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="commissionPercentageDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@UICommissionPercentageList" TItem="UICommissionAgentPercentage" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICommissionAgentPercentage" Property="CommissionPercentage" Title="CommissionPercentage" Width="120px" />
+                <RadzenDataGridColumn TItem="UICommissionAgentPercentage" Context="UICommissionPercentageList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="UICommissionPercentageList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowCommissionPercentage(UICommissionPercentageList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+
+
+@code {
+
+
+    public UICommissionAgentPercentage UICommissionPercentage { get; set; } = new() { };
+    public List<UICommissionAgentPercentage> UICommissionPercentageList = new List<UICommissionAgentPercentage>();//for grid
+
+
+
+    RadzenDataGrid<UICommissionAgentPercentage> commissionPercentageDetailsGrid;
+    UICommissionAgentPercentage commissionPercentageGridInsert;
+    UICommissionAgentPercentage commissionPercentageGridUpdate;
+    public string Log { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        // fill dropdownlist on form load event
+        FillVendorExpensesGrid_AsPerStockInId();
+    }
+
+
+
+    //stockin dropdown selection change event
+
+    void Reset()
+    {
+        commissionPercentageGridInsert = null;
+        commissionPercentageGridUpdate = null;
+    }
+    async Task DeleteRowCommissionPercentage(UICommissionAgentPercentage commissionPercentageModel)
+    {
+        Reset();
+
+        if (UICommissionPercentageList.Contains(commissionPercentageModel))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"CommissionPercentage?id={commissionPercentageModel.CommissionPercentageId}");
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await commissionPercentageDetailsGrid.Reload();
+        }
+    }
+    private async void FillVendorExpensesGrid_AsPerStockInId()
+    {
+        UICommissionPercentageList = await HttpClient.GetFromJsonAsync<List<UICommissionAgentPercentage>>($"CommissionAgentPercentage/GetAllCommissionPercentage");
+        StateHasChanged();
+    }
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UICommissionPercentage = (UICommissionAgentPercentage)formContext.Model;
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"CommissionAgentPercentage/AddCommissionPercentage", UICommissionPercentage);
+            FillVendorExpensesGrid_AsPerStockInId();
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        
+    }
+}
+ 

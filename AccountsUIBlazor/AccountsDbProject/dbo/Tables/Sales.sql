@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Sales] (
-    [SalesId] INT NOT NULL IDENTITY,
+    [SalesId] INT IDENTITY (1, 1) NOT NULL,
     [CustomerId]   INT NOT NULL,
     [VendorId]     INT NOT NULL,
     [StockInId]    INT NOT NULL,

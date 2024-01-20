@@ -10,16 +10,18 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class CustomerBalanceCarryForwardQueries
     {
-		public static string AllCustomerBalanceCarryForward => "SELECT * FROM [CustomerBalanceCarryForward] (NOLOCK)";
-        public static string GetBalanceCarryForwardBy_CustomerId => "SELECT * FROM [CustomerBalanceCarryForward] as c where c.CustomerId = @CustomerId and cp.IsActive=1";
-        
+		public static string AllCustomerBalanceCarryForward => "SELECT * FROM [accountancy].[dbo].[CustomerBalanceCarryForward] (NOLOCK)";
+        public static string GetBalanceCarryForwardBy_CustomerId => "SELECT * FROM [accountancy].[dbo].[CustomerBalanceCarryForward] as c where c.CustomerId = @CustomerId and c.IsActive=1";
 
-		public static string AddCustomerBalanceCarryForward =>
+        public static string GetCustomerBalanceCarry_ByDate => @"SELECT * FROM [accountancy].[dbo].[CommissionAgentExpenses] as c
+                                                  where CONVERT(DATE,c.CreatedDate) = @CreatedDate and isActive=1 ";
+
+        public static string AddCustomerBalanceCarryForward =>
             @"INSERT INTO [dbo].[CustomerBalanceCarryForward]
            ([CustomerId]
             ,[CustomerName]
-           ,[AmountPaid]
-           ,[PaymentDate]
+           ,[Amount]
+           ,[CreatedDate]
            ,[ModifiedDate]
            ,[IsActive]
            ,[CreatedBy]
@@ -31,8 +33,8 @@ namespace AccountApi.Sql.Queries
      VALUES
            (@CustomerId
             ,@CustomerName
-           ,@AmountPaid
-           ,@PaymentDate
+           ,@Amount
+           ,@CreatedDate
            ,@ModifiedDate
            ,@IsActive
            ,@CreatedBy
@@ -45,8 +47,8 @@ namespace AccountApi.Sql.Queries
             @"UPDATE [CustomerPaymentReceived] 
             SET [CustomerId] = @CustomerId,
                 [CustomerName] = @CustomerName, 
-				[AmountPaid] = @AmountPaid, 
-				[PaymentDate] = @PaymentDate, 
+				[Amount] = @Amount, 
+				[CreatedDate] = @CreatedDate, 
 				[ModifiedDate] = @ModifiedDate
 	            [IsActive] = @IsActive, 
 				[CreatedBy] = @CreatedBy, 

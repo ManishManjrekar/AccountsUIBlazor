@@ -15,47 +15,44 @@ using AccountApi.Core.Entities;
 
 namespace AccountApi.Infrastructure.Repository
 {
-    public class VendorPaymentRepository : IVendorPaymentRepository
+    public class VendorExpensesRepository : IVendorExpensesRepository
     {
 
         private readonly IConfiguration configuration;
        
-        public VendorPaymentRepository(IConfiguration configuration)
+        public VendorExpensesRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
-        public async Task<IReadOnlyList<VendorPayments>> GetAllAsync()
+        public async Task<IReadOnlyList<VendorExpenses>> GetAllAsync()
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<VendorPayments>(VendorPaymentQueries.AllVendorPayment);
+                var result = await connection.QueryAsync<VendorExpenses>(VendorExpensesQueries.GetAllVendorExpenses);
                 return result.ToList();
             }
         }
 
-        public async Task<VendorPayments> GetByIdAsync(long id)
+        public async Task<VendorExpenses> GetByIdAsync(long id)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<VendorPayments>(VendorPaymentQueries.VendorPaymentById, new { VendorPaymentId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<VendorExpenses>(VendorExpensesQueries.GetAllVendorExpenses_ByStockInId, new { StockInId = id });
                 return result;
             }
         }
 
-        public async Task<string> AddAsync(VendorPayments entity)
+        public async Task<string> AddAsync(VendorExpenses entity)
         {
-            entity.IsActive = true;
-            entity.ModifiedDate = DateTime.Now;
-            
             try
             {
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.ExecuteAsync(VendorPaymentQueries.AddVendorPayment, entity);
+                    var result = await connection.ExecuteAsync(VendorExpensesQueries.AddVendorExpenses, entity);
                     return result.ToString();
                 }
             }
@@ -64,15 +61,15 @@ namespace AccountApi.Infrastructure.Repository
 
                 throw;
             }
-            
+           
         }
 
-        public async Task<string> UpdateAsync(VendorPayments entity)
+        public async Task<string> UpdateAsync(VendorExpenses entity)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(VendorPaymentQueries.UpdateVendorPayment, entity);
+                var result = await connection.ExecuteAsync(VendorExpensesQueries.UpdateVendorExpenses, entity);
                 return result.ToString();
             }
         }
@@ -82,30 +79,29 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(VendorPaymentQueries.DeleteVendorPayment, new { VendorPaymentId = id });
+                var result = await connection.ExecuteAsync(VendorExpensesQueries.DeleteVendorExpenses, new { CustomerId = id });
                 return result.ToString();
             }
         }
 
-        public async Task<IReadOnlyList<VendorPaymentDetails>> GetVendorPaymentAsPerStockInId(long stockInId)
+        public async Task<IReadOnlyList<VendorExpenses>> GetCommissionAgentExpensesForADate(string selectedDate)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<VendorPaymentDetails>(VendorPaymentQueries.GetVendorPaymentAsPerStockInId, new { StockInId = stockInId });
+                var result = await connection.QueryAsync<VendorExpenses>(VendorExpensesQueries.GetVendorExpenses_ByDate, new { CreatedDate = selectedDate });
                 return result.ToList();
             }
         }
 
-        public async Task<IReadOnlyList<VendorPayments>> GetVendorPaymentsForADate(string selectedDate)
+        public async Task<IReadOnlyList<VendorExpenses>> GetVendorExpensesByStockInId(long id)
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<VendorPayments>(VendorPaymentQueries.GetVendorPayments_ByDate, new { CreatedDate = selectedDate });
+                var result = await connection.QueryAsync<VendorExpenses>(VendorExpensesQueries.GetAllVendorExpenses_ByStockInId, new { StockInId = id });
                 return result.ToList();
             }
         }
-
     }
 }

@@ -8,6 +8,7 @@ using AccountsUIBlazor.UIModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,7 +17,7 @@ namespace AccountsUIBlazor.Controller
 {
     [Route("[controller]")]
     [ApiController]
-    public class CustomerBalanceCarryForward : BaseApiController
+    public class CustomerBalanceCarryForwardController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
@@ -25,7 +26,7 @@ namespace AccountsUIBlazor.Controller
         /// <summary>
         /// Initialize StockInController by injecting an object type of IUnitOfWork
         /// </summary>
-        public CustomerBalanceCarryForward(IUnitOfWork unitOfWork, IMapper Mapper)
+        public CustomerBalanceCarryForwardController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
             this._IMapper = Mapper;
@@ -57,15 +58,17 @@ namespace AccountsUIBlazor.Controller
             return results;
         }
 
-
-        [HttpGet("{id}")]
-        public async  Task<UICustomerPayment> GetById(int id)
+        // this method is used for showing all records of Carry forward records for a given customer
+        [HttpGet()]
+        [Route("GetCarrryForwardDataByCustomerId")]
+        public async  Task<MasterCustomerBalanceCarryForwardGridData> GetCarrryForwardDataByCustomerId(int id)
         {
-            UICustomerPayment results = null;
+            MasterCustomerBalanceCarryForwardGridData results = new MasterCustomerBalanceCarryForwardGridData();
             try
             {
-                var data = await _unitOfWork.CustomerPaymentReceived.GetByIdAsync(id);
-                results = _IMapper.Map< UICustomerPayment > (data);
+                var data = await _unitOfWork.CustomerBalanceCarryForward.GetCarrryForwardDataByCustomerId(id);
+                var res = _IMapper.Map<List<UICustomerBalanceCarryForwardGridData>> (data);
+                results.CarryForwardAmountList = res;
                 return results;
             }
             catch (SqlException ex)
@@ -74,22 +77,19 @@ namespace AccountsUIBlazor.Controller
             }
             catch (Exception ex)
             {
-              
                 Logger.Instance.Error("Exception:", ex);
             }
             return results;
         }
 
         [HttpPost]
-        [Route("AddCustomerPayment")]
-        public async Task<string> AddCustomerPayment(UICustomerPayment UICustomerPayment)
+        [Route("AddCustomerBalanceCarryForward")]
+        public async Task<string> AddCustomerBalanceCarryForward(UICustomerBalanceCarryForward uiCustomerBalanceCarryForward)
         {
-            CustomerPaymentReceived custPayment = _IMapper.Map<CustomerPaymentReceived>(UICustomerPayment);
+            AccountApi.Core.CustomerBalanceCarryForward customerBalanceCarryForward = _IMapper.Map<AccountApi.Core.CustomerBalanceCarryForward>(uiCustomerBalanceCarryForward);
             try
             {
-                custPayment.TypeOfTransaction = UICustomerPayment.TypeOfTransaction.ToString();
-               
-                var data = await _unitOfWork.CustomerPaymentReceived.AddAsync(custPayment);
+                var data = await _unitOfWork.CustomerBalanceCarryForward.AddAsync(customerBalanceCarryForward);
                 //results = _IMapper.Map<List<UICustomerPayment>>(data);
                 return data;
                

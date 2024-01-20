@@ -37,14 +37,40 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<CustomerBalanceCarryForward> GetByIdAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryFirstOrDefaultAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetBalanceCarryForwardBy_CustomerId, new { CustomerId = id });
-                return result;
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QuerySingleOrDefaultAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetBalanceCarryForwardBy_CustomerId, new { CustomerId = id });
+                    return result;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            
         }
+        public async Task<IReadOnlyList<CustomerBalanceCarryForward>> GetCarrryForwardDataByCustomerId(long id)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetBalanceCarryForwardBy_CustomerId, new { CustomerId = id });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
 
+        }
         public async Task<string> AddAsync(CustomerBalanceCarryForward entity)
         {
             try
@@ -88,7 +114,15 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-       
+        public async Task<IReadOnlyList<CustomerBalanceCarryForward>> GetCommisionEarnedForADate(string selectedDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetCustomerBalanceCarry_ByDate, new { CreatedDate = selectedDate });
+                return result.ToList();
+            }
+        }
 
     }
 }

@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 namespace AccountApi.Sql.Queries
 {
 	[ExcludeFromCodeCoverage]
-	public static class VendorExpensesPaymentQueries
+	public static class VendorExpensesQueries
     {
-        public static string GetAllVendorExpensesPayment => "SELECT * FROM [VendorExpensesPayment] (NOLOCK) where IsActive=1";
+        public static string GetAllVendorExpenses => "SELECT * FROM [VendorExpenses] (NOLOCK) where IsActive=1";
 
-        public static string GetAllVendorExpensesPayment_ByStockInId => "SELECT * FROM [VendorExpensesPayment] (NOLOCK) WHERE [StockInId] = @StockInId and IsActive=1";
+        public static string GetAllVendorExpenses_ByStockInId => "SELECT * FROM [VendorExpenses] (NOLOCK) WHERE [StockInId] = @StockInId and IsActive=1";
 
-        public static string AddVendorExpensesPayment =>
-            @"INSERT INTO [dbo].[VendorExpensesPayment]
+        public static string GetVendorExpenses_ByDate => @"SELECT * FROM [accountancy].[dbo].[VendorExpenses] as c
+                                                  where CONVERT(DATE,c.CreatedDate) = @CreatedDate and isActive=1 ";
+        public static string AddVendorExpenses =>
+            @"INSERT INTO [dbo].[VendorExpenses]
            ( [VendorId]
             ,[StockInId]
             ,[ExpensesName]
+            ,[VendorName]
+            ,[LoadName]
            ,[AmountPaid]
            ,[CreatedDate]
            ,[ModifiedDate]
@@ -31,6 +35,8 @@ namespace AccountApi.Sql.Queries
            (@VendorId
             ,@StockInId
             ,@ExpensesName
+             ,@VendorName
+            ,@LoadName
            ,@AmountPaid
            ,@CreatedDate
            ,@ModifiedDate
@@ -39,20 +45,22 @@ namespace AccountApi.Sql.Queries
            ,@IsActive
           )";
 
-        public static string UpdateVendorExpensesPayment =>
-            @"UPDATE [VendorExpensesPayment] 
+        public static string UpdateVendorExpenses =>
+            @"UPDATE [VendorExpenses] 
             SET [VendorId] = @VendorId, 
 				[StockInId] = @StockInId,
                 [ExpensesName] = @ExpensesName
+                [VendorName] = @VendorName
+				[LoadName] = @LoadName, 
 				[AmountPaid] = @AmountPaid, 
 				[CreatedDate] = @CreatedDate, 
 				[ModifiedDate] = @ModifiedDate,
                 [LoggedInUser] = @LoggedInUser,
                 [Comments] = @Comments,
 	            [IsActive] = @IsActive, 
-            WHERE [VendorExpensesPaymentId] = @VendorExpensesPaymentId and IsActive=1 ";
+            WHERE [VendorExpensesId] = @VendorExpensesId and IsActive=1 ";
 
        
-        public static string DeleteVendorExpensesPayment => "Update [VendorExpensesPayment] set isActive=0 where [VendorExpensesPaymentId] = @VendorExpensesPaymentId ";
+        public static string DeleteVendorExpenses => "Update [VendorExpenses] set isActive=0 where [VendorExpensesId] = @VendorExpensesId ";
     }
 }

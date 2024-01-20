@@ -75,7 +75,15 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-       
 
+        public async Task<IReadOnlyList<CommissionAgentExpenses>> GetCommissionAgentExpensesForADate(string selectedDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CommissionAgentExpenses>(CommissionAgentExpensesQueries.GetCommissionAgentExpenses_ByDate, new { CreatedDate = selectedDate });
+                return result.ToList();
+            }
+        }
     }
 }

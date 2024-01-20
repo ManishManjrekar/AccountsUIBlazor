@@ -11,6 +11,8 @@ namespace AccountApi.Application.Interfaces
 {
     public interface ICustomerBalanceCarryForwardRepository : IRepository<CustomerBalanceCarryForward>
     {
-        
+        Task<IReadOnlyList<CustomerBalanceCarryForward>> GetCarrryForwardDataByCustomerId(long id);
+
+
     }
 }

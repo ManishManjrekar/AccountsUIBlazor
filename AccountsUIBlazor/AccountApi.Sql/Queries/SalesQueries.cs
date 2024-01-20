@@ -89,5 +89,19 @@ namespace AccountApi.Sql.Queries
              inner join [accountancy].[dbo].[StockIn] as si on s.StockInId = si.StockInId
               where CONVERT(DATE,s.CreatedDate) = @CreatedDate and s.isActive=1";
 
+        public static string GetSales_Sum_Per_StockInId => @" SELECT sum(s.TotalAmount) FROM [accountancy].[dbo].[Sales] as s
+                                                         where s.StockInId = @StockInId and isActive=1 ";
+
+        public static string GetSales_Sum_Per_Date => @" SELECT sum(s.TotalAmount) FROM [accountancy].[dbo].[Sales] as s
+                                                         where CONVERT(DATE,s.CreatedDate) = @CreatedDate and s.isActive=1 ";
+
+        public static string GetSales_Sum_Between_Dates => @" SELECT sum(s.TotalAmount) FROM [accountancy].[dbo].[Sales] as s
+                                                         where CONVERT(DATE,s.CreatedDate) between @fromDate and @toDate and s.isActive=1 ";
+
+
+        public static string GetCommission_for_Sales_PercentageValue => @" SELECT sum(s.TotalAmount) * @PercentageCommission /100.0 
+                                                                                      FROM [accountancy].[dbo].[Sales] as s
+                                                                                      where s.StockInId = @StockInId and s.isActive=1 ";
+
     }
 }

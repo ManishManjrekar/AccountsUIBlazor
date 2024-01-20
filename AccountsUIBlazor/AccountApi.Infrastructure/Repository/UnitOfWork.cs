@@ -1,4 +1,6 @@
 ﻿using AccountApi.Application.Interfaces;
+using AccountApi.Core;
+using AccountApi.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,10 @@ namespace AccountApi.Infrastructure.Repository
             ICustomerPaymentReceivedRepository customerPaymentReceivedRepository,
             IExpensesTypesRepository expensesTypesRepository,
             IStockInRepository stockInRepository,
-            IVendorExpensesPaymentRepository vendorExpensesPaymentRepository,
-            IVendorPaymentRepository vendorPaymentRepository)
+            IVendorExpensesRepository vendorExpensesPaymentRepository,
+            IVendorPaymentRepository vendorPaymentRepository,
+            ICustomerBalanceCarryForwardRepository customerBalanceCarryForward,
+            ICommissionEarnedRepository commissionEarned)
         {
             Customers = customerRepository;
             Vendor = vendorRepository;
@@ -28,9 +32,12 @@ namespace AccountApi.Infrastructure.Repository
             CustomerPaymentReceived = customerPaymentReceivedRepository;
             ExpensesTypes = expensesTypesRepository;
             StockIn = stockInRepository;
-            VendorExpensesPayment = vendorExpensesPaymentRepository;
+            VendorExpenses = vendorExpensesPaymentRepository;
             VendorPayment = vendorPaymentRepository;
-            
+
+            CustomerBalanceCarryForward = customerBalanceCarryForward;
+            CommissionEarned = commissionEarned;
+
         }
 
         public ICustomerRepository Customers { get; set; }
@@ -42,8 +49,10 @@ namespace AccountApi.Infrastructure.Repository
         public IExpensesTypesRepository ExpensesTypes { get; set; }
         public ISalesRepository Sales { get; set; }
         public IStockInRepository StockIn { get; set; }
-        public IVendorExpensesPaymentRepository VendorExpensesPayment { get; set; }
+        public IVendorExpensesRepository VendorExpenses { get; set; }
         public IVendorPaymentRepository VendorPayment { get; set; }
-       
+        public ICustomerBalanceCarryForwardRepository CustomerBalanceCarryForward { get; }
+        public ICommissionEarnedRepository CommissionEarned { get; }
+
     }
 }

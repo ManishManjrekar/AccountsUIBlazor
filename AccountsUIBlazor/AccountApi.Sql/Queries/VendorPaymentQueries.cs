@@ -14,6 +14,8 @@ namespace AccountApi.Sql.Queries
 
         public static string VendorPaymentById => "SELECT * FROM [VendorPayments] (NOLOCK) WHERE [VendorPaymentId] = @VendorPaymentId and IsActive=1";
 
+        public static string GetVendorPayments_ByDate => @"SELECT * FROM [accountancy].[dbo].[VendorPayments] as c
+                                                  where CONVERT(DATE,c.CreatedDate) = @CreatedDate and isActive=1 ";
         public static string AddVendorPayment =>
             @"INSERT INTO [dbo].[VendorPayments]
            ( [VendorId]

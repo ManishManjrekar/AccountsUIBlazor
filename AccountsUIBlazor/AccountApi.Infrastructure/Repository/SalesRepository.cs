@@ -142,7 +142,75 @@ namespace AccountApi.Infrastructure.Repository
                 return result.ToList();
             }
         }
+        public async Task<int> GetSales_Sum_Per_StockInId(int stockInId)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetSales_Sum_Per_StockInId, new { stockInId });
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
+        public async Task<int> GetSales_Sum_Per_Date(string selectedDate)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetSales_Sum_Per_Date, new { CreatedDate = selectedDate });
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
+
+        public async Task<int> GetSales_Sum_Between_Dates(string fromDate, string toDate)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetSales_Sum_Between_Dates, new { fromDate, toDate, });
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<int> GetCommission_for_Sales_AsPer_PercentageValue(int PercentageCommission, int StockInId)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetCommission_for_Sales_PercentageValue, new { PercentageCommission = PercentageCommission, StockInId = StockInId });
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

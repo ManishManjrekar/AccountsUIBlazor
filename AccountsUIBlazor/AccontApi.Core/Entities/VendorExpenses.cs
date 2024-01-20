@@ -2,12 +2,14 @@
 
 namespace AccountApi.Core
 {
-    public class VendorExpensesPayment
+    public class VendorExpenses
     {
-        public int VendorExpensesPaymentId { get; set; }
+        public int VendorExpensesId { get; set; }
         public int VendorId { get; set; }
         public int StockInId { get; set; }
         public string ExpensesName { get; set; }
+        public string LoadName { get; set; }
+        public string VendorName { get; set; }
 
         public int AmountPaid { get; set; }
         public DateTime CreatedDate { get; set; }

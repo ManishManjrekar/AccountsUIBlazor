@@ -1,0 +1,238 @@
+﻿@page "/VendorExpenses"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+@using System.Text.Json
+
+
+<h3>Vendor Expenses</h3>
+
+
+<EditForm Model="UIVendorExpenses" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    <div class="row">
+        <div class="row col-md-3 pt-1" style=" margin-left: 0;">
+            <label for="LoadName">Select Vendor Stock In</label>
+            <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UIVendorExpenses.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UIVendorExpenses.StockInId" Change="@OnChange" />
+        </div>
+
+
+        <div class="col-md-4">
+            <label for="fromDate"> Select Date</label>
+            <RadzenDatePicker Name="fromDate" class="form-control" @bind-Value="@UIVendorExpenses.CreatedDate" DateFormat="dd/MM/yyyy" Change="DateSelection" />
+        </div>
+    </div>
+   
+    <div class="row" style="margin-top:10px">
+        <div class="col-md-3 pt-1">
+            <label for="fromDate">Select Expense Type</label>
+            <InputSelect class="form-control pt-1" @bind-Value="@UIVendorExpenses.VendorExpensesTypes" onchange="CalculateCommissionAmount()">
+                @foreach (var value in Enum.GetValues<VendorExpensesTypes>())
+                {
+                    <option value="@value">@value</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="col-md-4">
+            
+            <label class="form-control" id="BalanceAmount">Total Sales Amount is : "@commissionModel.Sales_Sum."</label>
+            <label for="CommissionPercentage">Commission Percentage</label>
+            <RadzenNumeric class="form-control" id="CommissionPercentage" Change="SearchChanged" TValue="int" Value="@commissionModel.CommissionPercentage" placeholder="Commission Percentage..." />
+           
+        </div>
+        <div class="col-md-4">
+            <label for="lastName">Amount</label>
+            <input type="text" class="form-control" id="Quantity" @bind-value="@UIVendorExpenses.AmountPaid" placeholder="enter last name..." />
+            @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+        </div>
+        
+    </div>
+   
+<div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Stock</button>
+</div>
+</EditForm>
+<div class="row mt-2">
+    <h4>Vendor Payments Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="vendorPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@VendorExpensesList" TItem="UIVendorExpenses" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="VendorName" Title="Vendor Name" Width="120px" />
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="LoadName" Title="Load Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="VendorExpensesTypes" Title="Type Of Transaction" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="LoggedInUser" Title="LoggedInUser" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="Comments" Title="Comments" Width="120px" />
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Property="ModifiedDate" Title="ModifiedDate" Width="120px" />
+
+
+                <RadzenDataGridColumn TItem="UIVendorExpenses" Context="VendorExpensesList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="VendorExpensesList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowVendorPayment(VendorExpensesList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+
+
+@code {
+
+    public UICalenderModel UICalenderModel { get; set; } = new();
+    public UIVendorExpenses UIVendorExpenses { get; set; } = new() { };
+    public List<UIVendorExpenses> VendorExpensesList = new List<UIVendorExpenses>();//for grid
+    public List<UIStockInItem> UIStockInList = new List<UIStockInItem>();
+    public List<UISalesStockInData> MasterStockInDataList = new List<UISalesStockInData>();
+    UIVendorExpenses_CommissionPercentage commissionModel = new UIVendorExpenses_CommissionPercentage();
+
+    RadzenDataGrid<UIVendorExpenses> vendorPaymentDetailsGrid;
+    UIVendorExpenses vendorExpensessGridInsert;
+    UIVendorExpenses vendorExpensessGridUpdate;
+    public string Log { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        // fill dropdownlist on form load event
+        GetStockInData_PaymentNotCompleted();
+    }
+
+    private void SearchChanged(int value)
+    {
+        commissionModel.CommissionPercentage = value;
+        UIVendorExpenses.AmountPaid = commissionModel.Sales_Sum * value / 100;
+        StateHasChanged();
+    }
+    public async Task CalculateCommissionAmount()
+    {
+
+        try
+        {
+            commissionModel = await HttpClient.GetFromJsonAsync<UIVendorExpenses_CommissionPercentage>($"VendorExpenses/GetCalculateCommissionPercenage_By_StockId?stockInId={UIVendorExpenses.StockInId}");
+            UIVendorExpenses.AmountPaid = commissionModel.CommissionValue;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+    }
+    public async Task GetStockInData_PaymentNotCompleted()
+    {
+
+        MasterStockInDataList = await HttpClient.GetFromJsonAsync<List<UISalesStockInData>>($"StockIn/GetStockInAsPerPaymentNotCompleted");
+        foreach (var item in MasterStockInDataList)
+        {
+            // UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
+            UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
+        }
+
+        UIVendorExpenses.UIStockInList = UIStockInList;
+        StateHasChanged();
+    }
+
+
+    //stockin dropdown selection change event
+    void OnChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UIVendorExpenses.StockInId = UIVendorExpenses.UIStockInList.Where(e => e.LoadName.Equals(value))
+                              .Select(p => p.StockInId).FirstOrDefault();
+
+        if (UIVendorExpenses.StockInId > 0)
+        {
+            CalculateCommissionAmount();
+            var data = MasterStockInDataList.Where(e => e.StockInId.Equals(UIVendorExpenses.StockInId))
+                                             .Select(p => p).FirstOrDefault();
+            if (data!=null)
+            {
+                UIVendorExpenses.VendorId = data.VendorId;
+                UIVendorExpenses.LoadName = data.LoadName;
+                UIVendorExpenses.VendorName = data.VendorName;
+                FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
+                
+            }
+
+        }
+    }
+    void Reset()
+    {
+        vendorExpensessGridInsert = null;
+        vendorExpensessGridUpdate = null;
+    }
+    async Task DeleteRowVendorPayment(UIVendorExpenses vendorExpensesModel)
+    {
+        Reset();
+
+        if (VendorExpensesList.Contains(vendorExpensesModel))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"VendorExpenses?id={vendorExpensesModel.VendorId}");
+                FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await vendorPaymentDetailsGrid.Reload();
+        }
+    }
+    private async void FillVendorExpensesGrid_AsPerStockInId(int stockInId)
+    {
+        VendorExpensesList = await HttpClient.GetFromJsonAsync<List<UIVendorExpenses>>($"VendorExpenses/GetVendorExpensesByStockInId?stockInId=" + stockInId);
+        StateHasChanged();
+    }
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    public void DropDownChanged()
+    {
+        Log += "DropDownChanged fired. ";
+    }
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+    }
+   
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomer)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UIVendorExpenses = (UIVendorExpenses)formContext.Model;
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"VendorExpenses/AddVendorExpenses", UIVendorExpenses);
+            FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        
+    }
+}
+ 

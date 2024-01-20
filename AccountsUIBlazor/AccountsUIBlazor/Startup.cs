@@ -31,8 +31,14 @@ namespace AccountsUIBlazor
             services.AddScoped<ICustomerPaymentReceivedRepository, CustomerPaymentReceivedRepository>();
             services.AddScoped<IExpensesTypesRepository, ExpensesTypesRepository>();
             services.AddScoped<IStockInRepository, StockInRepository>();
-            services.AddScoped<IVendorExpensesPaymentRepository, VendorExpensesPaymentRepository>();
+            services.AddScoped<IVendorExpensesRepository, VendorExpensesRepository>();
             services.AddScoped<IVendorPaymentRepository, VendorPaymentRepository>();
+            services.AddScoped<ICustomerBalanceCarryForwardRepository, CustomerBalanceCarryForwardRepository>();
+            services.AddScoped<ICommissionEarnedRepository, CommissionEarnedRepository>();
+            //services.AddScoped<ICommissionAgentPercentageRepository, CommissionAgentPercentageRepository>();
+
+
+
             services.AddScoped<DialogService>();
             // Add other services as needed
             // services.AddScoped<IUserRepository, UserRepository>();

@@ -27,6 +27,8 @@ namespace AccountsUIBlazor.UIModels
 
     public class UISalesStockInData
     {
+        public string VendorName { get; set; }
+
         public string LoadName { get; set; }
         public int StockInId { get; set; }
         public int CustomerId { get; set; }

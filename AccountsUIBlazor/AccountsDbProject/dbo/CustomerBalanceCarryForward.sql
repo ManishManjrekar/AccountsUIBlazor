@@ -11,6 +11,5 @@
     [LoggedInUser]      NVARCHAR (500)   NULL,
     [TypeOfTransaction]      NVARCHAR (50)   NULL,
     [Comments]      NVARCHAR (Max)   NULL,
-    [IsActive] BIT NULL, 
-    CONSTRAINT [PK_CustomerBalanceCarryForward] PRIMARY KEY CLUSTERED ([CustomerBalanceCarryForwardId] ASC)
+    [IsActive] BIT NULL
 );
