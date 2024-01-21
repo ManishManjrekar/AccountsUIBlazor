@@ -12,6 +12,7 @@ using AccountApi.Sql.Queries;
 using AccountApi.Application.Interfaces;
 using AccountApi.Core;
 using AccountApi.Core.Entities;
+using static Dapper.SqlMapper;
 
 namespace AccountApi.Infrastructure.Repository
 {
@@ -101,7 +102,19 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-       
+        public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(VendorQueries.CheckDuplicateVendorName, new { firstName, lastName });
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
 
     }
 }

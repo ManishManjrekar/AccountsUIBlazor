@@ -11,5 +11,6 @@ namespace AccountApi.Application.Interfaces
 {
     public interface IVendorRepository : IRepository<Vendor>
     {
+        Task<bool> GetDuplicateOrNot(string firstName, string lastName);
     }
 }

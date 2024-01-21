@@ -275,10 +275,20 @@
             // var serialized = JsonConvert.SerializeObject(UICustomer);
             // var stringContent = new StringContent(serialized, Encoding.UTF8, "application/json");
             //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
+            var loadNameExists = await HttpClient.GetStringAsync($"Customer/GetDuplicateOrNot?firstName={UICustomer.FirstName}&lastName={UICustomer.LastName}");
+            Console.WriteLine(loadNameExists);
 
-            var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
-            Console.WriteLine(obj);
-            LoadCustomerDetails();
+            if (loadNameExists != "true")
+            {
+                var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
+                Console.WriteLine(obj);
+                LoadCustomerDetails();
+            }
+            else
+            {
+                OpenDuplicateLoadNameDialog();
+            }
+            
         }
         catch (Exception ex)
         {
@@ -287,6 +297,21 @@
         }
         //return null;
     }
-    
+    @code
+    {
+        [Inject]
+        protected DialogService DialogService { get; set; }
+
+        private async Task OpenDuplicateLoadNameDialog()
+        {
+            var confirmationResult = await DialogService.Alert("Duplicate Name exist, please change the name", "Duplicate Name");
+            //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+            if (confirmationResult.Equals(true))
+            {
+                // if yes then
+                Console.WriteLine();
+            }
+        }
+    }
 
 }

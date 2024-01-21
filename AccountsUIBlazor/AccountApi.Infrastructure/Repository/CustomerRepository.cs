@@ -86,7 +86,21 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-       
+        public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(CustomerQueries.CheckDuplicateCustomerName, new { firstName, lastName });
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+
 
     }
 }

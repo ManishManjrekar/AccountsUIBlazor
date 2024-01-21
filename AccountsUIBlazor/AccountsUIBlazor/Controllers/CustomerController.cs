@@ -203,6 +203,31 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-        
+        [HttpGet]
+        [Route("GetDuplicateOrNot")]
+        public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
+        {
+
+            // var apiResponse = new ApiResponse<AccountApi.Core.StockIn>();
+
+            try
+            {
+
+                var data = await _unitOfWork.Customers.GetDuplicateOrNot(firstName, lastName);
+                return data;
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return false;
+        }
+
+
     }
 }

@@ -12,7 +12,7 @@ namespace AccountApi.Sql.Queries
     {
 		public static string AllVendor => "SELECT * FROM [Vendor] (NOLOCK) where IsActive =1 ";
 
-		public static string VendorById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [VendorId] = @VendorId";
+		public static string VendorById => "SELECT * FROM [Vendor] (NOLOCK) WHERE [VendorId] = @VendorId and IsActive =1";
 
 		public static string AddVendor =>
             @"INSERT INTO [dbo].[Vendor]
@@ -57,5 +57,8 @@ namespace AccountApi.Sql.Queries
             WHERE [CustomerId] = @VendorId and IsActive =1";
 
 		public static string DeleteVendor => "Update [Vendor] set  isActive=0 where [VendorId] = @VendorId";
-	}
+
+        public static string CheckDuplicateVendorName => @" SELECT count(v.VendorId) FROM [accountancy].[dbo].[Vendor] as v
+                                                   where v.FirstName = @firstName and v.LastName = @lastName and v.IsActive=1";
+    }
 }

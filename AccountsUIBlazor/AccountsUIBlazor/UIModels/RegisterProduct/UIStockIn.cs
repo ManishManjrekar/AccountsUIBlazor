@@ -4,6 +4,8 @@ namespace AccountsUIBlazor.UIModels
 {
     public class UIStockIn
     {
+        public int StockInId { get; set; }
+
         public UIStockIn()
         {
             VendorNames = new List<VendorNames>();

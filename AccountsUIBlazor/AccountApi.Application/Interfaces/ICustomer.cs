@@ -10,5 +10,6 @@ namespace AccountApi.Application.Interfaces
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
+        Task<bool> GetDuplicateOrNot(string firstName, string lastName);
     }
 }

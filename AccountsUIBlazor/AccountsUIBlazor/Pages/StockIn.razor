@@ -45,46 +45,28 @@
 </div>
 </EditForm>
 
-
-<div class="row mt-3">
+<div class="row mt-2">
+    <h4>StockIn Details</h4>
     <div class="col-md-12">
+        <RadzenDataGrid @ref="salesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@StockInList" TItem="UIStockIn" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UIStockIn" Property="LoadName" Title="Customer Name" Width="120px" />
 
-        <h4>Stock In Details</h4>
-
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Load Name</th>
-                    <th>Vendor Name</th>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th>Payment Done</th>
-                    <th></th>
-                    <!-- Add more columns as needed -->
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var sale in StockInList)
-                {
-                    <tr>
-                        <td>@sale.LoadName</td>
-                        <td>@sale.VendorName</td>
-                        <td>@sale.CreatedDate</td>
-                        <td>@sale.Quantity</td>
-                        <td>No</td>
-                        <td>
-                            <div>
-                                <RadzenButton ButtonStyle="ButtonStyle.Secondary"
-                                              Click="HandleDeleteClick"><RadzenIcon Icon="delete" /></RadzenButton>
-                            </div>
-                        </td>
-                        <!-- Add more columns as needed -->
-                    </tr>
-                }
-            </tbody>
-        </table>
+                <RadzenDataGridColumn TItem="UIStockIn" Property="VendorName" Title="Vendor Name" Width="120px" />
+                <RadzenDataGridColumn TItem="UIStockIn" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+                <RadzenDataGridColumn TItem="UIStockIn" Property="Quantity" Title="Quantity" Width="120px" />
+                <RadzenDataGridColumn TItem="UIStockIn" Context="StockInList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="StockInList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(StockInList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
     </div>
 </div>
+
 @code
 {
 
@@ -108,7 +90,10 @@
     public UIStockIn UIStockIn { get; set; } = new() {  };
     public List<UIStockIn> StockInList = new List<UIStockIn>();//for grid
 
-
+    //Grid variables
+    RadzenDataGrid<UIStockIn> salesDetailsGrid;
+    UIStockIn salesDetailsGridInsert;
+    UIStockIn salesDetailsGridUpdate;
 
     public string Log { get; set; } = "";
 
@@ -233,6 +218,31 @@
             Console.WriteLine(ex.Message.ToString());
         }
         //return null;
+    }
+
+    void Reset()
+    {
+        salesDetailsGridInsert = null;
+        salesDetailsGridUpdate = null;
+    }
+    async Task DeleteRow(UIStockIn salesDetails)
+    {
+        Reset();
+
+        if (StockInList.Contains(salesDetails))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"StockIn?id={salesDetails.StockInId}");
+                FillGridForStockIns();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await salesDetailsGrid.Reload();
+        }
     }
 }
  

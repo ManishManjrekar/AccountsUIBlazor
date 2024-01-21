@@ -8,9 +8,9 @@ namespace AccountApi.Sql.Queries
 {
     public static class CustomerQueries
     {
-        public static string AllCustomer => "SELECT * FROM [Customer] (NOLOCK)";
+        public static string AllCustomer => "SELECT * FROM [Customer] (NOLOCK) where IsActive=1";
 
-        public static string CustomerById => "SELECT * FROM [Customer] (NOLOCK) WHERE [CustomerId] = @CustomerId";
+        public static string CustomerById => "SELECT * FROM [Customer] (NOLOCK) WHERE [CustomerId] = @CustomerId and and IsActive=1";
 
         public static string AddCustomer =>
             @"INSERT INTO [dbo].[Customer]
@@ -47,5 +47,8 @@ namespace AccountApi.Sql.Queries
         WHERE [CustomerId] = @CustomerId";
 
         public static string DeleteCustomer => "Update FROM [Customer] WHERE [CustomerId] = @CustomerId where isActive=0";
+
+        public static string CheckDuplicateCustomerName => @" SELECT count(c.CustomerId) FROM [accountancy].[dbo].[Customer] as c
+                                                   where c.FirstName = @firstName and c.LastName = @lastName and c.IsActive=1";
     }
 }
