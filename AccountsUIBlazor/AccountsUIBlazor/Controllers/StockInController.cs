@@ -163,8 +163,9 @@ namespace AccountsUIBlazor.Controller
 
             try
             {
+                 
                  var data = await _unitOfWork.StockIn.GetVendorLoadCount(vendorid, createdDate);
-                return 0;
+                return data+1;
             }
             catch (SqlException ex)
             {
@@ -179,7 +180,7 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpPost]
-        [Route("AddVendor")]
+        [Route("AddStockIn")]
         public async Task<IActionResult> Add(UIStockIn stockin)
         {
           
@@ -289,6 +290,32 @@ namespace AccountsUIBlazor.Controller
             }
 
             return sales;
+        }
+
+
+        [HttpGet]
+        [Route("GetDuplicateOrNot")]
+        public async Task<bool> GetDuplicateOrNot(int vendorid, string createdDate,string loadName)
+        {
+
+            // var apiResponse = new ApiResponse<AccountApi.Core.StockIn>();
+
+            try
+            {
+
+                var data = await _unitOfWork.StockIn.GetDuplicateOrNot(vendorid, createdDate, loadName);
+                return data;
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return false;
         }
     }
 }

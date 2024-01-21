@@ -85,9 +85,25 @@
         </table>
     </div>
 </div>
+@code
+{
 
+
+    private async Task OpenDuplicateLoadNameDialog()
+    {
+        var confirmationResult = await DialogService.Alert("Duplicate Load Name exist, please change the load name", "Duplicate Load Name");
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
+    }
+}
 @code {
 
+    [Inject]
+    protected DialogService DialogService { get; set; }
     public UICalenderModel UICalenderModel { get; set; } = new();
     public UIStockIn UIStockIn { get; set; } = new() {  };
     public List<UIStockIn> StockInList = new List<UIStockIn>();//for grid
@@ -171,7 +187,7 @@
         var datevalue = dateAndTime.ToString("dd/MM/yyyy");
         var createdDate = UIStockIn.CreatedDate;
         var vendorid = UIStockIn.VendorId;
-        var laodcount = await HttpClient.GetStringAsync($"StockIn/GetVendorLoadCount?vendorid={vendorid}&createdDate={createdDate}");
+        var laodcount = await HttpClient.GetStringAsync($"StockIn/GetVendorLoadCount?vendorid={vendorid}&createdDate={createdDate.ToString("yyyy-MM-dd")}");
         Console.WriteLine(laodcount);
         string value = $"{UIStockIn.VendorName}_{datevalue}_LoadName_{laodcount}";
         userNameChanged(value);
@@ -192,8 +208,24 @@
 
         try
         {
-            var obj = await HttpClient.PostAsJsonAsync($"StockIn/AddVendor", UIStockIn);
-            FillGridForStockIns();
+            //First check duplicate name exists for this load name or not?
+            var createdDate = UIStockIn.CreatedDate;
+            var vendorid = UIStockIn.VendorId;
+            var loadName = UIStockIn.LoadName;
+            var loadNameExists = await HttpClient.GetStringAsync($"StockIn/GetDuplicateOrNot?vendorid={vendorid}&createdDate={createdDate.ToString("yyyy-MM-dd")}&loadName={loadName}");
+            Console.WriteLine(loadNameExists);
+
+            if (loadNameExists != "true")
+            {
+                var obj = await HttpClient.PostAsJsonAsync($"StockIn/AddStockIn", UIStockIn);
+                FillGridForStockIns();
+            }
+            else
+            {
+                OpenDuplicateLoadNameDialog();
+            }
+
+            
         }
         catch (Exception ex)
         {

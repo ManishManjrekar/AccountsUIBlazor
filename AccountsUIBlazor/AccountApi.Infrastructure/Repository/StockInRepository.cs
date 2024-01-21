@@ -173,6 +173,19 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
+        public async Task<bool> GetDuplicateOrNot(int VendorId, string createdDate,string LoadName)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(StockInQueries.CheckDuplicateLoadName, new { VendorId, createdDate, LoadName });
+                if (result>0)
+                {
+                    return true;
+                }
+                return false ;
+            }
+        }
 
     }
 }

@@ -19,5 +19,6 @@ namespace AccountApi.Application.Interfaces
         Task<int> GetVendorId(long vendorId);
         Task<int> GetstockQuantity_ByStockInId(int stockInId);
         Task<int> GetstockQuantity_ByDate(string selectedDate);
+        Task<bool> GetDuplicateOrNot(int VendorId, string createdDate, string LoadName);
     }
 }

@@ -57,13 +57,18 @@ namespace AccountApi.Sql.Queries
                                              where s.VendorId = @VendorId and s.CreatedDate between @fromDate and @toDate";
         public static string GetStockInAsPerDates => @"SELECT * FROM[accountancy].[dbo].[StockIn] as s
                                              where s.CreatedDate between @fromDate and @toDate";
-        public static string GetVendorLoadCount => @"SELECT count(*) FROM [accountancy].[dbo].[StockIn] as s
-                                                   where s.VendorId = @VendorId and s.CreatedDate = @createdDate";
+        public static string GetVendorLoadCount => @" SELECT count(s.StockInId) FROM [accountancy].[dbo].[StockIn] as s
+                                                   where s.VendorId = @VendorId and CONVERT(DATE,s.CreatedDate) = @createdDate";
 
         public static string GetStockInWhereIn_PaymentNotCompleted => @"SELECT * FROM [accountancy].[dbo].[StockIn] as s
                                              where s.IsPaymentDone =0 and isActive =1 ";
         public static string GetStockInAsperDate => @"SELECT * FROM [accountancy].[dbo].[StockIn] as s
                                                    where CONVERT(DATE,s.CreatedDate) = @CreatedDate and isActive=1 ";
         public static string DeleteStockIn => "Update FROM [StockIn] WHERE [StockInId] = @StockInId where isActive=0";
-	}
+
+
+        public static string CheckDuplicateLoadName => @" SELECT count(s.StockInId) FROM [accountancy].[dbo].[StockIn] as s
+                                                   where s.VendorId = @VendorId and CONVERT(DATE,s.CreatedDate) = @createdDate and s.LoadName = @LoadName";
+
+    }
 }
