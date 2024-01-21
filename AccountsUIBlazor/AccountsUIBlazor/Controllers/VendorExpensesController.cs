@@ -50,6 +50,8 @@ namespace AccountsUIBlazor.Controller
                 if (vendorExpensesData.ExpensesName.Equals("CommissionAmount"))
                 {
                     AccountApi.Core.CommissionEarned commissionEarned = _IMapper.Map<AccountApi.Core.CommissionEarned>(uiVendorExpenses);
+
+                    //commissionEarned.CommissionPercentage = uiVendorExpenses.CommissionPercentage;
                     commissionEarned.IsActive = true;
                     commissionEarned.ModifiedDate = DateTime.Now;
                     commissionEarned.LoggedInUser = "System";

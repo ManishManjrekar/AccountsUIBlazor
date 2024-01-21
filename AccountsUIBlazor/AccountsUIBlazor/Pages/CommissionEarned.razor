@@ -1,0 +1,158 @@
+﻿@page "/CommissionEarned"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using System.Text;
+@using System.Text.Json
+@using Newtonsoft.Json;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+<h3>Journel Entry</h3>
+
+
+<EditForm Model="UICommissionEarned" OnInvalidSubmit="InvalidSubmit">
+
+    <div class="col-md-8">
+        Select Date<RadzenDatePicker style="width: 100%;" Name="FromSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.FromDate" Change="FromDateSelection" />
+    </div>
+    <div class="col-md-8">
+        Select To Date<RadzenDatePicker style="width: 100%;" Name="ToSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.ToDate" Change="ToDateSelection" />
+    </div>
+    <div>
+        Commission Earned Details
+    </div>
+<div class="col-md-8">
+        <label class="form-control" id="CommissionEarnedSum">Commission Earned Sum is : "@UICommissionEarned.CommissionEarned_Sum"</label>
+ </div> 
+
+</EditForm>
+
+
+<div class="row mt-2">
+    <h4>Commission Earned Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="commissionearnedDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@UICommissionEarned.UICommissionEarnedList" TItem="UICommissionEarnedGridDetails" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Property="VendorName" Title="Vendor Name" Width="120px" />
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Property="LoadName" Title="LoadName Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Property="Amount" Title="Amount" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Property="CommissionPercentage" Title="CommissionPercentage" Width="120px" />
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Property="Comments" Title="Comments" Width="120px" />
+
+
+
+                <RadzenDataGridColumn TItem="UICommissionEarnedGridDetails" Context="JEcommissionearnedList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="JEcommissionearnedList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(JEcommissionearnedList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+
+@code {
+    public UICommissionEarned UICommissionEarned = new UICommissionEarned();
+    public string Log { get; set; } = "";
+
+    //Grid variables
+    RadzenDataGrid<UICommissionEarnedGridDetails> commissionearnedDetailsGrid;
+
+    UICommissionEarnedGridDetails commissionearnedDetailsGridInsert;
+    UICommissionEarnedGridDetails commissionearnedDetailsGridUpdate;
+
+
+
+    protected override void OnInitialized()
+    {
+        UICommissionEarned = new UICommissionEarned();
+        // JeModel.UIJEMasterDto = new UIJEMasterDto();
+    }
+
+
+
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    //from Date Selection changed event
+    public void FromDateSelection()
+    {
+        Log += "DateSelection fired. ";
+        GetCommissionEarnedataAsPer_Selected_Date();
+    }
+
+    //To Date Selection changed event
+    public void ToDateSelection()
+    {
+        Log += "DateSelection fired. ";
+        GetCommissionEarnedata_AsPer_FromAndTo_Selected_Date();
+    }
+
+
+    //Get commissionearned Data as per the Date Selected......
+    public async Task GetCommissionEarnedataAsPer_Selected_Date()
+    {
+        var results = await HttpClient.PostAsJsonAsync($"CommissionEarned/PostCommissionEarnedAsPerDate", UICommissionEarned.UICalenderModel);
+        
+        UICommissionEarnedMaster UICommissionEarnedMaster = JsonConvert.DeserializeObject<UICommissionEarnedMaster>(await results.Content.ReadAsStringAsync());
+        UICommissionEarned.UICommissionEarnedList = UICommissionEarnedMaster.UICommissionEarnedList;
+        UICommissionEarned.CommissionEarned_Sum = UICommissionEarnedMaster.CommissionEarned_Sum;
+
+        StateHasChanged();
+    }
+
+    //Get commissionearned Data as per the Between Dates Selected......
+    public async Task GetCommissionEarnedata_AsPer_FromAndTo_Selected_Date()
+    {
+        var results = await HttpClient.PostAsJsonAsync($"CommissionEarned/PostCommissionEarnedBetweenDates", UICommissionEarned.UICalenderModel);
+        UICommissionEarnedMaster UICommissionEarnedMaster = JsonConvert.DeserializeObject<UICommissionEarnedMaster>(await results.Content.ReadAsStringAsync());
+        UICommissionEarned.UICommissionEarnedList = UICommissionEarnedMaster.UICommissionEarnedList;
+        UICommissionEarned.CommissionEarned_Sum = UICommissionEarnedMaster.CommissionEarned_Sum;
+        StateHasChanged();
+    }
+   
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomer)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    void Reset()
+    {
+        commissionearnedDetailsGridInsert = null;
+        commissionearnedDetailsGridUpdate = null;
+    }
+
+    async Task DeleteRow(UICommissionEarnedGridDetails commissionearnedDetails)
+    {
+        Reset();
+
+        if (UICommissionEarned.UICommissionEarnedList.Contains(commissionearnedDetails))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"commissionearned?id={commissionearnedDetails.CommissionPercentage}");
+                //FillGridForSaleAsPerStockInId();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await commissionearnedDetailsGrid.Reload();
+        }
+    }
+
+    
+
+}
+ 

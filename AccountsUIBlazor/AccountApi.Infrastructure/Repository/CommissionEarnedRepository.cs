@@ -47,12 +47,21 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<string> AddAsync(CommissionEarned entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CommissionEarnedQueries.AddCommissionEarned, entity);
-                return result.ToString();
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(CommissionEarnedQueries.AddCommissionEarned, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+           
         }
 
         public async Task<string> UpdateAsync(CommissionEarned entity)
@@ -100,7 +109,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CommissionEarnedQueries.GetCommissionEarnedSum_BySelectedDate, new { CreatedDate = selectedDate });
+                var result = await connection.ExecuteScalarAsync<int>(CommissionEarnedQueries.GetCommissionEarnedSum_BySelectedDate, new { CreatedDate = selectedDate });
                 return result;
             }
         }
@@ -109,7 +118,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CommissionEarnedQueries.GetCommissionEarnedSum_Between_Dates, new { fromDate, toDate });
+                var result = await connection.ExecuteScalarAsync<int>(CommissionEarnedQueries.GetCommissionEarnedSum_Between_Dates, new { fromDate, toDate });
                 return result;
             }
         }

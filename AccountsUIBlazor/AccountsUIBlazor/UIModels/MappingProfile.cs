@@ -48,6 +48,8 @@ namespace AccountsUIBlazor.UIModels
             CreateMap<CommissionEarned, UIVendorExpenses>()//.ReverseMap();
                 .ForMember(dest => dest.AmountPaid, opt => opt.MapFrom(src => src.Amount)).ReverseMap();
 
+            CreateMap<CommissionEarned, UICommissionEarnedGridDetails>().ReverseMap();
+
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();
             //CreateMap<UICustomer, Customer>().ReverseMap();

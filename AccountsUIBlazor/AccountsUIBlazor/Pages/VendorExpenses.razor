@@ -114,6 +114,7 @@
     {
         commissionModel.CommissionPercentage = value;
         UIVendorExpenses.AmountPaid = commissionModel.Sales_Sum * value / 100;
+        UIVendorExpenses.CommissionPercentage = value;
         StateHasChanged();
     }
     public async Task CalculateCommissionAmount()
@@ -194,6 +195,7 @@
             await vendorPaymentDetailsGrid.Reload();
         }
     }
+
     private async void FillVendorExpensesGrid_AsPerStockInId(int stockInId)
     {
         VendorExpensesList = await HttpClient.GetFromJsonAsync<List<UIVendorExpenses>>($"VendorExpenses/GetVendorExpensesByStockInId?stockInId=" + stockInId);

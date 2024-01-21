@@ -22,16 +22,16 @@ namespace AccountApi.Sql.Queries
                                                          where CONVERT(DATE,c.CreatedDate) between @fromDate and @toDate and isActive=1 ";
 
         public static string GetCommissionEarnedSum_Between_Dates => @" SELECT sum(c.Amount) FROM [accountancy].[dbo].[CommissionEarned] as c
-                                                         where CONVERT(DATE,c.CreatedDate) between @fromDate and @toDate and isActive=1 ";
+                                                         where CONVERT(DATE,c.CreatedDate) between @fromDate and @toDate and c.IsActive=1 ";
 
         public static string GetCommissionEarnedSum_BySelectedDate => @" SELECT sum(c.Amount) FROM [accountancy].[dbo].[CommissionEarned] as c
-                                                         where CONVERT(DATE,c.CreatedDate) = @CreatedDate and isActive=1 ";
+                                                         where CONVERT(DATE,c.CreatedDate) = @CreatedDate and c.IsActive=1 ";
 
         public static string AddCommissionEarned =>
             @"INSERT INTO [dbo].[CommissionEarned]
            ( [VendorId]
             ,[StockInId]
-            ,[CommissionPercentageId]
+            ,[CommissionPercentage]
             ,[LoadName]
             ,[VendorName]
            ,[Amount]
@@ -45,9 +45,9 @@ namespace AccountApi.Sql.Queries
      VALUES
            (@VendorId
             ,@StockInId
+            ,@CommissionPercentage
             ,@LoadName
             ,@VendorName
-            ,@CommissionPercentageId
            ,@Amount
            ,@CreatedDate
            ,@ModifiedDate
@@ -60,7 +60,7 @@ namespace AccountApi.Sql.Queries
             @"UPDATE [CommissionEarned] 
             SET [VendorId] = @VendorId, 
 				[StockInId] = @StockInId,
-				[CommissionPercentageId] = @CommissionPercentageId,
+				[CommissionPercentage] = @CommissionPercentage,
                 [LoadName] = @LoadName
                 [VendorName] = @VendorName
 				[Amount] = @Amount, 

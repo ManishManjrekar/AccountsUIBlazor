@@ -10,7 +10,7 @@ namespace AccountApi.Core
     {
         public int VendorId { get; set; }
         public int StockInId { get; set; }
-        public int CommissionPercentageId { get; set; }
+        public int CommissionPercentage { get; set; }
 
         public string LoadName { get; set; }
         public string VendorName { get; set; }
