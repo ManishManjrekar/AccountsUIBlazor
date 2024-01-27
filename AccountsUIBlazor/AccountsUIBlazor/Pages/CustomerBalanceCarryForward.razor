@@ -17,21 +17,28 @@
             <label for="selectvendor">Search Customer</label>
             <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerBalanceCarryForward.CustomerList" class="form-control" Name="selectvendor" TextProperty="CustomerName" ValueProperty="@UICustomerBalanceCarryForward.CustomerId" Change="@OnChange" />
         </div>
+        <div class=" col-md-4">
+            <label for="fromDate">Created Date</label>
+            <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerBalanceCarryForward.CreatedDate" Change="DateSelection" />
+        </div>
     </div>
-    <div class="row col-md-4">
-        <label for="fromDate">Created Date</label>
-        <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerBalanceCarryForward.CreatedDate" Change="DateSelection" />
+
+    <div class="row">
+        <div class=" col-md-4">
+            <label for="lastName" >Amount </label>
+            <input type="text" class="form-control" id="lastName"  @bind-value="@UICustomerBalanceCarryForward.Amount" placeholder="enter last name..." />
+
+        </div>
+
+        <div class=" col-md-4">
+            <label for="lastName">comments</label>
+            <input type="text" class="form-control" id="comments" @bind-value="@UICustomerBalanceCarryForward.Comments" placeholder="enter last name..." />
+
+        </div>
     </div>
-    <div class="row col-md-4" >
-        <label for="lastName">Amount </label>
-        <input type="text" class="form-control" id="lastName" style="margin-left:10px" @bind-value="@UICustomerBalanceCarryForward.Amount" placeholder="enter last name..." />
-       
-    </div>
-    <div class=" row col-md-4" >
-        <label for="lastName">comments</label>
-        <input type="text" class="form-control" id="comments" style="margin-left:10px" @bind-value="@UICustomerBalanceCarryForward.Comments" placeholder="enter last name..." />
-      
-    </div>
+   
+    
+   
     
     
 <div>

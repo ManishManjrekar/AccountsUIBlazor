@@ -12,19 +12,22 @@
 
 
 <EditForm Model="UICommissionEarned" OnInvalidSubmit="InvalidSubmit">
+    <div class="row">
+        <div class="col-md-4">
+            Select Date<RadzenDatePicker style="width: 100%;" Name="FromSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.FromDate" Change="FromDateSelection" />
+        </div>
+        <div class="col-md-4">
+            Select To Date<RadzenDatePicker style="width: 100%;" Name="ToSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.ToDate" Change="ToDateSelection" />
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-md-4">
+            <label class="form-control-plaintext text-primary" id="CommissionEarnedSum">Commission Earned Sum is : @UICommissionEarned.CommissionEarned_Sum</label>
+        </div>
+    </div>
 
-    <div class="col-md-8">
-        Select Date<RadzenDatePicker style="width: 100%;" Name="FromSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.FromDate" Change="FromDateSelection" />
-    </div>
-    <div class="col-md-8">
-        Select To Date<RadzenDatePicker style="width: 100%;" Name="ToSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.ToDate" Change="ToDateSelection" />
-    </div>
-    <div>
-        Commission Earned Details
-    </div>
-<div class="col-md-8">
-        <label class="form-control" id="CommissionEarnedSum">Commission Earned Sum is : "@UICommissionEarned.CommissionEarned_Sum"</label>
- </div> 
 
 </EditForm>
 

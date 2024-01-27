@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css">
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
-<body>
-    @RenderBody()
+<body class="rz-scrollbars">
+    <div class="rz-layout">
+        @RenderBody()
+    </div>
+   
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">

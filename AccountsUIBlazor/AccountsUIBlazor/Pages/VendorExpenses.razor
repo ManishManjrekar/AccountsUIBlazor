@@ -15,9 +15,9 @@
 
 <EditForm Model="UIVendorExpenses" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
     <div class="row">
-        <div class="row col-md-4 pt-1 pl-0">
+        <div class="col-md-4 pt-1 ml-2">
             <label for="LoadName">Select Vendor Stock In</label>
-            <RadzenAutoComplete Placeholder="Select vendor stock in..." class="form-control-plaintext" Data="@UIVendorExpenses.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UIVendorExpenses.StockInId" Change="@OnChange" />
+            <RadzenAutoComplete Placeholder="Select vendor stock in..." class="form-control-plaintext ml-2" Data="@UIVendorExpenses.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UIVendorExpenses.StockInId" Change="@OnChange" />
         </div>
 
 
