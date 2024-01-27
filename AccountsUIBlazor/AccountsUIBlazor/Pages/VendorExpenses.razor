@@ -15,20 +15,20 @@
 
 <EditForm Model="UIVendorExpenses" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
     <div class="row">
-        <div class="row col-md-3 pt-1" style=" margin-left: 0;">
+        <div class="row col-md-4 pt-1 pl-0">
             <label for="LoadName">Select Vendor Stock In</label>
-            <RadzenAutoComplete Placeholder="Select vendor stock in..." class="mt-2" Data="@UIVendorExpenses.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UIVendorExpenses.StockInId" Change="@OnChange" />
+            <RadzenAutoComplete Placeholder="Select vendor stock in..." class="form-control-plaintext" Data="@UIVendorExpenses.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UIVendorExpenses.StockInId" Change="@OnChange" />
         </div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-4 pt-1 ">
             <label for="fromDate"> Select Date</label>
-            <RadzenDatePicker Name="fromDate" class="form-control" @bind-Value="@UIVendorExpenses.CreatedDate" DateFormat="dd/MM/yyyy" Change="DateSelection" />
+            <RadzenDatePicker Name="fromDate" class="form-control-plaintext" @bind-Value="@UIVendorExpenses.CreatedDate" DateFormat="dd/MM/yyyy" Change="DateSelection" />
         </div>
     </div>
    
-    <div class="row" style="margin-top:10px">
-        <div class="col-md-3 pt-1">
+    <div class="row">
+        <div class="col-md-4 pt-1">
             <label for="fromDate">Select Expense Type</label>
             <InputSelect class="form-control pt-1" @bind-Value="@UIVendorExpenses.VendorExpensesTypes" onchange="CalculateCommissionAmount()">
                 @foreach (var value in Enum.GetValues<VendorExpensesTypes>())
@@ -37,19 +37,26 @@
                 }
             </InputSelect>
         </div>
-        <div class="col-md-4">
-            
-            <label class="form-control" id="BalanceAmount">Total Sales Amount is : "@commissionModel.Sales_Sum."</label>
-            <label for="CommissionPercentage">Commission Percentage</label>
-            <RadzenNumeric class="form-control" id="CommissionPercentage" Change="SearchChanged" TValue="int" Value="@commissionModel.CommissionPercentage" placeholder="Commission Percentage..." />
-           
-        </div>
-        <div class="col-md-4">
-            <label for="lastName">Amount</label>
-            <input type="text" class="form-control" id="Quantity" @bind-value="@UIVendorExpenses.AmountPaid" placeholder="enter last name..." />
-            @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
-        </div>
         
+
+        <div class="col-md-4">
+            <label for="Quantity">Amount</label>
+            <input type="text" class="form-control" id="Quantity" @bind-value="@UIVendorExpenses.AmountPaid" placeholder="enter last name..." />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">         
+            <label for="CommissionPercentage">Commission Percentage</label>
+            <RadzenNumeric class="form-control-plaintext" id="CommissionPercentage" Change="SearchChanged" TValue="int" Value="@commissionModel.CommissionPercentage" placeholder="Commission Percentage..." />
+
+        </div>
+    </div>
+
+    <div class="row pt-2">
+        <div class="col-md-4">
+            <h4 class="h-100 text-primary" id="BalanceAmount">Total Sales Amount is : @commissionModel.Sales_Sum.</h4>
+        </div>
     </div>
    
 <div>
