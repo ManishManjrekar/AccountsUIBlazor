@@ -1,0 +1,11 @@
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\bin\Debug\net6.0\AccountApi.Core.deps.json
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\bin\Debug\net6.0\AccountApi.Core.dll
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\bin\Debug\net6.0\AccountApi.Core.pdb
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccountApi.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccountApi.Core.AssemblyInfoInputs.cache
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccountApi.Core.AssemblyInfo.cs
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccountApi.Core.csproj.CoreCompileInputs.cache
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccountApi.Core.dll
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\refint\AccountApi.Core.dll
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccountApi.Core.pdb
+C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\ref\AccountApi.Core.dll

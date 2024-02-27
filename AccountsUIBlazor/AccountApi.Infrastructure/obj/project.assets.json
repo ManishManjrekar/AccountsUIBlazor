@@ -5,10 +5,14 @@
       "Dapper/2.1.24": {
         "type": "package",
         "compile": {
-          "lib/net5.0/Dapper.dll": {}
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net5.0/Dapper.dll": {}
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
@@ -17,10 +21,14 @@
           "Microsoft.Extensions.Primitives": "8.0.0"
         },
         "compile": {
-          "lib/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+          "lib/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+          "lib/net6.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
@@ -29,10 +37,14 @@
       "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
@@ -44,10 +56,14 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
@@ -69,10 +85,14 @@
           "System.Security.Principal.Windows": "4.7.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {}
+          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
@@ -128,10 +148,14 @@
           "runtime.native.System.Data.SqlClient.sni": "4.7.0"
         },
         "compile": {
-          "ref/netcoreapp2.1/System.Data.SqlClient.dll": {}
+          "ref/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netcoreapp2.1/System.Data.SqlClient.dll": {}
+          "lib/netcoreapp2.1/System.Data.SqlClient.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
@@ -147,10 +171,14 @@
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
@@ -163,10 +191,14 @@
           "System.Security.Principal.Windows": "4.7.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/System.Security.AccessControl.dll": {}
+          "lib/netstandard2.0/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll": {
@@ -178,10 +210,14 @@
       "System.Security.Principal.Windows/4.7.0": {
         "type": "package",
         "compile": {
-          "ref/netcoreapp3.0/_._": {}
+          "ref/netcoreapp3.0/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/System.Security.Principal.Windows.dll": {}
+          "lib/netstandard2.0/System.Security.Principal.Windows.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll": {
@@ -708,23 +744,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SANTOSH\\.nuget\\packages\\": {},
+    "C:\\Users\\manjr\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
       "projectName": "AccountApi.Infrastructure",
-      "projectPath": "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\SANTOSH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\manjr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\SANTOSH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\manjr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -733,17 +769,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
-              "projectPath": "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj"
+            "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
+              "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj"
             },
-            "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {
-              "projectPath": "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj"
+            "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {
+              "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj"
             }
           }
         }
@@ -781,7 +818,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -790,7 +828,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

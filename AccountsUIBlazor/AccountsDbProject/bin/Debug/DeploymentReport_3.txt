@@ -1,0 +1,43 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       [dbo].[Sales]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Sales].[TotalAmount] is being dropped, data loss could occur.
+       The column [dbo].[Sales].[Total] on table [dbo].[Sales] must be added, but the column has no default value and does not
+         allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add
+         a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+
+** User actions
+     Drop
+       [dbo].[DF_VendorDetails_createdDate] (Default Constraint)
+       [dbo].[DF_VendorDetails_modifiedDate] (Default Constraint)
+     Recreate table
+       [dbo].[Sales] (Table)
+     Create
+       [dbo].[CustomerPayments] (Table)
+       [dbo].[DF_CustomerPayments_createdDate] (Default Constraint)
+       [dbo].[DF_CustomerPayments_modifiedDate] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Vendor] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Vendor] (Default Constraint)
+
+** Supporting actions
+     Drop
+       [dbo].[DF_Sales_createdDate] (Default Constraint)
+       [dbo].[DF_Sales_modifiedDate] (Default Constraint)
+       [dbo].[DF_Sales_IsActive] (Default Constraint)
+       [dbo].[FK_Sales_StockIn] (Foreign Key)
+       [dbo].[FK_Sales_Vendor] (Foreign Key)
+       [dbo].[FK_Sales_Customer] (Foreign Key)
+     Create
+       [dbo].[FK_Sales_StockIn] (Foreign Key)
+       [dbo].[FK_Sales_Vendor] (Foreign Key)
+       [dbo].[FK_Sales_Customer] (Foreign Key)
+
+The column [dbo].[Sales].[TotalAmount] is being dropped, data loss could occur.
+The column [dbo].[Sales].[Total] on table [dbo].[Sales] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="edf1892f-6c37-425a-8771-efeedd045c03" ChangeDateTime="01/04/2024 13:37:31">
+    <Property Name="ElementName" Value="[dbo].[Sales].[Total]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Sales]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TotalAmount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e450c7ac-a4bf-4d71-b242-98bd4dc3c9ee" ChangeDateTime="01/07/2024 08:26:26">
+    <Property Name="ElementName" Value="[dbo].[CustomerBalanceCarryForward].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerBalanceCarryForward]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UICustomerBalanceCarryForwardId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d2d2df3a-c756-49b9-a330-ccacdb223cbb" ChangeDateTime="01/07/2024 08:33:29">
+    <Property Name="ElementName" Value="[dbo].[CustomerBalanceCarryForward].[AmountPaid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerBalanceCarryForward]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Amount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2d47558e-46ff-478c-a037-9212f41ff1e6" ChangeDateTime="01/07/2024 08:36:35">
+    <Property Name="ElementName" Value="[dbo].[CustomerPaymentReceived].[PaymentDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerPaymentReceived]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6debb161-ad9b-4141-bf45-825dbe975196" ChangeDateTime="01/07/2024 08:51:26">
+    <Property Name="ElementName" Value="[dbo].[CustomerBalanceCarryForward].[PaymentDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerBalanceCarryForward]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1782306f-3855-4fb1-9a8b-714f88209a52" ChangeDateTime="01/07/2024 08:55:28">
+    <Property Name="ElementName" Value="[dbo].[CommissionAgentExpenses].[createdDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CommissionAgentExpenses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e1e514fb-4182-4b5d-8008-728c524dd4e8" ChangeDateTime="01/07/2024 08:55:33">
+    <Property Name="ElementName" Value="[dbo].[CommissionAgentExpenses].[modifiedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CommissionAgentExpenses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ModifiedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8aaba24a-ba5b-4907-8e45-bb9b7c0da4dc" ChangeDateTime="01/09/2024 20:13:35">
+    <Property Name="ElementName" Value="[dbo].[VendorExpenses].[Amount]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VendorExpenses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AmountPaid" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="160c92d6-ee61-4ff1-8ff6-0cb25d4f0821" ChangeDateTime="01/09/2024 20:13:44">
+    <Property Name="ElementName" Value="[dbo].[VendorExpenses].[createdDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VendorExpenses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="70f03b0a-675f-4c9f-ac8d-6cadeb3263e5" ChangeDateTime="01/09/2024 20:13:49">
+    <Property Name="ElementName" Value="[dbo].[VendorExpenses].[modifiedDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VendorExpenses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ModifiedDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="07383ec2-dcc3-4979-824f-dbb0b5af239a" ChangeDateTime="01/09/2024 20:13:58">
+    <Property Name="ElementName" Value="[dbo].[VendorExpenses].[createdBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[VendorExpenses]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LoggedInUser" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dc0e396d-3a44-4cd2-ace6-7d344503643c" ChangeDateTime="01/13/2024 07:47:14">
+    <Property Name="ElementName" Value="[dbo].[CommissionPercentage].[Percentage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CommissionPercentage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CommissionPercentage" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="39c1eabd-2896-4385-baac-893497099f3f" ChangeDateTime="01/13/2024 09:07:17">
+    <Property Name="ElementName" Value="[dbo].[CommissionEarned].[CommissionPercentageId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CommissionEarned]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CommissionPercentage" />
+  </Operation>
+</Operations>

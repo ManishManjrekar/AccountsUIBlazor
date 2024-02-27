@@ -1,0 +1,66 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[CommissionAgentExpenses] (Table)
+       [dbo].[CommissionAgentSales] (Table)
+       [dbo].[CommissionEarned] (Table)
+       [dbo].[CommissionPercentage] (Table)
+       [dbo].[Customer] (Table)
+       [dbo].[CustomerBalanceCarryForward] (Table)
+       [dbo].[CustomerDetails] (Table)
+       [dbo].[CustomerPaymentReceived] (Table)
+       [dbo].[Expenses] (Table)
+       [dbo].[Sales] (Table)
+       [dbo].[SalesReturns] (Table)
+       [dbo].[StockIn] (Table)
+       [dbo].[Vendor] (Table)
+       [dbo].[VendorAdvances] (Table)
+       [dbo].[VendorAdvancesReturned] (Table)
+       [dbo].[VendorDetails] (Table)
+       [dbo].[VendorExpenses] (Table)
+       [dbo].[VendorPayments] (Table)
+       [dbo].[DF_CommisionAgentExpenses_modifiedDate] (Default Constraint)
+       [dbo].[DF_CommisionAgentExpenses_createdDate] (Default Constraint)
+       [dbo].[DF_CommissionAgentSales_createdDate] (Default Constraint)
+       [dbo].[DF_CommissionAgentSales_modifiedDate] (Default Constraint)
+       [dbo].[DF_CommissionEarned_modifiedDate] (Default Constraint)
+       [dbo].[DF_CommissionEarned_createdDate] (Default Constraint)
+       [dbo].[DF_Customer_modifiedDate] (Default Constraint)
+       [dbo].[DF_Customer_modifiedDate1] (Default Constraint)
+       [dbo].[DF_Customer_IsActive] (Default Constraint)
+       [dbo].[DF_CustomerBalanceCarryForward_createdDate] (Default Constraint)
+       [dbo].[DF_CustomerBalanceCarryForward_modifiedDate] (Default Constraint)
+       [dbo].[DF_CustomerPayments_createdDate] (Default Constraint)
+       [dbo].[DF_CustomerPayments_modifiedDate] (Default Constraint)
+       [dbo].[DF_Sales_createdDate] (Default Constraint)
+       [dbo].[DF_Sales_modifiedDate] (Default Constraint)
+       [dbo].[DF_Sales_IsActive] (Default Constraint)
+       [dbo].[DF_SalesReturns_createdDate] (Default Constraint)
+       [dbo].[DF_SalesReturns_modifiedDate] (Default Constraint)
+       [dbo].[DF_StockIn_isActive] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Vendor] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Vendor] (Default Constraint)
+       [dbo].[DF_Vendor_IsActive] (Default Constraint)
+       [dbo].[DF_VendorAdvances_createdDate] (Default Constraint)
+       [dbo].[DF_VendorAdvances_modifiedDate] (Default Constraint)
+       [dbo].[DF_VendorAdvancesReturned_createdDate] (Default Constraint)
+       [dbo].[DF_VendorAdvancesReturned_modifiedDate] (Default Constraint)
+       [dbo].[DF_VendorExpenses_modifiedDate] (Default Constraint)
+       [dbo].[DF_VendorExpenses_createdDate] (Default Constraint)
+       [dbo].[DF_VendorPayments_createdDate] (Default Constraint)
+       [dbo].[DF_VendorPayments_modifiedDate] (Default Constraint)
+       [dbo].[FK_CommissionEarned_CommissionPercentage] (Foreign Key)
+       [dbo].[FK_Sales_StockIn] (Foreign Key)
+       [dbo].[FK_Sales_Customer] (Foreign Key)
+       [dbo].[FK_StockIn_Vendor] (Foreign Key)
+
+** Supporting actions

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d1TjAJbibuLAzDRyI24zkZwfNqNtVrZVK8POlIiEcdcYFP4JTS9zyJhWutfkRtZhRudmE/av3L2q22hpYAF6jg==",
+  "dgSpecHash": "l8kvtLXZhfeons6Ld2KgX90JuFgzHt7lgi7OKXIMlNY09A/6rUZ7gWLNAf0pX4v6lGk9+s0fXjSNP0sZr7VZJA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SANTOSH\\source\\repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
+  "projectFilePath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

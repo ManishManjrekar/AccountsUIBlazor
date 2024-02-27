@@ -1,0 +1,101 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AccountsUIBlazor
+build_property.RootNamespace = AccountsUIBlazor
+build_property.ProjectDir = C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\manjr\source\repos\AccountsUIBlazor\AccountsUIBlazor\AccountsUIBlazor
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/AddCustomer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQ3VzdG9tZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/AddVendor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVmVuZG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/CommissionEarned.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tbWlzc2lvbkVhcm5lZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/CommissionPercentage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tbWlzc2lvblBlcmNlbnRhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/CustomerBalanceCarryForward.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3VzdG9tZXJCYWxhbmNlQ2FycnlGb3J3YXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/CustomerPayments.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3VzdG9tZXJQYXltZW50cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/JE.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSkUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/Sales.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2FsZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/StockIn.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3RvY2tJbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/VendorExpenses.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVuZG9yRXhwZW5zZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/VendorPayments.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVuZG9yUGF5bWVudHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-6vynkgigzu
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-qfhjfjvoky
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/manjr/source/repos/AccountsUIBlazor/AccountsUIBlazor/AccountsUIBlazor/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
