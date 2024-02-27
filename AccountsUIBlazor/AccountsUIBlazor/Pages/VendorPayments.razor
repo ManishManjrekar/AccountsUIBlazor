@@ -1,0 +1,289 @@
+﻿@page "/VendorPayments"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+<h3>Vendor payment</h3>
+    
+<EditForm Model="UIVendorPayment" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+
+    <div class="row mt-1">
+        <div class=" col-md-3">
+            <label for="selectvendor" >Select Vendor</label>
+            <RadzenAutoComplete Placeholder="Select Vendor..." class="form-control-plaintext" Name="selectvendor" Data="@UIVendorPayment.VendorList" TextProperty="VendorName" ValueProperty="@UIVendorPayment.VendorId" Change="@OnVendorSelectionChange" />
+        </div>
+
+        <div class=" col-md-3">
+            <label for="fromDate" >From Date</label>
+            <RadzenDatePicker style="width: 100%;" class="form-control-plaintext" Name="fromDate" @bind-Value="@UIVendorPayment.UICalenderModel.FromDate" />
+        </div>
+        <div class=" col-md-3">
+            <label for="toDate" >To Date</label>
+            <RadzenDatePicker Name="toDate" class="form-control-plaintext" @bind-Value="@UIVendorPayment.UICalenderModel.ToDate" Change="DateSelection" />
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class=" col-md-3 mt-1">
+            <label for="selectvendor" >Select StockIn</label>
+            <RadzenAutoComplete Placeholder="Select stockIn..." Data="@UIVendorPayment.StockInList" class="form-control-plaintext" TextProperty="LoadName" ValueProperty="@UIVendorPayment.StockInId" Change="@OnStockInSelectionChange" />
+        </div>
+
+
+        <div class=" col-md-3 mt-1">
+            <label for="PaymentDate" >Payment Date</label>
+            <RadzenDatePicker class="form-control-plaintext" style="width: 100%;" Name="PaymentDate" @bind-Value="@UIVendorPayment.PaymentDate" />
+        </div>
+        <div class=" col-md-3 mt-1">
+            <label for="AmountPaid" >Amount Paid</label>
+            <RadzenNumeric class="form-control" id="AmountPaid" @bind-Value="@UIVendorPayment.AmountPaid" placeholder="enter Amount Paid..."></RadzenNumeric>
+            @* <input type="text" class="form-control" id="AmountPaid" @bind-value="@UIVendorPayment.AmountPaid"  placeholder="enter Amount Paid..." /> *@
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class=" col-md-3 mt-1">
+            <label for="Comments" >Comments</label>
+            <RadzenTextBox class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments" placeholder="enter Comments..."></RadzenTextBox>
+            @* <input type="text" class="form-control" id="comments" @bind-value="@UIVendorPayment.Comments"  placeholder="enter Comments..." /> *@
+
+        </div>
+        <div class="mt-2 col-md-3">
+            <label for="TypeOfTransaction" >Type Of Transaction</label>
+            <InputSelect DisplayName="TypeOfTransaction" class="form-control" @bind-Value="@UIVendorPayment.TypeOfTransaction">
+                @foreach (var value in Enum.GetValues<TypeOfTransaction>())
+                {
+                    <option value="@value">@value</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+    <div class="mt-3 card p-2">
+        <h4>Total Sales Amount is <span class="h-25 text-primary">@VendorPaymentmasterDataSet.TotalSalesAmount</span></h4>
+        <h4>Total Vendor Payment Paid is <span class="h-25 text-success">@VendorPaymentmasterDataSet.TotalVendorPaymentPaid</span></h4>
+        <h4>Total Balance Amount is <span class="h-25 text-danger">@VendorPaymentmasterDataSet.BalanceAmount</span></h4>
+    </div>
+   @*  <div class="mt-2 col-md-4">
+        <label class="form-control-plaintext" id="BalanceAmount">Total Sales Amount is : "@VendorPaymentmasterDataSet.TotalSalesAmount"</label>
+        <label class="form-control-plaintext" id="BalanceAmount">Total Vendor Payment Paid is : "@VendorPaymentmasterDataSet.TotalVendorPaymentPaid"</label>
+        <label class="form-control-plaintext" id="BalanceAmount">Total Balance Amount is : "@VendorPaymentmasterDataSet.BalanceAmount"</label>
+    </div> *@
+    <div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit Vendor Payment</button>
+    </div>
+    <div class="row mt-2">
+        <h4>Vendor Sales Details</h4>
+        <div class="col-md-12">
+            <RadzenDataGrid @ref="salesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                            Data="@VendorPaymentmasterDataSet.SalesDetailsList" TItem="SalesDetailsDto" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+                <Columns>
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="VendorName" Title="Vendor Name" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="LoadName" Title="LoadName Name" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Quantity" Title="Quantity" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px" />
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
+
+                    <RadzenDataGridColumn TItem="SalesDetailsDto" Context="SalesDetailsList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                        <Template Context="SalesDetailsList">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(SalesDetailsList))" @onclick:stopPropagation="true">
+                            </RadzenButton>
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <h4>Vendor Payments Details</h4>
+        <div class="col-md-12">
+            <RadzenDataGrid @ref="vendorPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                            Data="@VendorPaymentmasterDataSet.VendorPaymentList" TItem="UIVendorPaymentDto" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+                <Columns>
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="VendorName" Title="Vendor Name" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="TypeOfTransaction" Title="Type Of Transaction" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="LoggedInUser" Title="LoggedInUser" Width="120px" />
+
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="Comments" Title="Comments" Width="120px" />
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Property="ModifiedDate" Title="ModifiedDate" Width="120px" />
+
+
+                    <RadzenDataGridColumn TItem="UIVendorPaymentDto" Context="VendorPaymentList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                        <Template Context="VendorPaymentList">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowVendorPayment(VendorPaymentList))" @onclick:stopPropagation="true">
+                            </RadzenButton>
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+    </div>
+
+</EditForm>
+@code {
+    VendorPaymentMaster VendorPaymentmasterDataSet = new VendorPaymentMaster();
+    RadzenDataGrid<SalesDetailsDto> salesDetailsGrid;
+    RadzenDataGrid<UIVendorPaymentDto> vendorPaymentDetailsGrid;
+
+
+    SalesDetailsDto salesDetailsGridInsert;
+    SalesDetailsDto salesDetailsGridUpdate;
+    public UIVendorPayment UIVendorPayment { get; set; } = new();
+    public string Log { get; set; } = "";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        // var results = await HttpClient.GetStringAsync($"StockIn/GetVendorNames");
+        var vendorList = await HttpClient.GetFromJsonAsync<List<VendorList>>($"StockIn/GetVendorNames");
+        //var APIreturn =  JsonConvert.DeserializeObject(results);
+        UIVendorPayment.VendorList = vendorList;
+        //Console.WriteLine(Vendorname);
+    }
+    void OnVendorSelectionChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UIVendorPayment.VendorId = UIVendorPayment.VendorList.Where(e => e.VendorName.Equals(value))
+                              .Select(p=> p.VendorId).FirstOrDefault();
+        UIVendorPayment.UICalenderModel.VendorId = UIVendorPayment.VendorId;
+        Console.WriteLine($"Value changed to {str}");
+    }
+
+    void OnStockInSelectionChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UIVendorPayment.StockInId = UIVendorPayment.StockInList.Where(e => e.LoadName.Equals(value))
+                              .Select(p => p.StockInId).FirstOrDefault();
+        Console.WriteLine($"Value changed to {str}");
+        GetVendorPaymentDetails(UIVendorPayment.StockInId);
+    }
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    public void DropDownChanged()
+    {
+        Log += "DropDownChanged fired. ";
+    }
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+
+        var laodcount = GetStockInList();
+        Console.WriteLine(laodcount);
+    }
+    public async Task GetStockInList()
+    {
+        // Log += "DateSelection fired. ";
+        var results = await HttpClient.PostAsJsonAsync($"StockIn/PostStockInsAsPerVendorId", UIVendorPayment.UICalenderModel);
+        var APIreturn = JsonConvert.DeserializeObject<List<UISalesStockInData>>(await results.Content.ReadAsStringAsync());
+        Console.WriteLine(APIreturn);
+        foreach (var item in APIreturn)
+        {
+            UIVendorPayment.StockInList.Add(new StockInList { StockInId = item.StockInId, LoadName = item.LoadName });
+        }
+
+        
+        // Log += UIStockIn.LoadName;
+    }
+    public void Submit(EditContext formContext)
+    {
+        var form = (UIVendorPayment)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UIVendorPayment = (UIVendorPayment)formContext.Model;
+
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"VendorPayment/AddVendorPayment", UIVendorPayment);
+            Console.WriteLine(obj);
+            GetVendorPaymentDetails(UIVendorPayment.StockInId);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+    void Reset()
+    {
+        salesDetailsGridInsert = null;
+        salesDetailsGridUpdate = null;
+    }
+    private async void GetVendorPaymentDetails(int stockInId)
+    {
+        VendorPaymentmasterDataSet = await HttpClient.GetFromJsonAsync<VendorPaymentMaster>($"VendorPayment/GetVendorPaymentDetails?stockInId={stockInId}");
+        //Console.WriteLine(customers);
+        StateHasChanged();
+    }
+    async Task DeleteRow(SalesDetailsDto salesDetails)
+    {
+        Reset();
+       
+        if (VendorPaymentmasterDataSet.SalesDetailsList.Contains(salesDetails))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"VendorPayment?id={salesDetails.SalesId}");
+                GetVendorPaymentDetails(UIVendorPayment.StockInId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await salesDetailsGrid.Reload();
+        }
+    }
+
+    async Task DeleteRowVendorPayment(UIVendorPaymentDto vendorPaymentdto)
+    {
+        Reset();
+
+        if (VendorPaymentmasterDataSet.VendorPaymentList.Contains(vendorPaymentdto))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"VendorPayment?id={vendorPaymentdto.VendorPaymentId}");
+                GetVendorPaymentDetails(UIVendorPayment.StockInId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await vendorPaymentDetailsGrid.Reload();
+        }
+    }
+    
+}
+ 

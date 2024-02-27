@@ -1,7 +1,10 @@
 ﻿using AccontApi.Core;
 using AccountApi.Application.Interfaces;
+using AccountApi.Core;
 using AccountApi.Logging;
 using AccountsUIBlazor.Data;
+using AccountsUIBlazor.UIModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -9,47 +12,47 @@ using System.Data.SqlClient;
 
 namespace AccountsUIBlazor.Controller
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CustomerController : BaseApiController
     {
-        #region ===[ Private Members ]=============================================================
+       
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _IMapper;
 
-        #endregion
 
-        #region ===[ Constructor ]=================================================================
-
+        
         /// <summary>
         /// Initialize CustomerController by injecting an object type of IUnitOfWork
         /// </summary>
-        public CustomerController(IUnitOfWork unitOfWork)
+        public CustomerController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
             this._unitOfWork = unitOfWork;
+            this._IMapper = Mapper;
+
         }
-         
-        #endregion
 
-        #region ===[ Public Methods ]==============================================================
-
+      
         [HttpGet]
-        public async Task<ApiResponse<List<Customer>>> GetAll()
+        [Route("GetAllCustomer")]
+        public async Task<List<UICustomer>> GetAll()
         {
-            var apiResponse = new ApiResponse<List<Customer>>();
-
+            var apiResponse = new ApiResponse<List<UICustomer>>();
+            List<UICustomer> customerList = new List<UICustomer>();
             try
             {
                 var data = await _unitOfWork.Customers.GetAllAsync();
+                customerList = _IMapper.Map<List<UICustomer>>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data.ToList();
+                apiResponse.Result = customerList;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -57,27 +60,50 @@ namespace AccountsUIBlazor.Controller
                 Logger.Instance.Error("Exception:", ex);
             }
 
-            return apiResponse;
+            return customerList;
+        }
+
+        [HttpGet]
+        [Route("GetAllCustomerNames")]
+        public async Task<List<UICustomerNames>> GetAllCustomerNames()
+        {
+            var customerNames = new List<UICustomerNames>();
+            try
+            {
+                var data = await _unitOfWork.Customers.GetAllAsync();
+                customerNames = _IMapper.Map<List<UICustomerNames>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return customerNames;
         }
 
         [HttpGet("{id}")]
-        public async Task<ApiResponse<Customer>> GetById(int id)
+        public async  Task<ApiResponse<UICustomer>> GetById(int id)
         {
 
-            var apiResponse = new ApiResponse<Customer>();
+            var apiResponse = new ApiResponse<UICustomer>();
 
             try
             {
                 var data = await _unitOfWork.Customers.GetByIdAsync(id);
+                UICustomer customer = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = customer;
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -89,55 +115,62 @@ namespace AccountsUIBlazor.Controller
         }
 
         [HttpPost]
-        public async Task<ApiResponse<string>> Add(Customer Customer)
+        //[Route("AddCustomer")]
+        public async Task<IActionResult> Add(UICustomer Customer)
         {
+          
             var apiResponse = new ApiResponse<string>();
+            Customer customer = _IMapper.Map<Customer>(Customer);
+            customer.IsActive = true;
 
             try
             {
-                var data = await _unitOfWork.Customers.AddAsync(Customer);
+                var data = await _unitOfWork.Customers.AddAsync(customer);
+                //UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
                 apiResponse.Result = data;
+               
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
-            return apiResponse;
+            return Ok(apiResponse);
         }
 
         [HttpPut]
-        public async Task<ApiResponse<string>> Update(Customer Customer)
+        public async Task<ApiResponse<UICustomer>> Update(UICustomer Customer)
         {
-            var apiResponse = new ApiResponse<string>();
-
+            var apiResponse = new ApiResponse<UICustomer>();
+            Customer customerdata = _IMapper.Map<Customer>(Customer);
             try
             {
-                var data = await _unitOfWork.Customers.UpdateAsync(Customer);
+                var data = await _unitOfWork.Customers.UpdateAsync(customerdata);
+                UICustomer customerUI = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = customerUI;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
                 Logger.Instance.Error("SQL Exception:", ex);
             }
-            //catch (Exception ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("Exception:", ex);
-            //}
+            catch (Exception ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("Exception:", ex);
+            }
 
             return apiResponse;
         }
@@ -150,15 +183,16 @@ namespace AccountsUIBlazor.Controller
             try
             {
                 var data = await _unitOfWork.Customers.DeleteAsync(id);
+                //UICustomer customerdata = _IMapper.Map<UICustomer>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = data;
+                apiResponse.Result = data.ToString();
             }
-            //catch (SqlException ex)
-            //{
-            //    apiResponse.Success = false;
-            //    apiResponse.Message = ex.Message;
-            //    Logger.Instance.Error("SQL Exception:", ex);
-            //}
+            catch (SqlException ex)
+            {
+                apiResponse.Success = false;
+                apiResponse.Message = ex.Message;
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
             catch (Exception ex)
             {
                 apiResponse.Success = false;
@@ -169,6 +203,31 @@ namespace AccountsUIBlazor.Controller
             return apiResponse;
         }
 
-        #endregion
+        [HttpGet]
+        [Route("GetDuplicateOrNot")]
+        public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
+        {
+
+            // var apiResponse = new ApiResponse<AccountApi.Core.StockIn>();
+
+            try
+            {
+
+                var data = await _unitOfWork.Customers.GetDuplicateOrNot(firstName, lastName);
+                return data;
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return false;
+        }
+
+
     }
 }

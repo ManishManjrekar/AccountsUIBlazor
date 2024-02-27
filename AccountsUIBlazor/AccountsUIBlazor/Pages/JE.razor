@@ -1,0 +1,193 @@
+﻿@page "/JE"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using System.Text;
+@using System.Text.Json
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+<h3>Journel Entry</h3>
+
+
+<EditForm Model="JeModel" OnInvalidSubmit="InvalidSubmit">
+
+    <div class="col-md-8">
+        Select Date<RadzenDatePicker style="width: 100%;" Name="SelectedDate" @bind-Value="JeModel.SelectedDate" Change="DateSelection" />
+    </div>
+    <div>
+        JE Details
+    </div>
+<div class="col-md-8">
+        <label class="form-control" id="BalanceAmount">Total Stock is : "@JeModel.UIJEMasterDto.TotalStock"</label>
+        <label class="form-control" id="BalanceAmount">Total Sales Completed is : "@JeModel.UIJEMasterDto.TotalSalesCompleted"</label>
+        <label class="form-control" id="BalanceAmount">Total StockLeft is : "@JeModel.UIJEMasterDto.TotalStockLeft"</label>
+        <label class="form-control" id="BalanceAmount">Total Customer Payment Received Today is : "@JeModel.UIJEMasterDto.TotalCustomerPaymentReceived"</label>
+
+ </div> 
+
+</EditForm>
+
+
+<div class="row mt-2">
+    <h4>Vendor Sales Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="salesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@JeModel.UIJEMasterDto.JESalesList" TItem="SalesDetailsDto" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="VendorName" Title="Vendor Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="LoadName" Title="LoadName Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Quantity" Title="Quantity" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px" />
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Context="JESalesList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="JESalesList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(JESalesList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+<div class="row mt-2">
+    <h4>Customer Payment Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="customerPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@JeModel.UIJEMasterDto.JECustomerPaymentList" TItem="UICustomerPayment" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="PaymentDate" Title="Payment Date" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="TypeOfTransaction" Title="TypeOfTransaction" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="Comments" Title="Price" Width="120px" />
+
+
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Context="JECustomerPaymentList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="JECustomerPaymentList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowCustomerPayment(JECustomerPaymentList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+@code {
+    public UIJEModel JeModel = new UIJEModel();
+    public string Log { get; set; } = "";
+
+    //Grid variables
+    RadzenDataGrid<SalesDetailsDto> salesDetailsGrid;
+    RadzenDataGrid<UICustomerPayment> customerPaymentDetailsGrid;
+    SalesDetailsDto salesDetailsGridInsert;
+    SalesDetailsDto salesDetailsGridUpdate;
+
+
+
+    protected override void OnInitialized()
+    {
+        JeModel = new UIJEModel();
+        JeModel.UIJEMasterDto = new UIJEMasterDto();
+    }
+
+
+
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+        GetSalesataAsPerDateSelected();
+    }
+
+
+    //Get Sales Data as per the Date Selected......
+    public async Task GetSalesataAsPerDateSelected()
+    {
+        UIJEMasterDto results = await HttpClient.GetFromJsonAsync<UIJEMasterDto>($"JE/GetJEDataAsperSelectedDate?SelectedDate={JeModel.SelectedDate.ToString("yyyy-MM-dd")}");
+        JeModel.UIJEMasterDto.JESalesList = results.JESalesList;
+        JeModel.UIJEMasterDto.JECustomerPaymentList = results.JECustomerPaymentList;
+
+        JeModel.UIJEMasterDto.TotalStock = results.TotalStock;
+        JeModel.UIJEMasterDto.TotalSalesCompleted = results.TotalSalesCompleted;
+        JeModel.UIJEMasterDto.TotalStockLeft = results.TotalStockLeft;
+        JeModel.UIJEMasterDto.TotalCustomerPaymentReceived = results.TotalCustomerPaymentReceived;
+
+        
+        StateHasChanged();
+    }
+   
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomer)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    void Reset()
+    {
+        salesDetailsGridInsert = null;
+        salesDetailsGridUpdate = null;
+    }
+
+    async Task DeleteRow(SalesDetailsDto salesDetails)
+    {
+        Reset();
+
+        if (JeModel.UIJEMasterDto.JESalesList.Contains(salesDetails))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"Sales?id={salesDetails.SalesId}");
+                //FillGridForSaleAsPerStockInId();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await salesDetailsGrid.Reload();
+        }
+    }
+
+    async Task DeleteRowCustomerPayment(UICustomerPayment customerPaymentdto)
+    {
+        Reset();
+
+        if (JeModel.UIJEMasterDto.JECustomerPaymentList.Contains(customerPaymentdto))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"CustomerPayment?id={customerPaymentdto.CustomerId}");
+                //GetVendorPaymentDetails(UIVendorPayment.StockInId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await customerPaymentDetailsGrid.Reload();
+        }
+    }
+
+}
+ 

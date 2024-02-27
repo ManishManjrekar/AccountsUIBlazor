@@ -21,16 +21,19 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+  //  app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseMvcWithDefaultRoute();
 app.MapBlazorHub();
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
 app.MapFallbackToPage("/_Host");
 
+//app.Run("http://0.0.0.0:80");
 app.Run();
+

@@ -1,19 +1,27 @@
-﻿namespace AccontApi.Core
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AccountApi.Core
 {
     public class Customer
     {
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
 
+        //[Required]
         public string MiddleName { get; set; }
 
+        //[Required]
         public string NickName { get; set; }
 
+        //[Required]
         public string LastName { get; set; }
 
-        public string Email { get; set; }
+        //[Required]
+       // public string Email { get; set; }
 
+        [Required]
         public string Mobile { get; set; }
 
         public string ReferredBy { get; set; }
@@ -26,7 +34,7 @@
 
         public DateTime CreatedDate { get; set; }
 
-        public string Url { get; set; }
+        //public string Url { get; set; }
 
         public bool IsActive { get; set; }
     }

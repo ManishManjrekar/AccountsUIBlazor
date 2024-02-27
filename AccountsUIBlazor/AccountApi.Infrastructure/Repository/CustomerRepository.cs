@@ -10,28 +10,19 @@ using System.Text;
 using System.Threading.Tasks;
 using AccountApi.Sql.Queries;
 using AccountApi.Application.Interfaces;
+using AccountApi.Core;
 
 namespace AccountApi.Infrastructure.Repository
 {
     public class CustomerRepository: ICustomerRepository
     {
 
-        #region ===[ Private Members ]=============================================================
-
         private readonly IConfiguration configuration;
-
-        #endregion
-
-        #region ===[ Constructor ]=================================================================
-
+       
         public CustomerRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
-
-        #endregion
-
-        #region ===[ ICustomerRepository Methods ]==================================================
 
         public async Task<IReadOnlyList<Customer>> GetAllAsync()
         {
@@ -55,12 +46,24 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<string> AddAsync(Customer entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                entity.CreatedDate = DateTime.Now;
+                entity.ModifiedDate = DateTime.Now;
+
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
+                    return result.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
 
         public async Task<string> UpdateAsync(Customer entity)
@@ -83,7 +86,21 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
-        #endregion
+        public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.ExecuteScalarAsync<int>(CustomerQueries.CheckDuplicateCustomerName, new { firstName, lastName });
+                if (result > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+
 
     }
 }

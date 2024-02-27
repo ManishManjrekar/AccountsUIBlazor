@@ -1,12 +1,19 @@
 ﻿CREATE TABLE [dbo].[VendorExpenses] (
-    [StockInId]    BIGINT           NULL,
-    [ExpenseId]    BIGINT           NULL,
-    [Amount]       BIGINT           NULL,
-    [createdBy]    NVARCHAR (500)   NULL,
-    [modifiedDate] DATETIME         CONSTRAINT [DF_VendorExpenses_modifiedDate] DEFAULT (getdate()) NOT NULL,
-    [createdDate]  DATETIME         CONSTRAINT [DF_VendorExpenses_createdDate] DEFAULT (getdate()) NOT NULL,
+    [VendorExpensesId] INT NOT NULL IDENTITY PRIMARY KEY,
+    [VendorId]    INT           NULL,
+    [StockInId]    INT           NULL,
+    [ExpensesName]    NVARCHAR (500)   NULL,
+    [LoadName]    NVARCHAR (500)   NULL,
+    [AmountPaid]       BIGINT           NULL,
+    [VendorName]    NVARCHAR (500)   NULL,
+    [LoggedInUser]    NVARCHAR (500)   NULL,
+    [Comments]    NVARCHAR (2000)   NULL,
+
+    [ModifiedDate] DATETIME         CONSTRAINT [DF_VendorExpenses_modifiedDate] DEFAULT (getdate()) NOT NULL,
+    [CreatedDate]  DATETIME         CONSTRAINT [DF_VendorExpenses_createdDate] DEFAULT (getdate()) NOT NULL,
     [modifiedBy]   NVARCHAR (500)   NULL,
-    [Id]           UNIQUEIDENTIFIER NOT NULL,
-    CONSTRAINT [PK_VendorExpenses_1] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [IsActive]    BIT   NULL,
+
+    
 );
 

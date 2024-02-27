@@ -1,0 +1,304 @@
+﻿@page "/AddVendor"
+
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+
+<EditForm Model="VendorModel" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <h4>Vendor Registration</h4>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-10">
+            <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" @bind-value="@VendorModel.FirstName" placeholder="enter first name..." />
+                       
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" @bind-value="@VendorModel.LastName" placeholder="enter last name..." />
+                      
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="MiddleName">Middle Name</label>
+                    <input type="text" class="form-control" id="MiddleName" @bind-value="@VendorModel.MiddleName" placeholder="enter Middle name..." />
+                       
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="email">Email Id</label>
+                    <input type="text" class="form-control" id="email" @bind-value="@VendorModel.Email" placeholder="email..." />
+                       
+                    </div>
+                </div>
+                 <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="ElectronicPaymentId">Electronic Payment Id</label>
+                    <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@VendorModel.ElectronicPaymentId" />
+                       
+                    </div>
+                </div>
+                 <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="Mobile">Mobile</label>
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.Mobile" />
+                       
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="ReferredBy">ReferredBy</label>
+                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@VendorModel.ReferredBy" />
+                       
+                    </div>
+                </div>
+
+
+            <button type="submit" class="btn btn-primary" Style="margin-top:10px">Register</button>
+            </div>
+            
+        </div>
+</EditForm>
+
+<div class="row mt-2">
+    <h4>Vendor Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="vendorGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@VendorListData" TItem="UIVendor" RowUpdate="@OnUpdateRow" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UIVendor" Property="FirstName" Title="First Name" Width="120px">
+                    <EditTemplate Context="vendor">
+                        <RadzenTextBox @bind-Value="vendor.FirstName" Style="width:200px; display: block" Name="FirstName" />
+                        <RadzenRequiredValidator Text="FirstName is required" Component="FirstName" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="UIVendor" Property="LastName" Title="First Name" Width="120px">
+                    <EditTemplate Context="vendor">
+                        <RadzenTextBox @bind-Value="vendor.LastName" Style="width:200px; display: block" Name="LastName" />
+                        <RadzenRequiredValidator Text="LastName is required" Component="LastName" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="UIVendor" Property="Email" Title="Email" Width="120px">
+                    <EditTemplate Context="vendor">
+                        <RadzenTextBox @bind-Value="vendor.Email" Style="width:200px; display: block" Name="Email" />
+                        <RadzenRequiredValidator Text="Email is required" Component="Email" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="UIVendor" Property="MobileNo" Title="Mobile No" Width="120px">
+                    <EditTemplate Context="vendor">
+                        <RadzenTextBox @bind-Value="vendor.Mobile" Style="width:200px; display: block" Name="MobileNo" />
+                        <RadzenRequiredValidator Text="Mobile No is required" Component="MobileNo" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="UIVendor" Context="vendor" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="vendor">
+                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@(args => EditRow(vendor))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(vendor))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                    <EditTemplate Context="vendor">
+                        <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@((args) => SaveRow(vendor))">
+                        </RadzenButton>
+                        <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@((args) => CancelEdit(vendor))">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(vendor))">
+                        </RadzenButton>
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+
+@code {
+    RadzenDataGrid<UIVendor> vendorGrid;
+    public UIVendor VendorModel { get; set; } = new();
+    public string Log { get; set; } = "";
+    private UIVendor UIVendor;
+    private List<UIVendor> vendors = new List<UIVendor>();
+    private List<UIVendor> VendorListData = new List<UIVendor>();
+    bool displayValidationErrorMessages = false;
+    UIVendor vendorToInsert;
+    UIVendor vendorToUpdate;
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    // public void ValidSubmit(EditContext formContext)
+    // {
+    //     Log += "OnValidSubmit fired. ";
+    // }
+
+    protected override void OnInitialized()
+    {
+        // Load customer details on page load
+        LoadCustomerDetails();
+    }
+
+    private async void LoadCustomerDetails()
+    {
+        VendorListData = await HttpClient.GetFromJsonAsync<List<UIVendor>>($"Vendor/GetAllVendor");
+        StateHasChanged();
+    }
+
+    async Task SaveRow(UIVendor vendor)
+    {
+        UIVendor updatedVendor = new UIVendor()
+            {
+                VendorId = vendor.VendorId,
+                FirstName = vendor.FirstName ?? string.Empty,
+                LastName = vendor.LastName ?? string.Empty,
+                Email = vendor.Email ?? string.Empty,
+                MiddleName = vendor.MiddleName ?? string.Empty,
+                Mobile = vendor.Mobile ?? string.Empty,
+                ElectronicPaymentId = vendor.ElectronicPaymentId ?? string.Empty,
+                ReferredBy = vendor.ReferredBy ?? string.Empty
+            };
+
+        try
+        {
+            var obj = await HttpClient.PutAsJsonAsync("Vendor", updatedVendor);
+            Console.WriteLine(obj);
+            LoadCustomerDetails();
+            await vendorGrid.UpdateRow(vendor);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+        await vendorGrid.UpdateRow(vendor);
+    }
+
+    void Reset()
+    {
+        vendorToInsert = null;
+        vendorToUpdate = null;
+    }
+
+    void OnUpdateRow(UIVendor vendor)
+    {
+        Reset();
+
+    }
+
+
+    async Task EditRow(UIVendor vendor)
+    {
+        vendorToUpdate = vendor;
+        await vendorGrid.EditRow(vendor);
+    }
+
+    void CancelEdit(UIVendor vendor)
+    {
+        Reset();
+
+        vendorGrid.CancelEditRow(vendor);
+
+
+    }
+
+    async Task DeleteRow(UIVendor vendor)
+    {
+        Reset();
+
+        if (VendorListData.Contains(vendor))
+        {
+            try
+            {
+
+                var obj = await HttpClient.DeleteAsync($"Vendor?id={vendor.VendorId}");
+                LoadCustomerDetails();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await vendorGrid.Reload();
+        }
+        else
+        {
+            vendorGrid.CancelEditRow(vendor);
+            await vendorGrid.Reload();
+        }
+    }
+
+    private async void HandleDeleteClick(MouseEventArgs args)
+    {
+
+    }
+
+
+    public void Submit(EditContext formContext)
+    {
+        var form = (UIVendor)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UIVendor = (UIVendor)formContext.Model;
+
+        try
+        {
+            var loadNameExists = await HttpClient.GetStringAsync($"Vendor/GetDuplicateOrNot?firstName={UIVendor.FirstName}&lastName={UIVendor.LastName}");
+            Console.WriteLine(loadNameExists);
+
+            if (loadNameExists != "true")
+            {
+                var obj = await HttpClient.PostAsJsonAsync($"Vendor/AddVendor", UIVendor);
+                LoadCustomerDetails();
+            }
+            else
+            {
+                OpenDuplicateLoadNameDialog();
+            }
+
+            
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+
+    @code
+    {
+        [Inject]
+        protected DialogService DialogService { get; set; }
+
+        private async Task OpenDuplicateLoadNameDialog()
+        {
+            var confirmationResult = await DialogService.Alert("Duplicate Name exist, please change the name", "Duplicate Name");
+            //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+            if (confirmationResult.Equals(true))
+            {
+                // if yes then
+                Console.WriteLine();
+            }
+        }
+    }
+    
+
+}

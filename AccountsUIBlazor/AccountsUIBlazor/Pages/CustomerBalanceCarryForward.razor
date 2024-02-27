@@ -1,0 +1,192 @@
+﻿@page "/CustomerBalanceCarryForward"
+
+@using AccountsUIBlazor.UIModels; 
+@using System.Net.Http
+@using AccountsUIBlazor.UIModels;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+<h3>Customer Balance Carry Forward</h3>
+
+
+<EditForm Model="UICustomerBalanceCarryForward" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="selectvendor">Search Customer</label>
+            <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerBalanceCarryForward.CustomerList" class="form-control" Name="selectvendor" TextProperty="CustomerName" ValueProperty="@UICustomerBalanceCarryForward.CustomerId" Change="@OnChange" />
+        </div>
+        <div class=" col-md-4">
+            <label for="fromDate">Created Date</label>
+            <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerBalanceCarryForward.CreatedDate" Change="DateSelection" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class=" col-md-4">
+            <label for="lastName" >Amount </label>
+            <input type="text" class="form-control" id="lastName"  @bind-value="@UICustomerBalanceCarryForward.Amount" placeholder="enter last name..." />
+
+        </div>
+
+        <div class=" col-md-4">
+            <label for="lastName">comments</label>
+            <input type="text" class="form-control" id="comments" @bind-value="@UICustomerBalanceCarryForward.Comments" placeholder="enter last name..." />
+
+        </div>
+    </div>
+   
+    
+   
+    
+    
+<div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit Customer Payment</button>
+</div>
+</EditForm>
+
+
+
+<div class="row mt-2">
+    <h4>Customer Payment Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="customerPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                        Data="@masterCarryForwardData.CarryForwardAmountList" TItem="UICustomerBalanceCarryForwardGridData" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICustomerBalanceCarryForwardGridData" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerBalanceCarryForwardGridData" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerBalanceCarryForwardGridData" Property="PaymentDate" Title="LoadName Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerBalanceCarryForwardGridData" Property="TypeOfTransaction" Title="TypeOfTransaction" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerBalanceCarryForwardGridData" Property="Comments" Title="Price" Width="120px" />
+
+                
+
+                <RadzenDataGridColumn TItem="UICustomerBalanceCarryForwardGridData" Context="CarryForwardAmountList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="CarryForwardAmountList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowCustomerPayment(CarryForwardAmountList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+<div>
+    @* <p> Total  Balance Amount Due:- @customerPaymentMasterDto.BalanceAmountDue</p> *@
+</div>
+@code {
+    // RadzenDataGrid<SalesDetailsDto> customerPaymentSalesDetailsGrid;
+    RadzenDataGrid<UICustomerBalanceCarryForwardGridData> customerPaymentDetailsGrid;
+
+    public UICustomerBalanceCarryForward UICustomerBalanceCarryForward { get; set; } = new();
+    public string Log { get; set; } = "";
+    public MasterCustomerBalanceCarryForwardGridData masterCarryForwardData = new MasterCustomerBalanceCarryForwardGridData();
+    UICustomerBalanceCarryForwardGridData customerPurchasesInsert;
+    UICustomerBalanceCarryForwardGridData customerPurchasesUpdate;
+    int selectedCustId = 0;
+
+    // on load of form load drop down list of customers 
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var custList = await HttpClient.GetFromJsonAsync<List<UICustomerNames>>($"Customer/GetAllCustomerNames");
+        UICustomerBalanceCarryForward.CustomerList = custList;
+
+    }
+    //on drop down selection of cust, load customers carry forward amounts data for grid.
+    private async void LoadCustomerPayment(int id)
+    {
+        masterCarryForwardData = await HttpClient.GetFromJsonAsync<MasterCustomerBalanceCarryForwardGridData>($"CustomerBalanceCarryForward/GetCarrryForwardDataByCustomerId?id={id}");
+        //masterCarryForwardData.CarryForwardAmountList
+        StateHasChanged();
+    }
+    //on drop down selection of cust, load customers carry forward amounts data for grid.
+    void OnChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UICustomerBalanceCarryForward.CustomerId = UICustomerBalanceCarryForward.CustomerList.Where(e => e.CustomerName.Equals(value))
+                              .Select(p=> p.CustomerId).FirstOrDefault();
+        UICustomerBalanceCarryForward.CustomerName = str.ToString();
+        selectedCustId = UICustomerBalanceCarryForward.CustomerId;
+        //on drop down selection of cust, load customers carry forward amounts data for grid.
+        if (selectedCustId>0)
+        {
+            LoadCustomerPayment(UICustomerBalanceCarryForward.CustomerId);
+        }
+       
+
+    }
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    public void DropDownChanged()
+    {
+        Log += "DropDownChanged fired. ";
+    }
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+
+        //Console.WriteLine(laodcount);
+    }
+    
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomerBalanceCarryForward)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UICustomerBalanceCarryForward = (UICustomerBalanceCarryForward)formContext.Model;
+
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"CustomerBalanceCarryForward/AddCustomerBalanceCarryForward", UICustomerBalanceCarryForward);
+            LoadCustomerPayment(UICustomerBalanceCarryForward.CustomerId);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+        //return null;
+    }
+
+
+    void Reset()
+    {
+        customerPurchasesInsert = null;
+        customerPurchasesUpdate = null;
+    }
+
+
+    async Task DeleteRowCustomerPayment(UICustomerBalanceCarryForwardGridData customerPurchases)
+    {
+        Reset();
+
+        if (masterCarryForwardData.CarryForwardAmountList.Contains(customerPurchases))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"CustomerPayment?id={customerPurchases.CustomerId}");
+                LoadCustomerPayment(selectedCustId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await customerPaymentDetailsGrid.Reload();
+        }
+    }
+}
+ 
