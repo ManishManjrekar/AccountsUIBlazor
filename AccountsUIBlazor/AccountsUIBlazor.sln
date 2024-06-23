@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountsUIBlazor", "AccountsUIBlazor\AccountsUIBlazor.csproj", "{9B86713E-6CBF-45CB-948B-5B6CC2988F41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Application", "AccountApi.Application\AccountApi.Application.csproj", "{B2B15C44-BF1C-4AED-B03B-2F137AD6F9F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Interface", "AccountApi.Application\AccountApi.Interface.csproj", "{B2B15C44-BF1C-4AED-B03B-2F137AD6F9F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Core", "AccontApi.Core\AccountApi.Core.csproj", "{4BA93EF5-EA09-42B7-8640-66810F230620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Model", "AccontApi.Core\AccountApi.Model.csproj", "{4BA93EF5-EA09-42B7-8640-66810F230620}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Infrastructure", "AccountApi.Infrastructure\AccountApi.Infrastructure.csproj", "{A643E65E-E09F-401F-9A77-178348A8C579}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.DataAccess", "AccountApi.Infrastructure\AccountApi.DataAccess.csproj", "{A643E65E-E09F-401F-9A77-178348A8C579}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Logging", "AccountApi.Logging\AccountApi.Logging.csproj", "{B2857E75-44C8-4BBD-911E-C3320D7924C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Sql", "AccountApi.Sql\AccountApi.Sql.csproj", "{8BF81CB9-959C-49DE-8CD9-7803BC647F3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.SqlQueries", "AccountApi.Sql\AccountApi.SqlQueries.csproj", "{8BF81CB9-959C-49DE-8CD9-7803BC647F3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Test", "AccountApi.Test\AccountApi.Test.csproj", "{643675C7-5CE7-405F-92AE-0FCD82620E8A}"
 EndProject

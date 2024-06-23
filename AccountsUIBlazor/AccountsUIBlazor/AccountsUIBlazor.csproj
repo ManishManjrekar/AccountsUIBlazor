@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountApi.Application\AccountApi.Application.csproj" />
-    <ProjectReference Include="..\AccountApi.Infrastructure\AccountApi.Infrastructure.csproj" />
+    <ProjectReference Include="..\AccountApi.Application\AccountApi.Interface.csproj" />
+    <ProjectReference Include="..\AccountApi.Infrastructure\AccountApi.DataAccess.csproj" />
     <ProjectReference Include="..\AccountApi.Logging\AccountApi.Logging.csproj" />
   </ItemGroup>
 

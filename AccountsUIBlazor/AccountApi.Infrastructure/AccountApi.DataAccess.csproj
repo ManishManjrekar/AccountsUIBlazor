@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountApi.Application\AccountApi.Application.csproj" />
-    <ProjectReference Include="..\AccountApi.Sql\AccountApi.Sql.csproj" />
+    <ProjectReference Include="..\AccountApi.Application\AccountApi.Interface.csproj" />
+    <ProjectReference Include="..\AccountApi.Sql\AccountApi.SqlQueries.csproj" />
   </ItemGroup>
 
 </Project>

@@ -81,7 +81,4 @@
     <Build Include="dbo\Tables\VendorPayments.sql" />
     <Build Include="dbo\CustomerBalanceCarryForward.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="AccountsDbProject.refactorlog" />
-  </ItemGroup>
 </Project>

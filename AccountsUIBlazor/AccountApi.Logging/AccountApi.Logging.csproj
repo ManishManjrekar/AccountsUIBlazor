@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountApi.Application\AccountApi.Application.csproj" />
+    <ProjectReference Include="..\AccountApi.Application\AccountApi.Interface.csproj" />
   </ItemGroup>
 
 </Project>
