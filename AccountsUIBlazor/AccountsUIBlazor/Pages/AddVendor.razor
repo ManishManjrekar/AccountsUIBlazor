@@ -156,6 +156,7 @@
     {
         VendorListData = await HttpClient.GetFromJsonAsync<List<UIVendor>>($"Vendor/GetAllVendor");
         StateHasChanged();
+        //test
     }
 
     async Task SaveRow(UIVendor vendor)

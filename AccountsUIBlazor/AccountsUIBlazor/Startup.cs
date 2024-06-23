@@ -2,6 +2,7 @@
 using AccountApi.Infrastructure.Repository;
 using AccountsUIBlazor.UIModels;
 using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Radzen;
 
@@ -20,6 +21,9 @@ namespace AccountsUIBlazor
         public void ConfigureServices(IServiceCollection services)
         {
             // Add services needed for your application
+            services.AddServerSideBlazor().AddCircuitOptions(e => {
+                e.DetailedErrors = true;
+            });
 
             // Add the IUnitOfWork as a scoped service
             services.AddTransient<IUnitOfWork, UnitOfWork>(); // Replace YourUnitOfWorkImplementation with the actual implementation class
@@ -57,10 +61,17 @@ namespace AccountsUIBlazor
 
             services.AddCors(options =>
             {
+                //options.AddPolicy("AllowSwagger",
+                //    builder => builder.WithOrigins("https://localhost:7207") // Update with your Blazor app URL
+                //                      .AllowAnyHeader()
+                //                      .AllowAnyMethod());
+
                 options.AddPolicy("AllowSwagger",
-                    builder => builder.WithOrigins("https://localhost:7207") // Update with your Blazor app URL
-                                      .AllowAnyHeader()
-                                      .AllowAnyMethod());
+                   builder => builder.WithOrigins("http://192.168.1.192") // Update with your Blazor app URL
+                                     .AllowAnyHeader()
+                                     .AllowAnyMethod());
+
+
             });
 
             var mapperConfiguration = new MapperConfiguration(configuration =>
@@ -79,7 +90,11 @@ namespace AccountsUIBlazor
             services.AddScoped(sp =>
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:7207/");
+                //client.BaseAddress = new Uri("https://localhost:7207/");
+                //client.BaseAddress = new Uri("http://localhost:7207/");
+
+                client.BaseAddress = new Uri("http://192.168.1.192/");
+
                 return client;
             });
                 
@@ -104,6 +119,7 @@ namespace AccountsUIBlazor
 
             // Configure other middleware as needed
             app.UseCors("AllowSwagger");
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
