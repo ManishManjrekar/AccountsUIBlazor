@@ -98,7 +98,7 @@
                         <RadzenRequiredValidator Text="Email is required" Component="Email" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="UIVendor" Property="MobileNo" Title="Mobile No" Width="120px">
+                <RadzenDataGridColumn TItem="UIVendor" Property="Mobile" Title="Mobile No" Width="120px">
                     <EditTemplate Context="vendor">
                         <RadzenTextBox @bind-Value="vendor.Mobile" Style="width:200px; display: block" Name="MobileNo" />
                         <RadzenRequiredValidator Text="Mobile No is required" Component="MobileNo" Popup="true" />
