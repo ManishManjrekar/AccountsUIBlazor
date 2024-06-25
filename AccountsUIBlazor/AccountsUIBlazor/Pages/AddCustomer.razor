@@ -159,7 +159,7 @@
     }
     async Task SaveRow(UICustomer customer)
     {
-      
+
 
         UICustomer updatedCustomer = new UICustomer()
             {
@@ -283,6 +283,7 @@
                 var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
                 Console.WriteLine(obj);
                 LoadCustomerDetails();
+                CustomerModel = new();
             }
             else
             {

@@ -204,6 +204,7 @@
             {
                 var obj = await HttpClient.PostAsJsonAsync($"StockIn/AddStockIn", UIStockIn);
                 FillGridForStockIns();
+                UIStockIn = new();
             }
             else
             {

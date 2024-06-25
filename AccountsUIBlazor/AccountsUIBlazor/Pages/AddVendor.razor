@@ -257,6 +257,9 @@
 
     public async Task ValidSubmit(EditContext formContext)
     {
+        if (formContext == null)
+            return;
+
         UIVendor = (UIVendor)formContext.Model;
 
         try
@@ -268,6 +271,7 @@
             {
                 var obj = await HttpClient.PostAsJsonAsync($"Vendor/AddVendor", UIVendor);
                 LoadCustomerDetails();
+                VendorModel = new();
             }
             else
             {
