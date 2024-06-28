@@ -52,9 +52,8 @@ namespace AccountApi.Sql.Queries
             @"UPDATE [Vendor] 
             SET [FirstName] = @FirstName, 
 				[LastName] = @LastName, 
-				[ElectronicPaymentId] = @ElectronicPaymentId, 
 				[Mobile] = @Mobile
-            WHERE [CustomerId] = @VendorId and IsActive =1";
+            WHERE [VendorId] = @VendorId and IsActive =1";
 
 		public static string DeleteVendor => "Update [Vendor] set  isActive=0 where [VendorId] = @VendorId";
 

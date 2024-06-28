@@ -42,8 +42,7 @@ namespace AccountApi.Sql.Queries
             @"UPDATE [Customer] 
         SET [FirstName] = @FirstName, 
 			[LastName] = @LastName, 
-			[Email] = @Email, 
-			[PhoneNumber] = @PhoneNumber
+			[Mobile] = @Mobile
         WHERE [CustomerId] = @CustomerId";
 
         public static string DeleteCustomer => "Update FROM [Customer] WHERE [CustomerId] = @CustomerId where isActive=0";

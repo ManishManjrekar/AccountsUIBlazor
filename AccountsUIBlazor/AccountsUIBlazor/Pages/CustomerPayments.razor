@@ -104,6 +104,14 @@
                         <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowCustomerPayment(CustomerPaymentsDone))" @onclick:stopPropagation="true">
                         </RadzenButton>
                     </Template>
+                    <EditTemplate Context="CustomerPaymentsDone">
+                        <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@((args) => SaveRow(CustomerPaymentsDone))">
+                        </RadzenButton>
+                        <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@((args) => CancelEdit(CustomerPaymentsDone))">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowCustomerPayment(CustomerPaymentsDone))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </EditTemplate>
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
@@ -116,11 +124,12 @@
     RadzenDataGrid<SalesDetailsDto> customerPaymentSalesDetailsGrid;
     RadzenDataGrid<UICustomerPayment> customerPaymentDetailsGrid;
 
-    public UICustomerPayment UICustomerPayment { get; set; } = new();
+    public UICustomerPayment UICustomerPayment { get; set; } = new() { PaymentDate = DateTime.Now};
     public string Log { get; set; } = "";
     public UICustomerPaymentMaster customerPaymentMasterDto = new UICustomerPaymentMaster();
-    SalesDetailsDto customerPurchasesInsert;
-    SalesDetailsDto customerPurchasesUpdate;
+    UICustomerPayment customerPurchasesInsert;
+    UICustomerPayment customerPurchasesUpdate;
+
     int selectedCustId = 0;
 
     protected override async Task OnInitializedAsync()
@@ -137,7 +146,7 @@
         StateHasChanged();
     }
 
-    void OnChange(object value)
+    async void OnChange(object value)
     {
 
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
@@ -145,8 +154,9 @@
                               .Select(p=> p.CustomerId).FirstOrDefault();
         UICustomerPayment.CustomerName = str.ToString();
         selectedCustId = UICustomerPayment.CustomerId;
+        await OnInitializedAsync();
         LoadCustomerPayment(UICustomerPayment.CustomerId);
-
+        
     }
     public void InvalidSubmit(EditContext formContext)
     {
@@ -215,6 +225,48 @@
         }
     }
 
+    async Task SaveRow(UICustomerPayment customerPayment)
+    {
+
+
+        try
+        {
+            var obj = await HttpClient.PutAsJsonAsync("CustomerPayment", customerPayment);
+            if (obj.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+                Console.WriteLine(obj);
+                LoadCustomerPayment(customerPayment.CustomerId);
+                await customerPaymentDetailsGrid.UpdateRow(customerPayment);
+            }
+            else
+            {
+                OpenUpdatefailedDialog();
+            }
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+    }
+
+    async Task EditRow(UICustomerPayment customerPayment)
+    {
+        customerPurchasesUpdate = customerPayment;
+        await customerPaymentDetailsGrid.EditRow(customerPayment);
+    }
+
+    void CancelEdit(UICustomerPayment customer)
+    {
+        Reset();
+
+        customerPaymentDetailsGrid.CancelEditRow(customer);
+
+
+    }
+
     async Task DeleteRowCustomerPayment(UICustomerPayment customerPurchases)
     {
         Reset();
@@ -232,6 +284,22 @@
                 Console.WriteLine(ex.Message.ToString());
             }
             await customerPaymentDetailsGrid.Reload();
+        }
+    }
+}
+
+@code
+{
+    [Inject]
+    protected DialogService DialogService { get; set; }
+
+    private async Task OpenUpdatefailedDialog()
+    {
+        var confirmationResult = await DialogService.Alert("Update Customer Payment Failed, please agaim", "Update Failed");
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
         }
     }
 }

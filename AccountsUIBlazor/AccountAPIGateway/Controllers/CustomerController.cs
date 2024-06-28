@@ -43,7 +43,8 @@ namespace AccountAPIGateway.Controller
             try
             {
                 var data = await _unitOfWork.Customers.GetAllAsync();
-                customerList = _IMapper.Map<List<UICustomer>>(data);
+                var sortedData = data.OrderByDescending(x => x.CreatedDate);
+                customerList = _IMapper.Map<List<UICustomer>>(sortedData);
                 apiResponse.Success = true;
                 apiResponse.Result = customerList;
             }
@@ -115,7 +116,7 @@ namespace AccountAPIGateway.Controller
         }
 
         [HttpPost]
-        //[Route("AddCustomer")]
+        [Route("AddCustomer")]
         public async Task<IActionResult> Add(UICustomer Customer)
         {
           

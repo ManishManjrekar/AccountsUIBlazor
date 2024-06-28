@@ -86,18 +86,18 @@
                         <RadzenRequiredValidator Text="FirstName is required" Component="FirstName" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="UIVendor" Property="LastName" Title="First Name" Width="120px">
+                <RadzenDataGridColumn TItem="UIVendor" Property="LastName" Title="Last Name" Width="120px">
                     <EditTemplate Context="vendor">
                         <RadzenTextBox @bind-Value="vendor.LastName" Style="width:200px; display: block" Name="LastName" />
                         <RadzenRequiredValidator Text="LastName is required" Component="LastName" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="UIVendor" Property="Email" Title="Email" Width="120px">
+              @*   <RadzenDataGridColumn TItem="UIVendor" Property="Email" Title="Email" Width="120px">
                     <EditTemplate Context="vendor">
                         <RadzenTextBox @bind-Value="vendor.Email" Style="width:200px; display: block" Name="Email" />
                         <RadzenRequiredValidator Text="Email is required" Component="Email" Popup="true" />
                     </EditTemplate>
-                </RadzenDataGridColumn>
+                </RadzenDataGridColumn> *@
                 <RadzenDataGridColumn TItem="UIVendor" Property="Mobile" Title="Mobile No" Width="120px">
                     <EditTemplate Context="vendor">
                         <RadzenTextBox @bind-Value="vendor.Mobile" Style="width:200px; display: block" Name="MobileNo" />
@@ -176,9 +176,17 @@
         try
         {
             var obj = await HttpClient.PutAsJsonAsync("Vendor", updatedVendor);
-            Console.WriteLine(obj);
-            LoadCustomerDetails();
-            await vendorGrid.UpdateRow(vendor);
+
+            if (obj.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                Console.WriteLine(obj);
+                LoadCustomerDetails();
+                await vendorGrid.UpdateRow(vendor);
+            } else
+            {
+                OpenUpdatefailedDialog();
+            }
+            
         }
         catch (Exception ex)
         {
@@ -303,7 +311,18 @@
                 Console.WriteLine();
             }
         }
+
+        private async Task OpenUpdatefailedDialog()
+        {
+            var confirmationResult = await DialogService.Alert("Update Vendor Failed, please agaim", "Update Failed");
+            if (confirmationResult.Equals(true))
+            {
+                // if yes then
+                Console.WriteLine();
+            }
+        }
     }
+}
     
 
 }

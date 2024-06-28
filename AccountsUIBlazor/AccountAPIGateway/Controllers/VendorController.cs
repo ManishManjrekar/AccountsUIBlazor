@@ -39,7 +39,8 @@ namespace AccountAPIGateway.Controller
             try
             {
                 var data = await _unitOfWork.Vendor.GetAllAsync();
-                vendorList = _IMapper.Map<List<UIVendor>>(data);
+                var sortedData = data.OrderByDescending(x => x.CreatedDate);
+                vendorList = _IMapper.Map<List<UIVendor>>(sortedData);
                 
             }
             catch (SqlException ex)
@@ -115,8 +116,7 @@ namespace AccountAPIGateway.Controller
 
             try
             {
-                var data = await _unitOfWork.Vendor.AddAsync(Vendor);
-                apiResponse.Success = true;
+                var data = await _unitOfWork.Vendor.AddAsync(Vendor);               apiResponse.Success = true;
                 apiResponse.Result = data;
                
             }
@@ -144,6 +144,7 @@ namespace AccountAPIGateway.Controller
             try
             {
                 var data = await _unitOfWork.Vendor.UpdateAsync(vendorData);
+
                 //UIVendor vendorDataResults = _IMapper.Map<UIVendor>(data);
                 apiResponse.Success = true;
                 apiResponse.Result = data;

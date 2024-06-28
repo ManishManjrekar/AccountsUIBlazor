@@ -25,32 +25,33 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-10">
             <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="firstName">First Name</label>
+                        <label for="firstName">First Name*</label>
                         <input type="text" class="form-control" id="firstName" @bind-value="@CustomerModel.FirstName" placeholder="enter first name..." />
-                        @* <ValidationMessage For="@(()=>CustomerModel.FirstName)" /> *@
+                        <ValidationMessage For="@(()=>CustomerModel.FirstName)" />
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="lastName">Last Name</label>
+                        <label for="lastName">Last Name*</label>
                         <input type="text" class="form-control" id="lastName" @bind-value="@CustomerModel.LastName" placeholder="enter last name..." />
-                       @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
+                        <ValidationMessage For="@(()=>CustomerModel.LastName)" />
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="MiddleName">Middle Name</label>
+                        <label for="MiddleName">Middle Name*</label>
                         <input type="text" class="form-control" id="MiddleName" @bind-value="@CustomerModel.MiddleName" placeholder="enter Middle name..." />
-                        @* <ValidationMessage For="@(()=>CustomerModel.MiddleName)" /> *@
+                        <ValidationMessage For="@(()=>CustomerModel.MiddleName)" />
                     </div>
                 </div>
                 @* <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="email">Email Id #</label>
                         <input type="text" class="form-control" id="email" @bind-value="@CustomerModel.Email" placeholder="email..." />
-                        @* <ValidationMessage For="@(()=>CustomerModel.Email)" /> 
+                        @*  <ValidationMessage For="@(()=>CustomerModel.Email)" /> 
                     </div>
                 </div> *@
+
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="ElectronicPaymentId">Electronic Payment Id</label>
@@ -60,16 +61,16 @@
                 </div>
                  <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
-                        <label for="Mobile">Mobile</label>
+                        <label for="Mobile">Mobile*</label>
                     <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@CustomerModel.Mobile" />
-                       
-                    </div>
+                    <ValidationMessage For="@(()=>CustomerModel.Mobile)" />
+                </div>
                 </div>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="ReferredBy">ReferredBy</label>
                     <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
-                        <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" />
+                       @*  <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" /> *@
                     </div>
                 </div>
                 
@@ -132,7 +133,7 @@
 
 
 @code {
-    RadzenDataGrid<UICustomer> customerGrid;
+        RadzenDataGrid<UICustomer> customerGrid;
     public UICustomer CustomerModel { get; set; } = new();
     public string Log { get; set; } = "";
     private UICustomer UICustomer;
@@ -180,9 +181,16 @@
             //  // var dataa = HttpClient.GetAsync($"Api/Customer/GetAll").Result;
 
             var obj = await HttpClient.PutAsJsonAsync("Customer", updatedCustomer);
-            Console.WriteLine(obj);
-            LoadCustomerDetails();
-            await customerGrid.UpdateRow(customer);
+            if(obj.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+                Console.WriteLine(obj);
+                LoadCustomerDetails();
+                await customerGrid.UpdateRow(customer);
+            } else
+            {
+                OpenUpdatefailedDialog();
+            }
         }
         catch (Exception ex)
         {
@@ -280,7 +288,21 @@
 
             if (loadNameExists != "true")
             {
-                var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
+
+                /*
+                 *   "customerId": 0,
+      "firstName": "string",
+      "lastName": "string",
+      "middleName": "string",
+      "email": "string",
+      "electronicPaymentId": "string",
+      "mobile": "string",
+      "referredBy": "string"
+                 */
+
+    //             var json = JsonSerializer.Serialize(UICustomer,
+    // new JsonSerializerOptions { WriteIndented = true });
+                var obj = await HttpClient.PostAsJsonAsync($"Customer/AddCustomer", UICustomer);
                 Console.WriteLine(obj);
                 LoadCustomerDetails();
                 CustomerModel = new();
@@ -307,6 +329,16 @@
         {
             var confirmationResult = await DialogService.Alert("Duplicate Name exist, please change the name", "Duplicate Name");
             //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+            if (confirmationResult.Equals(true))
+            {
+                // if yes then
+                Console.WriteLine();
+            }
+        }
+
+        private async Task OpenUpdatefailedDialog()
+        {
+            var confirmationResult = await DialogService.Alert("Update Customer Failed, please agaim", "Update Failed");
             if (confirmationResult.Equals(true))
             {
                 // if yes then

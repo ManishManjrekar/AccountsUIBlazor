@@ -56,11 +56,29 @@
                 <RadzenDataGridColumn TItem="UIStockIn" Property="VendorName" Title="Vendor Name" Width="120px" />
                 <RadzenDataGridColumn TItem="UIStockIn" Property="CreatedDate" Title="CreatedDate" Width="120px" />
                 <RadzenDataGridColumn TItem="UIStockIn" Property="Quantity" Title="Quantity" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UIStockIn" Property="Quantity" Title="First Name" Width="120px">
+                    <EditTemplate Context="StockInList">
+                        <RadzenNumeric @bind-Value="StockInList.Quantity" Style="width:200px; display: block" Name="Quantity" />
+                        <RadzenRequiredValidator Text="Quantity is required" Component="Quantity" Popup="true" />
+                    </EditTemplate>
+                </RadzenDataGridColumn>
+
                 <RadzenDataGridColumn TItem="UIStockIn" Context="StockInList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
                     <Template Context="StockInList">
+                        <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@(args => EditRow(StockInList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
                         <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(StockInList))" @onclick:stopPropagation="true">
                         </RadzenButton>
                     </Template>
+                    <EditTemplate Context="StockInList">
+                        <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@((args) => SaveRow(StockInList))">
+                        </RadzenButton>
+                        <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@((args) => CancelEdit(StockInList))">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(StockInList))">
+                        </RadzenButton>
+                    </EditTemplate>
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>
@@ -75,6 +93,28 @@
     {
         var confirmationResult = await DialogService.Alert("Duplicate Load Name exist, please change the load name", "Duplicate Load Name");
         //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
+
+        
+    }
+
+    private async Task OpenAddfailedDialog()
+    {
+        var confirmationResult = await DialogService.Alert("Add Stoke Failed, please again", "Add Stock Failed");
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
+    }
+
+    private async Task OpenUpdatefailedDialog()
+    {
+        var confirmationResult = await DialogService.Alert("Update Stoke Failed, please again", "Update Stock Failed");
         if (confirmationResult.Equals(true))
         {
             // if yes then
@@ -203,8 +243,17 @@
             if (loadNameExists != "true")
             {
                 var obj = await HttpClient.PostAsJsonAsync($"StockIn/AddStockIn", UIStockIn);
-                FillGridForStockIns();
-                UIStockIn = new();
+                if (obj.StatusCode== System.Net.HttpStatusCode.OK)
+                {
+                    FillGridForStockIns();
+                    UIStockIn = new();
+                    this.OnInitialized();
+                } 
+                else
+                {
+                    OpenAddfailedDialog();
+                }
+
             }
             else
             {
@@ -245,5 +294,46 @@
             await salesDetailsGrid.Reload();
         }
     }
+
+    async Task SaveRow(UIStockIn stockIn)
+    {
+        try
+        {
+            var obj = await HttpClient.PutAsJsonAsync("StockIn", stockIn);
+            if (obj.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+
+                Console.WriteLine(obj);
+                LoadStockInDetails();
+                await salesDetailsGrid.UpdateRow(stockIn);
+            }
+            else
+            {
+                OpenUpdatefailedDialog();
+            }
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+    }
+
+    async Task EditRow(UIStockIn stock)
+    {
+        salesDetailsGridUpdate = stock;
+        await salesDetailsGrid.EditRow(stock);
+    }
+
+    void CancelEdit(UIStockIn stock)
+    {
+        Reset();
+
+        salesDetailsGrid.CancelEditRow(stock);
+
+
+    }
 }
+ 
  
