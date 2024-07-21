@@ -208,7 +208,7 @@
             UIVendorPayment.StockInList.Add(new StockInList { StockInId = item.StockInId, LoadName = item.LoadName });
         }
 
-        
+
         // Log += UIStockIn.LoadName;
     }
     public void Submit(EditContext formContext)
@@ -226,6 +226,9 @@
             var obj = await HttpClient.PostAsJsonAsync($"VendorPayment/AddVendorPayment", UIVendorPayment);
             Console.WriteLine(obj);
             GetVendorPaymentDetails(UIVendorPayment.StockInId);
+            UIVendorPayment = new();
+            await OpenUpdateSuccessDialog();
+            StateHasChanged();
         }
         catch (Exception ex)
         {
@@ -285,5 +288,21 @@
         }
     }
     
+}
+
+@code
+{
+    [Inject]
+    protected DialogService DialogService { get; set; }
+
+    private async Task OpenUpdateSuccessDialog()
+    {
+        var confirmationResult = await DialogService.Alert("Vendor Payment Details are Updated", "Update Success");
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
+    }
 }
  

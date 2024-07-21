@@ -205,7 +205,7 @@ namespace AccountAPIGateway.Controller
             {
                 customerPaymentMasterDto.CustomerPurchases = await GetSalesDataAsPerCustomerId(customerId);
                 customerPaymentMasterDto.CustomerPaymentsDone  = await GetAllCustomerPaymentById(customerId);
-                customerPaymentMasterDto. BalanceAmountDue = customerPaymentMasterDto.CustomerPurchases.Select(e=>e.TotalAmount).Sum() - customerPaymentMasterDto.CustomerPaymentsDone.Select(e =>e.AmountPaid).Sum();
+                customerPaymentMasterDto.BalanceAmountDue = customerPaymentMasterDto.CustomerPurchases.Select(e=>e.TotalAmount).Sum() - customerPaymentMasterDto.CustomerPaymentsDone.Select(e =>e.AmountPaid).Sum();
                 
 
                 //var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);

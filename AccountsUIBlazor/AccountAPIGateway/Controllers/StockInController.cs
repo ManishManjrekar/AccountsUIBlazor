@@ -34,7 +34,8 @@ namespace AccountAPIGateway.Controller
             try
             {
                 var data = await _unitOfWork.StockIn.GetAllAsync();
-                stockInList = _IMapper.Map<List<UIStockIn>>(data);
+                var sortedData = data.OrderByDescending(x => x.CreatedDate);
+                stockInList = _IMapper.Map<List<UIStockIn>>(sortedData);
             }
             catch (SqlException ex)
             {

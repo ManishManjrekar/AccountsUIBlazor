@@ -173,7 +173,7 @@
                 UIVendorExpenses.LoadName = data.LoadName;
                 UIVendorExpenses.VendorName = data.VendorName;
                 FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
-                
+
             }
 
         }
@@ -221,7 +221,7 @@
     {
         Log += "DateSelection fired. ";
     }
-   
+
     public void Submit(EditContext formContext)
     {
         var form = (UICustomer)formContext.Model;
@@ -234,7 +234,12 @@
         try
         {
             var obj = await HttpClient.PostAsJsonAsync($"VendorExpenses/AddVendorExpenses", UIVendorExpenses);
+            OpenUpdateSuccessDialog();
+            this.UIVendorExpenses.CreatedDate = DateTime.Now;
+            this.UIVendorExpenses.AmountPaid = 0;
+            this.UIVendorExpenses.CommissionPercentage = 0;
             FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
+           
         }
         catch (Exception ex)
         {
@@ -242,6 +247,23 @@
             Console.WriteLine(ex.Message.ToString());
         }
         
+    }
+}
+
+
+@code
+{
+    [Inject]
+    protected DialogService DialogService { get; set; }
+
+    private async Task OpenUpdateSuccessDialog()
+    {
+        var confirmationResult = await DialogService.Alert("Vendor Expenses are Updated", "Update Success");
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
     }
 }
  

@@ -229,7 +229,7 @@ namespace AccountAPIGateway.Controller
         public async Task<VendorPaymentMaster> GetVendorPaymentDetails(int stockInId)
         {
             VendorPaymentMaster results = new VendorPaymentMaster();
-            try
+            try 
             {
                 //Sales Details as per StockInId
                 var salesDetails = await _unitOfWork.Sales.GetSalesDataAsPerStockInId(stockInId);
