@@ -1,8 +1,72 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿# Ignore Visual Studio temporary files, build results, etc..
 
-/.vs/AccountsUIBlazor/v17
-/.vs
-/AccountsUIBlazor/.vs/AccountsUIBlazor/v17/.suo
-/AccountsUIBlazor/AccountsUIBlazor/bin/Debug/net6.0
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[xX]64/
+[xX]86/
+[Aa][Rr][Mm]/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider files
+.idea/
+*.sln.iml
+
+# User-specific files
+*.sln.ide
+
+# Visual Studio Code settings
+.vscode/
+
+# Logs
+*.log
+
+# Local configuration files
+appsettings.Development.json
+
+# Environment variable files
+.env
+
+# Published output
+publish/
+
+# Database files
+*.db
+*.mdf
+*.ldf
+
+# NuGet Packages
+*.nupkg
+**/packages/*
+*.nuspec
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# npm and Yarn files (if applicable)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Other
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pdb
+*.d.ts
+*.cache
+*.pdb
+
+# Backup files
+*~
