@@ -9,20 +9,21 @@
       "AccountApi.Logging/1.0.0": {
         "dependencies": {
           "AccountApi.Application": "1.0.0",
-          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "8.0.0"
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "8.0.0",
+          "log4net": "3.0.4"
         },
         "runtime": {
           "AccountApi.Logging.dll": {}
         }
       },
-      "log4net/2.0.15": {
+      "log4net/3.0.4": {
         "dependencies": {
           "System.Configuration.ConfigurationManager": "4.5.0"
         },
         "runtime": {
           "lib/netstandard2.0/log4net.dll": {
-            "assemblyVersion": "2.0.15.0",
-            "fileVersion": "2.0.15.0"
+            "assemblyVersion": "3.0.4.0",
+            "fileVersion": "3.0.4.0"
           }
         }
       },
@@ -109,7 +110,7 @@
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
           "Microsoft.Extensions.Configuration.Binder": "6.0.0",
           "Microsoft.Extensions.Logging": "6.0.0",
-          "log4net": "2.0.15"
+          "log4net": "3.0.4"
         },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll": {
@@ -200,7 +201,10 @@
       },
       "AccontApi.Core/1.0.0": {
         "runtime": {
-          "AccontApi.Core.dll": {}
+          "AccontApi.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "AccountApi.Application/1.0.0": {
@@ -208,7 +212,10 @@
           "AccontApi.Core": "1.0.0"
         },
         "runtime": {
-          "AccountApi.Application.dll": {}
+          "AccountApi.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -219,12 +226,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "log4net/2.0.15": {
+    "log4net/3.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GahnO9ZgFka+xYcFwAfIFjW+k86P2nxFoaEpH6t3v4hiGj7tv2ksVZphxCVIHmJxoySS0HeU3dgCW+bSCcfD0A==",
-      "path": "log4net/2.0.15",
-      "hashPath": "log4net.2.0.15.nupkg.sha512"
+      "sha512": "sha512-4jJlhW7fTLIm0Ktq1FGlmgavlkEbfHCbqWEusacKQBq7NQ85vJOu5jjISCeOI4Pyu3kqIiAktv8WLKvyq6evwA==",
+      "path": "log4net/3.0.4",
+      "hashPath": "log4net.3.0.4.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/6.0.0": {
       "type": "package",

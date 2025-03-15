@@ -12,7 +12,7 @@
 		</CustomData>
 		<CustomData Category="Reference" Type="Assembly">
 			<Metadata Name="LogicalName" Value="AccountsDbProject.dll" />
-			<Metadata Name="FileName" Value="C:\USERS\MANJR\SOURCE\NEWREPOS\ACCOUNTSUIBLAZOR\ACCOUNTSUIBLAZOR\ACCOUNTSDBPROJECT\OBJ\DEBUG\ACCOUNTSDBPROJECT.DLL" />
+			<Metadata Name="FileName" Value="C:\USERS\ARATI\SOURCE\REPOS\ACCOUNTSUIBLAZOR\ACCOUNTSUIBLAZOR\ACCOUNTSDBPROJECT\OBJ\DEBUG\ACCOUNTSDBPROJECT.DLL" />
 			<Metadata Name="AssemblyName" Value="AccountsDbProject" />
 			<Metadata Name="PermissionSet" Value="SAFE" />
 			<Metadata Name="Owner" Value="" />
@@ -20,7 +20,7 @@
 			<Metadata Name="IsVisible" Value="True" />
 			<Metadata Name="IsModelAware" Value="True" />
 			<Metadata Name="SkipCreationIfEmpty" Value="True" />
-			<Metadata Name="AssemblySymbolsName" Value="C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.pdb" />
+			<Metadata Name="AssemblySymbolsName" Value="C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.pdb" />
 		</CustomData>
 		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
 	</Header>

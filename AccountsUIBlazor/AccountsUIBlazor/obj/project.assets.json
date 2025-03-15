@@ -66,19 +66,19 @@
           "build/_._": {}
         }
       },
-      "log4net/2.0.15": {
+      "log4net/3.0.4": {
         "type": "package",
         "dependencies": {
           "System.Configuration.ConfigurationManager": "4.5.0"
         },
         "compile": {
           "lib/netstandard2.0/log4net.dll": {
-            "related": ".xml"
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
           "lib/netstandard2.0/log4net.dll": {
-            "related": ".xml"
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -1391,7 +1391,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AccountApi.Application": "1.0.0",
-          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "8.0.0"
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "8.0.0",
+          "log4net": "3.0.4"
         },
         "compile": {
           "bin/placeholder/AccountApi.Logging.dll": {}
@@ -1508,28 +1509,21 @@
         "tool/x64/libsass.dll"
       ]
     },
-    "log4net/2.0.15": {
-      "sha512": "GahnO9ZgFka+xYcFwAfIFjW+k86P2nxFoaEpH6t3v4hiGj7tv2ksVZphxCVIHmJxoySS0HeU3dgCW+bSCcfD0A==",
+    "log4net/3.0.4": {
+      "sha512": "4jJlhW7fTLIm0Ktq1FGlmgavlkEbfHCbqWEusacKQBq7NQ85vJOu5jjISCeOI4Pyu3kqIiAktv8WLKvyq6evwA==",
       "type": "package",
-      "path": "log4net/2.0.15",
+      "path": "log4net/3.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net20/log4net.dll",
-        "lib/net20/log4net.xml",
-        "lib/net35/log4net.dll",
-        "lib/net35/log4net.xml",
-        "lib/net40-client/log4net.dll",
-        "lib/net40-client/log4net.xml",
-        "lib/net40/log4net.dll",
-        "lib/net40/log4net.xml",
-        "lib/net45/log4net.dll",
-        "lib/net45/log4net.xml",
-        "lib/netstandard1.3/log4net.dll",
-        "lib/netstandard1.3/log4net.xml",
+        "README.md",
+        "lib/net462/log4net.dll",
+        "lib/net462/log4net.pdb",
+        "lib/net462/log4net.xml",
         "lib/netstandard2.0/log4net.dll",
+        "lib/netstandard2.0/log4net.pdb",
         "lib/netstandard2.0/log4net.xml",
-        "log4net.2.0.15.nupkg.sha512",
+        "log4net.3.0.4.nupkg.sha512",
         "log4net.nuspec",
         "package-icon.png"
       ]
@@ -5155,23 +5149,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\manjr\\.nuget\\packages\\": {},
+    "C:\\Users\\Arati\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor.csproj",
+      "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor.csproj",
       "projectName": "AccountsUIBlazor",
-      "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor.csproj",
-      "packagesPath": "C:\\Users\\manjr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\",
+      "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor.csproj",
+      "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\manjr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Arati\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5180,21 +5174,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
-              "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj"
+            "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
+              "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj"
             },
-            "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj"
+            "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj"
             },
-            "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Logging\\AccountApi.Logging.csproj": {
-              "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Logging\\AccountApi.Logging.csproj"
+            "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Logging\\AccountApi.Logging.csproj": {
+              "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Logging\\AccountApi.Logging.csproj"
             }
           }
         }
@@ -5203,7 +5196,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net6.0": {
@@ -5257,7 +5256,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

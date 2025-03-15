@@ -135,7 +135,10 @@
       "System.Security.Principal.Windows/4.7.0": {},
       "AccontApi.Core/1.0.0": {
         "runtime": {
-          "AccontApi.Core.dll": {}
+          "AccontApi.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "AccountApi.Application/1.0.0": {
@@ -143,12 +146,18 @@
           "AccontApi.Core": "1.0.0"
         },
         "runtime": {
-          "AccountApi.Application.dll": {}
+          "AccountApi.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "AccountApi.Sql/1.0.0": {
         "runtime": {
-          "AccountApi.Sql.dll": {}
+          "AccountApi.Sql.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

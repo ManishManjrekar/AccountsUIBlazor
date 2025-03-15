@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {}
+    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {}
   },
   "projects": {
-    "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {
+    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
+        "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
         "projectName": "AccountApi.Sql",
-        "projectPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
-        "packagesPath": "C:\\Users\\manjr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\obj\\",
+        "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
+        "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\manjr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Arati\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net6.0": {
@@ -60,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

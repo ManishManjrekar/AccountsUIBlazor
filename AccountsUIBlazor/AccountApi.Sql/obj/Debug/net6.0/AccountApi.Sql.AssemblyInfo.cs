@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AccountApi.Sql")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57267ab3670bdf07819af520ce5c221d6f469d77")]
 [assembly: System.Reflection.AssemblyProductAttribute("AccountApi.Sql")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AccountApi.Sql")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
