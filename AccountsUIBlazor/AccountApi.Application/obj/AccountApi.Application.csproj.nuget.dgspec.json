@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {}
+    "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj": {
+    "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj",
         "projectName": "AccontApi.Core",
-        "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj",
+        "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj",
         "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\obj\\",
+        "outputPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
+    "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj",
         "projectName": "AccountApi.Application",
-        "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj",
+        "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj",
         "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\obj\\",
+        "outputPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj": {
-                "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj"
+              "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj": {
+                "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccontApi.Core\\AccontApi.Core.csproj"
               }
             }
           }

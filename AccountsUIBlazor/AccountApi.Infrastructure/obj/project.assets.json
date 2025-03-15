@@ -750,11 +750,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
       "projectName": "AccountApi.Infrastructure",
-      "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -775,11 +775,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
-              "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj"
+            "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj": {
+              "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Application\\AccountApi.Application.csproj"
             },
-            "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {
-              "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj"
+            "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj": {
+              "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj"
             }
           }
         }

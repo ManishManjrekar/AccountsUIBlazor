@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rr9Il8uJPSE=",
+  "dgSpecHash": "5eXkzV8D6bw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj",
+  "projectFilePath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arati\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\Arati\\.nuget\\packages\\microsoft.codecoverage\\16.11.0\\microsoft.codecoverage.16.11.0.nupkg.sha512",

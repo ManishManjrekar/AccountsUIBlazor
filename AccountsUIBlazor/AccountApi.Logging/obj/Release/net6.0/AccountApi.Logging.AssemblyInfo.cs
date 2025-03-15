@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AccountApi.Logging")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8087342ef95b5a302afac71262eccb1e75a731b")]
 [assembly: System.Reflection.AssemblyProductAttribute("AccountApi.Logging")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AccountApi.Logging")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

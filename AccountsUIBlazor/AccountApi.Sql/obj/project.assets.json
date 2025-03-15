@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
+      "projectUniqueName": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
       "projectName": "AccountApi.Sql",
-      "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
+      "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\AccountApi.Sql.csproj",
       "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\obj\\",
+      "outputPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Sql\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj": {}
+    "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj": {
+    "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj",
+        "projectUniqueName": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj",
         "projectName": "AccountApi.Test",
-        "projectPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj",
+        "projectPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\AccountApi.Test.csproj",
         "packagesPath": "C:\\Users\\Arati\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\obj\\",
+        "outputPath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VKyXGbdlQB8=",
+  "dgSpecHash": "nPDPf3h0xDQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Arati\\Source\\Repos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Arati\\source\\repos\\ManishManjrekar\\AccountsUIBlazor\\AccountsUIBlazor\\AccountApi.Infrastructure\\AccountApi.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Arati\\.nuget\\packages\\dapper\\2.1.24\\dapper.2.1.24.nupkg.sha512",
     "C:\\Users\\Arati\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

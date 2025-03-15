@@ -43,3 +43,15 @@ C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj
 C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\refint\AccontApi.Core.dll
 C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.pdb
 C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\ref\AccontApi.Core.dll
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\bin\Debug\net6.0\AccontApi.Core.deps.json
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\bin\Debug\net6.0\AccontApi.Core.dll
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\bin\Debug\net6.0\AccontApi.Core.pdb
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.AssemblyInfoInputs.cache
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.AssemblyInfo.cs
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.csproj.CoreCompileInputs.cache
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.sourcelink.json
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.dll
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\refint\AccontApi.Core.dll
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\AccontApi.Core.pdb
+C:\Users\Arati\source\repos\ManishManjrekar\AccountsUIBlazor\AccountsUIBlazor\AccontApi.Core\obj\Debug\net6.0\ref\AccontApi.Core.dll
