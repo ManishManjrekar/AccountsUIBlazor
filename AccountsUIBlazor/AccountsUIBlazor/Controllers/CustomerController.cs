@@ -22,8 +22,8 @@ namespace AccountsUIBlazor.Controller
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
-        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
-
+        //private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
+        private static readonly ILog _log = LogManager.GetLogger(typeof(CustomerController));
 
 
         /// <summary>
