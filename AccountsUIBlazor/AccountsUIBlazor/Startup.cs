@@ -1,8 +1,7 @@
 ﻿using AccountApi.Application.Interfaces;
 using AccountApi.Infrastructure.Repository;
-using AccountsUIBlazor.UIModels;
+using Accounts.Apis;
 using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Radzen;
 
@@ -93,7 +92,7 @@ namespace AccountsUIBlazor
                 //client.BaseAddress = new Uri("http://localhost:7207/");
                 //client.BaseAddress = new Uri("http://localhost:7207/");
 
-                client.BaseAddress = new Uri("http://192.168.1.192/");
+                client.BaseAddress = new Uri(Configuration["Services:AccountApi"]);
 
                 return client;
             });

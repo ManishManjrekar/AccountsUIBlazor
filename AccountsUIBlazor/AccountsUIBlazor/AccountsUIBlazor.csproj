@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="UIModels\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="UIModels\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="UIModels\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="UIModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\InputTextOnInput.razor" />
   </ItemGroup>
 
@@ -24,6 +35,8 @@
     <ProjectReference Include="..\AccountApi.Application\AccountApi.Application.csproj" />
     <ProjectReference Include="..\AccountApi.Infrastructure\AccountApi.Infrastructure.csproj" />
     <ProjectReference Include="..\AccountApi.Logging\AccountApi.Logging.csproj" />
+    <ProjectReference Include="..\Accounts.Apis\Accounts.Apis.csproj" />
+    <ProjectReference Include="..\Accounts.Models\Accounts.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>
