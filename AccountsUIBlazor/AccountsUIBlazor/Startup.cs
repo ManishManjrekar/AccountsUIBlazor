@@ -90,10 +90,10 @@ namespace AccountsUIBlazor
             services.AddScoped(sp =>
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:7207/");
+                //client.BaseAddress = new Uri("http://localhost:7207/");
                 //client.BaseAddress = new Uri("http://localhost:7207/");
 
-                //client.BaseAddress = new Uri("http://192.168.1.192/");
+                client.BaseAddress = new Uri("http://192.168.1.192/");
 
                 return client;
             });
