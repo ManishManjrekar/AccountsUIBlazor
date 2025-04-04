@@ -88,12 +88,8 @@ namespace AccountsUIBlazor
             //services.AddHttpClient();
             services.AddScoped(sp =>
             {
-                var client = new HttpClient();
-                //client.BaseAddress = new Uri("http://localhost:7207/");
-                //client.BaseAddress = new Uri("http://localhost:7207/");
-
+                var client = new HttpClient();               
                 client.BaseAddress = new Uri(Configuration["Services:AccountApi"]);
-
                 return client;
             });
 
