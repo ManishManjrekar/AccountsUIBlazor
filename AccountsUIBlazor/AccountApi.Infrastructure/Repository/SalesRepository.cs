@@ -31,7 +31,7 @@ namespace AccountApi.Infrastructure.Repository
             {
                 
                 connection.Open();
-                var result = await connection.QueryAsync<Sales>(SalesQueries.AllSales);
+                var result = await connection.QueryAsync<Sales>(Constants.AllSales);
                 return result.ToList();
             }
         }
@@ -41,7 +41,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<Sales>(SalesQueries.SalesById, new { SalesId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Sales>(Constants.SalesById, new { SalesId = id });
                 return result;
             }
         }
@@ -62,7 +62,7 @@ namespace AccountApi.Infrastructure.Repository
                 {
                     //Sales obj = new Sales();
                     connection.Open();
-                    var result = await connection.ExecuteAsync(SalesQueries.AddSales, entity);
+                    var result = await connection.ExecuteAsync(Constants.AddSales, entity);
                     // var result1 = await connection.Add<Sales>(entity);
 
                     return result.ToString();
@@ -80,7 +80,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(SalesQueries.UpdateSales, entity);
+                var result = await connection.ExecuteAsync(Constants.UpdateSales, entity);
                 return result.ToString();
             }
         }
@@ -90,7 +90,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(SalesQueries.DeleteSales, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(Constants.DeleteSales, new { CustomerId = id });
                 return result.ToString();
             }
         }
@@ -102,7 +102,7 @@ namespace AccountApi.Infrastructure.Repository
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerStockInId, new { stockInId });
+                    var result = await connection.QueryAsync<SalesDetails>(Constants.GetSalesDataAsPerStockInId, new { stockInId });
                     return result.ToList();
                 }
             }
@@ -121,7 +121,7 @@ namespace AccountApi.Infrastructure.Repository
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerCustomerId, new { customerId });
+                    var result = await connection.QueryAsync<SalesDetails>(Constants.GetSalesDataAsPerCustomerId, new { customerId });
                     return result.ToList();
                 }
             }
@@ -138,7 +138,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerDate, new { CreatedDate = selectedDate });
+                var result = await connection.QueryAsync<SalesDetails>(Constants.GetSalesDataAsPerDate, new { CreatedDate = selectedDate });
                 return result.ToList();
             }
         }
@@ -149,7 +149,7 @@ namespace AccountApi.Infrastructure.Repository
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetSales_Sum_Per_StockInId, new { stockInId });
+                    var result = await connection.ExecuteScalarAsync<int>(Constants.GetSales_Sum_Per_StockInId, new { stockInId });
                     return result;
                 }
             }
@@ -166,7 +166,7 @@ namespace AccountApi.Infrastructure.Repository
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetSales_Sum_Per_Date, new { CreatedDate = selectedDate });
+                    var result = await connection.ExecuteScalarAsync<int>(Constants.GetSales_Sum_Per_Date, new { CreatedDate = selectedDate });
                     return result;
                 }
             }
@@ -184,7 +184,7 @@ namespace AccountApi.Infrastructure.Repository
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetSales_Sum_Between_Dates, new { fromDate, toDate, });
+                    var result = await connection.ExecuteScalarAsync<int>(Constants.GetSales_Sum_Between_Dates, new { fromDate, toDate, });
                     return result;
                 }
             }
@@ -202,7 +202,7 @@ namespace AccountApi.Infrastructure.Repository
                 using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
-                    var result = await connection.ExecuteScalarAsync<int>(SalesQueries.GetCommission_for_Sales_PercentageValue, new { PercentageCommission = PercentageCommission, StockInId = StockInId });
+                    var result = await connection.ExecuteScalarAsync<int>(Constants.GetCommission_for_Sales_PercentageValue, new { PercentageCommission = PercentageCommission, StockInId = StockInId });
                     return result;
                 }
             }

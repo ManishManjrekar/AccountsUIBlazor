@@ -4,6 +4,7 @@ namespace AccountApi.Core
 {
     public class CustomerPaymentReceived
     {
+        public int CustomerPaymentId { get; set; }
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
 

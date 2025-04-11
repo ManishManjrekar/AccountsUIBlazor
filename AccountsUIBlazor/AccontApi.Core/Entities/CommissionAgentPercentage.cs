@@ -11,5 +11,7 @@ namespace AccountApi.Core
         public int CommissionAgentPercentageId { get; set; }
         public int CommissionPercentage { get; set; }
         public bool IsActive { get; set; }
+
+        public int CommissionPercentageId { get; set; }
     }
 }

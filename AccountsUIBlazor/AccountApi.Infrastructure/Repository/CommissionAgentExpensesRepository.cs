@@ -30,7 +30,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<CommissionAgentExpenses>(CommissionAgentExpensesQueries.GetAllCommissionAgentExpenses);
+                var result = await connection.QueryAsync<CommissionAgentExpenses>(Constants.GetAllCommissionAgentExpenses);
                 return result.ToList();
             }
         }
@@ -40,7 +40,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentExpenses>(CommissionAgentExpensesQueries.GetAllCommissionAgentExpenses_ByStockInId, new { StockInId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentExpenses>(Constants.GetAllCommissionAgentExpenses_ByStockInId, new { StockInId = id });
                 return result;
             }
         }
@@ -50,7 +50,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CommissionAgentExpensesQueries.AddCommissionAgentExpenses, entity);
+                var result = await connection.ExecuteAsync(Constants.AddCommissionAgentExpenses, entity);
                 return result.ToString();
             }
         }
@@ -60,7 +60,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CommissionAgentExpensesQueries.UpdateCommissionAgentExpenses, entity);
+                var result = await connection.ExecuteAsync(Constants.UpdateCommissionAgentExpenses, entity);
                 return result.ToString();
             }
         }
@@ -70,7 +70,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CommissionAgentExpensesQueries.DeleteCommissionAgentExpenses, new { CommissionAgentExpensesId = id });
+                var result = await connection.ExecuteAsync(Constants.DeleteCommissionAgentExpenses, new { CommissionAgentExpensesId = id });
                 return result.ToString();
             }
         }
@@ -81,7 +81,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<CommissionAgentExpenses>(CommissionAgentExpensesQueries.GetCommissionAgentExpenses_ByDate, new { CreatedDate = selectedDate });
+                var result = await connection.QueryAsync<CommissionAgentExpenses>(Constants.GetCommissionAgentExpenses_ByDate, new { CreatedDate = selectedDate });
                 return result.ToList();
             }
         }
