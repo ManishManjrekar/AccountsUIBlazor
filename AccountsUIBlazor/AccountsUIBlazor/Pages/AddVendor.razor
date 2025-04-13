@@ -1,77 +1,75 @@
-﻿@page "/AddVendor"
+﻿
+
+@page "/AddVendor"
 @using Accounts.Models.UIModels;
 @using System.Net.Http;
 @using Newtonsoft.Json;
 @using System.Text;
+@using Microsoft.Extensions.Logging;
 @inject HttpClient HttpClient
 @inject NavigationManager navigationManager;
+@inject ILogger<AddVendor> Logger;
 
 <EditForm Model="VendorModel" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
-
     <DataAnnotationsValidator />
     <ValidationSummary />
-
 
     <h4>Vendor Registration</h4>
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-10">
             <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="firstName">First Name</label>
+                <div class="col-md-12">
+                    <label for="firstName">First Name</label>
                     <input type="text" class="form-control" id="firstName" @bind-value="@VendorModel.FirstName" placeholder="enter first name..." />
-                       
-                    </div>
                 </div>
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" @bind-value="@VendorModel.LastName" placeholder="enter last name..." />
-                      
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="MiddleName">Middle Name</label>
-                    <input type="text" class="form-control" id="MiddleName" @bind-value="@VendorModel.MiddleName" placeholder="enter Middle name..." />
-                       
-                    </div>
-                </div>
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="email">Email Id</label>
-                    <input type="text" class="form-control" id="email" @bind-value="@VendorModel.Email" placeholder="email..." />
-                       
-                    </div>
-                </div>
-                 <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="ElectronicPaymentId">Electronic Payment Id</label>
-                    <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@VendorModel.ElectronicPaymentId" />
-                       
-                    </div>
-                </div>
-                 <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="Mobile">Mobile</label>
-                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.Mobile" />
-                       
-                    </div>
-                </div>
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="ReferredBy">ReferredBy</label>
-                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@VendorModel.ReferredBy" />
-                       
-                    </div>
-                </div>
-
-
-            <button type="submit" class="btn btn-primary" Style="margin-top:10px">Register</button>
             </div>
-            
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" @bind-value="@VendorModel.LastName" placeholder="enter last name..." />
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="MiddleName">Middle Name</label>
+                    <input type="text" class="form-control" id="MiddleName" @bind-value="@VendorModel.MiddleName" placeholder="enter Middle name..." />
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="email">Email Id</label>
+                    <input type="text" class="form-control" id="email" @bind-value="@VendorModel.Email" placeholder="email..." />
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="ElectronicPaymentId">Electronic Payment Id</label>
+                    <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@VendorModel.ElectronicPaymentId" />
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="Mobile">Mobile</label>
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@VendorModel.Mobile" />
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="ReferredBy">ReferredBy</label>
+                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@VendorModel.ReferredBy" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:10px">Register</button>
         </div>
+    </div>
 </EditForm>
+
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
 
 <div class="row mt-2">
     <h4>Vendor Details</h4>
@@ -85,7 +83,7 @@
                         <RadzenRequiredValidator Text="FirstName is required" Component="FirstName" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="UIVendor" Property="LastName" Title="First Name" Width="120px">
+                <RadzenDataGridColumn TItem="UIVendor" Property="LastName" Title="Last Name" Width="120px">
                     <EditTemplate Context="vendor">
                         <RadzenTextBox @bind-Value="vendor.LastName" Style="width:200px; display: block" Name="LastName" />
                         <RadzenRequiredValidator Text="LastName is required" Component="LastName" Popup="true" />
@@ -124,67 +122,149 @@
     </div>
 </div>
 
-
 @code {
+
+    [Inject]
+    protected DialogService DialogService { get; set; }
     RadzenDataGrid<UIVendor> vendorGrid;
     public UIVendor VendorModel { get; set; } = new();
     public string Log { get; set; } = "";
     private UIVendor UIVendor;
-    private List<UIVendor> vendors = new List<UIVendor>();
-    private List<UIVendor> VendorListData = new List<UIVendor>();
-    bool displayValidationErrorMessages = false;
+    private List<UIVendor> VendorListData = new();
+    private bool isLoading = false;
+
     UIVendor vendorToInsert;
     UIVendor vendorToUpdate;
-    public void InvalidSubmit(EditContext formContext)
-    {
-        Log += "OnInvalidSubmit fired. ";
-    }
-
-    // public void ValidSubmit(EditContext formContext)
-    // {
-    //     Log += "OnValidSubmit fired. ";
-    // }
 
     protected override void OnInitialized()
     {
-        // Load customer details on page load
         LoadCustomerDetails();
     }
 
     private async void LoadCustomerDetails()
     {
-        VendorListData = await HttpClient.GetFromJsonAsync<List<UIVendor>>($"Vendor/GetAllVendor");
+        isLoading = true;
         StateHasChanged();
+        try
+        {
+            VendorListData = await HttpClient.GetFromJsonAsync<List<UIVendor>>("Vendor/GetAllVendor");
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error loading customer details");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+        Logger.LogWarning("Invalid form submission");
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UIVendor = (UIVendor)formContext.Model;
+        isLoading = true;
+        StateHasChanged();
+        try
+        {
+            var loadNameExists = await HttpClient.GetStringAsync($"Vendor/GetDuplicateOrNot?firstName={UIVendor.FirstName}&lastName={UIVendor.LastName}");
+            if (loadNameExists != "true")
+            {
+                var response = await HttpClient.PostAsJsonAsync("Vendor/AddVendor", UIVendor);
+                if (response.IsSuccessStatusCode)
+                {
+                    await OpenDialog("Vendor details are saved");
+                }
+                LoadCustomerDetails();
+            }
+            else
+            {
+                await OpenDuplicateLoadNameDialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Error saving vendor details");
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
     }
 
     async Task SaveRow(UIVendor vendor)
     {
-        UIVendor updatedVendor = new UIVendor()
-            {
-                VendorId = vendor.VendorId,
-                FirstName = vendor.FirstName ?? string.Empty,
-                LastName = vendor.LastName ?? string.Empty,
-                Email = vendor.Email ?? string.Empty,
-                MiddleName = vendor.MiddleName ?? string.Empty,
-                Mobile = vendor.Mobile ?? string.Empty,
-                ElectronicPaymentId = vendor.ElectronicPaymentId ?? string.Empty,
-                ReferredBy = vendor.ReferredBy ?? string.Empty
-            };
-
+        isLoading = true;
+        StateHasChanged();
         try
         {
-            var obj = await HttpClient.PutAsJsonAsync("Vendor", updatedVendor);
-            Console.WriteLine(obj);
+            var response = await HttpClient.PutAsJsonAsync("Vendor", vendor);
+            if (response.IsSuccessStatusCode)
+            {
+                await OpenDialog("Vendor details are saved");
+            }
             LoadCustomerDetails();
             await vendorGrid.UpdateRow(vendor);
         }
         catch (Exception ex)
         {
-
-            Console.WriteLine(ex.Message.ToString());
+            Logger.LogError(ex, "Error updating vendor details");
         }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
 
-        await vendorGrid.UpdateRow(vendor);
+    async Task EditRow(UIVendor vendor)
+    {
+        await vendorGrid.EditRow(vendor);
+    }
+
+    void CancelEdit(UIVendor vendor)
+    {
+        vendorGrid.CancelEditRow(vendor);
+    }
+
+    async Task DeleteRow(UIVendor vendor)
+    {
+        if (VendorListData.Contains(vendor))
+        {
+            isLoading = true;
+            StateHasChanged();
+            try
+            {
+                var response = await HttpClient.DeleteAsync($"Vendor?id={vendor.VendorId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    await OpenDialog("Vendor details are deleted successfully");
+                }
+                LoadCustomerDetails();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error deleting vendor details");
+            }
+            finally
+            {
+                isLoading = false;
+                StateHasChanged();
+            }
+            await vendorGrid.Reload();
+        }
+        else
+        {
+            vendorGrid.CancelEditRow(vendor);
+            await vendorGrid.Reload();
+        }
     }
 
     void Reset()
@@ -199,105 +279,13 @@
 
     }
 
-
-    async Task EditRow(UIVendor vendor)
+    private async Task OpenDuplicateLoadNameDialog()
     {
-        vendorToUpdate = vendor;
-        await vendorGrid.EditRow(vendor);
+        await DialogService.Alert("Duplicate Name exist, please change the name", "Duplicate Name");
     }
 
-    void CancelEdit(UIVendor vendor)
+    private async Task OpenDialog(string message)
     {
-        Reset();
-
-        vendorGrid.CancelEditRow(vendor);
-
-
+        await DialogService.Alert(message);
     }
-
-    async Task DeleteRow(UIVendor vendor)
-    {
-        Reset();
-
-        if (VendorListData.Contains(vendor))
-        {
-            try
-            {
-
-                var obj = await HttpClient.DeleteAsync($"Vendor?id={vendor.VendorId}");
-                LoadCustomerDetails();
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message.ToString());
-            }
-            await vendorGrid.Reload();
-        }
-        else
-        {
-            vendorGrid.CancelEditRow(vendor);
-            await vendorGrid.Reload();
-        }
-    }
-
-    private async void HandleDeleteClick(MouseEventArgs args)
-    {
-
-    }
-
-
-    public void Submit(EditContext formContext)
-    {
-        var form = (UIVendor)formContext.Model;
-        Log += "OnSubmit fired. ";
-    }
-
-    public async Task ValidSubmit(EditContext formContext)
-    {
-        UIVendor = (UIVendor)formContext.Model;
-
-        try
-        {
-            var loadNameExists = await HttpClient.GetStringAsync($"Vendor/GetDuplicateOrNot?firstName={UIVendor.FirstName}&lastName={UIVendor.LastName}");
-            Console.WriteLine(loadNameExists);
-
-            if (loadNameExists != "true")
-            {
-                var obj = await HttpClient.PostAsJsonAsync($"Vendor/AddVendor", UIVendor);
-                LoadCustomerDetails();
-            }
-            else
-            {
-                OpenDuplicateLoadNameDialog();
-            }
-
-            
-        }
-        catch (Exception ex)
-        {
-
-            Console.WriteLine(ex.Message.ToString());
-        }
-        //return null;
-    }
-
-    @code
-    {
-        [Inject]
-        protected DialogService DialogService { get; set; }
-
-        private async Task OpenDuplicateLoadNameDialog()
-        {
-            var confirmationResult = await DialogService.Alert("Duplicate Name exist, please change the name", "Duplicate Name");
-            //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
-            if (confirmationResult.Equals(true))
-            {
-                // if yes then
-                Console.WriteLine();
-            }
-        }
-    }
-    
-
 }
