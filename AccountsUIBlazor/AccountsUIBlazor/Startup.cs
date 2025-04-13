@@ -1,6 +1,6 @@
 ﻿using AccountApi.Application.Interfaces;
 using AccountApi.Infrastructure.Repository;
-using Accounts.Apis;
+//using Accounts.Apis;
 using AutoMapper;
 using Microsoft.OpenApi.Models;
 using Radzen;
@@ -73,14 +73,14 @@ namespace AccountsUIBlazor
 
             });
 
-            var mapperConfiguration = new MapperConfiguration(configuration =>
-            {
-                configuration.AddProfile(new MappingProfile());
-            });
+            //var mapperConfiguration = new MapperConfiguration(configuration =>
+            //{
+            //    configuration.AddProfile(new MappingProfile());
+            //});
 
-            var mapper = mapperConfiguration.CreateMapper();
+            //var mapper = mapperConfiguration.CreateMapper();
 
-            services.AddSingleton(mapper);
+            //services.AddSingleton(mapper);
 
 
             // Add MVC or API controllers
