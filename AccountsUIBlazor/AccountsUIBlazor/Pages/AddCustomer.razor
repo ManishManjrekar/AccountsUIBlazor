@@ -7,83 +7,83 @@
 @inject HttpClient HttpClient;
 @inject NavigationManager navigationManager;
 
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
+<div >
 <EditForm Model="CustomerModel" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
 
     <DataAnnotationsValidator />
     <ValidationSummary />
-    @* <div>
-            <label id="firstname">First name:</label> 
-        <InputText @bind-Value="FormModel.FirstName" type="text" id="FirstName" />
-        <label id="lastname">last name:</label>
-        <InputText @bind-Value="FormModel.LastName" type="text" id="LastName" />
-    </div>
-    <button class="btn btn-primary">Submit</button> *@
 
     <h4>Customer Registration</h4>
-     
+
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-10">
             <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" @bind-value="@CustomerModel.FirstName" placeholder="enter first name..." />
-                        @* <ValidationMessage For="@(()=>CustomerModel.FirstName)" /> *@
-                    </div>
+                <div class="col-md-12">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" @bind-value="@CustomerModel.FirstName" placeholder="enter first name..." />
+                    @* <ValidationMessage For="@(()=>CustomerModel.FirstName)" /> *@
                 </div>
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" @bind-value="@CustomerModel.LastName" placeholder="enter last name..." />
-                       @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
-                    </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" @bind-value="@CustomerModel.LastName" placeholder="enter last name..." />
+                    @*  <ValidationMessage For="@(()=>CustomerModel.LastName)" /> *@
                 </div>
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="MiddleName">Middle Name</label>
-                        <input type="text" class="form-control" id="MiddleName" @bind-value="@CustomerModel.MiddleName" placeholder="enter Middle name..." />
-                        @* <ValidationMessage For="@(()=>CustomerModel.MiddleName)" /> *@
-                    </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="MiddleName">Middle Name</label>
+                    <input type="text" class="form-control" id="MiddleName" @bind-value="@CustomerModel.MiddleName" placeholder="enter Middle name..." />
+                    @* <ValidationMessage For="@(()=>CustomerModel.MiddleName)" /> *@
                 </div>
-                @* <div class="row" style="margin-top:10px">
+            </div>
+            @* <div class="row" style="margin-top:10px">
                     <div class="col-md-12">
                         <label for="email">Email Id #</label>
                         <input type="text" class="form-control" id="email" @bind-value="@CustomerModel.Email" placeholder="email..." />
                         @* <ValidationMessage For="@(()=>CustomerModel.Email)" /> 
                     </div>
                 </div> *@
-                 <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="ElectronicPaymentId">Electronic Payment Id</label>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="ElectronicPaymentId">Electronic Payment Id</label>
                     <input type="text" class="form-control" id="ElectronicPaymentId" placeholder="Electronic Payment Id..." @bind-value="@CustomerModel.ElectronicPaymentId" />
-                        @* <ValidationMessage For="@(()=>CustomerModel.ElectronicPaymentId)" /> *@
-                    </div>
+                    @* <ValidationMessage For="@(()=>CustomerModel.ElectronicPaymentId)" /> *@
                 </div>
-                 <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="Mobile">Mobile</label>
-                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@CustomerModel.Mobile" />
-                       
-                    </div>
-                </div>
-                <div class="row" style="margin-top:10px">
-                    <div class="col-md-12">
-                        <label for="ReferredBy">ReferredBy</label>
-                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
-                        <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" />
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary" Style="margin-top:10px">Register</button>
             </div>
-            
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="Mobile">Mobile</label>
+                    <input type="text" class="form-control" placeholder="Mobile number..." id="Mobile" @bind-value="@CustomerModel.Mobile" />
+
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-12">
+                    <label for="ReferredBy">ReferredBy</label>
+                    <input type="text" class="form-control" placeholder="Referred By..." id="ReferredBy" @bind-value="@CustomerModel.ReferredBy" />
+                    <ValidationMessage For="@(()=>CustomerModel.ReferredBy)" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" Style="margin-top:10px">Register</button>
         </div>
+
+    </div>
 </EditForm>
 
-<div class="row mt-2">
+<div class="row mt-2 ">
     <h4>Customer Details</h4>
-    <div class="col-md-12">
+    <div class="col-md-12 mb-5">
         <RadzenDataGrid @ref="customerGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
-                        Data="@customers" TItem="UICustomer" RowUpdate="@OnUpdateRow" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+        Data="@customers" TItem="UICustomer" RowUpdate="@OnUpdateRow" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
                 <RadzenDataGridColumn TItem="UICustomer" Property="FirstName" Title="First Name" Width="120px">
                     <EditTemplate Context="customer">
@@ -91,18 +91,12 @@
                         <RadzenRequiredValidator Text="FirstName is required" Component="FirstName" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="UICustomer" Property="LastName" Title="First Name" Width="120px">
+                <RadzenDataGridColumn TItem="UICustomer" Property="LastName" Title="Last Name" Width="120px">
                     <EditTemplate Context="customer">
                         <RadzenTextBox @bind-Value="customer.LastName" Style="width:200px; display: block" Name="LastName" />
                         <RadzenRequiredValidator Text="LastName is required" Component="LastName" Popup="true" />
                     </EditTemplate>
                 </RadzenDataGridColumn>
-          @*       <RadzenDataGridColumn TItem="UICustomer" Property="Email" Title="Email" Width="120px">
-                    <EditTemplate Context="customer">
-                        <RadzenTextBox @bind-Value="customer.Email" Style="width:200px; display: block" Name="Email" />
-                        <RadzenRequiredValidator Text="Email is required" Component="Email" Popup="true" />
-                    </EditTemplate>
-                </RadzenDataGridColumn> *@
                 <RadzenDataGridColumn TItem="UICustomer" Property="Mobile" Title="Mobile" Width="120px">
                     <EditTemplate Context="customer">
                         <RadzenTextBox @bind-Value="customer.Mobile" Style="width:200px; display: block" Name="Mobile" />
@@ -129,7 +123,7 @@
         </RadzenDataGrid>
     </div>
 </div>
-
+</div>
 
 @code {
     RadzenDataGrid<UICustomer> customerGrid;
@@ -139,6 +133,7 @@
     private List<UICustomer> customers=new List<UICustomer>();
     UICustomer customerToInsert;
     UICustomer customerToUpdate;
+    private bool isLoading = false;
     protected override void OnInitialized()
     {
         // Load customer details on page load
@@ -159,7 +154,8 @@
     }
     async Task SaveRow(UICustomer customer)
     {
-      
+        isLoading = true;
+        StateHasChanged();
 
         UICustomer updatedCustomer = new UICustomer()
             {
@@ -189,6 +185,10 @@
 
             Console.WriteLine(ex.Message.ToString());
         }
+        finally {
+            isLoading = false;
+            StateHasChanged();
+        }
 
         // update customer api call need to be update
     }
@@ -216,6 +216,8 @@
 
     async Task DeleteRow(UICustomer customer)
     {
+        isLoading = true;
+        StateHasChanged();
         Reset();
 
         if (customers.Contains(customer))
@@ -241,6 +243,9 @@
             customerGrid.CancelEditRow(customer);
             await customerGrid.Reload();
         }
+
+        isLoading = false;
+        StateHasChanged();
     }
 
 
@@ -268,6 +273,8 @@
 
     public async Task ValidSubmit(EditContext formContext)
     {
+        isLoading = true;
+        StateHasChanged();
         UICustomer = (UICustomer)formContext.Model;
 
         try
@@ -280,13 +287,14 @@
 
             if (loadNameExists != "true")
             {
+               await OpenDialog("Customer Details saved.");
                 var obj = await HttpClient.PostAsJsonAsync($"Customer", UICustomer);
                 Console.WriteLine(obj);
                 LoadCustomerDetails();
             }
             else
             {
-                OpenDuplicateLoadNameDialog();
+               await OpenDuplicateLoadNameDialog();
             }
             
         }
@@ -294,6 +302,10 @@
         {
 
             Console.WriteLine(ex.Message.ToString());
+        }
+        finally {
+            isLoading = false;
+            StateHasChanged();
         }
         //return null;
     }
@@ -305,6 +317,18 @@
         private async Task OpenDuplicateLoadNameDialog()
         {
             var confirmationResult = await DialogService.Alert("Duplicate Name exist, please change the name", "Duplicate Name");
+            //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+            if (confirmationResult.Equals(true))
+            {
+                // if yes then
+                Console.WriteLine();
+            }
+        }
+
+
+        private async Task OpenDialog(string message)
+        {
+            var confirmationResult = await DialogService.Alert(message);
             //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
             if (confirmationResult.Equals(true))
             {
