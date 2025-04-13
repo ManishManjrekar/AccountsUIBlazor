@@ -1,5 +1,6 @@
 using AccountApi.Application.Interfaces;
 using AccountApi.Infrastructure.Repository;
+using AccountApi.Logging;
 using Accounts.Apis;
 using AutoMapper;
 using log4net;
@@ -49,15 +50,22 @@ builder.Services.AddScoped<ICommissionEarnedRepository, CommissionEarnedReposito
 
 var app = builder.Build();
 
-
+app.Use(async (context, next) =>
+{
+    Logger.Instance.Error($"Request: {context.Request.Path}");
+    await next.Invoke();
+});
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
