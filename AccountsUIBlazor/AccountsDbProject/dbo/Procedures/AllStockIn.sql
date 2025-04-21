@@ -1,5 +1,0 @@
-﻿CREATE PROCEDURE GetAllStockIn
-AS
-BEGIN
-    SELECT * FROM [StockIn] WITH (NOLOCK);
-END

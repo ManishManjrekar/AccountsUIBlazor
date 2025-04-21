@@ -127,7 +127,15 @@ namespace AccountApi.Infrastructure
         public const string GetSales_Sum_Per_Date = "GetSales_Sum_Per_Date";
         public const string GetSales_Sum_Between_Dates = "GetSales_Sum_Between_Dates";
         public const string GetCommission_for_Sales_PercentageValue = "GetCommission_for_Sales_PercentageValue";
-        
+
+
+        //Expenses Types Querirs
+        public const string ExpensesAllCustomer = "ExpensesAllCustomer";
+        public const string ExpensesCusotmerById = "ExpensesCusotmerById";
+        public const string ExpensesAddCustomer = "ExpensesAddCustomer";
+        public const string ExpensesUpdateCustomer = "ExpensesUpdateCustomer";
+        public const string ExpensesDeleteCustomer = "ExpensesDeleteCustomer";
+
     }
 }
  

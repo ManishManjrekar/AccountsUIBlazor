@@ -1,0 +1,6 @@
+﻿CREATE PROCEDURE [dbo].[AllSales]
+AS
+BEGIN
+SET NOCOUNT ON;
+    SELECT * FROM [Sales] (NOLOCK) WHERE isActive = 1;
+END
