@@ -21,155 +21,83 @@ namespace AccountApi.Infrastructure.Repository
 
         private readonly IConfiguration configuration;
         private readonly IMapper _mapper;
+        private readonly SqlConnection connection;
 
         public CommissionAgentPercentageRepository(IConfiguration configuration, IMapper mapper)
         {
             this.configuration = configuration;
             _mapper = mapper;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
         }
 
         public async Task<IReadOnlyList<CommissionAgentPercentage>> GetAllAsync()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
+                connection.Open();          
                 var result = await connection.QueryAsync<CommissionAgentPercentage>(Constants.AllCommissionPercentage, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result.ToList();
-            }       
+                   
         }
-
-        //public async Task<IReadOnlyList<CommissionAgentPercentage>> GetAllAsync()
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<CommissionAgentPercentage>(Constants.AllCommissionPercentage);
-        //        return result.ToList();
-        //    }
-        //}
-
         public async Task<CommissionAgentPercentage> GetByIdAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentPercentage>(Constants.CommissionPercentageById, new { CommissionPercentageId = id }, commandType: CommandType.StoredProcedure);
+                var parameters = new DynamicParameters();
+                parameters.Add("@CommissionAgentExpensesId", id, DbType.Int64);
+                var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentPercentage>(Constants.CommissionPercentageById,parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result;
-            }      
+                  
         }
-
-
-        //public async Task<CommissionAgentPercentage> GetByIdAsync(long id)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QuerySingleOrDefaultAsync<CommissionAgentPercentage>(Constants.CommissionPercentageById, new { CommissionPercentageId = id });
-        //        return result;
-        //    }
-        //}
-
         public async Task<string> AddAsync(CommissionAgentPercentage entity)
         {     
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open(); 
-                    var result = await connection.ExecuteAsync(Constants.AddCommissionPercentage,new{CommissionPercentage = entity.CommissionPercentage,
-                        IsActive = entity.IsActive},commandType: CommandType.StoredProcedure);               
-                        return result.ToString();
-                }         
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@CommissionPercentage", entity.CommissionPercentage, DbType.String);
+                parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);
+                var result = await connection.ExecuteAsync(Constants.AddCommissionPercentage,parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();
+                        
         }
-
-        //public async Task<string> AddAsync(CommissionAgentPercentage entity)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.AddCommissionPercentage, entity);
-        //        return result.ToString();
-        //    }
-        //}
-
         public async Task<string> UpdateAsync(CommissionAgentPercentage entity)
         {
-            var commissionPercentage = _mapper.Map<CommissionAgentPercentage>(entity);
-
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
                 connection.Open();
-
-                var result = await connection.ExecuteAsync(Constants.UpdateCommissionPercentage,new { CommissionPercentageId = commissionPercentage.CommissionPercentageId,
-                        CommissionPercentage = commissionPercentage.CommissionPercentage,IsActive = commissionPercentage.IsActive },
-                    commandType: CommandType.StoredProcedure);
-
+                var parameters = new DynamicParameters();
+                parameters.Add("@CommissionPercentageId ",entity.CommissionPercentageId,DbType.Int64);
+                parameters.Add(" @CommissionPercentage ",entity.CommissionPercentage,DbType.String);
+                parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);
+                var result = await connection.ExecuteAsync(Constants.UpdateCommissionPercentage,parameters,commandType: CommandType.StoredProcedure);
+                connection.Open();
                 return result.ToString(); 
-            }
+            
         }
-
-        //public async Task<string> UpdateAsync(CommissionAgentPercentage entity)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.UpdateCommissionPercentage, entity);
-        //        return result.ToString();
-        //    }
-        //}
-
-
         public async Task<string> DeleteAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
                 connection.Open();
-                var result = await connection.ExecuteAsync(Constants.DeleteCommissionPercentage, new { CommissionPercentageId = id }, commandType: CommandType.StoredProcedure);
+                var parameters = new DynamicParameters();
+                parameters.Add("@CommissionAgentExpensesId", id, DbType.Int64);
+                var result = await connection.ExecuteAsync(Constants.DeleteCommissionPercentage,parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result.ToString();
-            }
+            
         }
-
-
-        //public async Task<string> DeleteAsync(long id)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.DeleteCommissionPercentage, new { CommissionPercentageId = id });
-        //        return result.ToString();
-        //    }
-        //}
-
-       
-
         public async Task<IReadOnlyList<CommissionAgentPercentage>> GetAllCommissionPercentage()
-        {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
+        {         
                 connection.Open();
                 var result = await connection.QueryAsync<CommissionAgentPercentage>(Constants.GetAllCommissionPercentageData);
+                connection.Close();
                 return result.ToList();
-            }
+            
         }
-
-        //public async Task<IReadOnlyList<CommissionAgentPercentage>> GetAllCommissionPercentage()
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-
-        //        var result = await connection.QueryAsync<CommissionAgentPercentage>("GetAllCommissionPercentageData", commandType: CommandType.StoredProcedure);
-        //        return result.ToList();
-        //    }
-        //}
-
 
         public async Task<int> GetCommissionPercentage_Active()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
+         
                 connection.Open();
                 var result = await connection.ExecuteScalarAsync<int>(Constants.GetCommissionPercentage_Active);
+                connection.Close();
                 return result;
-            }
+            
         }
 
 

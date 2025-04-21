@@ -20,61 +20,45 @@ namespace AccountApi.Infrastructure.Repository
     {
 
         private readonly IConfiguration configuration;
+        private readonly SqlConnection connection;
        
         public VendorRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
+
         }
 
         public async Task<IReadOnlyList<Vendor>> GetAllAsync()
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-                    var result = await connection.QueryAsync<Vendor>(Constants.GetActiveVendors);
-                    return result.ToList();
-                }
+                connection.Open();
+                var result = await connection.QueryAsync<Vendor>(Constants.GetActiveVendors);
+                connection.Close();
+                return result.ToList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
-           
         }
         public async Task<Vendor> GetByIdAsync(long id)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@VendorId", id, DbType.Int64);
-
-                    var result = await connection.QuerySingleOrDefaultAsync<Vendor>("VendorById", parameters,commandType: CommandType.StoredProcedure);
-                    return result;
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorId", id, DbType.Int64);
+                var result = await connection.QuerySingleOrDefaultAsync<Vendor>("VendorById", parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
-        }
-        //public async Task<Vendor> GetByIdAsync(long id)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QuerySingleOrDefaultAsync<Vendor>(Constants.VendorById, new { CustomerId = id });
-        //        return result;
-        //    }
-        //}
-
+        } 
         public async Task<string> AddAsync(Vendor entity)
         {
             try
@@ -88,169 +72,85 @@ namespace AccountApi.Infrastructure.Repository
                 entity.State = "some state";
                 entity.CreatedBy = "System";
                 entity.ModifiedBy = "System";
-
-                var parameters = new DynamicParameters();
-                parameters.Add("@FirstName", entity.FirstName, DbType.String);
-                parameters.Add("@MiddleName", entity.MiddleName, DbType.String);
-                parameters.Add("@LastName", entity.LastName, DbType.String);
-                parameters.Add("@Mobile", entity.Mobile, DbType.String);
-                parameters.Add("@ModifiedDate", entity.ModifiedDate, DbType.DateTime);
-                parameters.Add("@CreatedDate", entity.CreatedDate, DbType.DateTime);
-                parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String);
-                parameters.Add("@ModifiedBy", entity.ModifiedBy, DbType.String);
-                parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);
-                parameters.Add("@ElectronicPaymentId", entity.ElectronicPaymentId, DbType.String);
-                parameters.Add("@ReferredBy", entity.ReferredBy, DbType.String);
-                parameters.Add("@Address", entity.Address, DbType.String);
-                parameters.Add("@City", entity.City, DbType.String);
-                parameters.Add("@State", entity.State, DbType.String);
-
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
                 {
                     connection.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@FirstName", entity.FirstName, DbType.String);
+                    parameters.Add("@MiddleName", entity.MiddleName, DbType.String);
+                    parameters.Add("@LastName", entity.LastName, DbType.String);
+                    parameters.Add("@Mobile", entity.Mobile, DbType.String);
+                    parameters.Add("@ModifiedDate", entity.ModifiedDate, DbType.DateTime);
+                    parameters.Add("@CreatedDate", entity.CreatedDate, DbType.DateTime);
+                    parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String);
+                    parameters.Add("@ModifiedBy", entity.ModifiedBy, DbType.String);
+                    parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);
+                    parameters.Add("@ElectronicPaymentId", entity.ElectronicPaymentId, DbType.String);
+                    parameters.Add("@ReferredBy", entity.ReferredBy, DbType.String);
+                    parameters.Add("@Address", entity.Address, DbType.String);
+                    parameters.Add("@City", entity.City, DbType.String);
+                    parameters.Add("@State", entity.State, DbType.String);
                     var result = await connection.ExecuteAsync("AddVendor", parameters, commandType: CommandType.StoredProcedure);
+                    connection.Close();
                     return result.ToString();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
                 throw;
             }
         }
-
-        //public async Task<string> AddAsync(Vendor entity)
-        //{
-        //    entity.CreatedDate = DateTime.Now;
-        //    entity.ModifiedDate = DateTime.Now;
-        //    entity.IsActive = true;
-        //    entity.Address = "Address";
-        //    entity.City = "some city";
-        //    entity.State = "some state";
-        //    entity.CreatedBy = "System";
-        //    entity.ModifiedBy = "system";
-        //    try
-        //    {
-        //        using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //        {
-        //            connection.Open();
-        //            var result = await connection.ExecuteAsync(Constants.AddVendor, entity);
-        //            return result.ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw;
-        //    }
-
-        //}
         public async Task<string> UpdateAsync(Vendor entity)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@VendorId", entity.VendorId, DbType.Int32);
-                    parameters.Add("@FirstName", entity.FirstName, DbType.String);
-                    parameters.Add("@LastName", entity.LastName, DbType.String);
-                    parameters.Add("@Mobile", entity.Mobile, DbType.String);
-                    parameters.Add("@ElectronicPaymentId", entity.ElectronicPaymentId, DbType.String);
-
-                    var result = await connection.ExecuteAsync("UpdateVendor", parameters,commandType: CommandType.StoredProcedure);
-
-                    return result.ToString();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorId", entity.VendorId, DbType.Int32);
+                parameters.Add("@FirstName", entity.FirstName, DbType.String);
+                parameters.Add("@LastName", entity.LastName, DbType.String);
+                parameters.Add("@Mobile", entity.Mobile, DbType.String);
+                parameters.Add("@ElectronicPaymentId", entity.ElectronicPaymentId, DbType.String);
+                var result = await connection.ExecuteAsync("UpdateVendor", parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();
             }
-            catch (Exception ex)
-            {
-                
+            catch (Exception)
+            {               
                 throw;
             }
         }
-        //public async Task<string> UpdateAsync(Vendor entity)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.UpdateVendor, entity);
-        //        return result.ToString();
-        //    }
-        //}
-
         public async Task<string> DeleteAsync(long id)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@VendorId", id, DbType.Int32);
-
-                    var result = await connection.ExecuteAsync("DeleteVendor",parameters,commandType: CommandType.StoredProcedure);
-
-                    return result.ToString();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorId", id, DbType.Int32);
+                var result = await connection.ExecuteAsync("DeleteVendor", parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         }
-        //public async Task<string> DeleteAsync(long id)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.DeleteVendor, new { CustomerId = id });
-        //        return result.ToString();
-        //    }
-        //}
-
         public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@FirstName", firstName, DbType.String);
-                    parameters.Add("@LastName", lastName, DbType.String);
-
-                    var result = await connection.ExecuteScalarAsync<int>("CheckDuplicateVendorName",parameters,commandType: CommandType.StoredProcedure);
-                    return result > 0;
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@FirstName", firstName, DbType.String);
+                parameters.Add("@LastName", lastName, DbType.String);
+                var result = await connection.ExecuteScalarAsync<int>("CheckDuplicateVendorName", parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Log or handle exception as needed
                 throw;
             }
         }
-
-
-        //public async Task<bool> GetDuplicateOrNot(string firstName, string lastName)
-        //{
-
-
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteScalarAsync<int>(Constants.CheckDuplicateVendorName, new { firstName, lastName });
-        //        if (result > 0)
-        //        {
-        //            return true;
-        //        }
-        //        return false;
-        //    }
-        //}
-
     }
 }

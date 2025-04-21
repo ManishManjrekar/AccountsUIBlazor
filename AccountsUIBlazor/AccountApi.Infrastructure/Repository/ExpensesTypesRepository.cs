@@ -19,63 +19,79 @@ namespace AccountApi.Infrastructure.Repository
     {
 
         private readonly IConfiguration configuration;
+        private readonly SqlConnection connection;
        
         public ExpensesTypesRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
         }
 
         public async Task<IReadOnlyList<ExpensesTypes>> GetAllAsync()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<ExpensesTypes>(CustomerQueries.AllCustomer);
-                return result.ToList();
-            }
+                connection.Open();                
+                var result = await connection.QueryAsync<ExpensesTypes>(Constants.ExpensesAllCustomer);
+                connection.Close();
+                return result.ToList();           
         }
 
         public async Task<ExpensesTypes> GetByIdAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@CustomerId", id, DbType.Int32);
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<ExpensesTypes>(CustomerQueries.CustomerById, new { CustomerId = id });
-                return result;
-            }
+                var result = await connection.QuerySingleOrDefaultAsync<ExpensesTypes>(Constants.ExpensesCusotmerById, parameters,commandType:CommandType.StoredProcedure);
+                return result;           
         }
-
         public async Task<string> AddAsync(ExpensesTypes entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            try
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.AddCustomer, entity);
-                return result.ToString();
+                var parameters = new DynamicParameters();
+                parameters.Add("@FirstName", entity.FirstName, DbType.String);
+                parameters.Add("@MiddleName", entity.MiddleName, DbType.String);
+                parameters.Add("@NickName", entity.NickName, DbType.String);
+                parameters.Add("@LastName", entity.LastName, DbType.String);
+                parameters.Add("@Mobile", entity.Mobile, DbType.String);
+                parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String);
+                parameters.Add("@ReferredBy", entity.ReferredBy, DbType.String);
+                parameters.Add("@ModifiedDate", entity.ModifiedDate, DbType.DateTime);
+                parameters.Add("@CreatedDate", entity.CreatedDate, DbType.DateTime);
+                parameters.Add("@ModifiedBy", entity.ModifiedBy, DbType.Int32);
+                parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);                
+                var result = await connection.ExecuteAsync(Constants.ExpensesAddCustomer, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();                
+            }
+            catch (Exception )
+            {
+                throw;
             }
         }
-
         public async Task<string> UpdateAsync(ExpensesTypes entity)
-        {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
+        {      
+                var parameters = new DynamicParameters();
+                parameters.Add("@CustomerId", entity.CustomerId, DbType.Int32);
+                parameters.Add("@FirstName", entity.FirstName, DbType.String);
+                parameters.Add("@LastName", entity.LastName, DbType.String);
+                parameters.Add("@Email", entity,DbType.String);
+                parameters.Add("@PhoneNumber", entity.Mobile, DbType.Int32);
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.UpdateCustomer, entity);
-                return result.ToString();
-            }
+                var result = await connection.ExecuteAsync(Constants.ExpensesUpdateCustomer, parameters,commandType:CommandType.StoredProcedure);
+                return result.ToString();          
         }
-
         public async Task<string> DeleteAsync(long id)
-        {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
+        {        
                 connection.Open();
-                var result = await connection.ExecuteAsync(CustomerQueries.DeleteCustomer, new { CustomerId = id });
-                return result.ToString();
-            }
+                var parameters = new DynamicParameters();
+                parameters.Add("@CustomerId", id);
+                var result = await connection.ExecuteAsync(Constants.ExpensesDeleteCustomer, parameters,commandType:CommandType.StoredProcedure);
+                connection.Open();
+                return result.ToString();       
         }
-
-       
 
     }
 }

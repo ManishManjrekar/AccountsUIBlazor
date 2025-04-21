@@ -20,15 +20,17 @@ namespace AccountApi.Infrastructure.Repository
     {
 
         private readonly IConfiguration configuration;
+        private readonly SqlConnection connection;
        
         public CommissionEarnedRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
         }
 
         public async Task<IReadOnlyList<CommissionEarned>> GetAllAsync()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+           // using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
                 var result = await connection.QueryAsync<CommissionEarned>(Constants.GetAllCommissionEarned);
@@ -38,32 +40,18 @@ namespace AccountApi.Infrastructure.Repository
 
         public async Task<CommissionEarned> GetByIdAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
                 connection.Open();
                 var parameters = new DynamicParameters();
                 parameters.Add("@StockInId", id, DbType.Int64);
                 var result = await connection.QuerySingleOrDefaultAsync<CommissionEarned>(Constants.GetAllCommissionEarned_ByStockInId, parameters,commandType: CommandType.StoredProcedure );
-                return result;
-            }
+                connection.Close();
+                return result;            
         }
-
-        //public async Task<CommissionEarned> GetByIdAsync(long id)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QuerySingleOrDefaultAsync<CommissionEarned>(Constants.GetAllCommissionEarned_ByStockInId, new { StockInId = id });
-        //        return result;
-        //    }
-        //}
-
         public async Task<string> AddAsync(CommissionEarned entity)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
+                    connection.Open();
                     var parameters = new DynamicParameters();
                     parameters.Add("@VendorId", entity.VendorId);
                     parameters.Add("@StockInId", entity.StockInId);
@@ -76,47 +64,21 @@ namespace AccountApi.Infrastructure.Repository
                     parameters.Add("@LoggedInUser", entity.LoggedInUser);
                     parameters.Add("@Comments", entity.Comments);
                     parameters.Add("@IsActive", entity.IsActive);
-
                     var result = await connection.ExecuteAsync(Constants.AddCommissionEarned, parameters, commandType: CommandType.StoredProcedure);
-                    return result.ToString();
-                }
+                    connection.Open();
+                    return result.ToString();                
             }
-            catch (Exception ex)
+                    catch (Exception)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                    throw;
             }
         }
-
-
-
-        //public async Task<string> AddAsync(CommissionEarned entity)
-        //{
-        //    try
-        //    {
-        //        using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //        {
-        //            connection.Open();
-        //            var result = await connection.ExecuteAsync(Constants.AddCommissionEarned, entity);
-        //            return result.ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //        throw;
-        //    }
-
-        //}
-
-
 
         public async Task<string> UpdateAsync(CommissionEarned entity)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
+                    connection.Open();
                     var parameters = new DynamicParameters();
                     parameters.Add("@CommissionEarnedId", entity.CommissionEarnedId);
                     parameters.Add("@VendorId", entity.VendorId);
@@ -130,104 +92,59 @@ namespace AccountApi.Infrastructure.Repository
                     parameters.Add("@LoggedInUser", entity.LoggedInUser);
                     parameters.Add("@Comments", entity.Comments);
                     parameters.Add("@IsActive", entity.IsActive);
-
-                    var result = await connection.ExecuteAsync(Constants.UpdateCommissionEarned, parameters, commandType: CommandType.StoredProcedure);                        
+                    var result = await connection.ExecuteAsync(Constants.UpdateCommissionEarned, parameters, commandType: CommandType.StoredProcedure);
+                    connection.Close();
                     return result.ToString();
-                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                    throw;
             }
         }
-
-        //public async Task<string> UpdateAsync(CommissionEarned entity)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.UpdateCommissionEarned, entity);
-        //        return result.ToString();
-        //    }
-        //}
-
         public async Task<string> DeleteAsync(long id)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@CommissionEarnedId", id, DbType.Int64);
-
-                    var result = await connection.ExecuteAsync(Constants.DeleteCommissionEarned, parameters, commandType: CommandType.StoredProcedure);                                      
-                    return result.ToString();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@CommissionEarnedId", id, DbType.Int64);
+                var result = await connection.ExecuteAsync(Constants.DeleteCommissionEarned, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
+            catch (Exception)
+            { 
+                    throw;
             }
         }
-
-        //public async Task<string> DeleteAsync(long id)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteAsync(Constants.DeleteCommissionEarned, new { CommissionAgentExpensesId = id });
-        //        return result.ToString();
-        //    }
-        //}
         public async Task<IReadOnlyList<CommissionEarned>> GetCommisionEarnedList_ForA_Date(string selectedDate)
         {
                 try
                 {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                        var parameters = new DynamicParameters();
-                        parameters.Add("@CreatedDate", selectedDate.ToString(), DbType.Date);
-
-                    var result = await connection.QueryAsync<CommissionEarned>(Constants.GetCommissionEarned_BySelectedDate, parameters, commandType: CommandType.StoredProcedure);                                                     
-                        return result.ToList();
-                    }
+                    connection.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@CreatedDate", selectedDate.ToString(), DbType.Date);
+                    var result = await connection.QueryAsync<CommissionEarned>(Constants.GetCommissionEarned_BySelectedDate, parameters, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return result.ToList();
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    throw;
+                        Console.WriteLine(ex.Message);
+                        throw;
                 }
             }
-
-
-
-        //public async Task<IReadOnlyList<CommissionEarned>> GetCommisionEarnedList_ForA_Date(string selectedDate)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<CommissionEarned>(Constants.GetCommissionEarned_BySelectedDate, new { CreatedDate = selectedDate });
-        //        return result.ToList();
-        //    }
-        //}
-
-
         public async Task<IReadOnlyList<CommissionEarned>> GetCommisionEarnedList_Between_Dates(string fromDate, string toDate)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@fromDate", fromDate.ToString(), DbType.Date);
-                    parameters.Add("@toDate", toDate.ToString(), DbType.Date);
-
-                   // var result = await connection.QueryAsync<CommissionEarned>("GetCommissionEarned_Between_Dates", parameters, commandType: CommandType.StoredProcedure);
-                    var result = await connection.QueryAsync<CommissionEarned>(Constants.GetCommissionEarned_Between_Dates, parameters, commandType: CommandType.StoredProcedure);
-                    return result.ToList();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@fromDate", fromDate.ToString(), DbType.Date);
+                parameters.Add("@toDate", toDate.ToString(), DbType.Date);
+                var result = await connection.QueryAsync<CommissionEarned>(Constants.GetCommissionEarned_Between_Dates, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToList();
             }
             catch (Exception ex)
             {
@@ -235,29 +152,16 @@ namespace AccountApi.Infrastructure.Repository
                 throw;
             }
         }
-        //public async Task<IReadOnlyList<CommissionEarned>> GetCommisionEarnedList_Between_Dates(string fromDate, string toDate)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.QueryAsync<CommissionEarned>(Constants.GetCommissionEarned_Between_Dates, new { fromDate, toDate });
-        //        return result.ToList();
-        //    }
-        //}
-
-
         public async Task<int> GetCommisionEarnedSum_ForA_Date(string selectedDate)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
+                    connection.Open();
                     var parameters = new DynamicParameters();
                     parameters.Add("@CreatedDate", selectedDate.ToString(), DbType.Date);
-                    // var result = await connection.ExecuteScalarAsync<int>("GetCommissionEarnedSum_BySelectedDate", parameters, commandType: CommandType.StoredProcedure);
                     var result = await connection.ExecuteScalarAsync<int>(Constants.GetCommissionEarnedSum_BySelectedDate, parameters, commandType: CommandType.StoredProcedure);
-                    return result;
-                }
+                    connection.Close();
+                    return result;                
             }
             catch (Exception ex)
             {
@@ -265,51 +169,23 @@ namespace AccountApi.Infrastructure.Repository
                 throw;
             }
         }
-
-
-
-        //public async Task<int> GetCommisionEarnedSum_ForA_Date(string selectedDate)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteScalarAsync<int>(Constants.GetCommissionEarnedSum_BySelectedDate, new { CreatedDate = selectedDate });
-        //        return result;
-        //    }
-        //}
-
-
         public async Task<int> GetCommisionEarnedSum_Between_Dates(string fromDate, string toDate)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
+                    connection.Close();
                     var parameters = new DynamicParameters();
-
                     parameters.Add("@fromDate", fromDate.ToString(), DbType.Date);
                     parameters.Add("@fromDate", toDate.ToString(), DbType.Date);
-
-                   // var result = await connection.ExecuteScalarAsync<int>("GetCommissionEarnedSum_Between_Dates", parameters, commandType: CommandType.StoredProcedure);
                     var result = await connection.ExecuteScalarAsync<int>(Constants.GetCommissionEarnedSum_Between_Dates, parameters, commandType: CommandType.StoredProcedure);
-                    return result;
-                }
+                    connection.Close();
+                    return result;                
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                    Console.WriteLine(ex.Message);
+                    throw;
             }
         }
-
-        //public async Task<int> GetCommisionEarnedSum_Between_Dates(string fromDate, string toDate)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-        //    {
-        //        connection.Open();
-        //        var result = await connection.ExecuteScalarAsync<int>(Constants.GetCommissionEarnedSum_Between_Dates, new { fromDate, toDate });
-        //        return result;
-        //    }
-        //}
     }
 }
