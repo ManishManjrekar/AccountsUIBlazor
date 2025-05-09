@@ -46,7 +46,8 @@ namespace AccountApi.Sql.Queries
 			[PhoneNumber] = @PhoneNumber
         WHERE [CustomerId] = @CustomerId";
 
-        public static string DeleteCustomer => "Update FROM [Customer] WHERE [CustomerId] = @CustomerId where isActive=0";
+        public static string DeleteCustomer => "Update  FROM [Customer] WHERE [CustomerId] = @CustomerId AND isActive=0";
+       
 
         public static string CheckDuplicateCustomerName => @" SELECT count(c.CustomerId) FROM [accountancy].[dbo].[Customer] as c
                                                    where c.FirstName = @firstName and c.LastName = @lastName and c.IsActive=1";

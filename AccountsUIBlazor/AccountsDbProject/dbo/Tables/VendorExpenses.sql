@@ -12,8 +12,6 @@
     [ModifiedDate] DATETIME         CONSTRAINT [DF_VendorExpenses_modifiedDate] DEFAULT (getdate()) NOT NULL,
     [CreatedDate]  DATETIME         CONSTRAINT [DF_VendorExpenses_createdDate] DEFAULT (getdate()) NOT NULL,
     [modifiedBy]   NVARCHAR (500)   NULL,
-    [IsActive]    BIT   NULL,
-
-    
+    [IsActive]    BIT   NULL,   
 );
 

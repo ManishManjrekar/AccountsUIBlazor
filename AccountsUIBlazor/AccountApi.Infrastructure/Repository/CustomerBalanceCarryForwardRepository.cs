@@ -19,110 +19,141 @@ namespace AccountApi.Infrastructure.Repository
     {
 
         private readonly IConfiguration configuration;
+        private readonly SqlConnection connection;
        
         public CustomerBalanceCarryForwardRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
         }
 
         public async Task<IReadOnlyList<CustomerBalanceCarryForward>> GetAllAsync()
-        {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.AllCustomerBalanceCarryForward);
-                return result.ToList();
-            }
+        {          
+            connection.Open();
+            var result = await connection.QueryAsync<CustomerBalanceCarryForward>(Constants.AllCustomerBalanceCarryForward);
+            connection.Close();
+            return result.ToList();           
         }
 
         public async Task<CustomerBalanceCarryForward> GetByIdAsync(long id)
         {
             try
-            {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-                    var result = await connection.QuerySingleOrDefaultAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetBalanceCarryForwardBy_CustomerId, new { CustomerId = id });
-                    return result;
-                }
+            {              
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@CustomerId", id);                  
+                var result = await connection.QuerySingleOrDefaultAsync<CustomerBalanceCarryForward>(Constants.GetBalanceCarryForwardBy_CustomerId, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                    throw;
             }
-            
         }
         public async Task<IReadOnlyList<CustomerBalanceCarryForward>> GetCarrryForwardDataByCustomerId(long id)
         {
             try
-            {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
+            {              
                     connection.Open();
-                    var result = await connection.QueryAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetBalanceCarryForwardBy_CustomerId, new { CustomerId = id });
-                    return result.ToList();
-                }
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@CustomerId",id);
+                    var result = await connection.QueryAsync<CustomerBalanceCarryForward>("GetBalanceCarryForwardBy_CustomerId", parameters, commandType: CommandType.StoredProcedure);
+                    return result.ToList();               
+            }
+            catch (Exception )
+            {                    
+                    throw;
+            }
+        }        
+        public async Task<string> AddAsync(CustomerBalanceCarryForward entity)
+        {
+             try
+                {
+                    entity.CreatedBy = "System";
+                    entity.LoggedInUser = "System";
+                    entity.ModifiedDate = DateTime.Now;
+                    entity.IsActive = true;
+                    connection.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@CustomerId", entity.CustomerId);
+                    parameters.Add("@CustomerName", entity.CustomerName);
+                    parameters.Add("@Amount", entity.Amount);
+                    parameters.Add("@CreatedDate", DateTime.Now); 
+                    parameters.Add("@ModifiedDate", entity.ModifiedDate);
+                    parameters.Add("@IsActive", entity.IsActive);
+                    parameters.Add("@CreatedBy", entity.CreatedBy);
+                    parameters.Add("@ModifiedBy", entity.ModifiedDate); 
+                    parameters.Add("@LoggedInUser", entity.LoggedInUser);
+                    parameters.Add("@Comments", entity.Comments);
+                    var result = await connection.ExecuteAsync("AddCustomerBalanceCarryForward", parameters, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return result.ToString();                   
+             }
+             catch (Exception ex)
+             {
+                    Console.WriteLine($"Error in AddAsync: {ex.Message}");
+                    throw;
+             }
+        }
+        public async Task<string> UpdateAsync(CustomerBalanceCarryForward entity)
+        {       
+            try
+            {
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@CustomerBalanceCarryForwardId", entity.CustomerBalanceCarryForwardId);
+                parameters.Add("@CustomerId", entity.CustomerId);
+                parameters.Add("@CustomerName", entity.CustomerName);
+                parameters.Add("@Amount", entity.Amount);
+                parameters.Add("@CreatedDate", entity.CreatedDate);
+                parameters.Add("@ModifiedDate", DateTime.Now);
+                parameters.Add("@IsActive", entity.IsActive);
+                parameters.Add("@CreatedBy", entity.CreatedBy);
+                parameters.Add("@ModifiedBy", entity.ModifiedBy); 
+                parameters.Add("@LoggedInUser", entity.LoggedInUser);
+                parameters.Add("@Comments", entity.Comments);
+                var result = await connection.ExecuteAsync("UpdateCustomerBalanceCarryForward",parameters,commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();                                   
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+            {                  
+                Console.WriteLine($"Update failed: {ex.Message}");
                 throw;
             }
-
         }
-        public async Task<string> AddAsync(CustomerBalanceCarryForward entity)
+        public async Task<string> DeleteAsync(long id)
         {
             try
             {
-                entity.CreatedBy = "System";
-                entity.LoggedInUser = "System";
-                //entity.PaymentDate = DateTime.Now;
-                entity.ModifiedDate = DateTime.Now;
-                entity.IsActive = true;
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-                    var result = await connection.ExecuteAsync(CustomerBalanceCarryForwardQueries.AddCustomerBalanceCarryForward, entity);
-                    return result.ToString();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@CustomerBalanceCarryForwardId", id);
+                var result = await connection.ExecuteAsync("DeleteCustomerBalanceCarryForward", parameters, commandType: CommandType.StoredProcedure);
+                connection.Open();
+                return result > 0 ? "Deleted Successfully (Soft Delete)" : "No Record Found";                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
-           
         }
-
-        public async Task<string> UpdateAsync(CustomerBalanceCarryForward entity)
-        {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerBalanceCarryForwardQueries.UpdateCustomerBalanceCarryForward, entity);
-                return result.ToString();
-            }
-        }
-
-        public async Task<string> DeleteAsync(long id)
-        {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.ExecuteAsync(CustomerBalanceCarryForwardQueries.DeleteCustomerBalanceCarryForward, new { CustomerId = id });
-                return result.ToString();
-            }
-        }
-
         public async Task<IReadOnlyList<CustomerBalanceCarryForward>> GetCommisionEarnedForADate(string selectedDate)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
                 connection.Open();
-                var result = await connection.QueryAsync<CustomerBalanceCarryForward>(CustomerBalanceCarryForwardQueries.GetCustomerBalanceCarry_ByDate, new { CreatedDate = selectedDate });
+                var parameters = new DynamicParameters();
+                parameters.Add("@CreatedDate", selectedDate);
+                var result = await connection.QueryAsync<CustomerBalanceCarryForward>("GetCustomerBalanceCarry_ByDate", parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result.ToList();
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
     }
 }

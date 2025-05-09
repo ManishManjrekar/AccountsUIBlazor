@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5pD2DT+RIVUL47jkLBcyKC5D+PmIHUK79gCN/6zE5Kc=",
+  "Hash": "f2isip59ZYuZZF+sxlFvHeTzlsaXWkLvA3igWvOqESs=",
   "Source": "AccountsUIBlazor",
   "BasePath": "_content/AccountsUIBlazor",
   "Mode": "Default",
@@ -10,827 +10,3472 @@
     {
       "Name": "AccountsUIBlazor\\wwwroot",
       "Source": "AccountsUIBlazor",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/dark.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "0bpxu4945l",
+      "Integrity": "pANjp/nvsk6iZeDtqxnL7FSsDpzpAUAkh43HbMcoqfQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark-base.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/dark-base.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "n36gq5zxh3",
+      "Integrity": "44A9sameqBM1qhs2soT/DE0N5ew1bn70rLg3Uram8S0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark-base.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark-base.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/default.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "qiz2w5qidx",
+      "Integrity": "UpTEIaEe4wFUTtTr57rEtM1a5NepWVocwzTfuTGstn4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default-base.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/default-base.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "kfb3swerc4",
+      "Integrity": "oBgExFDM065o0+Mad3PwyYgWRx0OhHJ6yTz68UQnN88=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default-base.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default-base.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/humanistic.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "f4nle5jg7l",
+      "Integrity": "sWXng4ugjDjP2xIeyB18P1uF81Ix9/xjkUNH6phzdFA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic-base.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/humanistic-base.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "or3894jamy",
+      "Integrity": "FK5BW4DwHFg8Q+dUe3RG/1VWau2kJYfo4lHCYYzBetw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic-base.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic-base.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/material.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "ouvalnoh76",
+      "Integrity": "wHCx4H+PAcJ1hQ/SqHv3WK+LR/IIQKc8/l/hNM7zwuk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material-base.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/material-base.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "e3e8ngrgs0",
+      "Integrity": "WmBEG8gzzOhpoVTilHRx8j0imXKwZz1x84tUZsfr4m4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material-base.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material-base.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/software.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "syyktjwb6r",
+      "Integrity": "BBeBiT2tCb8MalbBfWHQjGv5hmbWsAcwk2/a67kqSio=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software-base.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/software-base.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "ozpoemy5g5",
+      "Integrity": "bCDS3HxYXUrDpuB4f9TyPC0RNHRubxRCKgoboJmLmrc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software-base.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software-base.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/standard.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "7r3p1lknx7",
+      "Integrity": "Q/RMs/1tbLURQOL8YisAMEqfLGfKmC/a/R5SLvTHcXQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard-base.css",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard-base.css",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "css/standard-base.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "ymddviucbb",
+      "Integrity": "Sm3ZSoETv14AT3DaoPWpuM/J6D8+kbfDtMSTOeOl/cs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard-base.css"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard-base.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\MaterialIcons-Regular.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\MaterialIcons-Regular.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/MaterialIcons-Regular.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "nlbc4zbxdg",
+      "Integrity": "u6U8/ZO6KPQ3BD8dHlvhf4VyZKL5W7jRqwjHLSnlG1E=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\MaterialIcons-Regular.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\MaterialIcons-Regular.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-300.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-300.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v15-latin-300.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "5xso21gs3z",
+      "Integrity": "aY5euu4b9B4uoPbO6pUg0M02KHH1iFkV/DX7TpV/l+g=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-300.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-300.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-700.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-700.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v15-latin-700.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "2zlwf0hkge",
+      "Integrity": "PrZc6Ar6Orw126gGmRpfnzIY2LU8S+T5wSSNnZ88Guo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-700.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-700.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-regular.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-regular.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v15-latin-regular.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "hih70wjpja",
+      "Integrity": "l7uYY0Ka6X/MDNbIDTDD90VNCyGNR1jiTDC9pEG9OdM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-regular.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-regular.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-300.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-300.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v30-latin-300.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "d5sfvw7x3z",
+      "Integrity": "vxTH13NLj5yGO5gqTnsw1DYa+Oh0fyyoZyuljnA+lqM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-300.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-300.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-500.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-500.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v30-latin-500.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "o3uw885dm2",
+      "Integrity": "nOfzrEe5F0OJOi0p/lEafr7HrvUrLqmF+hJ0SNHyJ8E=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-500.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-500.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-700.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-700.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v30-latin-700.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "c913dn72ec",
+      "Integrity": "4P1XwNlTfZyYhLaorYwYI4ANlNz7aizJiHgP5lpZL+Y=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-700.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-700.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-regular.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-regular.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/roboto-v30-latin-regular.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "6udge33bk2",
+      "Integrity": "8qv3+6vimOWCPSV+SPXcITjG1eDCEAZvdrAGfo7aGU8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-regular.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-regular.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Black.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Black.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-Black.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "ikoiy9uq81",
+      "Integrity": "4tJ2y83Opy9zhl/cqC+2kN6Dyj9o+FR2zLmn9aSPwcg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Black.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Black.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BlackIt.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BlackIt.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-BlackIt.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "zp1wa2rwul",
+      "Integrity": "Se1Ckp/WChi38Ylv0M9zeWV40BrNdzJZCuL5vLArVss=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BlackIt.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BlackIt.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Bold.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Bold.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-Bold.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "np37tijgda",
+      "Integrity": "iwPDiY3GwHRvR7nxbjO1MUzZ4OIDrBnBE7JVh8uvL7Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Bold.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Bold.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BoldIt.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BoldIt.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-BoldIt.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "j6lpm6ypsj",
+      "Integrity": "hbpdyuMzEkbBLV46tNBW8O4fcBC1OHCZu73IKA/wxFY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BoldIt.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BoldIt.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLight.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLight.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-ExtraLight.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "w9mgt586g9",
+      "Integrity": "PLpVAO2hf3ujhcFgIgpvr95XZj15sDT5TlPjBcIKjOo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLight.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLight.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLightIt.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLightIt.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-ExtraLightIt.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "pp2rhga4uu",
+      "Integrity": "gyjJCK9yyzeB56egUKX2oyJUAHzhrxPnuT+JB1brUjg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLightIt.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLightIt.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-It.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-It.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-It.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "u5hiafamtk",
+      "Integrity": "Yi16KO1MmnQJMcyA7nBl9RenDCtzOoi9TIYcCTDYYA0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-It.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-It.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Light.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Light.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-Light.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "j0s6k8r36a",
+      "Integrity": "U/c5uZXyrUZYibduYAqP66xUX7hjF+MuGqjty6kp+n8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Light.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Light.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-LightIt.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-LightIt.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-LightIt.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "3m4gi0b3tl",
+      "Integrity": "Wz06DrCrEo8PhVFosBvtv0BwVRad1e6cHVYPrOXcTTk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-LightIt.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-LightIt.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Regular.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Regular.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-Regular.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "r4g9t9shyh",
+      "Integrity": "FUVkwg6zvTHIIS9plEgvWa39AFMb6VCbD1LTENYjsm4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Regular.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Regular.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Semibold.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Semibold.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-Semibold.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "d80scqnld4",
+      "Integrity": "0yvxUfB8+6PXLdQAnlit3rprdUByfZdrdEJe4i5AjqY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Semibold.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Semibold.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-SemiboldIt.woff",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-SemiboldIt.woff",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "fonts/SourceSansPro-SemiboldIt.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "1slh9f0ixv",
+      "Integrity": "f7Kf/RI21ULz4ITMVN+kUuGhpYP3UWYywC73o3WtAgw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-SemiboldIt.woff"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-SemiboldIt.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\Radzen.Blazor.js",
+      "Identity": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\Radzen.Blazor.js",
       "SourceId": "Radzen.Blazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\",
       "BasePath": "_content/Radzen.Blazor",
       "RelativePath": "Radzen.Blazor.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "ypwgjcv2ul",
+      "Integrity": "WuOb0yooDFPoLOsOrHCQYEbnonn6JFUN7EeXl9oIABk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\Radzen.Blazor.js"
+      "OriginalItemSpec": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\Radzen.Blazor.js"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\AccountsUIBlazor.styles.css",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\AccountsUIBlazor.styles.css",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "AccountsUIBlazor.styles.css",
+      "RelativePath": "AccountsUIBlazor#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
       "AssetMode": "CurrentProject",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ApplicationBundle",
+      "Fingerprint": "cgl7xsqg0u",
+      "Integrity": "pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\AccountsUIBlazor.styles.css"
+      "OriginalItemSpec": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\AccountsUIBlazor.styles.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\AccountsUIBlazor.bundle.scp.css",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\AccountsUIBlazor.bundle.scp.css",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "AccountsUIBlazor.bundle.scp.css",
+      "RelativePath": "AccountsUIBlazor#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
       "AssetMode": "Reference",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "ScopedCss",
       "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "cgl7xsqg0u",
+      "Integrity": "pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\AccountsUIBlazor.bundle.scp.css"
+      "OriginalItemSpec": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\AccountsUIBlazor.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/bootstrap/bootstrap.min.css",
+      "RelativePath": "css/bootstrap/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "6gzpyzhau4",
+      "Integrity": "SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/bootstrap/bootstrap.min.css.map",
+      "RelativePath": "css/bootstrap/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "8inm30yfxf",
+      "Integrity": "gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
+      "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "cmapd0fi15",
+      "Integrity": "BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
+      "RelativePath": "css/open-iconic/font/fonts/open-iconic#[.{fingerprint}]?.eot",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "0uw8dim9nl",
+      "Integrity": "OK3poGPgzKI2NzNgP07XMbJa3Dz6USoUh/chSkSvQpc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
+      "RelativePath": "css/open-iconic/font/fonts/open-iconic#[.{fingerprint}]?.otf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "wk8x8xm0ah",
+      "Integrity": "sDUtuZAEzWZyv/U1xl/9D3ehyU69JE+FvAcu5HQ+/a0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
+      "RelativePath": "css/open-iconic/font/fonts/open-iconic#[.{fingerprint}]?.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "sjnzgf7e1h",
+      "Integrity": "+P1oQ5jPzOVJGC52E1oxGXIXxxCyMlqy6A9cNxGYzVk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
+      "RelativePath": "css/open-iconic/font/fonts/open-iconic#[.{fingerprint}]?.ttf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "ll5grcv8wv",
+      "Integrity": "p+RP8CV3vRK1YbIkNzq3rPo1jyETPnR07ULb+HVYL8w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
+      "RelativePath": "css/open-iconic/font/fonts/open-iconic#[.{fingerprint}]?.woff",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "h4d0pazwgy",
+      "Integrity": "cZPqVlRJfSNW0KaQ4+UPOXZ/v/QzXlejRDwUNdZIofI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/FONT-LICENSE",
+      "RelativePath": "css/open-iconic/FONT-LICENSE#[.{fingerprint}]?",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "48tmkg660f",
+      "Integrity": "jA4J4h/k76zVxbFKEaWwFKJccmO0voOQ1DbUW+5YNlI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/ICON-LICENSE",
+      "RelativePath": "css/open-iconic/ICON-LICENSE#[.{fingerprint}]?",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "4dwjve0o0b",
+      "Integrity": "aF5g/izareSj02F3MPSoTGNbcMBl9nmZKDe04zjU/ss=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/open-iconic/README.md",
+      "RelativePath": "css/open-iconic/README#[.{fingerprint}]?.md",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "psxpu4y82n",
+      "Integrity": "p/oxU91iBE+uaDr3kYOyZPuulf4YcPAMNIz6PRA/tb0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\site.css",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\site.css",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "css/site.css",
+      "RelativePath": "css/site#[.{fingerprint}]?.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "1fpfb6x0uo",
+      "Integrity": "bQF09ZZOsk0T2q2MpSrJMbqdu0Ks9Ea03LFI7wJyLeU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\favicon.ico",
+      "Identity": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\favicon.ico",
       "SourceId": "AccountsUIBlazor",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\manjr\\Source\\NewRepos\\AccountsUIBlazor\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
+      "ContentRoot": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\",
       "BasePath": "_content/AccountsUIBlazor",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "61n19gt1b8",
+      "Integrity": "Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "_content/Radzen.Blazor/css/dark.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "799095"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pANjp/nvsk6iZeDtqxnL7FSsDpzpAUAkh43HbMcoqfQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pANjp/nvsk6iZeDtqxnL7FSsDpzpAUAkh43HbMcoqfQ="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/dark-base.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\dark-base.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "707452"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"44A9sameqBM1qhs2soT/DE0N5ew1bn70rLg3Uram8S0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-44A9sameqBM1qhs2soT/DE0N5ew1bn70rLg3Uram8S0="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/default.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "798710"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UpTEIaEe4wFUTtTr57rEtM1a5NepWVocwzTfuTGstn4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UpTEIaEe4wFUTtTr57rEtM1a5NepWVocwzTfuTGstn4="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/default-base.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\default-base.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "707067"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oBgExFDM065o0+Mad3PwyYgWRx0OhHJ6yTz68UQnN88=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-oBgExFDM065o0+Mad3PwyYgWRx0OhHJ6yTz68UQnN88="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/humanistic.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "798650"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sWXng4ugjDjP2xIeyB18P1uF81Ix9/xjkUNH6phzdFA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-sWXng4ugjDjP2xIeyB18P1uF81Ix9/xjkUNH6phzdFA="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/humanistic-base.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\humanistic-base.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "707031"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FK5BW4DwHFg8Q+dUe3RG/1VWau2kJYfo4lHCYYzBetw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-FK5BW4DwHFg8Q+dUe3RG/1VWau2kJYfo4lHCYYzBetw="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/material.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "806753"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wHCx4H+PAcJ1hQ/SqHv3WK+LR/IIQKc8/l/hNM7zwuk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wHCx4H+PAcJ1hQ/SqHv3WK+LR/IIQKc8/l/hNM7zwuk="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/material-base.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\material-base.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "715469"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WmBEG8gzzOhpoVTilHRx8j0imXKwZz1x84tUZsfr4m4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WmBEG8gzzOhpoVTilHRx8j0imXKwZz1x84tUZsfr4m4="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/software.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "798718"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BBeBiT2tCb8MalbBfWHQjGv5hmbWsAcwk2/a67kqSio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BBeBiT2tCb8MalbBfWHQjGv5hmbWsAcwk2/a67kqSio="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/software-base.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\software-base.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "707068"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bCDS3HxYXUrDpuB4f9TyPC0RNHRubxRCKgoboJmLmrc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bCDS3HxYXUrDpuB4f9TyPC0RNHRubxRCKgoboJmLmrc="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/standard.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "804854"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Q/RMs/1tbLURQOL8YisAMEqfLGfKmC/a/R5SLvTHcXQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Q/RMs/1tbLURQOL8YisAMEqfLGfKmC/a/R5SLvTHcXQ="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/css/standard-base.css",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\css\\standard-base.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "713205"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Sm3ZSoETv14AT3DaoPWpuM/J6D8+kbfDtMSTOeOl/cs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 12 Sep 2023 07:21:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Sm3ZSoETv14AT3DaoPWpuM/J6D8+kbfDtMSTOeOl/cs="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/MaterialIcons-Regular.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\MaterialIcons-Regular.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "183892"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u6U8/ZO6KPQ3BD8dHlvhf4VyZKL5W7jRqwjHLSnlG1E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jan 2023 14:42:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-u6U8/ZO6KPQ3BD8dHlvhf4VyZKL5W7jRqwjHLSnlG1E="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v15-latin-300.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-300.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18520"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aY5euu4b9B4uoPbO6pUg0M02KHH1iFkV/DX7TpV/l+g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aY5euu4b9B4uoPbO6pUg0M02KHH1iFkV/DX7TpV/l+g="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v15-latin-700.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-700.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18568"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PrZc6Ar6Orw126gGmRpfnzIY2LU8S+T5wSSNnZ88Guo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PrZc6Ar6Orw126gGmRpfnzIY2LU8S+T5wSSNnZ88Guo="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v15-latin-regular.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v15-latin-regular.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "18520"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"l7uYY0Ka6X/MDNbIDTDD90VNCyGNR1jiTDC9pEG9OdM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-l7uYY0Ka6X/MDNbIDTDD90VNCyGNR1jiTDC9pEG9OdM="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v30-latin-300.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-300.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20416"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vxTH13NLj5yGO5gqTnsw1DYa+Oh0fyyoZyuljnA+lqM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jan 2023 14:42:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-vxTH13NLj5yGO5gqTnsw1DYa+Oh0fyyoZyuljnA+lqM="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v30-latin-500.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-500.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20544"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nOfzrEe5F0OJOi0p/lEafr7HrvUrLqmF+hJ0SNHyJ8E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jan 2023 14:42:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nOfzrEe5F0OJOi0p/lEafr7HrvUrLqmF+hJ0SNHyJ8E="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v30-latin-700.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-700.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4P1XwNlTfZyYhLaorYwYI4ANlNz7aizJiHgP5lpZL+Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jan 2023 14:42:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4P1XwNlTfZyYhLaorYwYI4ANlNz7aizJiHgP5lpZL+Y="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/roboto-v30-latin-regular.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\roboto-v30-latin-regular.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20344"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8qv3+6vimOWCPSV+SPXcITjG1eDCEAZvdrAGfo7aGU8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 11 Jan 2023 14:42:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8qv3+6vimOWCPSV+SPXcITjG1eDCEAZvdrAGfo7aGU8="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-Black.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Black.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "132224"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4tJ2y83Opy9zhl/cqC+2kN6Dyj9o+FR2zLmn9aSPwcg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4tJ2y83Opy9zhl/cqC+2kN6Dyj9o+FR2zLmn9aSPwcg="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-BlackIt.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BlackIt.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54204"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Se1Ckp/WChi38Ylv0M9zeWV40BrNdzJZCuL5vLArVss=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Se1Ckp/WChi38Ylv0M9zeWV40BrNdzJZCuL5vLArVss="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-Bold.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Bold.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "135828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iwPDiY3GwHRvR7nxbjO1MUzZ4OIDrBnBE7JVh8uvL7Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-iwPDiY3GwHRvR7nxbjO1MUzZ4OIDrBnBE7JVh8uvL7Q="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-BoldIt.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-BoldIt.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54292"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hbpdyuMzEkbBLV46tNBW8O4fcBC1OHCZu73IKA/wxFY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hbpdyuMzEkbBLV46tNBW8O4fcBC1OHCZu73IKA/wxFY="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-ExtraLight.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLight.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "124560"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PLpVAO2hf3ujhcFgIgpvr95XZj15sDT5TlPjBcIKjOo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PLpVAO2hf3ujhcFgIgpvr95XZj15sDT5TlPjBcIKjOo="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-ExtraLightIt.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-ExtraLightIt.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "50064"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gyjJCK9yyzeB56egUKX2oyJUAHzhrxPnuT+JB1brUjg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gyjJCK9yyzeB56egUKX2oyJUAHzhrxPnuT+JB1brUjg="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-It.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-It.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "53852"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Yi16KO1MmnQJMcyA7nBl9RenDCtzOoi9TIYcCTDYYA0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Yi16KO1MmnQJMcyA7nBl9RenDCtzOoi9TIYcCTDYYA0="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-Light.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Light.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "129732"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U/c5uZXyrUZYibduYAqP66xUX7hjF+MuGqjty6kp+n8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U/c5uZXyrUZYibduYAqP66xUX7hjF+MuGqjty6kp+n8="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-LightIt.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-LightIt.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "52320"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Wz06DrCrEo8PhVFosBvtv0BwVRad1e6cHVYPrOXcTTk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Wz06DrCrEo8PhVFosBvtv0BwVRad1e6cHVYPrOXcTTk="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-Regular.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Regular.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "133352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FUVkwg6zvTHIIS9plEgvWa39AFMb6VCbD1LTENYjsm4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-FUVkwg6zvTHIIS9plEgvWa39AFMb6VCbD1LTENYjsm4="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-Semibold.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-Semibold.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134540"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0yvxUfB8+6PXLdQAnlit3rprdUByfZdrdEJe4i5AjqY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0yvxUfB8+6PXLdQAnlit3rprdUByfZdrdEJe4i5AjqY="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/fonts/SourceSansPro-SemiboldIt.woff",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\fonts\\SourceSansPro-SemiboldIt.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54260"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f7Kf/RI21ULz4ITMVN+kUuGhpYP3UWYywC73o3WtAgw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 Aug 2019 14:49:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-f7Kf/RI21ULz4ITMVN+kUuGhpYP3UWYywC73o3WtAgw="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Radzen.Blazor/Radzen.Blazor.js",
+      "AssetFile": "C:\\Users\\Admin\\.nuget\\packages\\radzen.blazor\\4.15.12\\staticwebassets\\Radzen.Blazor.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "64755"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WuOb0yooDFPoLOsOrHCQYEbnonn6JFUN7EeXl9oIABk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Sep 2023 07:55:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WuOb0yooDFPoLOsOrHCQYEbnonn6JFUN7EeXl9oIABk="
+        }
+      ]
+    },
+    {
+      "Route": "AccountsUIBlazor.bundle.scp.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\AccountsUIBlazor.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2853"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 07:36:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA="
+        }
+      ]
+    },
+    {
+      "Route": "AccountsUIBlazor.cgl7xsqg0u.bundle.scp.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\AccountsUIBlazor.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2853"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 07:36:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cgl7xsqg0u"
+        },
+        {
+          "Name": "label",
+          "Value": "AccountsUIBlazor.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA="
+        }
+      ]
+    },
+    {
+      "Route": "AccountsUIBlazor.cgl7xsqg0u.styles.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\AccountsUIBlazor.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2853"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 07:36:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cgl7xsqg0u"
+        },
+        {
+          "Name": "label",
+          "Value": "AccountsUIBlazor.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA="
+        }
+      ]
+    },
+    {
+      "Route": "AccountsUIBlazor.styles.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\obj\\Debug\\net6.0\\scopedcss\\bundle\\AccountsUIBlazor.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2853"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 11 Apr 2025 07:36:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pEYvqQyV0sjVYQIUnEFb2dfOHTRiFG5q/KhMLf1YQbA="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "162726"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6gzpyzhau4"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap/bootstrap.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap/bootstrap.min.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "162726"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "449111"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8inm30yfxf"
+        },
+        {
+          "Name": "label",
+          "Value": "css/bootstrap/bootstrap.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/bootstrap/bootstrap.min.css.map",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "449111"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/css/open-iconic-bootstrap.min.cmapd0fi15.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9395"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cmapd0fi15"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/font/css/open-iconic-bootstrap.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9395"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.0uw8dim9nl.eot",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28196"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.ms-fontobject"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OK3poGPgzKI2NzNgP07XMbJa3Dz6USoUh/chSkSvQpc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0uw8dim9nl"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/font/fonts/open-iconic.eot"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OK3poGPgzKI2NzNgP07XMbJa3Dz6USoUh/chSkSvQpc="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.eot",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28196"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.ms-fontobject"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OK3poGPgzKI2NzNgP07XMbJa3Dz6USoUh/chSkSvQpc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OK3poGPgzKI2NzNgP07XMbJa3Dz6USoUh/chSkSvQpc="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.h4d0pazwgy.woff",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14984"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cZPqVlRJfSNW0KaQ4+UPOXZ/v/QzXlejRDwUNdZIofI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h4d0pazwgy"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/font/fonts/open-iconic.woff"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cZPqVlRJfSNW0KaQ4+UPOXZ/v/QzXlejRDwUNdZIofI="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.ll5grcv8wv.ttf",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28028"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p+RP8CV3vRK1YbIkNzq3rPo1jyETPnR07ULb+HVYL8w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ll5grcv8wv"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/font/fonts/open-iconic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-p+RP8CV3vRK1YbIkNzq3rPo1jyETPnR07ULb+HVYL8w="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.otf",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20996"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "font/otf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sDUtuZAEzWZyv/U1xl/9D3ehyU69JE+FvAcu5HQ+/a0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-sDUtuZAEzWZyv/U1xl/9D3ehyU69JE+FvAcu5HQ+/a0="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.sjnzgf7e1h.svg",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "55332"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+P1oQ5jPzOVJGC52E1oxGXIXxxCyMlqy6A9cNxGYzVk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sjnzgf7e1h"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/font/fonts/open-iconic.svg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+P1oQ5jPzOVJGC52E1oxGXIXxxCyMlqy6A9cNxGYzVk="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.svg",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "55332"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+P1oQ5jPzOVJGC52E1oxGXIXxxCyMlqy6A9cNxGYzVk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+P1oQ5jPzOVJGC52E1oxGXIXxxCyMlqy6A9cNxGYzVk="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.ttf",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28028"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p+RP8CV3vRK1YbIkNzq3rPo1jyETPnR07ULb+HVYL8w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-p+RP8CV3vRK1YbIkNzq3rPo1jyETPnR07ULb+HVYL8w="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.wk8x8xm0ah.otf",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20996"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "font/otf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sDUtuZAEzWZyv/U1xl/9D3ehyU69JE+FvAcu5HQ+/a0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wk8x8xm0ah"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/font/fonts/open-iconic.otf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-sDUtuZAEzWZyv/U1xl/9D3ehyU69JE+FvAcu5HQ+/a0="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/font/fonts/open-iconic.woff",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14984"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/font-woff"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cZPqVlRJfSNW0KaQ4+UPOXZ/v/QzXlejRDwUNdZIofI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cZPqVlRJfSNW0KaQ4+UPOXZ/v/QzXlejRDwUNdZIofI="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/FONT-LICENSE",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4103"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jA4J4h/k76zVxbFKEaWwFKJccmO0voOQ1DbUW+5YNlI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jA4J4h/k76zVxbFKEaWwFKJccmO0voOQ1DbUW+5YNlI="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/FONT-LICENSE.48tmkg660f",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4103"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jA4J4h/k76zVxbFKEaWwFKJccmO0voOQ1DbUW+5YNlI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "48tmkg660f"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/FONT-LICENSE"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jA4J4h/k76zVxbFKEaWwFKJccmO0voOQ1DbUW+5YNlI="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/ICON-LICENSE",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1093"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aF5g/izareSj02F3MPSoTGNbcMBl9nmZKDe04zjU/ss=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aF5g/izareSj02F3MPSoTGNbcMBl9nmZKDe04zjU/ss="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/ICON-LICENSE.4dwjve0o0b",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1093"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aF5g/izareSj02F3MPSoTGNbcMBl9nmZKDe04zjU/ss=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4dwjve0o0b"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/ICON-LICENSE"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aF5g/izareSj02F3MPSoTGNbcMBl9nmZKDe04zjU/ss="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/README.md",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\README.md",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3615"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p/oxU91iBE+uaDr3kYOyZPuulf4YcPAMNIz6PRA/tb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-p/oxU91iBE+uaDr3kYOyZPuulf4YcPAMNIz6PRA/tb0="
+        }
+      ]
+    },
+    {
+      "Route": "css/open-iconic/README.psxpu4y82n.md",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\open-iconic\\README.md",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3615"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p/oxU91iBE+uaDr3kYOyZPuulf4YcPAMNIz6PRA/tb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "psxpu4y82n"
+        },
+        {
+          "Name": "label",
+          "Value": "css/open-iconic/README.md"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-p/oxU91iBE+uaDr3kYOyZPuulf4YcPAMNIz6PRA/tb0="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.1fpfb6x0uo.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2810"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bQF09ZZOsk0T2q2MpSrJMbqdu0Ks9Ea03LFI7wJyLeU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1fpfb6x0uo"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bQF09ZZOsk0T2q2MpSrJMbqdu0Ks9Ea03LFI7wJyLeU="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2810"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bQF09ZZOsk0T2q2MpSrJMbqdu0Ks9Ea03LFI7wJyLeU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bQF09ZZOsk0T2q2MpSrJMbqdu0Ks9Ea03LFI7wJyLeU="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.61n19gt1b8.ico",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5430"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "61n19gt1b8"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ico",
+      "AssetFile": "E:\\Test\\AccountsUIBlazor\\AccountsUIBlazor\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5430"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 01 Apr 2025 14:01:54 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
     }
   ]
 }

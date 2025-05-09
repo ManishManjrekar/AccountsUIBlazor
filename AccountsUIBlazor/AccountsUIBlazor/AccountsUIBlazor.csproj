@@ -26,4 +26,8 @@
     <ProjectReference Include="..\AccountApi.Logging\AccountApi.Logging.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AccountApi\Core\" />
+  </ItemGroup>
+
 </Project>

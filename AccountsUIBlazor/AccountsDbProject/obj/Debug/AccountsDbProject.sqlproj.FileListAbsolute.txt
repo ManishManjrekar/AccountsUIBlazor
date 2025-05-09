@@ -18,3 +18,9 @@ C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProje
 C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\predeploy.sql
 C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.dll
 C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.pdb
+E:\Test\AccountsUIBlazor\AccountsDbProject\bin\Debug\AccountsDbProject.dacpac
+E:\Test\AccountsUIBlazor\AccountsDbProject\bin\Debug\AccountsDbProject.dll
+E:\Test\AccountsUIBlazor\AccountsDbProject\bin\Debug\AccountsDbProject.pdb
+E:\Test\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.sqlproj.AssemblyReference.cache
+E:\Test\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.dll
+E:\Test\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.pdb

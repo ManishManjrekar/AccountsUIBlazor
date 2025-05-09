@@ -20,3 +20,15 @@ C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\
 C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\refint\AccountApi.Sql.dll
 C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.pdb
 C:\Users\manjr\Source\NewRepos\AccountsUIBlazor\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\ref\AccountApi.Sql.dll
+E:\Test\AccountsUIBlazor\AccountApi.Sql\bin\Debug\net6.0\AccountApi.Sql.deps.json
+E:\Test\AccountsUIBlazor\AccountApi.Sql\bin\Debug\net6.0\AccountApi.Sql.dll
+E:\Test\AccountsUIBlazor\AccountApi.Sql\bin\Debug\net6.0\AccountApi.Sql.pdb
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.GeneratedMSBuildEditorConfig.editorconfig
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.AssemblyInfoInputs.cache
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.AssemblyInfo.cs
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.csproj.CoreCompileInputs.cache
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.sourcelink.json
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.dll
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\refint\AccountApi.Sql.dll
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\AccountApi.Sql.pdb
+E:\Test\AccountsUIBlazor\AccountApi.Sql\obj\Debug\net6.0\ref\AccountApi.Sql.dll

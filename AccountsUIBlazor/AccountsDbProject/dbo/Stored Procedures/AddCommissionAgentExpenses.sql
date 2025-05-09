@@ -1,0 +1,19 @@
+﻿CREATE PROCEDURE [dbo].[AddCommissionAgentExpense]
+    @VendorId INT,
+    @StockInId INT,
+    @ExpensesName NVARCHAR(100),
+    @ElectronicPaymentId INT,
+    @AmountPaid DECIMAL(18, 2),
+    @CreatedDate DATETIME,
+    @ModifiedDate DATETIME,
+    @LoggedInUser NVARCHAR(100),
+    @Comments NVARCHAR(MAX),
+    @IsActive BIT
+AS
+BEGIN
+SET NOCOUNT ON;
+    INSERT INTO [dbo].[CommissionAgentExpenses]([VendorId],[StockInId],[ExpensesName],[ElectronicPaymentId],[Amount],
+	                                            [CreatedDate],[ModifiedDate],[LoggedInUser],[Comments],[IsActive])
+												VALUES(@VendorId,@StockInId,@ExpensesName,@ElectronicPaymentId,@AmountPaid,
+												@CreatedDate,@ModifiedDate,@LoggedInUser,@Comments,@IsActive);
+END;

@@ -5,6 +5,7 @@
     [NickName]     NVARCHAR (MAX)   NULL,
     [LastName]     NVARCHAR (MAX)   NULL,
     [Mobile]       NVARCHAR (50)    NULL,
+    [Email]        NVARCHAR (500)   NULL,
     [ReferredBy]   NVARCHAR (MAX)   NULL,
     [CreatedBy]    NVARCHAR (500)   NULL,
     [ModifiedDate] DATETIME         CONSTRAINT [DF_Customer_modifiedDate] DEFAULT (getdate()) NOT NULL,

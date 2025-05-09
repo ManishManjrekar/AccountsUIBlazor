@@ -12,6 +12,7 @@ using AccountApi.Sql.Queries;
 using AccountApi.Application.Interfaces;
 using AccountApi.Core;
 using AccountApi.Core.Entities;
+using System.Reflection.Metadata;
 
 namespace AccountApi.Infrastructure.Repository
 {
@@ -19,93 +20,136 @@ namespace AccountApi.Infrastructure.Repository
     {
 
         private readonly IConfiguration configuration;
+        private readonly SqlConnection connection;
        
         public VendorPaymentRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
         }
 
         public async Task<IReadOnlyList<VendorPayments>> GetAllAsync()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<VendorPayments>(VendorPaymentQueries.AllVendorPayment);
-                return result.ToList();
-            }
-        }
-
+            connection.Open();
+            var result = await connection.QueryAsync<VendorPayments>(Constants.AllVendorPayment);
+            connection.Close();
+            return result.ToList();
+        }     
         public async Task<VendorPayments> GetByIdAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<VendorPayments>(VendorPaymentQueries.VendorPaymentById, new { VendorPaymentId = id });
-                return result;
-            }
-        }
-
-        public async Task<string> AddAsync(VendorPayments entity)
-        {
-            entity.IsActive = true;
-            entity.ModifiedDate = DateTime.Now;
-            
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-                    var result = await connection.ExecuteAsync(VendorPaymentQueries.AddVendorPayment, entity);
-                    return result.ToString();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorPaymentId", id, DbType.Int64);
+                var result = await connection.QuerySingleOrDefaultAsync<VendorPayments>("VendorPaymentById", parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result;
             }
-            catch (Exception ex)
-            {
-
+            catch (Exception)
+            {               
                 throw;
             }
-            
+        }    
+        public async Task<string> AddAsync(VendorPayments entity)
+        {
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            entity.IsActive = true;
+            try
+            {
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorId", entity.VendorId, DbType.Int32);
+                parameters.Add("@StockInId", entity.StockInId, DbType.Int32);
+                parameters.Add("@TypeOfTransaction", entity.TypeOfTransaction, DbType.String);
+                parameters.Add("@AmountPaid", entity.AmountPaid, DbType.Int64);
+                parameters.Add("@CreatedDate", entity.CreatedDate, DbType.DateTime);
+                parameters.Add("@ModifiedDate", entity.ModifiedDate, DbType.DateTime);
+                parameters.Add("@LoggedInUser", entity.LoggedInUser, DbType.String);
+                parameters.Add("@Comments", entity.Comments, DbType.String);
+                parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);
+                var result = await connection.ExecuteAsync(Constants.AddVendorPayment, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();
+            }
+            catch (Exception)
+            {        
+                throw;
+            }
         }
-
         public async Task<string> UpdateAsync(VendorPayments entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(VendorPaymentQueries.UpdateVendorPayment, entity);
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorId", entity.VendorId, DbType.Int32);
+                parameters.Add("@StockInId", entity.StockInId, DbType.Int32);
+                parameters.Add("@TypeOfTransaction", entity.TypeOfTransaction, DbType.String);
+                parameters.Add("@AmountPaid", entity.AmountPaid, DbType.Int64);
+                parameters.Add("@CreatedDate", entity.CreatedDate, DbType.DateTime);
+                parameters.Add("@ModifiedDate", DateTime.Now, DbType.DateTime);
+                parameters.Add("@LoggedInUser", entity.LoggedInUser, DbType.String);
+                parameters.Add("@Comments", entity.Comments, DbType.String);
+                parameters.Add("@VendorPaymentId", entity.VendorPaymentId, DbType.Int32);
+                parameters.Add("@IsActive", entity.IsActive, DbType.Boolean);
+                var result = await connection.ExecuteAsync(Constants.UpdateVendorPayment, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToString();
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
         public async Task<string> DeleteAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(VendorPaymentQueries.DeleteVendorPayment, new { VendorPaymentId = id });
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorPaymentId", id, DbType.Int64);
+                var result = await connection.ExecuteAsync(Constants.DeleteVendorPayment, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result.ToString();
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
         public async Task<IReadOnlyList<VendorPaymentDetails>> GetVendorPaymentAsPerStockInId(long stockInId)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
                 connection.Open();
-                var result = await connection.QueryAsync<VendorPaymentDetails>(VendorPaymentQueries.GetVendorPaymentAsPerStockInId, new { StockInId = stockInId });
+                var parameters = new DynamicParameters();
+                //parameters.Add("@VendorId", VendorId, DbType.Int64);
+                parameters.Add("@StockInId", stockInId, DbType.Int64);
+                var result = await connection.QueryAsync<VendorPaymentDetails>(Constants.GetVendorPaymentAsPerStockInId, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result.ToList();
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
         public async Task<IReadOnlyList<VendorPayments>> GetVendorPaymentsForADate(string selectedDate)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            try
             {
                 connection.Open();
-                var result = await connection.QueryAsync<VendorPayments>(VendorPaymentQueries.GetVendorPayments_ByDate, new { CreatedDate = selectedDate });
+                var parameters = new DynamicParameters();
+                parameters.Add("@CreatedDate", DateTime.Parse(selectedDate), DbType.Date);
+                var result = await connection.QueryAsync<VendorPayments>(Constants.GetVendorPayments_ByDate, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
                 return result.ToList();
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
     }
 }

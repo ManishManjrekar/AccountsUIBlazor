@@ -12,6 +12,9 @@ using AccountApi.Sql.Queries;
 using AccountApi.Application.Interfaces;
 using AccountApi.Core;
 using AccountApi.Core.Entities;
+using System.Reflection.Metadata;
+using static Dapper.SqlMapper;
+using System.Security.Cryptography;
 
 namespace AccountApi.Infrastructure.Repository
 {
@@ -19,89 +22,107 @@ namespace AccountApi.Infrastructure.Repository
     {
 
         private readonly IConfiguration configuration;
-       
+        private readonly SqlConnection connection;
+
         public VendorExpensesRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+            this.connection = new SqlConnection(configuration.GetConnectionString("DBConnection"));
         }
 
         public async Task<IReadOnlyList<VendorExpenses>> GetAllAsync()
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<VendorExpenses>(VendorExpensesQueries.GetAllVendorExpenses);
-                return result.ToList();
-            }
+            connection.Open();
+            var result = await connection.QueryAsync<VendorExpenses>(Constants.GetAllVendorExpenses);
+            connection.Close();
+            return result.ToList();
         }
-
         public async Task<VendorExpenses> GetByIdAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<VendorExpenses>(VendorExpensesQueries.GetAllVendorExpenses_ByStockInId, new { StockInId = id });
-                return result;
-            }
+            connection.Open();
+            var parameters = new DynamicParameters();
+            parameters.Add("@StockInId", id, DbType.Int64);
+            var result = await connection.QuerySingleOrDefaultAsync<VendorExpenses>(Constants.GetAllVendorExpenses_ByStockInId, parameters, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return result;
         }
 
         public async Task<string> AddAsync(VendorExpenses entity)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-                {
-                    connection.Open();
-                    var result = await connection.ExecuteAsync(VendorExpensesQueries.AddVendorExpenses, entity);
-                    return result.ToString();
-                }
+                connection.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@VendorId", entity.VendorId);
+                parameters.Add("@StockInId", entity.StockInId);
+                parameters.Add("@ExpensesName", entity.ExpensesName);
+                parameters.Add("@VendorName", entity.VendorName);
+                parameters.Add("@LoadName", entity.LoadName);
+                parameters.Add("@AmountPaid", entity.AmountPaid);
+                parameters.Add("@CreatedDate", entity.CreatedDate);
+                parameters.Add("@ModifiedDate", entity.ModifiedDate);
+                parameters.Add("@LoggedInUser", entity.LoggedInUser);
+                parameters.Add("@Comments", entity.Comments);
+                parameters.Add("@IsActive", entity.IsActive);
+                var result = await connection.ExecuteAsync(Constants.AddVendorExpenses, parameters, commandType: CommandType.StoredProcedure);
+                connection.Close();
+                return result.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
-           
         }
-
         public async Task<string> UpdateAsync(VendorExpenses entity)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.ExecuteAsync(VendorExpensesQueries.UpdateVendorExpenses, entity);
-                return result.ToString();
-            }
+            connection.Open();
+            var parameters = new DynamicParameters();
+            parameters.Add("@VendorExpensesId", entity.VendorExpensesId);
+            parameters.Add("@VendorId", entity.VendorId);
+            parameters.Add("@StockInId", entity.StockInId);
+            parameters.Add("@ExpensesName", entity.ExpensesName);
+            parameters.Add("@VendorName", entity.VendorName);
+            parameters.Add("@LoadName", entity.LoadName);
+            parameters.Add("@AmountPaid", entity.AmountPaid);
+            parameters.Add("@CreatedDate", entity.CreatedDate);
+            parameters.Add("@ModifiedDate", entity.ModifiedDate);
+            parameters.Add("@LoggedInUser", entity.LoggedInUser);
+            parameters.Add("@Comments", entity.Comments);
+            parameters.Add("@IsActive", entity.IsActive);
+            var result = await connection.ExecuteAsync(Constants.UpdateVendorExpenses, parameters, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return result.ToString();
         }
-
         public async Task<string> DeleteAsync(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.ExecuteAsync(VendorExpensesQueries.DeleteVendorExpenses, new { CustomerId = id });
-                return result.ToString();
-            }
+            connection.Open();
+            var parameters = new DynamicParameters();
+            parameters.Add("VendorExpensesId", id, DbType.Int64);
+            var result = await connection.ExecuteAsync(Constants.DeleteVendorExpenses, parameters, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return result.ToString();
         }
 
-        public async Task<IReadOnlyList<VendorExpenses>> GetCommissionAgentExpensesForADate(string selectedDate)
+        public async Task<IReadOnlyList<VendorPayments>> GetCommissionAgentExpensesForADate(DateTime selectedDate)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<VendorExpenses>(VendorExpensesQueries.GetVendorExpenses_ByDate, new { CreatedDate = selectedDate });
-                return result.ToList();
-            }
+            connection.Open();
+            var parameters = new DynamicParameters();
+            parameters.Add("@CreatedDate", selectedDate, DbType.Date);
+            //parameters.Add("@CreatedDate", DateTime.Parse(selectedDate), DbType.Date); 
+            var result = await connection.QueryAsync<VendorPayments>(Constants.GetVendorPayments_ByDate, parameters, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return result.ToList();
         }
-
         public async Task<IReadOnlyList<VendorExpenses>> GetVendorExpensesByStockInId(long id)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
-            {
-                connection.Open();
-                var result = await connection.QueryAsync<VendorExpenses>(VendorExpensesQueries.GetAllVendorExpenses_ByStockInId, new { StockInId = id });
-                return result.ToList();
-            }
+            connection.Open();
+            var parameter = new DynamicParameters();
+            parameter.Add("@StockInId", id, DbType.Int64);
+            var result = await connection.QueryAsync<VendorExpenses>(Constants.GetAllVendorExpenses_ByStockInId, parameter, commandType: CommandType.StoredProcedure);
+            connection.Close();
+            return result.ToList();
         }
+
+        
     }
 }

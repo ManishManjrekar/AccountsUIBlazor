@@ -1,0 +1,247 @@
+﻿@page "/CommissionExpenses"
+
+@using AccountsUIBlazor.UIModels;
+@using System.Net.Http
+
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+@using System.Text.Json
+
+
+<h3>Commission Expenses</h3>
+
+<EditForm Model="UICommissionExpenses" OnValidSubmit="ValidSubmit" OnInvalidSubmit="InvalidSubmit">
+    <div class="row">
+        @*  <div class="col-md-4 pt-1 ml-2">
+            <label for="LoadName">Select Commission Stock In</label>
+            <RadzenAutoComplete Placeholder="Select commission stock in..." class="form-control-plaintext ml-2" Data="@UICommissionExpenses.UIStockInList" Name="LoadName" TextProperty="LoadName" ValueProperty="@UICommissionExpenses.StockInId" Change="@OnChange" />
+        </div> *@
+        <div class="row">
+            <div class="col-md-4 pt-1">
+                <label for="fromDate">Select Expense Type</label>
+                <InputSelect class="form-control pt-1" @bind-Value="@UICommissionExpenses.CommissionExpensesTyps" onchange="CalculateCommissionAmount()">
+                    @foreach (var value in Enum.GetValues<CommissionExpensesTyps>())
+                    {
+                        <option value="@value">@value</option>
+                    }
+                </InputSelect>
+            </div>
+
+
+            <div class="col-md-4">
+                <label for="Quantity">Amount</label>
+                <input type="text" class="form-control" id="Quantity" @bind-value="@UICommissionExpenses.AmountPaid" placeholder="enter Amount..." />
+            </div>
+        </div>
+
+        <div class="col-md-4 pt-1 ">
+            <label for="fromDate"> Select Date</label>
+            <RadzenDatePicker Name="fromDate" class="form-control-plaintext" @bind-Value="@UICommissionExpenses.CreatedDate" DateFormat="dd/MM/yyyy" Change="DateSelection" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit</button>
+        </div>
+    </div>
+
+
+
+    @*  <div class="row">
+        <div class="col-md-4">
+            <label for="CommissionPercentage">Commission Percentage</label>
+            <RadzenNumeric class="form-control-plaintext" id="CommissionPercentage" Change="SearchChanged" TValue="int" Value="@commissionModel.CommissionPercentage" placeholder="Commission Percentage..." />
+
+        </div> 
+    </div> *@
+
+    @* <div class="row pt-2">
+        <div class="col-md-4">
+            <h4 class="h-100 text-primary" id="BalanceAmount">Total Sales Amount is : @commissionModel.Sales_Sum.</h4>
+        </div>
+    </div> *@
+
+
+</EditForm>
+
+<div class="row mt-2">
+    <h4>Commission Expenses Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="CommissionPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+        Data="@CommissionExpensesList" TItem="UICommissionExpenses" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                @* <RadzenDataGridColumn TItem="UICommissionExpenses" Property="ExpensesName" Title="Expenses Name" Width="120px" /> *@
+                @* <RadzenDataGridColumn TItem="UICommissionExpenses" Property="LoadName" Title="Load Name" Width="120px" /> 
+ *@
+                <RadzenDataGridColumn TItem="UICommissionExpenses" Property="CommissionExpensesTypes" Title="Type Of Expenses" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICommissionExpenses" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICommissionExpenses" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
+                @*  <RadzenDataGridColumn TItem="UICommissionExpenses" Property="LoggedInUser" Title="LoggedInUser" Width="120px" /> *@
+
+                @*   <RadzenDataGridColumn TItem="UICommissionExpenses" Property="Comments" Title="Comments" Width="120px" /> *@
+                <RadzenDataGridColumn TItem="UICommissionExpenses" Property="ModifiedDate" Title="ModifiedDate" Width="120px" />
+
+
+                <RadzenDataGridColumn TItem="UICommissionExpenses" Context="CommissionExpensesList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
+                    <Template Context="CommissionExpensesList">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRowVendorPayment(CommissionExpensesList))" @onclick:stopPropagation="true">
+                        </RadzenButton>
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+@code {
+
+    public UICalenderModel UICalenderModel { get; set; } = new();
+    public UICommissionExpenses UICommissionExpenses { get; set; } = new() { };
+    public List<UICommissionExpenses> CommissionExpensesList = new List<UICommissionExpenses>();//for grid
+    public List<UIStockInItem> UIStockInList = new List<UIStockInItem>();
+    public List<UISalesStockInData> MasterStockInDataList = new List<UISalesStockInData>();
+    UICommissionExpenses_CommissionPercentage  commissionModel = new UICommissionExpenses_CommissionPercentage();
+
+    RadzenDataGrid<UICommissionExpenses> CommissionPaymentDetailsGrid;
+    UICommissionExpenses CommissionExpensessGridInsert;
+    UICommissionExpenses CommissionExpensessGridUpdate;
+    public string Log { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        // fill dropdownlist on form load event
+        //GetStockInData_PaymentNotCompleted();
+        CalculateCommissionAmount();
+    }
+
+    private void SearchChanged(int value)
+    {
+        commissionModel.CommissionPercentage = value;
+        UICommissionExpenses.AmountPaid = commissionModel.Sales_Sum * value / 100;
+        UICommissionExpenses.CommissionPercentage = value;
+        StateHasChanged();
+    }
+    public async Task CalculateCommissionAmount()
+    {
+
+        try
+        {
+            commissionModel = await HttpClient.GetFromJsonAsync<UICommissionExpenses_CommissionPercentage>($"CommissionExpenses/GetByIdAsync?id={UICommissionExpenses.StockInId}");
+            UICommissionExpenses.AmountPaid = commissionModel.CommissionValue;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+    }
+    public async Task GetStockInData_PaymentNotCompleted()
+    {
+
+        MasterStockInDataList = await HttpClient.GetFromJsonAsync<List<UISalesStockInData>>($"StockIn/GetByIdAsync");
+        foreach (var item in MasterStockInDataList)
+        {
+            // UISales.UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
+            UIStockInList.Add(new UIStockInItem { StockInId = item.StockInId, LoadName = item.LoadName });
+        }
+
+         UICommissionExpenses.UIStockInList = UIStockInList;
+        StateHasChanged();
+    }
+
+
+    //stockin dropdown selection change event
+    void OnChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UICommissionExpenses.StockInId = UICommissionExpenses.UIStockInList.Where(e => e.LoadName.Equals(value))
+                              .Select(p => p.StockInId).FirstOrDefault();
+
+        if (UICommissionExpenses.StockInId > 0)
+        {
+            CalculateCommissionAmount();
+            var data = MasterStockInDataList.Where(e => e.StockInId.Equals(UICommissionExpenses.StockInId))
+                                             .Select(p => p).FirstOrDefault();
+            if (data != null)
+            {
+                UICommissionExpenses.VendorId = data.VendorId;
+                //UICommissionExpenses.LoadName = data.LoadName;
+                //UICommissionExpenses.VendorName = data.VendorName;
+               FillVendorExpensesGrid_AsPerStockInId(UICommissionExpenses.StockInId);
+
+            }
+
+        }
+    }
+    void Reset()
+    {
+        CommissionExpensessGridInsert = null;
+        CommissionExpensessGridUpdate = null;
+    }
+    async Task DeleteRowVendorPayment(UICommissionExpenses commissionExpensesModel)
+    {
+        Reset();
+
+        if (CommissionExpensesList.Contains(commissionExpensesModel))
+        {
+            try
+            {
+                var obj = await HttpClient.DeleteAsync($"VendorExpenses?id={commissionExpensesModel.VendorId}");
+                FillVendorExpensesGrid_AsPerStockInId(UICommissionExpenses.StockInId);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message.ToString());
+            }
+            await CommissionPaymentDetailsGrid.Reload();
+        }
+    }
+
+    private async void FillVendorExpensesGrid_AsPerStockInId(int id)
+    {
+        CommissionExpensesList = await HttpClient.GetFromJsonAsync<List<UICommissionExpenses>>($"CommissionExpenses/GetByIdAsync?id=" + id);
+        StateHasChanged();
+    }
+    public void InvalidSubmit(EditContext formContext)
+    {
+        Log += "OnInvalidSubmit fired. ";
+    }
+
+    public void DropDownChanged()
+    {
+        Log += "DropDownChanged fired. ";
+    }
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+    }
+
+    public void Submit(EditContext formContext)
+    {
+        var form = (UICustomer)formContext.Model;
+        Log += "OnSubmit fired. ";
+    }
+
+    public async Task ValidSubmit(EditContext formContext)
+    {
+        UICommissionExpenses = (UICommissionExpenses)formContext.Model;
+        try
+        {
+            var obj = await HttpClient.PostAsJsonAsync($"CommissionExpenses", UICommissionExpenses);
+           // FillVendorExpensesGrid_AsPerStockInId(UICommissionExpenses.id);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+    }
+}
