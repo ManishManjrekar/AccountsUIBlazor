@@ -1,14 +1,25 @@
 using AccountsUIBlazor;
 using AccountsUIBlazor.Data;
+using log4net;
+using log4net.Config;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Configure log4net
+var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddLog4Net();
 
 var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services); // calling ConfigureServices method

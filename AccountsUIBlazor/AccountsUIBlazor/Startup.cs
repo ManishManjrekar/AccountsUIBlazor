@@ -30,8 +30,8 @@ namespace AccountsUIBlazor
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IVendorRepository, VendorRepository>();
             services.AddScoped<ISalesRepository, SalesRepository>();
-            services.AddScoped<ICommissionAgentExpensesRepository, CommissionAgentExpensesRepository>(); 
-            services.AddScoped<ICommissionAgentPercentageRepository, CommissionAgentPercentageRepository>(); 
+            services.AddScoped<ICommissionAgentExpensesRepository, CommissionAgentExpensesRepository>();
+            services.AddScoped<ICommissionAgentPercentageRepository, CommissionAgentPercentageRepository>();
             services.AddScoped<ICustomerPaymentReceivedRepository, CustomerPaymentReceivedRepository>();
             services.AddScoped<IExpensesTypesRepository, ExpensesTypesRepository>();
             services.AddScoped<IStockInRepository, StockInRepository>();
@@ -61,15 +61,15 @@ namespace AccountsUIBlazor
 
             services.AddCors(options =>
             {
-                //options.AddPolicy("AllowSwagger",
-                //    builder => builder.WithOrigins("https://localhost:7207") // Update with your Blazor app URL
-                //                      .AllowAnyHeader()
-                //                      .AllowAnyMethod());
-
                 options.AddPolicy("AllowSwagger",
-                   builder => builder.WithOrigins("http://192.168.1.192") // Update with your Blazor app URL
-                                     .AllowAnyHeader()
-                                     .AllowAnyMethod());
+                    builder => builder.WithOrigins("http://localhost:7207") // Update with your Blazor app URL
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod());
+
+                //options.AddPolicy("AllowSwagger",
+                //   builder => builder.WithOrigins("http://192.168.1.192") // Update with your Blazor app URL
+                //                     .AllowAnyHeader()
+                //                     .AllowAnyMethod());
 
 
             });
@@ -90,14 +90,13 @@ namespace AccountsUIBlazor
             services.AddScoped(sp =>
             {
                 var client = new HttpClient();
-                //client.BaseAddress = new Uri("https://localhost:7207/");
+                client.BaseAddress = new Uri("http://localhost:7207/");
                 //client.BaseAddress = new Uri("http://localhost:7207/");
 
-                client.BaseAddress = new Uri("http://192.168.1.192/");
+                //client.BaseAddress = new Uri("http://192.168.1.192/");
 
                 return client;
             });
-                
 
         }
 

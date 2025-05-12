@@ -5,8 +5,10 @@ using AccountApi.Logging;
 using AccountsUIBlazor.Data;
 using AccountsUIBlazor.UIModels;
 using AutoMapper;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using System.Reflection;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,9 +22,10 @@ namespace AccountsUIBlazor.Controller
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;
+        //private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);
+        private static readonly ILog _log = LogManager.GetLogger(typeof(CustomerController));
 
 
-        
         /// <summary>
         /// Initialize CustomerController by injecting an object type of IUnitOfWork
         /// </summary>
@@ -33,32 +36,40 @@ namespace AccountsUIBlazor.Controller
 
         }
 
-      
+      /// <summary>
+      /// Get customer data 
+      /// </summary>
+      /// <returns></returns>
         [HttpGet]
         [Route("GetAllCustomer")]
         public async Task<List<UICustomer>> GetAll()
         {
+            _log.Info($"Method : {nameof(GetAll)} - Started ");
+
             var apiResponse = new ApiResponse<List<UICustomer>>();
             List<UICustomer> customerList = new List<UICustomer>();
             try
             {
+                _log.Info($"Method : {nameof(GetAll)} - try block Started ");
                 var data = await _unitOfWork.Customers.GetAllAsync();
                 customerList = _IMapper.Map<List<UICustomer>>(data);
                 apiResponse.Success = true;
-                apiResponse.Result = customerList;
+                apiResponse.Result = customerList;              
+                _log.Info($"Method : {nameof(GetAll)} - try block Completed ");
             }
             catch (SqlException ex)
             {
+                _log.Error($"Method : {nameof(GetAll)} SQL Error : {ex.Message}");
                 apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
-                Logger.Instance.Error("SQL Exception:", ex);
+                apiResponse.Message = ex.Message;               
             }
             catch (Exception ex)
             {
+                _log.Error($"Method : {nameof(GetAll)} Error : message {ex.Message}");
                 apiResponse.Success = false;
-                apiResponse.Message = ex.Message;
-                Logger.Instance.Error("Exception:", ex);
+                apiResponse.Message = ex.Message;               
             }
+            _log.Info($"Method : {nameof(GetAll)} - Completed ");
 
             return customerList;
         }

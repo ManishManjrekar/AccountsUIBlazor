@@ -70,3 +70,9 @@ yarn.lock
 
 # Backup files
 *~
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
