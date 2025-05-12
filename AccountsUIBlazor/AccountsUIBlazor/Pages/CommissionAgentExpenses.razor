@@ -44,19 +44,19 @@
     <h4>Commission Agent Expenses Details</h4>
     <div class="col-md-12">
         <RadzenDataGrid @ref="CommissionExpensesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
-        Data="@CommissionAgentExpensesList" TItem="UICommissionAgentExpenses"  Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+                        Data="@CommissionAgentExpensesList" TItem="UICommissionAgentExpenses" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
 
                 <RadzenDataGridColumn TItem="UICommissionAgentExpenses" Property="CommissionAgentExpensesTypes" Title="Type Of Expenses" Width="120px" />
-                  
+
 
                 <RadzenDataGridColumn TItem="UICommissionAgentExpenses" Property="AmountPaid" Title="Amount Paid" Width="120px" />
-               
+
 
                 <RadzenDataGridColumn TItem="UICommissionAgentExpenses" Property="CreatedDate" Title="CreatedDate" Width="120px" />
 
-                    
-               @*   <RadzenDataGridColumn TItem="UICommissionAgentExpenses" Property="ModifiedDate" Title="ModifiedDate" Width="120px" /> *@
+
+                @*   <RadzenDataGridColumn TItem="UICommissionAgentExpenses" Property="ModifiedDate" Title="ModifiedDate" Width="120px" /> *@
 
 
                 <RadzenDataGridColumn TItem="UICommissionAgentExpenses" Context="CommissionAgentExpensesList" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
