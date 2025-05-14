@@ -1,0 +1,162 @@
+﻿@page "/CustomerPaymentDetails"
+
+@using Accounts.Models.UIModels;
+@using System.Net.Http;
+@using Newtonsoft.Json;
+@using System.Text;
+@inject HttpClient HttpClient
+@inject NavigationManager navigationManager;
+@using AccountsUIBlazor.Data;
+<h3>Customer Payments</h3>
+
+
+<editform model="uicustomerpayment">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="selectvendor">Search Customer</label>
+            <RadzenAutoComplete Placeholder="Select Customer..." Data="@UICustomerPayment.CustomerList" class="form-control" Name="selectvendor" TextProperty="CustomerName" ValueProperty="@UICustomerPayment.CustomerId" Change="@OnChange" />
+        </div>
+        <div class="col-md-3">
+            <label for="fromDate">From Date</label>
+            <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.CustomerCalenderModel.FromDate" />
+        </div>
+        <div class="col-md-3">
+            <label for="toDate">To Date</label>
+            <RadzenDatePicker style="width: 100%;" Name="toDate" @bind-Value="@UICustomerPayment.CustomerCalenderModel.ToDate" Change="DateSelection" />
+        </div>
+    </div>
+</EditForm>
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
+<div class="row mt-2">
+    <h4>Customer Purchases Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="customerPaymentSalesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+        Data="@customerPaymentMasterDto.CustomerPurchases" TItem="SalesDetailsDto" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="VendorName" Title="Vendor Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="LoadName" Title="LoadName" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Quantity" Title="Quantity" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px" />
+
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px" />
+                <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CreatedDate" Title="CreatedDate" Width="120px" />
+
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <h4>Customer Payment Details</h4>
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="customerPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
+        Data="@customerPaymentMasterDto.CustomerPaymentsDone" TItem="UICustomerPayment" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+            <Columns>
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="CustomerName" Title="Customer Name" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="AmountPaid" Title="Amount Paid" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="PaymentDate" Title="PaymentDate" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="TypeOfTransaction" Title="TypeOfTransaction" Width="120px" />
+
+                <RadzenDataGridColumn TItem="UICustomerPayment" Property="Comments" Title="Comments" Width="120px" />
+
+            </Columns>
+        </RadzenDataGrid>
+    </div>
+</div>
+<div>
+    <p> Total  Balance Amount Due:- @customerPaymentMasterDto.BalanceAmountDue</p>
+</div>
+@code {
+    RadzenDataGrid<SalesDetailsDto> customerPaymentSalesDetailsGrid;
+    RadzenDataGrid<UICustomerPayment> customerPaymentDetailsGrid;
+
+    public UICustomerPayment UICustomerPayment { get; set; } = new();
+    public string Log { get; set; } = "";
+    public UICustomerPaymentMaster customerPaymentMasterDto = new UICustomerPaymentMaster();
+    SalesDetailsDto customerPurchasesInsert;
+    SalesDetailsDto customerPurchasesUpdate;
+    int selectedCustId = 0;
+    private bool isLoading = false;
+    [Inject]
+    protected DialogService DialogService { get; set; }
+
+    public UICustomerCalenderModel UICustomerCalenderModel = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var custList = await HttpClient.GetFromJsonAsync<List<UICustomerNames>>($"Customer/GetAllCustomerNames");
+        UICustomerPayment.CustomerList = custList;
+        Console.WriteLine($"customer payment date {UICustomerPayment.PaymentDate}");
+
+    }
+
+    void OnChange(object value)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        UICustomerPayment.CustomerId = UICustomerPayment.CustomerList.Where(e => e.CustomerName.Equals(value))
+                              .Select(p => p.CustomerId).FirstOrDefault();
+        UICustomerPayment.CustomerName = str.ToString();
+        selectedCustId = UICustomerPayment.CustomerId;
+        //LoadCustomerPayment(UICustomerPayment.CustomerId);
+
+    }
+    
+
+    public void DropDownChanged()
+    {
+        Log += "DropDownChanged fired. ";
+    }
+    public void DateSelection()
+    {
+        Log += "DateSelection fired. ";
+        var customerId = UICustomerPayment.CustomerId;
+        DateTime fromDate = UICustomerPayment.CustomerCalenderModel.FromDate;
+        DateTime toDate = UICustomerPayment.CustomerCalenderModel.ToDate;
+
+        GetAllDetails(customerId, fromDate, toDate);
+
+        //Console.WriteLine(laodcount);
+    }
+
+    private async void GetAllDetails(int customerId, DateTime fromDate, DateTime toDate)
+    {
+        customerPaymentMasterDto = await HttpClient.GetFromJsonAsync<UICustomerPaymentMaster>($"CustomerPayment/GetPendingBalanceForCustomerWithinDates?customerId={customerId}&fromDate={fromDate}&toDate={toDate}");
+        //Console.WriteLine(customers);
+        StateHasChanged();
+    }
+
+
+
+    void Reset()
+    {
+        customerPurchasesInsert = null;
+        customerPurchasesUpdate = null;
+    }
+
+
+    private async Task OpenDialog(string message)
+    {
+        var confirmationResult = await DialogService.Alert(message);
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
+    }
+}

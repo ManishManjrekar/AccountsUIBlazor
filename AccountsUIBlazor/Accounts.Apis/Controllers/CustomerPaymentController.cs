@@ -224,6 +224,80 @@ namespace Accounts.Apis.Controllers
             return customerPaymentMasterDto;
         }
 
+        //Added
+        [HttpGet]
+        [Route("GetPendingBalanceForCustomerWithinDates")]
+        public async Task<UICustomerPaymentMaster> GetPendingBalanceForCustomerWithinDates(int customerId, DateTime fromDate, DateTime toDate)
+        {
+            UICustomerPaymentMaster customerPaymentMasterDto = new UICustomerPaymentMaster();
+            try
+            {
+                customerPaymentMasterDto.CustomerPurchases = await GetSalesDataAsPerCustomerDates(customerId, fromDate, toDate);
+                customerPaymentMasterDto.CustomerPaymentsDone = await GetAllCustomerPaymentByDates(customerId, fromDate, toDate);
+                customerPaymentMasterDto.BalanceAmountDue = customerPaymentMasterDto.CustomerPurchases.Select(e => e.TotalAmount).Sum() - customerPaymentMasterDto.CustomerPaymentsDone.Select(e => e.AmountPaid).Sum();
+
+
+                //var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerId(customerId);
+                //results = _IMapper.Map<List<SalesDetailsDto>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return customerPaymentMasterDto;
+        }
+
+        // added
+        [HttpGet]
+        [Route("GetSalesDataAsPerCustomerDates")]
+        public async Task<List<SalesDetailsDto>> GetSalesDataAsPerCustomerDates(int customerId, DateTime fromDate, DateTime toDate)
+        {
+            List<SalesDetailsDto> results = new List<SalesDetailsDto>();
+            try
+            {
+                var data = await _unitOfWork.Sales.GetSalesDataAsPerCustomerDates(customerId, fromDate, toDate);
+                results = _IMapper.Map<List<SalesDetailsDto>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+
+                Logger.Instance.Error("Exception:", ex);
+            }
+            return results;
+        }
+
+        // Added
+        [HttpGet]
+        [Route("GetAllCustomerPaymentByDates")]
+        public async Task<List<UICustomerPayment>> GetAllCustomerPaymentByDates(int customerId, DateTime fromDate, DateTime toDate)
+        {
+            List<UICustomerPayment> results = new List<UICustomerPayment>();
+            try
+            {
+                var data = await _unitOfWork.CustomerPaymentReceived.GetAllCustomerPaymentByDates(customerId, fromDate, toDate);
+                results = _IMapper.Map<List<UICustomerPayment>>(data);
+            }
+            catch (SqlException ex)
+            {
+                Logger.Instance.Error("SQL Exception:", ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Exception:", ex);
+            }
+
+            return results;
+        }
+
 
     }
 }

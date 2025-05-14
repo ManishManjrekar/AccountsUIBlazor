@@ -13,6 +13,11 @@
 
     public class UICustomerPayment
     {
+        // Added
+        public UICustomerPayment()
+        { 
+            CustomerCalenderModel = new UICustomerCalenderModel();
+        }
         public List<UICustomerNames> CustomerList { get; set; }
         public int CustomerId { get; set; }
         public int AmountPaid { get; set; }
@@ -20,6 +25,11 @@
         public string CustomerName { get; set; }
         public TypeOfTransaction TypeOfTransaction { get; set; }
         public string Comments { get; set; }
+
+        // Added
+        public UICustomerCalenderModel CustomerCalenderModel { get; set; }
+
+
     }
     public enum TypeOfTransaction
     {
@@ -41,6 +51,16 @@
         public int AmountPaid { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+    }
+
+    public class UICustomerCalenderModel
+    {
+        //[Required]
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+
+        public int CustomerId { get; set; }
 
     }
 }

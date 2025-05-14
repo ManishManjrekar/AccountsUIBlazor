@@ -103,5 +103,18 @@ namespace AccountApi.Sql.Queries
                                                                                       FROM [accountancy].[dbo].[Sales] as s
                                                                                       where s.StockInId = @StockInId and s.isActive=1 ";
 
+
+        //Added
+        public static string GetSalesDataAsPerCustomerDates => @"
+            SELECT s.SalesId, s.createdDate, s.Price, s.Quantity, s.TotalAmount,
+                   c.FirstName AS CustomerName, v.FirstName AS VendorName, si.LoadName
+            FROM [accountancy].[dbo].[Sales] AS s
+            INNER JOIN [accountancy].[dbo].[Customer] AS c ON s.CustomerId = c.CustomerId
+            INNER JOIN [accountancy].[dbo].[Vendor] AS v ON v.VendorId = s.VendorId
+            INNER JOIN [accountancy].[dbo].[StockIn] AS si ON s.StockInId = si.StockInId
+            WHERE s.CustomerId = @CustomerId 
+              AND s.isActive = 1
+              AND s.createdDate BETWEEN @fromDate AND @toDate";
+
     }
 }

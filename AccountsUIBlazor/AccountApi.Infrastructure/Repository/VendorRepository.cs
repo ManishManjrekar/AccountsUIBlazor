@@ -97,7 +97,7 @@ namespace AccountApi.Infrastructure.Repository
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync(VendorQueries.DeleteVendor, new { CustomerId = id });
+                var result = await connection.ExecuteAsync(VendorQueries.DeleteVendor, new { CustomerId = id }); // CustomerId
                 return result.ToString();
             }
         }
