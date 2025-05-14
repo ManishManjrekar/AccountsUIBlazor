@@ -1,8 +1,7 @@
 ﻿using AccountApi.Application.Interfaces;
 using AccountApi.Infrastructure.Repository;
-using AccountsUIBlazor.UIModels;
+//using Accounts.Apis;
 using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Radzen;
 
@@ -74,14 +73,14 @@ namespace AccountsUIBlazor
 
             });
 
-            var mapperConfiguration = new MapperConfiguration(configuration =>
-            {
-                configuration.AddProfile(new MappingProfile());
-            });
+            //var mapperConfiguration = new MapperConfiguration(configuration =>
+            //{
+            //    configuration.AddProfile(new MappingProfile());
+            //});
 
-            var mapper = mapperConfiguration.CreateMapper();
+            //var mapper = mapperConfiguration.CreateMapper();
 
-            services.AddSingleton(mapper);
+            //services.AddSingleton(mapper);
 
 
             // Add MVC or API controllers
@@ -89,12 +88,8 @@ namespace AccountsUIBlazor
             //services.AddHttpClient();
             services.AddScoped(sp =>
             {
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:7207/");
-                //client.BaseAddress = new Uri("http://localhost:7207/");
-
-                //client.BaseAddress = new Uri("http://192.168.1.192/");
-
+                var client = new HttpClient();               
+                client.BaseAddress = new Uri(Configuration["Services:AccountApi"]);
                 return client;
             });
 

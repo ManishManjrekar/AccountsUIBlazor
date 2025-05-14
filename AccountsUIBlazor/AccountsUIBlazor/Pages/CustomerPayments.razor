@@ -1,8 +1,7 @@
 ﻿@page "/CustomerPayments"
 
-@using AccountsUIBlazor.UIModels; 
-@using System.Net.Http
-@using AccountsUIBlazor.UIModels;
+@using Accounts.Models.UIModels;
+@using System.Net.Http;
 @using Newtonsoft.Json;
 @using System.Text;
 @inject HttpClient HttpClient
@@ -22,18 +21,18 @@
             <RadzenDatePicker style="width: 100%;" Name="fromDate" @bind-Value="@UICustomerPayment.PaymentDate" Change="DateSelection" />
         </div>
     </div>
-    
+
     <div class="row mt-1">
-    <div class=" col-md-3" >
-        <label for="lastName">Amount paid </label>
-        <input type="text" class="form-control" id="lastName"  @bind-value="@UICustomerPayment.AmountPaid" placeholder="enter last name..." />
-       
-    </div>
-    <div class="  col-md-3" >
-        <label for="lastName">comments</label>
-        <input type="text" class="form-control" id="comments"  @bind-value="@UICustomerPayment.Comments" placeholder="enter last name..." />
-      
-    </div>
+        <div class=" col-md-3" >
+            <label for="lastName">Amount paid </label>
+            <input type="text" class="form-control" id="lastName"  @bind-value="@UICustomerPayment.AmountPaid" placeholder="enter last name..." />
+
+        </div>
+        <div class="  col-md-3" >
+            <label for="lastName">comments</label>
+            <input type="text" class="form-control" id="comments"  @bind-value="@UICustomerPayment.Comments" placeholder="enter last name..." />
+
+        </div>
     </div>
     <div class="row col-md-3 mt-1" >
         <label for="TypeOfTransaction">Type Of Transaction</label>
@@ -44,17 +43,22 @@
             }
         </InputSelect>
     </div>
-    
-<div>
-        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit Customer Payment</button>
-</div>
-</EditForm>
 
+    <div>
+        <button type="submit" class="btn btn-primary" Style="margin-top:10px">Submit Customer Payment</button>
+    </div>
+</EditForm>
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
 <div class="row mt-2">
     <h4>Customer Purchases Details</h4>
     <div class="col-md-12">
         <RadzenDataGrid @ref="customerPaymentSalesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
-                        Data="@customerPaymentMasterDto.CustomerPurchases" TItem="SalesDetailsDto"  Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+        Data="@customerPaymentMasterDto.CustomerPurchases" TItem="SalesDetailsDto"  Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
 
@@ -65,11 +69,11 @@
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Quantity" Title="Quantity" Width="120px" />
 
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="Price" Title="Price" Width="120px" />
-             
+
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="TotalAmount" Title="TotalAmount" Width="120px" />
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CreatedDate" Title="CreatedDate" Width="120px" />
 
-               
+
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Context="customerPurchases" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
                     <Template Context="customerPurchases">
                         <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1" Click="@(args => DeleteRow(customerPurchases))" @onclick:stopPropagation="true">
@@ -85,7 +89,7 @@
     <h4>Customer Payment Details</h4>
     <div class="col-md-12">
         <RadzenDataGrid @ref="customerPaymentDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
-                        Data="@customerPaymentMasterDto.CustomerPaymentsDone" TItem="UICustomerPayment" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+        Data="@customerPaymentMasterDto.CustomerPaymentsDone" TItem="UICustomerPayment" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
                 <RadzenDataGridColumn TItem="UICustomerPayment" Property="CustomerName" Title="Customer Name" Width="120px" />
 
@@ -97,7 +101,7 @@
 
                 <RadzenDataGridColumn TItem="UICustomerPayment" Property="Comments" Title="Price" Width="120px" />
 
-                
+
 
                 <RadzenDataGridColumn TItem="UICustomerPayment" Context="CustomerPaymentsDone" Filterable="false" Sortable="false" TextAlign="TextAlign.Right" Frozen="true">
                     <Template Context="CustomerPaymentsDone">
@@ -122,6 +126,9 @@
     SalesDetailsDto customerPurchasesInsert;
     SalesDetailsDto customerPurchasesUpdate;
     int selectedCustId = 0;
+    private bool isLoading = false;
+    [Inject]
+    protected DialogService DialogService { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -163,7 +170,7 @@
 
         //Console.WriteLine(laodcount);
     }
-    
+
     public void Submit(EditContext formContext)
     {
         var form = (UICustomerPayment)formContext.Model;
@@ -176,13 +183,21 @@
 
         try
         {
+            isLoading = true;
+            StateHasChanged();
             var obj = await HttpClient.PostAsJsonAsync($"CustomerPayment/AddCustomerPayment", UICustomerPayment);
+            await OpenDialog("customer payment saved.");
             LoadCustomerPayment(UICustomerPayment.CustomerId);
         }
         catch (Exception ex)
         {
 
             Console.WriteLine(ex.Message.ToString());
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
         }
         //return null;
     }
@@ -203,13 +218,21 @@
         {
             try
             {
+                isLoading = true;
+                StateHasChanged();
                 var obj = await HttpClient.DeleteAsync($"CustomerPayment?id={customerPurchases.SalesId}");
                 LoadCustomerPayment(selectedCustId);
+                await OpenDialog("customer payment Deleted.");
             }
             catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+                isLoading = false;
+                StateHasChanged();
             }
             await customerPaymentSalesDetailsGrid.Reload();
         }
@@ -223,7 +246,10 @@
         {
             try
             {
+                isLoading = true;
+                StateHasChanged();
                 var obj = await HttpClient.DeleteAsync($"CustomerPayment?id={customerPurchases.CustomerId}");
+                await OpenDialog("customer payment saved.");
                 LoadCustomerPayment(selectedCustId);
             }
             catch (Exception ex)
@@ -231,7 +257,23 @@
 
                 Console.WriteLine(ex.Message.ToString());
             }
+            finally
+            {
+                isLoading = false;
+                StateHasChanged();
+            }
             await customerPaymentDetailsGrid.Reload();
+        }
+    }
+
+    private async Task OpenDialog(string message)
+    {
+        var confirmationResult = await DialogService.Alert(message);
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
         }
     }
 }

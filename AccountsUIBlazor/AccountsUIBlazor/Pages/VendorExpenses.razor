@@ -1,7 +1,7 @@
 ﻿@page "/VendorExpenses"
 
-@using AccountsUIBlazor.UIModels; 
-@using System.Net.Http
+@using Accounts.Models.UIModels;
+@using System.Net.Http;
 
 @using System.Text;
 @inject HttpClient HttpClient
@@ -63,6 +63,12 @@
         <button type="submit" class="btn btn-primary" Style="margin-top:10px">Add Stock</button>
 </div>
 </EditForm>
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
 <div class="row mt-2">
     <h4>Vendor Payments Details</h4>
     <div class="col-md-12">
@@ -105,6 +111,9 @@
     public List<UIStockInItem> UIStockInList = new List<UIStockInItem>();
     public List<UISalesStockInData> MasterStockInDataList = new List<UISalesStockInData>();
     UIVendorExpenses_CommissionPercentage commissionModel = new UIVendorExpenses_CommissionPercentage();
+    private bool isLoading = false; 
+    [Inject]
+    protected DialogService DialogService { get; set; }
 
     RadzenDataGrid<UIVendorExpenses> vendorPaymentDetailsGrid;
     UIVendorExpenses vendorExpensessGridInsert;
@@ -129,13 +138,21 @@
 
         try
         {
+            isLoading = true;
+            StateHasChanged();
             commissionModel = await HttpClient.GetFromJsonAsync<UIVendorExpenses_CommissionPercentage>($"VendorExpenses/GetCalculateCommissionPercenage_By_StockId?stockInId={UIVendorExpenses.StockInId}");
             UIVendorExpenses.AmountPaid = commissionModel.CommissionValue;
             StateHasChanged();
+            await OpenDialog("Commission Percentage is : " + commissionModel.CommissionPercentage + " % and Commission Amount is : " + commissionModel.CommissionValue);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
         }
 
     }
@@ -191,13 +208,20 @@
         {
             try
             {
+                isLoading = true;
+                StateHasChanged();
                 var obj = await HttpClient.DeleteAsync($"VendorExpenses?id={vendorExpensesModel.VendorId}");
                 FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
+                await OpenDialog("Vendor Payment Deleted Successfully");
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message.ToString());
+            }
+            finally
+            {
+                isLoading = false;
+                StateHasChanged();
             }
             await vendorPaymentDetailsGrid.Reload();
         }
@@ -233,15 +257,34 @@
         UIVendorExpenses = (UIVendorExpenses)formContext.Model;
         try
         {
+            isLoading = true;
+            StateHasChanged();
             var obj = await HttpClient.PostAsJsonAsync($"VendorExpenses/AddVendorExpenses", UIVendorExpenses);
             FillVendorExpensesGrid_AsPerStockInId(UIVendorExpenses.StockInId);
+            await OpenDialog("Vendor Payment Added Successfully");
         }
         catch (Exception ex)
         {
 
             Console.WriteLine(ex.Message.ToString());
         }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
         
+    }
+
+    private async Task OpenDialog(string message)
+    {
+        var confirmationResult = await DialogService.Alert(message);
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
     }
 }
  
