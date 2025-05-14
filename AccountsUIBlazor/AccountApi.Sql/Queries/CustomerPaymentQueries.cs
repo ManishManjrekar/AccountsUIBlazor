@@ -68,5 +68,16 @@ namespace AccountApi.Sql.Queries
             where CONVERT(DATE,cp.PaymentDate) = @PaymentDate and cp.IsActive=1";
 
         public static string DeleteCustomerPaymentReceived => "Update FROM [CustomerPaymentReceived] WHERE [CustomerPaymentId] = @CustomerPaymentId and isActive=0";
+
+        // Added
+        public static string GetAllCustomerPaymentByDates => @"
+            SELECT c.FirstName AS CustomerName, c.CustomerId,
+                   cp.AmountPaid, cp.ModifiedDate, cp.PaymentDate, cp.ModifiedBy, cp.LoggedInUser, cp.Comments
+            FROM [accountancy].[dbo].[CustomerPaymentReceived] AS cp
+            INNER JOIN [accountancy].[dbo].[Customer] AS c ON cp.CustomerId = c.CustomerId
+            WHERE cp.CustomerId = @CustomerId
+              AND cp.IsActive = 1
+              AND cp.PaymentDate BETWEEN @fromDate AND @toDate";
+
     }
 }

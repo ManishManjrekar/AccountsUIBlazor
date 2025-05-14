@@ -76,3 +76,6 @@ _ReSharper.*
 bin
 obj
 packages
+/AccountsUIBlazor/AccountsUIBlazor/appsettings.json
+/AccountsUIBlazor/Accounts.Apis/appsettings.json
+/AccountsUIBlazor/AccountApi.Infrastructure/appsettings.json

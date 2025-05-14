@@ -21,5 +21,7 @@ namespace AccountApi.Application.Interfaces
         Task<int> GetSales_Sum_Between_Dates(string fromDate, string toDate);
         Task<int> GetCommission_for_Sales_AsPer_PercentageValue(int PercentageCommission, int stockInId);
 
+        public Task<IReadOnlyList<SalesDetails>> GetSalesDataAsPerCustomerDates(int customerId, DateTime fromDate, DateTime toDate);
+        
     }
 }

@@ -13,5 +13,7 @@ namespace AccountApi.Application.Interfaces
     {
         Task<IReadOnlyList<CustomerPaymentReceived>> GetCustomerPaymentReceivedByCustomerId(int customerId);
         Task<IReadOnlyList<CustomerPaymentReceived>> GetCustomerPaymentReceivedByDate(string selectedDate);
+
+        Task<IReadOnlyList<CustomerPaymentReceived>> GetAllCustomerPaymentByDates(int customerId, DateTime fromDate, DateTime toDate);
     }
 }
