@@ -1,8 +1,8 @@
 ﻿@page "/CommissionEarned"
 
-@using AccountsUIBlazor.UIModels; 
-@using System.Net.Http
-@using AccountsUIBlazor.UIModels;
+
+@using Accounts.Models.UIModels;
+@using System.Net.Http;
 @using System.Text;
 @using System.Text.Json
 @using Newtonsoft.Json;
@@ -20,8 +20,8 @@
             Select To Date<RadzenDatePicker style="width: 100%;" Name="ToSelectedDate" @bind-Value="UICommissionEarned.UICalenderModel.ToDate" Change="ToDateSelection" />
         </div>
     </div>
-    
-    
+
+
     <div class="row">
         <div class="col-md-4">
             <label class="form-control-plaintext text-primary" id="CommissionEarnedSum">Commission Earned Sum is : @UICommissionEarned.CommissionEarned_Sum</label>
@@ -105,7 +105,7 @@
     public async Task GetCommissionEarnedataAsPer_Selected_Date()
     {
         var results = await HttpClient.PostAsJsonAsync($"CommissionEarned/PostCommissionEarnedAsPerDate", UICommissionEarned.UICalenderModel);
-        
+
         UICommissionEarnedMaster UICommissionEarnedMaster = JsonConvert.DeserializeObject<UICommissionEarnedMaster>(await results.Content.ReadAsStringAsync());
         UICommissionEarned.UICommissionEarnedList = UICommissionEarnedMaster.UICommissionEarnedList;
         UICommissionEarned.CommissionEarned_Sum = UICommissionEarnedMaster.CommissionEarned_Sum;
@@ -122,7 +122,7 @@
         UICommissionEarned.CommissionEarned_Sum = UICommissionEarnedMaster.CommissionEarned_Sum;
         StateHasChanged();
     }
-   
+
     public void Submit(EditContext formContext)
     {
         var form = (UICustomer)formContext.Model;
@@ -155,7 +155,6 @@
         }
     }
 
-    
+
 
 }
- 
