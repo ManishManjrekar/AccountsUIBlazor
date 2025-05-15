@@ -10,7 +10,7 @@ namespace AccountApi.Sql.Queries
 	[ExcludeFromCodeCoverage]
 	public static class CommissionAgentExpensesQueries
     {
-        public static string GetAllCommissionAgentExpenses => "SELECT * FROM [CommissionAgentExpenses] (NOLOCK) where IsActive=1";
+        public static string GetAllCommissionAgentExpenses => "SELECT * FROM [CommissionAgentExpenses] (NOLOCK) WHERE IsActive=1";
 
         public static string GetAllCommissionAgentExpenses_ByStockInId => "SELECT * FROM [CommissionAgentExpenses] (NOLOCK) WHERE [StockInId] = @StockInId and IsActive=1";
 
