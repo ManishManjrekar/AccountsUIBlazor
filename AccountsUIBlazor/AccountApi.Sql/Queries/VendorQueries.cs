@@ -56,7 +56,9 @@ namespace AccountApi.Sql.Queries
 				[Mobile] = @Mobile
             WHERE [CustomerId] = @VendorId and IsActive =1";
 
-		public static string DeleteVendor => "Update [Vendor] set  isActive=0 where [VendorId] = @VendorId";
+        public static string DeleteVendor => "Update [Vendor] SET  isActive=0 where [VendorId] = @VendorId";
+        //public static string DeleteVendor => "UPDATE [Vendor] SET [IsActive]=0 WHERE [SalesId] = @SalesId";
+
 
         public static string CheckDuplicateVendorName => @" SELECT count(v.VendorId) FROM [accountancy].[dbo].[Vendor] as v
                                                    where v.FirstName = @firstName and v.LastName = @lastName and v.IsActive=1";

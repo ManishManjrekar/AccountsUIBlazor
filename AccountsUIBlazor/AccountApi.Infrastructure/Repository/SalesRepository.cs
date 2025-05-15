@@ -212,5 +212,25 @@ namespace AccountApi.Infrastructure.Repository
                 throw;
             }
         }
+
+        // Added
+        public async Task<IReadOnlyList<SalesDetails>> GetSalesDataAsPerCustomerDates(int customerId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<SalesDetails>(SalesQueries.GetSalesDataAsPerCustomerDates, new { customerId, fromDate, toDate });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

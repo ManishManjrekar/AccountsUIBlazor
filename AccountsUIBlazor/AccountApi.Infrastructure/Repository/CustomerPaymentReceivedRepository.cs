@@ -108,5 +108,15 @@ namespace AccountApi.Infrastructure.Repository
             }
         }
 
+        //Added
+        public async Task<IReadOnlyList<CustomerPaymentReceived>> GetAllCustomerPaymentByDates(int customerId, DateTime fromDate, DateTime toDate)
+        {
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("DBConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<CustomerPaymentReceived>(CustomerPaymentQueries.GetAllCustomerPaymentByDates, new { CustomerId = customerId, fromDate = fromDate, toDate = toDate });
+                return result.ToList();
+            }
+        }
     }
 }

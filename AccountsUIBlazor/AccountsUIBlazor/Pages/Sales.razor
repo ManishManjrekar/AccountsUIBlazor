@@ -1,8 +1,7 @@
 ﻿@page "/AddSales"
 
-@using AccountsUIBlazor.UIModels;
-@using System.Net.Http
-@using AccountsUIBlazor.UIModels;
+@using Accounts.Models.UIModels;
+@using System.Net.Http;
 @using System.Text;
 @using System.Text.Json
 @inject HttpClient HttpClient
@@ -12,7 +11,7 @@
 <h3>Sales</h3>
 <style>
     #LoadNam3 > .row > * {
-        padding-left: 0;
+    padding-left: 0;
     }
 </style>
 
@@ -45,7 +44,7 @@
             <div class="">
                 <label for="price">Price:</label>
                 <input type="number" class="form-control" id="Price" @bind="@UISales.UISalesPostDataModel.Price" @oninput="CalculateAmount" @onblur="CalculateAmount"
-                       placeholder="enter price." />
+                placeholder="enter price." />
 
             </div>
         </div>
@@ -82,12 +81,17 @@
     </div>
 </EditForm>
 
-
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
 <div class="row mt-2">
     <h4>Vendor Sales Details</h4>
     <div class="col-md-12">
         <RadzenDataGrid @ref="salesDetailsGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" EditMode="DataGridEditMode.Single"
-                        Data="@salesDetailsList" TItem="SalesDetailsDto" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
+        Data="@salesDetailsList" TItem="SalesDetailsDto" Sort="@Reset" Page="@Reset" Filter="@Reset" ColumnWidth="200px">
             <Columns>
                 <RadzenDataGridColumn TItem="SalesDetailsDto" Property="CustomerName" Title="Customer Name" Width="120px" />
 
@@ -131,6 +135,17 @@
             Console.WriteLine();
         }
     }
+
+    private async Task OpenSalesDialog(string message)
+    {
+        var confirmationResult = await DialogService.Alert(message);
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
+    }
 }
 
 @code {
@@ -142,6 +157,7 @@
     public List<UIStockInItem> UIStockInList = new List<UIStockInItem>();
     public string Log { get; set; } = "";
     UISalesDto salesDetails = new UISalesDto();
+    private bool isLoading = false;
 
     [Inject]
     protected DialogService DialogService { get; set; }
@@ -163,8 +179,11 @@
         //for binding grid
         int stockInId = UISales.UISalesPostDataModel.StockInId;
         //salesDetailsList = await HttpClient.GetFromJsonAsync<List<SalesDetailsDto>>($"Sales/GetSalesDataAsPerStockInId?stockInId=" + stockInId);
+        isLoading = true;
+        StateHasChanged();
         salesDetails = await HttpClient.GetFromJsonAsync<UISalesDto>($"Sales/GetSalesDataAsPerStockInId?stockInId=" + stockInId);
         salesDetailsList = salesDetails.salesDetailsList;
+        isLoading = false;
         StateHasChanged();
     }
 
@@ -251,14 +270,19 @@
         UISales.UIStockInList = UIStockInList;
         StateHasChanged();
     }
+
     public async Task GetVendorId(int StockInId)
     {
-
+        isLoading = true;
+        StateHasChanged();
         //int vendorId = 0;
         var vendorId = await HttpClient.GetAsync($"Sales/GetVendorId?id={StockInId}").Result.Content.ReadFromJsonAsync<int>();
+
         //int.TryParse(id, out vendorId);
         UIStockIn.VendorId = vendorId;
         UISales.UISalesPostDataModel.VendorId = vendorId;
+        isLoading = false;
+        StateHasChanged();
 
     }
 
@@ -274,14 +298,21 @@
 
         try
         {
+            isLoading = true;
+            StateHasChanged();
             var obj = await HttpClient.PostAsJsonAsync($"Sales/AddSales", UISales.UISalesPostDataModel);
             Console.WriteLine(obj);
             FillGridForSaleAsPerStockInId();
+            await OpenSalesDialog("sales details added successfully");
         }
         catch (Exception ex)
         {
 
             Console.WriteLine(ex.Message.ToString());
+        }
+        finally{
+            isLoading = false;
+            StateHasChanged();
         }
         //return null;
     }
@@ -298,13 +329,20 @@
         {
             try
             {
+                isLoading = true;
+                StateHasChanged();
                 var obj = await HttpClient.DeleteAsync($"Sales?id={salesDetails.SalesId}");
                 FillGridForSaleAsPerStockInId();
+                await OpenSalesDialog("sales details deleted successfully");
             }
             catch (Exception ex)
             {
 
                 Console.WriteLine(ex.Message.ToString());
+            }
+            finally{
+                isLoading = false;
+                StateHasChanged();
             }
             await salesDetailsGrid.Reload();
         }

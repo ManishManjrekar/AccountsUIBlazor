@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountApi.Test", "AccountA
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AccountsDbProject", "AccountsDbProject\AccountsDbProject.sqlproj", "{9355543B-F08E-490B-81C7-EFDDE99485FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Apis", "Accounts.Apis\Accounts.Apis.csproj", "{1184B078-85D1-4392-92FB-490FC5BD6192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Models", "Accounts.Models\Accounts.Models.csproj", "{BB08D1B4-226E-46FA-A952-D2C633C785AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,14 @@ Global
 		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9355543B-F08E-490B-81C7-EFDDE99485FF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1184B078-85D1-4392-92FB-490FC5BD6192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1184B078-85D1-4392-92FB-490FC5BD6192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1184B078-85D1-4392-92FB-490FC5BD6192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1184B078-85D1-4392-92FB-490FC5BD6192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB08D1B4-226E-46FA-A952-D2C633C785AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB08D1B4-226E-46FA-A952-D2C633C785AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB08D1B4-226E-46FA-A952-D2C633C785AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB08D1B4-226E-46FA-A952-D2C633C785AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

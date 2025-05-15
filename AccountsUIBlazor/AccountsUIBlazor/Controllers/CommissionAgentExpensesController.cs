@@ -17,7 +17,11 @@ namespace AccountsUIBlazor.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+<<<<<<< HEAD
     public class CommissionAgentExpensesController : BaseApiController
+=======
+    public class CommissionAgentExpensesController :BaseApiController
+>>>>>>> 2a7c567507003fd888eed496c56fbea50c43867b
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _IMapper;

@@ -1,6 +1,6 @@
 ﻿@page "/CommissionPercentage"
 
-@using AccountsUIBlazor.UIModels; 
+@using Accounts.Models.UIModels;
 @using System.Net.Http
 
 @using System.Text;
@@ -9,7 +9,12 @@
 @using AccountsUIBlazor.Data;
 @using System.Text.Json
 
-
+@if (isLoading)
+{
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+}
 <h3>Commission Percentage</h3>
 
 
@@ -47,7 +52,9 @@
 
 @code {
 
-
+    private bool isLoading = false;
+    [Inject]
+    protected DialogService DialogService { get; set; }
     public UICommissionAgentPercentage UICommissionPercentage { get; set; } = new() { };
     public List<UICommissionAgentPercentage> UICommissionPercentageList = new List<UICommissionAgentPercentage>();//for grid
 
@@ -81,7 +88,19 @@
         {
             try
             {
+                isLoading = true;
+                StateHasChanged();
                 var obj = await HttpClient.DeleteAsync($"CommissionPercentage?id={commissionPercentageModel.CommissionPercentageId}");
+                if (obj.IsSuccessStatusCode)
+                {
+                    UICommissionPercentageList.Remove(commissionPercentageModel);
+                    OpenDialog("Deleted Successfully");
+                    //await commissionPercentageDetailsGrid.Reload();
+                }
+                else
+                {
+                    Console.WriteLine("Error deleting item");
+                }
 
             }
             catch (Exception ex)
@@ -89,12 +108,20 @@
 
                 Console.WriteLine(ex.Message.ToString());
             }
+            finally
+            {
+                isLoading = false;
+                StateHasChanged();
+            }
             await commissionPercentageDetailsGrid.Reload();
         }
     }
     private async void FillVendorExpensesGrid_AsPerStockInId()
     {
+        isLoading = true;
+        StateHasChanged();
         UICommissionPercentageList = await HttpClient.GetFromJsonAsync<List<UICommissionAgentPercentage>>($"CommissionAgentPercentage/GetAllCommissionPercentage");
+        isLoading = false;
         StateHasChanged();
     }
     public void InvalidSubmit(EditContext formContext)
@@ -109,15 +136,34 @@
         UICommissionPercentage = (UICommissionAgentPercentage)formContext.Model;
         try
         {
+            isLoading = true;
+            StateHasChanged();
             var obj = await HttpClient.PostAsJsonAsync($"CommissionAgentPercentage/AddCommissionPercentage", UICommissionPercentage);
             FillVendorExpensesGrid_AsPerStockInId();
+            await OpenDialog("Added Successfully");
         }
         catch (Exception ex)
         {
 
             Console.WriteLine(ex.Message.ToString());
         }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
         
+    }
+
+    private async Task OpenDialog(string message)
+    {
+        var confirmationResult = await DialogService.Alert(message);
+        //var confirmationResult = await DialogService.Confirm("confirm you want mark this stock as payment completed", "Stock Payment completed", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+        if (confirmationResult.Equals(true))
+        {
+            // if yes then
+            Console.WriteLine();
+        }
     }
 }
  
