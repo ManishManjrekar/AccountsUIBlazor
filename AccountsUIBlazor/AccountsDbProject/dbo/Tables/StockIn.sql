@@ -2,6 +2,7 @@
     [StockInId] INT NOT NULL IDENTITY, 
     [CreatedDate]           DATETIME         NOT NULL,
     [LoadName]              NVARCHAR (MAX)   NOT NULL,
+    [ExpenseId]                 INT           NULL,
     [ModifiedDate]      DATETIME         NULL,
     [LoginID]               NVARCHAR (MAX)   NULL,
     [isActive]              BIT              CONSTRAINT [DF_StockIn_isActive] DEFAULT ((1)) NOT NULL,

@@ -5,6 +5,8 @@ using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Radzen;
+using Microsoft.EntityFrameworkCore;
+using AccountsUIBlazor.Data;
 
 namespace AccountsUIBlazor
 {
@@ -97,6 +99,9 @@ namespace AccountsUIBlazor
 
                 return client;
             });
+
+            services.AddDbContext<AccountsUIBlazorContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("AccountsUIBlazorContext")));
 
         }
 

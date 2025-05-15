@@ -28,3 +28,9 @@ C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\
 C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\refactor.xml
 C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\postdeploy.sql
 C:\Users\Arati\Source\Repos\AccountsUIBlazor\AccountsUIBlazor\AccountsDbProject\obj\Debug\predeploy.sql
+E:\Test\AccountsUIBlazor\AccountsDbProject\bin\Debug\AccountsDbProject.dacpac
+E:\Test\AccountsUIBlazor\AccountsDbProject\bin\Debug\AccountsDbProject.dll
+E:\Test\AccountsUIBlazor\AccountsDbProject\bin\Debug\AccountsDbProject.pdb
+E:\Test\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.sqlproj.AssemblyReference.cache
+E:\Test\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.dll
+E:\Test\AccountsUIBlazor\AccountsDbProject\obj\Debug\AccountsDbProject.pdb

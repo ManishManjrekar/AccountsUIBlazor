@@ -2,6 +2,7 @@
     [CommissionAgentExpensesId] INT           IDENTITY (1, 1) NOT NULL,
     [ExpenseId]                 INT           NULL,
     [Amount]                    INT           NULL,
+    [LoadName]              NVARCHAR (MAX)   NOT NULL,
     [CreatedBy]                 NVARCHAR (500)   NULL,
     [ModifiedDate]              DATETIME         CONSTRAINT [DF_CommisionAgentExpenses_modifiedDate] DEFAULT (getdate()) NOT NULL,
     [CreatedDate]               DATETIME         CONSTRAINT [DF_CommisionAgentExpenses_createdDate] DEFAULT (getdate()) NOT NULL,
