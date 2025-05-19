@@ -3,6 +3,9 @@
     [ExpenseId]                 INT           NULL,
     [Amount]                    INT           NULL,
     [CreatedBy]                 NVARCHAR (500)   NULL,
+    [AmountPaid]                BIGINT   NULL,
+    [ExpensesName]              NVARCHAR(500)   NULL,
+    [IsActive]                  BIT             NULL,
     [ModifiedDate]              DATETIME         CONSTRAINT [DF_CommisionAgentExpenses_modifiedDate] DEFAULT (getdate()) NOT NULL,
     [CreatedDate]               DATETIME         CONSTRAINT [DF_CommisionAgentExpenses_createdDate] DEFAULT (getdate()) NOT NULL,
     CONSTRAINT [PK_CommisionAgentExpenses] PRIMARY KEY CLUSTERED ([CommissionAgentExpensesId] ASC)

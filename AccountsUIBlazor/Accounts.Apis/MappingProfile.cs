@@ -1,6 +1,7 @@
 ﻿using AccountApi.Core;
 using AccountApi.Core.Entities;
 using Accounts.Models.UIModels;
+using AccountsUIBlazor.UIModels;
 using AutoMapper;
 using AutoMapper.Extensions.EnumMapping;
 
@@ -48,6 +49,9 @@ namespace Accounts.Apis
 
             CreateMap<CommissionEarned, UIVendorExpenses>()//.ReverseMap();
                 .ForMember(dest => dest.AmountPaid, opt => opt.MapFrom(src => src.Amount)).ReverseMap();
+
+            CreateMap<CommissionAgentExpenses, UICommissionAgentExpenses>()
+           .ForMember(dest => dest.CommissionAgentExpensesTypes, opt => opt.MapFrom(src => src.ExpensesName)).ReverseMap();
 
             CreateMap<CommissionEarned, UICommissionEarnedGridDetails>().ReverseMap();
 
